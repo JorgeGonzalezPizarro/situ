@@ -28,6 +28,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
+    public $nombre_rol;
 
     /**
      * Create a new controller instance.
@@ -51,6 +52,8 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'rol' => 'string|max:255',
+            'nombre_rol'=>'string|max:255'
         ]);
     }
 
@@ -62,10 +65,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if ($data['rol']=='1'){
+           $nombre_rol ='Alumno';
+            }else {
+            $nombre_rol = 'Profesor';
+            }
+
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'rol' => $data['rol'],
+            'nombre_rol'=>$nombre_rol,
+
         ]);
     }
 }

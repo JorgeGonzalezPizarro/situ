@@ -62,6 +62,20 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="password-confirm" class="col-md-4 control-label">Rol</label>
+
+                            <div class="col-md-6">
+
+                            <select class="form-control" name="rol">
+                                <option value="1">Alumno</option>
+                                <option value="2">Profesor</option>
+                            </select>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary">
                                     Register
