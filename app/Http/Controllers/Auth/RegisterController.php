@@ -63,7 +63,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    public function create(array $data)
     {
         if ($data['rol']=='1'){
            $nombre_rol ='Alumno';
