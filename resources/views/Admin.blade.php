@@ -20,20 +20,9 @@
                 </thead>
 
                 <tbody>
-                @foreach ($users as $user)
+                {{--@foreach ($users as $user)--}}
                     <tr>
-                        <td>{{ $user->getFullName() }}</td>
-                        <td>{{ $user->username }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
-                        <td>
-                            <a href="/user/{{ $user->id }}/edit" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
-                            {{ Form::open(['url' => '/user/' . $user->id, 'method' => 'DELETE']) }}
-                            {{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                            {{ Form::close() }}
-                        </td>
-                    </tr>
-                @endforeach
+                        <td>{{ $user->name}}</td>
                 </tbody>
 
             </table>

@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
         $array = [
             'name' => 'ADMIN',
             'email' => 'ADMIN@gmail.com',
-            'password'=> bcrypt('ADMIN'),
+            'password'=> '1',
             'rol'=>'1',
             'nombre_rol'=>'Administrador',
         ];

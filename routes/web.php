@@ -19,9 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/Adminpage','AdminController@show');
+Route::get('/Adminpage','AdminController@getFullName');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
+
 

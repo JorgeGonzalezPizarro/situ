@@ -13,13 +13,19 @@ class AdminController extends Controller
     public function show(){
 
         $users=Auth::user()->getAuthPassword();
-
         return view('Admin')->with($users);
 
     }
 
 
 
+    public function getFullName(){
+        $user= Auth::user();
+
+        return view('Admin')->withUser($user);
+
+
+    }
 
 
 
