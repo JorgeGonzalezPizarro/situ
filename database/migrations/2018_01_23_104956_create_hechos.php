@@ -22,10 +22,12 @@ class CreateHechos extends Migration
             $table->string('contenido');
             $table->string('proposito');
             $table->string('evidencia');
-            $table->string('etiquetas');
-            $table->string('nivel_autorizacion');
-            $table->string('hechos_relacionados');
-            $table->timestamp('fecha_hecho');
+            $table->string('etiquetas')->nullable();
+            $table->string('nivel_autorizacion')->nullable();;
+            $table->string('hechos_relacionados')->nullable();;
+            $table->timestamp('fecha_hecho')->nullable();;
+            $table->string('ruta_imagen')->nullable();;
+
             $table->timestamps();
         });
     }
