@@ -22,7 +22,9 @@
                 <tbody>
                 {{--@foreach ($users as $user)--}}
                     <tr>
-                        <td>{{ $user->name}}</td>
+                        <td>{{ Sentinel::getUser() }}</td>
+                        <td>{{ Auth::getUser() }}</td>
+
                 </tbody>
 
             </table>

@@ -29,3 +29,5 @@ Route::get('crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
 
 
 Route::POST('guardar_Hecho', array('as' => 'guardar_Hecho', 'uses' => 'HechoController@guardar_Hecho'));
+
+Route::POST('/home', array('as' => 'guardar_Hecho', 'uses' => 'AdminController@loginSentinel'));

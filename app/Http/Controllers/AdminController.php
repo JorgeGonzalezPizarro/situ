@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class AdminController extends Controller
 {
@@ -19,9 +20,26 @@ class AdminController extends Controller
 
 
 
-    public function getFullName(){
+    public function loginSentinel(Request $request){
         $user= Auth::user();
 
+            $credentials = [
+                'email'=>Input::get('email'),
+                'password' =>Input::get('password'),
+            ];
+        $user = Sentinel::findById(Auth::user()->getAuthIdentifier());
+
+         Sentinel::login($user);
+        $user = Sentinel::getUser()->id;
+        return view('/home');
+
+
+    }
+
+
+
+    public function getFullName(){
+        $user= Auth::user();
         return view('Admin')->withUser($user);
 
 

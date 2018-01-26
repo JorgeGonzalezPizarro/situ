@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use App\Http\Controllers\Auth\RegisterController;
-class CreateUsersTable extends Migration
+class CreateUsers2Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users2', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
@@ -25,16 +25,16 @@ class CreateUsersTable extends Migration
         });
 
 
-        $array = [
-            'name' => 'ADMIN',
-            'email' => 'ADMIN@gmail.com',
-            'password'=> '1',
-            'rol'=>'1',
-            'nombre_rol'=>'Administrador',
-        ];
-
-
-        app('\App\Http\Controllers\Auth\RegisterController')->create($array);
+//        $array = [
+//            'name' => 'ADMIN',
+//            'email' => 'ADMIN@gmail.com',
+//            'password'=> '1',
+//            'rol'=>'1',
+//            'nombre_rol'=>'Administrador',
+//        ];
+//
+//
+//        app('\App\Http\Controllers\Auth\RegisterController')->create($array);
         //        DB::table('users')->insert([
 //
 //            'name' => 'ADMIN',
@@ -53,6 +53,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users2');
     }
 }
