@@ -21,17 +21,10 @@ class AdminController extends Controller
 
 
     public function loginSentinel(Request $request){
-        $user= Auth::user();
 
-            $credentials = [
-                'email'=>Input::get('email'),
-                'password' =>Input::get('password'),
-            ];
-        $user = Sentinel::findById(Auth::user()->getAuthIdentifier());
 
-         Sentinel::login($user);
-        $user = Sentinel::getUser()->id;
-        return view('/home');
+        $user = Sentinel::getUser();
+        return view('Admin')->withUser($user);;
 
 
     }

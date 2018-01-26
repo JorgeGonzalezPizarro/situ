@@ -22,8 +22,13 @@
                 <tbody>
                 {{--@foreach ($users as $user)--}}
                     <tr>
-                        <td>{{ Sentinel::getUser() }}</td>
-                        <td>{{ Auth::getUser() }}</td>
+                        @if (Sentinel::check() )
+                            Your name : {{Sentinel::getUser()->name}} <br>
+                            Last name : {{Sentinel::getUser()->last_name}} <br>
+                            E-mail : {{Sentinel::getUser()->email}} <br>
+                        @endif
+                        <td>{{Sentinel::getUser()->name.' ' .Sentinel::getUser()->last_name}}</td>
+                            <td>{{Sentinel::getUser()->name.' ' .Sentinel::getUser()->last_name}}</td>
 
                 </tbody>
 

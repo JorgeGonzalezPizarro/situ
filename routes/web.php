@@ -15,13 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::auth();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/Adminpage','AdminController@getFullName');
+Route::get('/Adminpage','AdminController@loginSentinel');
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -30,4 +30,3 @@ Route::get('crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
 
 Route::POST('guardar_Hecho', array('as' => 'guardar_Hecho', 'uses' => 'HechoController@guardar_Hecho'));
 
-Route::POST('/home', array('as' => 'guardar_Hecho', 'uses' => 'AdminController@loginSentinel'));

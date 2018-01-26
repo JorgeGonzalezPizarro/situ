@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Redirect;
-
+use Sentinel;
+use Session;
+use Activation;
 class RegisterController extends Controller
 {
     /*
@@ -73,18 +75,20 @@ class RegisterController extends Controller
             }
         $request=$data;
 
-     
+
         $user = Sentinel::register($data);
         //Activate the user **
         $activation = Activation::create($user);
         $activation = Activation::complete($user, $activation->code);
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-            'rol' => $data['rol'],
-            'permissions'=>$nombre_rol,
+//        return User::create([
+//            'name' => $data['name'],
+//            'email' => $data['email'],
+//            'password' => bcrypt($data['password']),
+//            'rol' => $data['rol'],
+//            'permissions'=>$nombre_rol,
+//
+//        ]);
+        return $user;
 
-        ]);
     }
 }
