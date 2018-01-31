@@ -52,7 +52,6 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
         'first_name',
         'permissions',
         'remember_token',
-        'rol',
     ];
 
     /**
@@ -218,10 +217,10 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
      * @param  mixed  $permissions
      * @return void
      */
-//    public function setPermissionsAttribute(array $permissions)
-//    {
-//        $this->attributes['permissions'] = $permissions ? json_encode($permissions) : '';
-//    }
+    public function setPermissionsAttribute(array $permissions)
+    {
+        $this->attributes['permissions'] = $permissions ? json_encode($permissions) : '';
+    }
 
     /**
      * {@inheritDoc}

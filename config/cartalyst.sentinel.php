@@ -53,7 +53,7 @@ return [
 
     'users' => [
 
-        'model' => App\User::class,
+        'model' =>App\User::class,
 
     ],
 

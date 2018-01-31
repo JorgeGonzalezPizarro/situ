@@ -20,6 +20,10 @@ Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/Adminpage','AdminController@loginSentinel');
+Route::get('/alumnoDashboard', ['uses' => 'Admincontroller@getFullName', 'as' => 'alumnoDashboard']);
+Route::get('/email', function (){
+    return view('email');
+});
 
 //Auth::routes();
 

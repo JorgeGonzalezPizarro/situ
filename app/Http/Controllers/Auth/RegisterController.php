@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -10,6 +11,7 @@ use Redirect;
 use Sentinel;
 use Session;
 use Activation;
+use Mail;
 class RegisterController extends Controller
 {
     /*
@@ -31,7 +33,6 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-    public $nombre_rol;
 
     /**
      * Create a new controller instance.
@@ -43,52 +44,58 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'rol' => 'string|max:255',
-            'permissions'=>'string|max:255'
-        ]);
-    }
+   
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return User
      */
-    public function create(array $data )
+    
+    public function showRegistrationForm()
     {
-        if ($data['rol']=='1'){
-           $nombre_rol ='Alumno';
-            }else {
-            $nombre_rol = 'Profesor';
-            }
-        $request=$data;
-
-
-        $user = Sentinel::register($data);
-        //Activate the user **
-        $activation = Activation::create($user);
-        $activation = Activation::complete($user, $activation->code);
-//        return User::create([
-//            'name' => $data['name'],
-//            'email' => $data['email'],
-//            'password' => bcrypt($data['password']),
-//            'rol' => $data['rol'],
-//            'permissions'=>$nombre_rol,
-//
-//        ]);
-        return $user;
-
+        return view('auth.register');
     }
+
+    public function register(Request $request){
+
+        $validation = Validator::make($request->all(), [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+            ]);
+
+          if ($validation->fails()) {
+                return Redirect::back()->withErrors($validation)->withInput();
+         }
+
+         $user = Sentinel::register($request->all());
+        //Activate the user ** 
+         $activation = Activation::create($user);
+         $activation = Activation::complete($user, $activation->code);
+        //End activation
+        $request['name'];
+        if($user){
+            $user->roles()->sync([2]); // 2 = client
+            Session::flash('message', 'Registration is completed');
+            Session::flash('status', 'success');
+            Mail::send('email',['request' => $request->all()],function ($mensaje) use($request){
+
+                $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                $mensaje->subject("Welcome to site name");
+                $mensaje->to($request['email'],$request['name']);
+
+
+            });
+           return redirect('/');
+        }
+         Session::flash('message', 'There was an error with the registration' );
+         Session::flash('status', 'error');
+         return Redirect::back();
+    }
+
+
+
 }

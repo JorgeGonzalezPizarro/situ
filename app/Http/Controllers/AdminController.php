@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function getFullName(){
         $user= Auth::user();
-        return view('Admin')->withUser($user);
+        return view('alumnoDashboard')->withUser($user);
 
 
     }
