@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use Sentinel;
 class Admin
 {
     /**
@@ -15,6 +15,13 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        /*Chequeo si es Admin*/
+        if (Sentinel::check() && Sentinel::inRole('Admin')) {
+
+            return $next($request);
+        }
+        else{
+            return redirect('/');
+        }
     }
 }

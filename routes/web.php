@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/Adminpage','AdminController@loginSentinel');
+Route::get('/Adminpage','AdminController@loginSentinel')->middleware("Admin");
 Route::get('/alumnoDashboard', ['uses' => 'Admincontroller@getFullName', 'as' => 'alumnoDashboard']);
 Route::get('/email', function (){
     return view('email');
@@ -39,6 +39,7 @@ Route::get('crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
 Route::POST('guardar_Hecho', array('as' => 'guardar_Hecho', 'uses' => 'HechoController@guardar_Hecho'));
 
 
+Route::get('mail', 'HomeController@mail');
 
 
 

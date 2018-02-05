@@ -118,11 +118,13 @@
                     <a href="{{ route('login') }}">Login</a>
                 @endif
                 <ul class="dropdown-menu">
-                    @if (Sentinel::check() && (Sentinel::inRole('admin') || Sentinel::inRole('mod')) )
-                        <li>
+                    {{--@if (Sentinel::check() && (Sentinel::inRole('admin') || Sentinel::inRole('mod')) )--}}
+                    @if (Sentinel::check() && Sentinel::inRole('Admin')  )
+
+                    <li>
                         </li>
                         <li>
-                            <a href="{{ route('logout') }}">Some Text</a>
+                            <a href="{{ route('logout') }}">Log Out</a>
 
                         </li>
                     @else
