@@ -83,7 +83,20 @@
                     {!! $errors->first('password_confirmation', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+            <label for="name" class="cols-sm-2 control-label">Rol</label>
 
+            <div class="form-group  {{ $errors->has('first_name') ? 'has-error' : ''}}">
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+
+                        {{--{!! Form::select($role->Slug, null, ['class' => 'form-control','placeholder '=>'Enter your  name']) !!}--}}
+                        {!! Form::select('roles[]', $roles ,$roles,[ 'multiple' => 'multiple' ]) !!}
+                      </div>
+                      {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+
+                </div>
+            </div>
             <div class="form-group  {{ $errors->has('password') ? 'has-error' : ''}} ">
                 <button class="btn btn-primary btn-lg btn-block register-button" type="submit" >Register</button>
 

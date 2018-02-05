@@ -35,7 +35,7 @@
             </table>
         </div>
 
-        <a href="/user/create" class="btn btn-success">Add User</a>
+        <a href="/crear" class="btn btn-success">Add User</a>
 
     </div>
 

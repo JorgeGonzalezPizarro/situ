@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.email')
 
 @section('content')
     <p>Page: admin.post.create</p>

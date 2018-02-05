@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -12,6 +13,8 @@ use Sentinel;
 use Session;
 use Activation;
 use Mail;
+use Cartalyst\Sentinel\Users;
+use Cartalyst\Sentinel\Roles\EloquentRole;
 class RegisterController extends Controller
 {
     /*
@@ -55,7 +58,12 @@ class RegisterController extends Controller
     
     public function showRegistrationForm()
     {
-        return view('auth.register');
+//        $role= new Role();
+//        $roles=Role::select('Slug')->get();
+        $roles=Role::pluck('Slug','id');
+
+//        $roles=$role->getRoleSlug();
+        return view('auth.register')->withRoles($roles);
     }
 
     public function register(Request $request){
@@ -65,22 +73,37 @@ class RegisterController extends Controller
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6|confirmed',
+                'permissions' =>  'string|min:6|confirmed',
             ]);
 
           if ($validation->fails()) {
                 return Redirect::back()->withErrors($validation)->withInput();
          }
+        $rol=$request['roles'];
+        $role=$rol[0];
+        \Log::info($rol);
 
-         $user = Sentinel::register($request->all());
+        $user = Sentinel::register($request->all());
+        $user->roles()->sync([$role]);
+        $user->permissions = [(Sentinel::findRoleById($role)->name)];
+        $user->save();
+
         //Activate the user ** 
          $activation = Activation::create($user);
          $activation = Activation::complete($user, $activation->code);
         //End activation
         $request['name'];
+        $rol=$request['roles'];
+        $rol=$rol[0];
         if($user){
-            $user->roles()->sync([2]); // 2 = client
+            $user->roles()->sync([$rol]);
+
             Session::flash('message', 'Registration is completed');
             Session::flash('status', 'success');
+//            $role = Sentinel::findRoleBySlug($rol);
+//            $role->users()->attach($user);
+
+
             Mail::send('email',['request' => $request->all()],function ($mensaje) use($request){
 
                 $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");

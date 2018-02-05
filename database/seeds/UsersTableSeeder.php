@@ -1,8 +1,13 @@
 <?php
+use App\Role;
+use App\User;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
-
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -23,18 +28,8 @@ class UsersTableSeeder extends Seeder
 //
 //        ]);
 
-        $user = Sentinel::register([ 'name' => 'ADMIN',
-            'email' => 'ADMIN@gmail.com',
-            'password'=> bcrypt('ADMIN'),
-
-            'permissions'=> ['Administrator'],
-    ]
-);
         $permission = ['{"user.create:1, user.update:1, user.delete:1"}', '{"hecho.create:1, hecho.update:1, hecho.view:1"}', '{""}','{""}'];
 
-        //Activate the user **
-        $activation = Activation::create($user);
-        $activation = Activation::complete($user, $activation->code);
 
         $slug = ['Admin', 'Alu', 'Prof','Inv'];
 
@@ -49,6 +44,28 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ]);
         }
+
+
+
+
+
+        $role=Sentinel::findRoleById(1);
+        $user = Sentinel::register([ 'name' => 'ADMIN',
+            'email' => 'ADMIN@gmail.com',
+            'password'=> bcrypt('ADMIN'),
+
+            'permissions'=> ['Administrator'],
+
+
+    ]);
+
+        $role->users()->attach($user);
+
+        //Activate the user **
+        $activation = Activation::create($user);
+        $activation = Activation::complete($user, $activation->code);
+
+
 
 
     }
