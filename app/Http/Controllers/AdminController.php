@@ -13,8 +13,8 @@ class AdminController extends Controller
 
     public function show(){
 
-        $users=Auth::user()->getAuthPassword();
-        return view('Admin')->with($users);
+        $users=User::all();
+        return view('Admin.adminDashboard')->with('users',$users);
 
     }
 
@@ -24,7 +24,8 @@ class AdminController extends Controller
 
 
         $user = Sentinel::getUser();
-        return view('Admin')->withUser($user);;
+
+        return view('Admin.Admin')->withUser($user);;
 
 
     }
@@ -33,7 +34,7 @@ class AdminController extends Controller
 
     public function getFullName(){
         $user= Auth::user();
-        return view('alumnoDashboard')->withUser($user);
+        return view('Alumno.alumnoDashboard')->withUser($user);
 
 
     }

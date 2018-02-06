@@ -69,8 +69,7 @@
     @if (Route::has('login'))
         <div class="top-right links">
             @if (Sentinel::check())
-                <a href="{{ url('/Adminpage') }}">Home</a>
-                <a href="{{ url('/') }}">Home</a>
+
 
                 {!! Form::open(['url' => url('logout'),'class'=>'form-inline']) !!}
                 {!! csrf_field() !!}

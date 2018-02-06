@@ -23,8 +23,8 @@ Route::get('/', function () {
 Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/Adminpage','AdminController@loginSentinel')->middleware("Admin");
-Route::get('/alumnoDashboard', ['uses' => 'Admincontroller@getFullName', 'as' => 'alumnoDashboard']);
+Route::get('/Admin/adminDashboard','AdminController@show')->middleware('Admin');
+Route::get('/Alumno/alumnoDashboard', ['uses' => 'Admincontroller@getFullName', 'as' => 'alumnoDashboard']);
 Route::get('/email', function (){
     return view('email');
 });

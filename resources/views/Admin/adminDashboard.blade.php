@@ -4,7 +4,7 @@
 
     <div class="col-lg-10 col-lg-offset-1">
 
-        <h1><i class="fa fa-users"></i> User Administration </h1>
+        <h1><i class="fa fa-users"></i> Hola   @if(Sentinel::check()) {{   Sentinel::getUser()->first_name }} @endif   </h1>
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
@@ -20,15 +20,20 @@
                 </thead>
 
                 <tbody>
-                {{--@foreach ($users as $user)--}}
                     <tr>
                         @if (Sentinel::check() )
-                            Your name : {{Sentinel::getUser()->name}} <br>
-                            Last name : {{Sentinel::getUser()->last_name}} <br>
-                            E-mail : {{Sentinel::getUser()->email}} <br>
+                            <td>{{Sentinel::getUser()->first_name}}</td>
+                            <td>{{Sentinel::getUser()->last_name}}</td>
                         @endif
-                        <td>{{Sentinel::getUser()->name.' ' .Sentinel::getUser()->last_name}}</td>
-                            <td>{{Sentinel::getUser()->name.' ' .Sentinel::getUser()->last_name}}</td>
+
+
+                    @foreach ($users as $user)
+                        <tr>
+                            <td>{{$user->first_name}}</td>
+                            <td>{{$user->last_name}}</td>
+
+                        </tr>
+                    @endforeach
 
                 </tbody>
 

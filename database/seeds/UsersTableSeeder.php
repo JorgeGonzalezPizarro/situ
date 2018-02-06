@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
         $role=Sentinel::findRoleById(1);
         $user = Sentinel::register([ 'name' => 'ADMIN',
             'email' => 'ADMIN@gmail.com',
-            'password'=> bcrypt('ADMIN'),
+            'password'=> ('ADMIN'),
 
             'permissions'=> ['Administrator'],
 
