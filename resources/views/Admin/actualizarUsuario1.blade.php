@@ -1,6 +1,5 @@
 @extends('layouts.layoutAdmin')
 
-
 @section('content')
     <div class = "container">
         <div class="wrapper">
@@ -16,19 +15,20 @@
                     <strong>{{Session::get('status')}}!</strong> {!! Session::get('message') !!}
                 </div>
             @endif
-            {{--{{ Form::open(array('url' => route('actualizarUsuario'), 'class' => 'form-horizontal form-signin','files' => true)) }}--}}
-            {{--{!! csrf_field() !!}--}}
+            {{ Form::open(array('url' => route('actualizarUsuario'), 'class' => 'form-horizontal form-signin','files' => true)) }}
+            {!! csrf_field() !!}
 
-            {{--<div class="form-group  {{ $errors->has('first_name') ? 'has-error' : ''}}">--}}
-                {{--<label for="first_name" class="cols-sm-2 control-label">First Name</label>--}}
-                {{--<div class="cols-sm-10">--}}
-                    {{--<div class="input-group">--}}
-                        {{--<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>--}}
-                        {{--{!! Form::text('first_name', null, ['class' => 'form-control','placeholder '=>$user->first_name ']) !!}--}}
-                    {{--</div>--}}
-                    {{--{!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            <div class="form-group  {{ $errors->has('first_name') ? 'has-error' : ''}}">
+                <label for="first_name" class="cols-sm-2 control-label">First Name</label>
+                <div class="cols-sm-10">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                        {!!    $admin !!}
+
+                    </div>
+                    {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
+                </div>
+            </div>
             {{--<div class="form-group  {{ $errors->has('first_name') ? 'has-error' : ''}}">--}}
                 {{--<label for="name" class="cols-sm-2 control-label">Nombre</label>--}}
                 {{--<div class="cols-sm-10">--}}
@@ -114,3 +114,4 @@
         </div>
     </div>
 @endsection
+

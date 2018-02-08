@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use App\Role;
 use Illuminate\Support\Facades\Redirect;
-
+use Illuminate\Routing\Route;
+use Router;
+use View;
+use Response;
 class AdminController extends Controller
 {
     public function __construct()
@@ -131,16 +134,20 @@ class AdminController extends Controller
 
         }
     }
-    public function getActualizarUsuario($email){
-
-       // $user = User::find($id);
-
+    public function getActualizarUsuario(Request $request){
+        $credentials = [
+            'login' => $request->email,
+        ];
+   $user = Sentinel::findByCredentials($credentials);
+    $usuario=User::find($credentials->email);
+    $usuario=$user;
        // $rol=$user->role;
 
+        $email= $request->email;
 
-
-        return View::make('Admin.actualizarUsuario');
-
+       // return response()->json($data);
+//       return view('Admin.actualizarUsuario')->with('email',$email);
+      return response($usuario);
     }
 
     public function create()

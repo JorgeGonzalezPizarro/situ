@@ -55,18 +55,32 @@
                 .data();
             var cData = table.cell(this).data();
             var data = table.row( this ).data();
-            alert( 'You clicked on '+data[2]+'\'s row' );
+            //alert( 'You clicked on '+data[2]+'\'s row' );
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 
             $.ajax({
-                   type:"POST",
-                   url: url + '/' + 'actualizarUsuario/',
+                   type:"get",
+                url     : "{{ route('actualizarUsuario') }}",
+                datatype:"json",
+                encode  : true,
+                  // url: url + '/' + 'actualizarUsuario'+ '/',
                    data: {
                        email: data[2],
                        _token: CSRF_TOKEN
-                   }
-               });
+                   },
+                success: function(response){ // What to do if we succeed
+                  window.location.href= "{{ url('Admin/actualizarUsuari') }}"+"/"+response;
+                    console.log(response);
+                    {{--$(location).attr('href', "{{route('Admin/actualizar')}}"+"/"+ data[2]+"");--}}
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+
 
 
         } );

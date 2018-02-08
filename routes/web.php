@@ -23,12 +23,13 @@ Route::get('/', function () {
 Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/Admin/adminDashboard','AdminController@getDashboard');
-Route::get('/Admin/nuevoUsuario', 'AdminController@getNuevoUsuario')->name('nuevoUsuario');
-Route::post('Admin/actualizarUsuario/{email}/', 'AdminController@getactualizarUsuario');
-Route::GET('/Admin/actualizarUsuario', function (){
-
-   return view('/Admin/actualizarUsuario');
+//Route::post('Admin/actualizarUsuario', 'AdminController@getactualizarUsuario')->name('actualizarUsuario');
+Route::get('Admin/actualizarUsuario/', 'AdminController@getactualizarUsuario')->name('actualizarUsuario');
+Route::get('Admin/actualizarUsuari/{admin}', function($admin){
+    return view('Admin.actualizarUsuario1')->with('admin',$admin);
 });
+
+Route::get('/Admin/nuevoUsuario', 'AdminController@getNuevoUsuario')->name('nuevoUsuario');
 
 Route::post('register', 'AdminController@register');
 
