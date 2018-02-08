@@ -53,7 +53,8 @@ class UsersTableSeeder extends Seeder
         $user = Sentinel::register([ 'name' => 'ADMIN',
             'email' => 'ADMIN@gmail.com',
             'password'=> ('ADMIN'),
-
+            'first_name' =>('Antonio'),
+            'last_name'=> ('Fernandez'),
             'permissions'=> ['Administrator'],
 
 

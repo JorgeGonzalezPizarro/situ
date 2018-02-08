@@ -34,21 +34,27 @@
     <link href="{{ asset('dataTables/css/dataTables.bootstrap.css') }}"rel="stylesheet">
     <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/css/dataTables.bootstrap.min.css">-->
     <link href="http://cdn.datatables.net/responsive/1.0.2/css/dataTables.responsive.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" rel="stylesheet" >.10.16/css/dataTables.material.min.css"></link>
+<link href="https://cdn.datatables.net/1.10.16/css/dataTables.material.min.css" rel="stylesheet" >
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 
-    <link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">
+<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
     <style>
         body {
             height: 100%;
             background-color: #fff;
+
         }
         pre {
             border: none;
@@ -119,7 +125,7 @@
                 @endif
                 <ul class="dropdown-menu">
                     {{--@if (Sentinel::check() && (Sentinel::inRole('admin') || Sentinel::inRole('mod')) )--}}
-                    @if (Sentinel::check() && Sentinel::inRole('Admin')  )
+                    @if (Sentinel::check()   )
 
                     <li>
                         </li>
@@ -140,21 +146,25 @@
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
+                @if(Sentinel::check() && Sentinel::inRole('Admin'))
                 <li class="">
-                    <a href=""><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>
                 </li>
                 <li class="">
-                <a href=""><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <a href="{{ route('nuevoUsuario') }}"><i class="fa fa-fw fa-dashboard"></i> Crear Usuario</a>
                 </li>
                 <li class="">
-                    <a href=""><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    {{--<a href={{ route('actualizarUsuario') }}""><i class="fa fa-fw fa-dashboard"></i> Actualizar Usuario</a>--}}
                 </li>
-                <li class="">
-                    <a href=""><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                </li>
-                @if (Sentinel::check() && Sentinel::inRole('admin'))
+                @else
                     <li class="">
-                        <a href=""><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="{{ url('#') }}"><i class="fa fa-fw fa-dashboard"></i> Alumno Link 2</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ url('#') }}"><i class="fa fa-fw fa-dashboard"></i> Alumno Link 2 </a>
+                    </li>
+                    <li class="">
+                        <a href=""><i class="fa fa-fw fa-dashboard"></i> Alumno Link 3</a>
                     </li>
                 @endif
             </ul>
@@ -166,7 +176,11 @@
 
         <div class="container-fluid">
 
-
+            @if (Session::has('permission'))
+                <div class="alert alert-danger">
+                    {{ Session::get('permission')  }}
+                </div>
+            @endif
         <!-- /.content -->
             @yield('content')
 
@@ -175,12 +189,11 @@
     </div><!-- /#page-wrapper -->
 
 </div><!-- /#wrapper -->
-
+</ul>
 <!-- jQuery -->
-<script src="{{ asset('js/jquery.js') }}"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/js/jquery-3.3.1.min.js') }}"></script>
 
 <!-- Select Chosen -->
 <script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>

@@ -6,12 +6,18 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
+use App\Role;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        //$this->middleware('auth')->except('orders');
+        $this->middleware('Admin');
+    }
 
-
-    public function show(){
+    public function getDashboard(){
 
         $users=User::all();
         return view('Admin.adminDashboard')->with('users',$users);
@@ -32,22 +38,111 @@ class AdminController extends Controller
 
 
 
-    public function getFullName(){
-        $user= Auth::user();
-        return view('Alumno.alumnoDashboard')->withUser($user);
+    public function getNuevoUsuario(){
+
+        $roles=Role::pluck('Slug','id');
+        return view('Admin/nuevoUsuario')->with('roles' , $roles);
 
 
     }
 
 
+    public function register(Request $request)
+    {
+
+                $validation = Validator::make($request->all(), [
+                    'first_name' => 'required|string|max:255',
+                    'last_name' => 'required|string|max:255',
+                    'email' => 'required|string|email|max:255|unique:users',
+                    'password' => 'required|string|min:6|confirmed',
+                    'permissions' => 'string|min:6|confirmed',
+                ]);
+
+                if ($validation->fails()) {
+                    return Redirect::back()->withErrors($validation)->withInput();
+                }
+                $rol = $request['roles'];
+                $role = $rol[0];
+                \Log::info($rol);
+
+                $user = Sentinel::register($request->all());
+                $user->roles()->sync([$role]);
+                $user->permissions = [(Sentinel::findRoleById($role)->name)];
+                $user->save();
+
+             //Activate the user **
+                 $activation = Activation::create($user);
+                $activation = Activation::complete($user, $activation->code);
+             //End activation
+                $request['name'];
+                $rol = $request['roles'];
+                $rol = $rol[0];
+                if ($user) {
+                    $user->roles()->sync([$rol]);
+
+                    Session::flash('message', 'Registration is completed');
+                    Session::flash('status', 'success');
+        //            $role = Sentinel::findRoleBySlug($rol);
+        //            $role->users()->attach($user);
 
 
+                    Mail::send('email', ['request' => $request->all()], function ($mensaje) use ($request) {
 
+                        $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "Site name");
+                        $mensaje->subject("Welcome to site name");
+                        $mensaje->to($request['email'], $request['name']);
+
+
+                    });
+        //           return redirect('/');
+                    return redirect()->back();
+                }
+         Session::flash('message', 'There was an error with the registration' );
+        Session::flash('status', 'error');
+        return Redirect::back();
+}
     /**
      * Show the form for creating a new user.
      *
      * @return Response
      */
+
+
+    public function actualizarUsuario($email)
+    {
+
+        $user = User::find($email);
+
+        $validation = Validator::make(Input::all());
+
+        if ($validation->fails()) {
+            return Redirect::back()->with('message', 'Error al actualizar Usuario');
+        } else {
+
+            $user->first_name = Input::get('first_name');
+            $user->last_name = Input::get('last_name');
+
+            $user->save();
+
+            Session::flash('success', ' Actualizado con éxito');
+
+            return Redirect::back();
+
+
+        }
+    }
+    public function getActualizarUsuario($email){
+
+       // $user = User::find($id);
+
+       // $rol=$user->role;
+
+
+
+        return View::make('Admin.actualizarUsuario');
+
+    }
+
     public function create()
     {
         return View::make('user.create');

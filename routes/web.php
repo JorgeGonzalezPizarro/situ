@@ -22,9 +22,24 @@ Route::get('/', function () {
 
 Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/Admin/adminDashboard','AdminController@getDashboard');
+Route::get('/Admin/nuevoUsuario', 'AdminController@getNuevoUsuario')->name('nuevoUsuario');
+Route::post('Admin/actualizarUsuario/{email}/', 'AdminController@getactualizarUsuario');
+Route::GET('/Admin/actualizarUsuario', function (){
 
-Route::get('/Admin/adminDashboard','AdminController@show')->middleware('Admin');
-Route::get('/Alumno/alumnoDashboard', ['uses' => 'Admincontroller@getFullName', 'as' => 'alumnoDashboard']);
+   return view('/Admin/actualizarUsuario');
+});
+
+Route::post('register', 'AdminController@register');
+
+
+
+Route::get('/Alumno/alumnoDashboard','AlumnoController@getDashboard');
+
+
+
+
+
 Route::get('/email', function (){
     return view('email');
 });
@@ -53,7 +68,6 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('register', 'Auth\RegisterController@register');
 
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');

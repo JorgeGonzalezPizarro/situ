@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,18 +36,51 @@
 
     <link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <style>
+        body {
+            height: 100%;
+            background-color: #fff;
+            margin-top:0px;
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        }
+        /*pre {*/
+            /*border: none;*/
+            /*background: #fff;*/
+            /*padding: 0;*/
+        /*}*/
+        /*!*.hljs {*/
+            /*padding: 1.5em;*/
+        /*}*!*/
+        /*pre code {*/
+            /*border-radius: 20px;*/
+            /*overflow: auto;*/
+            /*word-wrap: normal;*/
+            /*white-space: pre;*/
+        /*}*/
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+        /*!* Panel *!*/
+        /*.panel-lightblue {*/
+            /*border-color: #5bc0de;*/
+        /*}*/
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        /*.panel-lightblue > .panel-heading {*/
+            /*border-color: #5bc0de;*/
+            /*color: #fff;*/
+            /*background-color: #5bc0de;*/
+        /*}*/
+
+        /*.panel-lightblue > a {*/
+            /*color: #5bc0de;*/
+        /*}*/
+
+        /*.panel-lightblue > a:hover {*/
+            /*color: #31b0d5;*/
+        /*}*/
+
+    </style>
+    @yield('css')
+
 </head>
 <body>
     <div id="app">
@@ -105,7 +139,11 @@
                 </div>
             </div>
         </nav>
-
+        @if (session('status'))
+            <div class="alert alert-danger">
+                {{ session('status') }}
+            </div>
+        @endif
         @yield('content')
     </div>
 

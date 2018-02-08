@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Sentinel;
+use Redirect;
+use Session;
 class Admin
 {
     /**
@@ -21,7 +23,10 @@ class Admin
             return $next($request);
         }
         else{
-            return redirect('/');
+
+            Session::flash('permission', "Acceso denegado!");
+
+            return Redirect::back();
         }
     }
 }
