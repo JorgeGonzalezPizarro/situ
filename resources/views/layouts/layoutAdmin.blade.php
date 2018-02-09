@@ -156,7 +156,7 @@
                 <a href="{{ route('nuevoUsuario') }}"><i class="fa fa-fw fa-dashboard"></i> Crear Usuario</a>
                 </li>
                 <li class="">
-                    {{--<a href={{ route('actualizarUsuario') }}""><i class="fa fa-fw fa-dashboard"></i> Actualizar Usuario</a>--}}
+                    <a href={{ route('crearEtiqueta') }}><i class="fa fa-fw fa-dashboard"></i> CrearEtiqueta</a>
                 </li>
                 @else
                     <li class="">

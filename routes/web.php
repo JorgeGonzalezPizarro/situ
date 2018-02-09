@@ -23,45 +23,28 @@ Route::get('/', function () {
 Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/Admin/adminDashboard','AdminController@getDashboard');
-//Route::post('Admin/actualizarUsuario', 'AdminController@getactualizarUsuario')->name('actualizarUsuario');
-Route::get('Admin/actualizarUsuario/', 'AdminController@getactualizarUsuario')->name('actualizarUsuario');
-Route::get('Admin/actualizarUsuari/{admin}', function($admin){
-    return view('Admin.actualizarUsuario1')->with('admin',$admin);
+Route::get('Admin/getUsuario/', 'AdminController@getactualizarUsuario')->name('actualizarUsuario');
+Route::get('Admin/usuario/{admin}', function($admin){
+    Sentinel::findById($admin);
+    return view('Admin.setUsuario')->with('admin',Sentinel::findById($admin));
 });
 
 Route::get('/Admin/nuevoUsuario', 'AdminController@getNuevoUsuario')->name('nuevoUsuario');
-
 Route::post('register', 'AdminController@register');
+Route::get('Admin/crearEtiqueta',function(){
+    return view('Admin.crearEtiqueta');
+})->name('crearEtiqueta');
 
-
+Route::post('Admin/crearEtiqueta','AdminController@crearNuevaEtiqueta')->name('guardarEtiqueta');
 
 Route::get('/Alumno/alumnoDashboard','AlumnoController@getDashboard');
 
 
-
-
-
-Route::get('/email', function (){
-    return view('email');
-});
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
-
-
 Route::POST('guardar_Hecho', array('as' => 'guardar_Hecho', 'uses' => 'HechoController@guardar_Hecho'));
-
-
 Route::get('mail', 'HomeController@mail');
-
-
-
-
-
-
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -75,3 +58,7 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+Route::get('/email', function (){
+    return view('email');
+});

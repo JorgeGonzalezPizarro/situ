@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Etiquetas;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\User;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Illuminate\Routing\Route;
 use Router;
 use View;
 use Response;
+use Validator;
 class AdminController extends Controller
 {
     public function __construct()
@@ -135,20 +137,43 @@ class AdminController extends Controller
         }
     }
     public function getActualizarUsuario(Request $request){
-        $credentials = [
-            'login' => $request->email,
-        ];
-   $user = Sentinel::findByCredentials($credentials);
-    $usuario=User::find($credentials->email);
-    $usuario=$user;
-       // $rol=$user->role;
+    $credentials =array('login' =>$request->email);
+   $usuario = Sentinel::findByCredentials($credentials);
 
-        $email= $request->email;
-
-       // return response()->json($data);
-//       return view('Admin.actualizarUsuario')->with('email',$email);
-      return response($usuario);
+      return response($usuario->id);
     }
+
+
+
+
+    public function crearNuevaEtiqueta(Request $request){
+        $validation = Validator::make($request->all(), [
+            'nombre' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'color' => 'required|string|max:255',
+
+        ]);
+
+        if ($validation->fails()) {
+            return Redirect::back()->withErrors($validation)->withInput();
+        }
+
+
+        Etiquetas::create($request->all());
+
+        return Redirect::to('Admin/adminDashboard');
+    }
+
+
+
+
+
+
+
+
+
+
+
 
     public function create()
     {
@@ -221,6 +246,9 @@ class AdminController extends Controller
 
         return Redirect::to('/user');
     }
+
+
+
 
 
 

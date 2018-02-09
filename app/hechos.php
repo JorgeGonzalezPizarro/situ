@@ -15,5 +15,21 @@ class hechos extends Model
     public $timestamps = true;
 
 
+    public function getEtiquetas()
+    {
+
+        return $this->belongsToMany('App\Etiquetas', 'hecho_etiqueta');
+
+    }
+
+
+        public function user() {
+
+            return $this->belongsto('App\User');
+
+
+        }
+
+
 
 }

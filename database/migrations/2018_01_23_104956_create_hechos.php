@@ -30,6 +30,24 @@ class CreateHechos extends Migration
 
             $table->timestamps();
         });
+
+
+        Schema::create('etiquetas', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nombre');
+            $table->string('slug')->unique();
+            $table->string('color');
+
+            $table->timestamps();
+        });
+
+        Schema::create('hecho_etiqueta', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('hecho_id')->unsigned()->index();
+            $table->integer('etiqueta_id')->unsigned()->index();
+
+        });
+
     }
 
     /**
@@ -39,6 +57,9 @@ class CreateHechos extends Migration
      */
     public function down()
     {
-        //
+        Schema::drop('etiquetas');
+        Schema::drop('users');
+        Schema::drop('hecho_etiqueta');
+
     }
 }

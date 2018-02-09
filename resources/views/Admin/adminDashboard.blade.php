@@ -70,7 +70,7 @@
                        _token: CSRF_TOKEN
                    },
                 success: function(response){ // What to do if we succeed
-                  window.location.href= "{{ url('Admin/actualizarUsuari') }}"+"/"+response;
+                  window.location.href= "{{ url('Admin/usuario') }}"+"/"+response;
                     console.log(response);
                     {{--$(location).attr('href', "{{route('Admin/actualizar')}}"+"/"+ data[2]+"");--}}
 
