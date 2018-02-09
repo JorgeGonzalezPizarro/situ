@@ -45,7 +45,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
 Route::POST('guardar_Hecho', array('as' => 'guardar_Hecho', 'uses' => 'HechoController@guardar_Hecho'));
 Route::get('mail', 'HomeController@mail');
-Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('auth');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');

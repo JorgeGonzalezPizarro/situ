@@ -50,8 +50,9 @@ class UsersTableSeeder extends Seeder
 
 
         $role=Sentinel::findRoleById(1);
+        for ($i=0;$i<100;$i++){
         $user = Sentinel::register([ 'name' => 'ADMIN',
-            'email' => 'ADMIN@gmail.com',
+            'email' => 'ADMIN'.$i.'@gmail.com',
             'password'=> ('ADMIN'),
             'first_name' =>('Antonio'),
             'last_name'=> ('Fernandez'),
@@ -59,7 +60,7 @@ class UsersTableSeeder extends Seeder
 
 
     ]);
-
+        }
         $role->users()->attach($user);
 
         //Activate the user **

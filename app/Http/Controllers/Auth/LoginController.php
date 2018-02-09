@@ -102,7 +102,7 @@ class LoginController extends Controller
     protected function logout()
     {
         Sentinel::logout();
-        return redirect('/');
+        return redirect('/login');
     }
     protected function activate($id){
         $user = Sentinel::findById($id);

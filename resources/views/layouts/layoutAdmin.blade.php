@@ -158,7 +158,7 @@
                 <li class="">
                     <a href={{ route('crearEtiqueta') }}><i class="fa fa-fw fa-dashboard"></i> CrearEtiqueta</a>
                 </li>
-                @else
+                @elseif(Sentinel::check() && Sentinel::inRole('Alu'))
                     <li class="">
                         <a href="{{ url('#') }}"><i class="fa fa-fw fa-dashboard"></i> Alumno Link 2</a>
                     </li>

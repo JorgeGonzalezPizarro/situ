@@ -21,11 +21,18 @@ class SentinelAuth
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 403);
             } else {
-                return redirect()->guest('login');
+//                return redirect()->guest('login');
             }
         }
 
-        return $next($request);
+
+        if(Sentinel::check() && Sentinel::inRole('Admin')){
+                return redirect('Admin\adminDashboard');
+            }
+            elseif  (Sentinel::check() && Sentinel::inRole('Alu')) {
+                return redirect('Alumno\alumnoDashboard');
+            }
+                return $next($request);
     }
 }
 

@@ -22,7 +22,7 @@
                 <ul class="list-group">
                     <li class="list-group-item text-muted" contenteditable="false">Perfil</li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Fecha  de registro </strong></span>{{ $admin->created_at  }} </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Fecha último acceso</strong></span>{{ $admin->last_login  }} </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Fecha  último acceso</strong></span><span><p>{{ $admin->last_login  }} </p></span></li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Rol </strong></span> {{ $admin->roles()->first()->slug }}</li>
                 </ul>
                 <div class="panel panel-default">
