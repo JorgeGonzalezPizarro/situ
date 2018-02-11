@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controllers;
 use App\hechos;
 use Validator;
+use Sentinel;
+use Session;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
@@ -24,7 +27,7 @@ class HechoController extends Controller
             }
             else{
                 $hecho = new hechos();
-                $hecho -> usuario = Auth::user()->getAuthIdentifierName();
+                $hecho -> usuario = Sentinel::getUser()->id;
                 $hecho -> titulo_hecho = Input::get('titulo_hecho');
                 $hecho -> tipo_hecho = Input::get('tipo_hecho');
                 $hecho -> curso= Input::get('curso');
@@ -83,8 +86,9 @@ class HechoController extends Controller
 
 
                 $hecho->save();
+                Session::flash('message', 'Hecho creado');
 
-                return response()->json(array($hecho));
+                return redirect()->back();
 
             }
 
@@ -94,8 +98,8 @@ class HechoController extends Controller
 
     public function crear(Request $request){
 
-            if(Auth::user()){
-                return view('crear');
+            if(Sentinel::check()){
+                return view('Alumno.crear');
             }
     }
 

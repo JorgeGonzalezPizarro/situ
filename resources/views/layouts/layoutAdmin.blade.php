@@ -4,21 +4,16 @@
     <title>Bootstrap Example</title>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
@@ -54,9 +49,12 @@
 
     <style>
         body {
-            height: 100%;
-            background-color: #fff;
-
+            background: #f1f1f1;
+            color: #444;
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+            font-size: 13px;
+            line-height: 1.4em;
+            min-width: 600px;
         }
         pre {
             border: none;
@@ -100,7 +98,7 @@
 
 <body>
 
-<ul id="wrapper">
+<div id="wrapper">
 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -160,7 +158,7 @@
                 </li>
                 @elseif(Sentinel::check() && Sentinel::inRole('Alu'))
                     <li class="">
-                        <a href="{{ url('#') }}"><i class="fa fa-fw fa-dashboard"></i> Alumno Link 2</a>
+                        <a href="{{ route('crear') }}"><i class="fa fa-fw fa-dashboard"></i> Nuevo Hecho</a>
                     </li>
                     <li class="">
                         <a href="{{ url('#') }}"><i class="fa fa-fw fa-dashboard"></i> Alumno Link 2 </a>
@@ -191,7 +189,6 @@
     </div><!-- /#page-wrapper -->
 
 </div><!-- /#wrapper -->
-</ul>
 <!-- jQuery -->
 
 <!-- Bootstrap Core JavaScript -->

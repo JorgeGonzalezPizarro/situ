@@ -36,6 +36,8 @@
 
     <link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">
     <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <script src="{{ asset('bootstrap-js/bootstrap.bundle.js') }}" ></script>
+    <script src="{{ asset('bootstrap-js/bootstrap.js') }}" ></script>
 
     <style>
         body {

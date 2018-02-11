@@ -29,16 +29,7 @@
                     {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-            <div class="form-group  {{ $errors->has('first_name') ? 'has-error' : ''}}">
-                <label for="name" class="cols-sm-2 control-label">Nombre</label>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        {!! Form::text('name', null, ['class' => 'form-control','placeholder '=>'Enter your  name']) !!}
-                    </div>
-                    {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
-                </div>
-            </div>
+
             <div class="form-group  {{ $errors->has('last_name') ? 'has-error' : ''}}">
                 <label for="last_name" class="cols-sm-2 control-label">Last Name</label>
                 <div class="cols-sm-10">

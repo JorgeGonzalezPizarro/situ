@@ -47,11 +47,26 @@ class UsersTableSeeder extends Seeder
 
 
 
-
-
         $role=Sentinel::findRoleById(1);
+
+
+        $user = Sentinel::register([
+            'email' => 'ADMIN@gmail.com',
+            'password'=> ('ADMIN'),
+            'first_name' =>('Antonio'),
+            'last_name'=> ('Fernandez'),
+            'permissions'=> ['Administrator'],
+        ]);
+
+
+
+        //Activate the user **
+        $activation = Activation::create($user);
+        $activation = Activation::complete($user, $activation->code);
+        $role->users()->attach($user);
+
         for ($i=0;$i<100;$i++){
-        $user = Sentinel::register([ 'name' => 'ADMIN',
+        $user1= Sentinel::register([
             'email' => 'ADMIN'.$i.'@gmail.com',
             'password'=> ('ADMIN'),
             'first_name' =>('Antonio'),
@@ -60,12 +75,13 @@ class UsersTableSeeder extends Seeder
 
 
     ]);
-        }
-        $role->users()->attach($user);
+            $role->users()->attach($user1);
+            //Activate the user **
+            $activation = Activation::create($user1);
+            $activation = Activation::complete($user1, $activation->code);
 
-        //Activate the user **
-        $activation = Activation::create($user);
-        $activation = Activation::complete($user, $activation->code);
+        }
+
 
 
 
