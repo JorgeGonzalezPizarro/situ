@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {{--<script src="{{ asset('/js/jquery-3.3.1.min.js') }}"></script>--}}
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 
     <!-- Bootstrap Core CSS -->
@@ -36,16 +41,17 @@
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
 
-<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>-->
+    <!--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->
+    {{--<![endif]-->--}}
+    {{--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
+    {{--<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>--}}
+{{--<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>--}}
+
+{{--<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">--}}
+    {{--<script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>--}}
 
     <style>
         body {
@@ -115,8 +121,9 @@
 
         <!-- Top Menu Items -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <ul class="nav navbar-nav navbar-right">
+            <div id="adminMenu" role="navigation" aria-label="Menú principal">
+                <div id="adminmenuwrap" style="">
+                <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
                 @if (Sentinel::check())
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Sentinel::getUser()->email }} <b class="caret"></b></a>
@@ -142,6 +149,8 @@
             </li>
 
         </ul>
+                </div>
+            </div>
         </div>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -192,25 +201,24 @@
 <!-- jQuery -->
 
 <!-- Bootstrap Core JavaScript -->
-<script src="{{ asset('/js/jquery-3.3.1.min.js') }}"></script>
 
-<!-- Select Chosen -->
-<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>
-<script>
-    $(function() {
-        $('.chosen-select').chosen({max_selected_options: 3});
-        $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
-    });
-</script>
+{{--<!-- Select Chosen -->--}}
+{{--<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>--}}
+{{--<script>--}}
+    {{--$(function() {--}}
+        {{--$('.chosen-select').chosen({max_selected_options: 3});--}}
+        {{--$('.chosen-select-deselect').chosen({ allow_single_deselect: true });--}}
+    {{--});--}}
+{{--</script>--}}
 
 <!-- DataTables JavaScript -->
-<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/js/jquery.dataTables.min.js"></script>-->
-<script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>
-<script src="{{ asset('dataTables/js/dataTables.bootstrap.min.js') }}"></script>
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/js/dataTables.bootstrap.min.js"></script>-->
+{{--<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>--}}
+{{--<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/js/jquery.dataTables.min.js"></script>-->--}}
+{{--<script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>--}}
+{{--<script src="{{ asset('dataTables/js/dataTables.bootstrap.min.js') }}"></script>--}}
+{{--<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/js/dataTables.bootstrap.min.js"></script>-->--}}
 
-@yield('scripts')
+{{--@yield('scripts')--}}
 
 </body>
 

@@ -1,18 +1,12 @@
 @extends('layouts.layoutAdmin')
 
 @section('content')
-    <p>Page: admin.post.create</p>
-    <ol class="breadcrumb">
-        <li>
-        </li>
-        <li class="active">
-            <i class="fa fa-plus-square"></i> Create
-        </li>
-    </ol>
 
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            @if (Session::has('message'))
+        <div class="col-md-10 col-md-offset-1">
+            <h1 class="">Create a new Post</h1>
+
+        @if (Session::has('message'))
                 <div class="alert alert-{{(Session::get('status')=='error')?'danger':Session::get('status')}} " alert-dismissable fade in id="sessions-hide">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>{{Session::get('status')}}!</strong> {!! Session::get('message') !!}
@@ -20,7 +14,6 @@
             @endif
             {!! Form::open(array('route' => 'guardar_Hecho', 'method' => 'POST', 'files' => true )) !!}
 
-            <h2 class="">Create a new Post</h2>
 
             <div class="form-group">
                 {!! Form::label('title', 'Post Title') !!}
@@ -44,8 +37,10 @@
             </div>
                 <div class="form-group">
                     <div class='input-group date' id='fecha_hecho'>
+                        <input class="datepicker" data-date-format="mm/dd/yyyy">
+
                         {!! Form::label('fecha_hecho', 'Fecha Hecho') !!}
-                        {!! Form::text('fecha_hecho', Input::old('fecha_hecho'), array('class' => 'form-control','placeholder' => 'Proposito')) !!}
+                        {!! Form::text('datepicker', Input::old('fecha_hecho'), array('class' => 'form-control','placeholder' => 'Proposito')) !!}
 
                         <input type='text' class="form-control" />
                         <span class="input-group-addon">
@@ -86,7 +81,9 @@
 @stop
 
 @section('scripts')
+
     <script>
+
         var simplemde = new SimpleMDE({
             element: document.getElementById("text"),
             renderingConfig: {
@@ -96,10 +93,19 @@
         });
     </script>
     <script type="text/javascript">
+        $('.datepicker').datepicker({
+            format: 'mm/dd/yyyy',
+            startDate: '-3d'
+        });
         $(function () {
-            $("#fecha_hecho").datepicker();
+            $('.datepicker').datepicker();
                 locale: 'ru'
 
+        });
+
+        jQuery.noConflict();
+        jQuery(document).ready(function() {
+            jQuery(".datepicker").datepicker();
         });
     </script>
 @stop

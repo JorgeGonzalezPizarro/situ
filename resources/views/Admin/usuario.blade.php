@@ -268,7 +268,6 @@
 
 
 
-        <script src="/plugins/bootstrap-pager.js"></script>
     </div>
 
 
