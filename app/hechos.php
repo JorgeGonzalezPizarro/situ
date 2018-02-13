@@ -7,18 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class hechos extends Model
 {
 
-    protected $fillable = [ 'usuario' ,
+    protected $fillable = [ 'user_id' ,
         'tipo_hecho','titulo_hecho', 'curso', 'contenido', 'proposito', 'evidencia',
-        'nivel_autorizacion', 'hechos_relacionados', 'fecha_hecho', 'proposito', 'evidencia',
+        'nivel_autorizacion', 'hechos_relacionados', 'fecha_inicio','fecha_fin','proposito', 'evidencia',
         'ruta_imagen',
     ];
     public $timestamps = true;
 
 
-    public function getEtiquetas()
+    public function getEtiqueta()
     {
 
-        return $this->belongsToMany('App\Etiquetas', 'hecho_etiqueta');
+        return $this->belongsToMany('App\Etiqueta', 'hecho_etiqueta');
 
     }
 

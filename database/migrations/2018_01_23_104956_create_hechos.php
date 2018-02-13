@@ -15,35 +15,36 @@ class CreateHechos extends Migration
     {
         Schema::create('hechos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('usuario');
-            $table->string('tipo_hecho');
-            $table->string('titulo_hecho');
-            $table->string('curso');
-            $table->string('contenido');
-            $table->string('proposito');
-            $table->string('evidencia');
-            $table->string('etiquetas')->nullable();
-            $table->string('nivel_autorizacion')->nullable();;
-            $table->string('hechos_relacionados')->nullable();;
-            $table->timestamp('fecha_hecho')->nullable();;
-            $table->string('ruta_imagen')->nullable();;
+            $table->integer('user_id')->unsigned()->index();
+            $table->string('tipo_hecho')->nullable();
+            $table->string('titulo_hecho')->nullable();
+            $table->string('curso')->nullable();
+            $table->string('contenido')->nullable();
+            $table->string('proposito')->nullable();
+            $table->string('evidencia')->nullable();
+            $table->string('etiqueta')->nullable();
+            $table->string('nivel_autorizacion')->nullable();
+            $table->string('hechos_relacionados')->nullable();
+            $table->date('fecha_inicio')->nullable();
+            $table->date('fecha_fin')->nullable();
+            $table->string('ruta_imagen')->nullable();
 
             $table->timestamps();
         });
 
 
-        Schema::create('etiquetas', function (Blueprint $table) {
+        Schema::create('etiqueta', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             $table->string('slug')->unique();
-            $table->string('color');
+            $table->string('color')->nullable();
 
             $table->timestamps();
         });
 
         Schema::create('hecho_etiqueta', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('hecho_id')->unsigned()->index();
+            $table->integer('hechos_id')->unsigned()->index();
             $table->integer('etiqueta_id')->unsigned()->index();
 
         });
@@ -57,7 +58,7 @@ class CreateHechos extends Migration
      */
     public function down()
     {
-        Schema::drop('etiquetas');
+        Schema::drop('etiqueta');
         Schema::drop('users');
         Schema::drop('hecho_etiqueta');
 

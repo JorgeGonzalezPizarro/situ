@@ -9,6 +9,12 @@
 body {
     margin-top: 100px;
     background-color: #222;
+
+
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
+    font-size: 13px;
+    line-height: 1.4em;
+    min-width: 600px;
 }
 
 @media(min-width:768px) {
@@ -23,7 +29,7 @@ body {
 
 #page-wrapper {
     /* width: 100%; */
-    /* padding: 0; */
+     padding: 70px;
     /* background-color: #fff; */
 	height: 100%;
     padding-left: 20px;
@@ -35,9 +41,9 @@ body {
     line-height: normal;
 }
 
-@media(min-width:768px) {
+@media(min-width:1200px) {
     #wrapper {
-        /* padding-left: 225px; */
+ padding-left: 30px;
 		    height: auto;
     min-height: 100%;
     width: 100%;
@@ -46,7 +52,7 @@ body {
     }
 
     #page-wrapper {
-        padding: 10px;
+        padding: 40px;
     }
 }
 
@@ -120,12 +126,12 @@ ul.alert-dropdown {
 
 /* Side Navigation */
 
-@media(min-width:768px) {
+@media(min-width:1200px) {
     .side-nav {
         position: fixed;
         top: 50px;
-        left: 225px;
-        width: 139px;
+        /*left: 225px;*/
+        width: 145px;
         margin-left: -225px;
         border: none;
         border-radius: 0;
@@ -134,7 +140,7 @@ ul.alert-dropdown {
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
-			
+        overflow: hidden;
 			    clear: left;
    
     }

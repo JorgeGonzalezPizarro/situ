@@ -1,13 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Etiqueta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controllers;
 use App\hechos;
 use Validator;
 use Sentinel;
 use Session;
-
+use Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
@@ -27,17 +28,26 @@ class HechoController extends Controller
             }
             else{
                 $hecho = new hechos();
-                $hecho -> usuario = Sentinel::getUser()->id;
+                $hecho -> user_id = Sentinel::getUser()->id;
                 $hecho -> titulo_hecho = Input::get('titulo_hecho');
                 $hecho -> tipo_hecho = Input::get('tipo_hecho');
                 $hecho -> curso= Input::get('curso');
                 $hecho -> contenido= Input::get('contenido');
                 $hecho -> proposito= Input::get('proposito');
                 $hecho -> evidencia= Input::get('evidencia');
-                $hecho -> etiquetas= Input::get('etiquetas');
+//                $hecho -> etiqueta= Input::get('etiqueta');
                 $hecho -> nivel_autorizacion= Input::get('nivel_autorizacion');
                 $hecho -> hechos_relacionados= Input::get('hechos_relacionados');
-                $hecho -> fecha_hecho= Input::get('fecha_hecho');
+                $format = 'd/m/Y';
+
+
+
+                $fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
+
+               $hecho -> fecha_inicio= $fecha_inicio;
+                $fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
+
+                $hecho -> fecha_fin= $fecha_fin;
 
                 if (Input::hasfile('imagen')) {
                     $extension = Input::file('imagen')->getClientOriginalExtension(); // Get image extension
@@ -83,9 +93,17 @@ class HechoController extends Controller
                     imagedestroy($dst);
 
                 }
-
-
                 $hecho->save();
+
+                $etiqueta=Input::get('etiqueta');
+                $hecho1= hechos::find($hecho->id);
+                foreach ($etiqueta as $etiquet){
+
+                    $hecho->getEtiqueta()->attach($etiquet);
+
+
+
+                }
                 Session::flash('message', 'Hecho creado');
 
                 return redirect()->back();
@@ -99,7 +117,8 @@ class HechoController extends Controller
     public function crear(Request $request){
 
             if(Sentinel::check()){
-                return view('Alumno.crear');
+                $etiqueta=Etiqueta::pluck('slug');
+                return view('Alumno.crear',compact('etiqueta'));
             }
     }
 

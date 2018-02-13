@@ -265,7 +265,7 @@
 
 
 
-        <script src="/plugins/bootstrap-pager.js"></script>
+        {{--<script src="/plugins/bootstrap-pager.js"></script>--}}
     </div>
 
 @endsection

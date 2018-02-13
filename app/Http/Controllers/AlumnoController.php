@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
-
+use App\hechos;
+use App\Http\Controllers\HechoController;
+use Sentinel;
 class AlumnoController extends Controller
 
 {
@@ -14,8 +17,11 @@ class AlumnoController extends Controller
     }
 
     public function getDashboard(){
+        $user=Sentinel::getUser();
+//        console.log($user->getHechos());
 
-        return view('Alumno.alumnoDashboard');
+        $hechos=$user->getHechos()->get();
+        return view('Alumno.alumnoDashboard')->with('hechos',$hechos);
 
     }
 

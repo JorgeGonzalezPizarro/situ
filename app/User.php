@@ -32,6 +32,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Notifications\ResetPassword;
 use  Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+use hechos;
 class User extends Model implements RoleableInterface, PermissibleInterface, PersistableInterface, UserInterface ,CanResetPassword,Authenticatable
 {
     use PermissibleTrait,Notifiable,AuthenticableTrait;
@@ -59,6 +60,12 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
     protected $hidden = [
         'password','remember_token',
     ];
+    public function getHechos(){
+
+        return $this->hasMany('App\hechos');
+
+    }
+
 
     //Change Password
     public function getRememberToken()

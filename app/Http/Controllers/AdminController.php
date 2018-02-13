@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Etiquetas;
+use App\Etiqueta;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\User;
 use Illuminate\Http\Request;
@@ -159,7 +159,7 @@ class AdminController extends Controller
         }
 
 
-        Etiquetas::create($request->all());
+        Etiqueta::create($request->all());
 
         return Redirect::to('Admin/adminDashboard');
     }

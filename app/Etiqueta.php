@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Etiquetas extends Model
+class Etiqueta extends Model
 {
+    public $table = "etiqueta";
 
     protected $fillable = [
         'nombre' , 'slug','color'

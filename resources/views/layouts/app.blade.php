@@ -46,39 +46,39 @@
             margin-top:0px;
 
         }
-        /*pre {*/
-            /*border: none;*/
-            /*background: #fff;*/
-            /*padding: 0;*/
-        /*}*/
-        /*!*.hljs {*/
-            /*padding: 1.5em;*/
-        /*}*!*/
-        /*pre code {*/
-            /*border-radius: 20px;*/
-            /*overflow: auto;*/
-            /*word-wrap: normal;*/
-            /*white-space: pre;*/
-        /*}*/
+        pre {
+            border: none;
+            background: #fff;
+            padding: 0;
+        }
+        /*.hljs {
+            padding: 1.5em;
+        }*/
+        pre code {
+            border-radius: 20px;
+            overflow: auto;
+            word-wrap: normal;
+            white-space: pre;
+        }
 
-        /*!* Panel *!*/
-        /*.panel-lightblue {*/
-            /*border-color: #5bc0de;*/
-        /*}*/
+        /* Panel */
+        .panel-lightblue {
+            border-color: #5bc0de;
+        }
 
-        /*.panel-lightblue > .panel-heading {*/
-            /*border-color: #5bc0de;*/
-            /*color: #fff;*/
-            /*background-color: #5bc0de;*/
-        /*}*/
+        .panel-lightblue > .panel-heading {
+            border-color: #5bc0de;
+            color: #fff;
+            background-color: #5bc0de;
+        }
 
-        /*.panel-lightblue > a {*/
-            /*color: #5bc0de;*/
-        /*}*/
+        .panel-lightblue > a {
+            color: #5bc0de;
+        }
 
-        /*.panel-lightblue > a:hover {*/
-            /*color: #31b0d5;*/
-        /*}*/
+        .panel-lightblue > a:hover {
+            color: #31b0d5;
+        }
 
     </style>
     @yield('css')
