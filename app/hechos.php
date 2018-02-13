@@ -7,6 +7,7 @@ use App\Categorias;
 class hechos extends Model
 {
     protected $categoria;
+    protected static $categoriaModel = 'App\Categorias';
 
 
     protected $fillable = [ 'user_id' ,
@@ -31,9 +32,21 @@ class hechos extends Model
 
 
         }
-    public  static function getCategoria($id) {
 
-        return  Categorias::find($id);;
+
+    public function withTimestamps($createdAt = null, $updatedAt = null)
+    {
+        $this->withTimestamps = true;
+
+        $this->pivotCreatedAt = $createdAt;
+        $this->pivotUpdatedAt = $updatedAt;
+
+        return $this->withPivot($this->createdAt(), $this->updatedAt());
+    }
+    public   function getCategoria() {
+
+        return $this->belongsTo(static::$categoriaModel, 'id', 'id', 'categoria_id');
+
 
 
     }

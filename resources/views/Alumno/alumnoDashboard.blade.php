@@ -31,8 +31,7 @@
                         <td>{{$hecho->created_at}}</td>
                         <td>{{$hecho->contenido}}</td>
                         <td>{{$hecho->fecha_inicio}}</td>
-                        <td>{{($hecho::getCategoria($hecho->id_categoria))->first()->id}}</td>
-
+                        <td>{{$hecho->getCategoria()->first()->categoria}}</td>
                     </tr>
                 @endforeach
 
