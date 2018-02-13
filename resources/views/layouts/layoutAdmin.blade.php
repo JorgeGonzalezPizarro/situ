@@ -185,10 +185,10 @@
                 </li>
                 @elseif(Sentinel::check() && Sentinel::inRole('Alu'))
                     <li class="">
-                        <a href="{{ route('crear') }}"><i class="fa fa-fw fa-dashboard"></i> Nuevo Hecho</a>
+                        <a href="{{ route('alumnoDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
                     </li>
                     <li class="">
-                        <a href="{{ url('#') }}"><i class="fa fa-fw fa-dashboard"></i> Alumno Link 2 </a>
+                        <a href="{{ route('crear') }}"><i class="fa fa-fw fa-dashboard"></i> Nuevo Hecho</a>
                     </li>
                     <li class="">
                         <a href=""><i class="fa fa-fw fa-dashboard"></i> Alumno Link 3</a>

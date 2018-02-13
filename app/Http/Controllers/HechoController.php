@@ -9,6 +9,7 @@ use Validator;
 use Sentinel;
 use Session;
 use Carbon;
+use App\Categorias;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
@@ -30,7 +31,7 @@ class HechoController extends Controller
                 $hecho = new hechos();
                 $hecho -> user_id = Sentinel::getUser()->id;
                 $hecho -> titulo_hecho = Input::get('titulo_hecho');
-                $hecho -> tipo_hecho = Input::get('tipo_hecho');
+                $hecho -> categoria_id = Input::get('categoria_id');
                 $hecho -> curso= Input::get('curso');
                 $hecho -> contenido= Input::get('contenido');
                 $hecho -> proposito= Input::get('proposito');
@@ -117,8 +118,11 @@ class HechoController extends Controller
     public function crear(Request $request){
 
             if(Sentinel::check()){
+                $categorias=Categorias::get();
                 $etiqueta=Etiqueta::pluck('slug');
-                return view('Alumno.crear',compact('etiqueta'));
+                return view('Alumno.crear')->with('etiqueta',$etiqueta)->with('categorias',$categorias);
+//                return view('Alumno.crear',compact('etiqueta'));
+
             }
     }
 

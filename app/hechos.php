@@ -3,12 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Categorias;
 class hechos extends Model
 {
+    protected $categoria;
+
 
     protected $fillable = [ 'user_id' ,
-        'tipo_hecho','titulo_hecho', 'curso', 'contenido', 'proposito', 'evidencia',
+        'categoria_id','titulo_hecho', 'curso', 'contenido', 'proposito', 'evidencia',
         'nivel_autorizacion', 'hechos_relacionados', 'fecha_inicio','fecha_fin','proposito', 'evidencia',
         'ruta_imagen',
     ];
@@ -29,6 +31,13 @@ class hechos extends Model
 
 
         }
+    public  static function getCategoria($id) {
+
+        return  Categorias::find($id);;
+
+
+    }
+
 
 
 

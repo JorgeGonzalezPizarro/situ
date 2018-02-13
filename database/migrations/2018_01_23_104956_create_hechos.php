@@ -16,7 +16,7 @@ class CreateHechos extends Migration
         Schema::create('hechos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->index();
-            $table->string('tipo_hecho')->nullable();
+            $table->integer('categoria_id')->unsigned()->index();
             $table->string('titulo_hecho')->nullable();
             $table->string('curso')->nullable();
             $table->string('contenido')->nullable();
@@ -49,7 +49,20 @@ class CreateHechos extends Migration
 
         });
 
+        Schema::create('categorias', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('categoria');
+            $table->string('nivel_acceso')->nullable();
+            $table->integer('user_id')->unsigned()->index()->nullable();
+
+            $table->timestamps();
+
+
+        });
+
     }
+
+
 
     /**
      * Reverse the migrations.
@@ -59,7 +72,6 @@ class CreateHechos extends Migration
     public function down()
     {
         Schema::drop('etiqueta');
-        Schema::drop('users');
         Schema::drop('hecho_etiqueta');
 
     }

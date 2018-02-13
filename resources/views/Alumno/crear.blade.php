@@ -29,42 +29,58 @@
 
                     {!! Form::label('Tipo de Hecho', 'Tipo de Hecho') !!}
                     <br>
-                    <div style="padding-left: 10px;">
-                        {{ Form::checkbox('tipo_hecho', 'Trabajo académico') }}
-                        {!! Form::label('Trabajo académico', 'Trabajo académico') !!}
-                        <br>
+            @foreach($categorias as $categoria)
 
-                        {{ Form::checkbox('Calificaciones', 'Calificaciones') }}
-                        {{ Form::label('tipo_hecho', 'Calificaciones') }}
-                        <br>
+                        <div style="padding-left: 10px;">
 
-                        {{ Form::checkbox('tipo_hecho', 'Recuerdos') }}
-                        {{ Form::label('Recuerdos', 'Recuerdos') }}
-                        <br>
-
-                        {{ Form::checkbox('tipo_hecho', 'Frases guía') }}
-                        {{ Form::label('Frases guía', 'Frases guía') }}
-                        <br>
-
-                        {{ Form::checkbox('tipo_hecho', 'Reflexiones') }}
-                        {{ Form::label('Reflexiones', 'Reflexiones') }}
-                        <br>
-
-                        {{ Form::checkbox('tipo_hecho', 'Portafolios profesional ') }}
-                        {{ Form::label('Portafolios profesional', 'Portafolios profesional') }}
-                        <br>
-
-                        {{ Form::checkbox('tipo_hecho', 'Proyectos de investigación') }}
-                        {{ Form::label('Proyectos de investigación', 'Proyectos de investigación') }}
+                        {{ Form::checkbox('categoria_id', $categoria->id) }}
+                        {!! Form::label($categoria->id, $categoria->categoria) !!}
 
                     </div>
+            @endforeach
                 </div>
             </div>
+            {{--<div class="form-group">--}}
+                {{--<div class='input-group date' id='fecha_hecho'>--}}
 
+                    {{--{!! Form::label('Tipo de Hecho', 'Tipo de Hecho') !!}--}}
+                    {{--<br>--}}
+                    {{--<div style="padding-left: 10px;">--}}
+                        {{--{{ Form::checkbox('tipo_hecho', 'Trabajo académico') }}--}}
+                        {{--{!! Form::label('Trabajo académico', 'Trabajo académico') !!}--}}
+                        {{--<br>--}}
+
+                        {{--{{ Form::checkbox('Calificaciones', 'Calificaciones') }}--}}
+                        {{--{{ Form::label('tipo_hecho', 'Calificaciones') }}--}}
+                        {{--<br>--}}
+
+                        {{--{{ Form::checkbox('tipo_hecho', 'Recuerdos') }}--}}
+                        {{--{{ Form::label('Recuerdos', 'Recuerdos') }}--}}
+                        {{--<br>--}}
+
+                        {{--{{ Form::checkbox('tipo_hecho', 'Frases guía') }}--}}
+                        {{--{{ Form::label('Frases guía', 'Frases guía') }}--}}
+                        {{--<br>--}}
+
+                        {{--{{ Form::checkbox('tipo_hecho', 'Reflexiones') }}--}}
+                        {{--{{ Form::label('Reflexiones', 'Reflexiones') }}--}}
+                        {{--<br>--}}
+
+                        {{--{{ Form::checkbox('tipo_hecho', 'Portafolios profesional ') }}--}}
+                        {{--{{ Form::label('Portafolios profesional', 'Portafolios profesional') }}--}}
+                        {{--<br>--}}
+
+                        {{--{{ Form::checkbox('tipo_hecho', 'Proyectos de investigación') }}--}}
+                        {{--{{ Form::label('Proyectos de investigación', 'Proyectos de investigación') }}--}}
+
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
             <div class="form-group" style="">
-                {!! Form::label('Propósito', 'Link tags') !!}
+                {!! Form::label('Etiquetas', 'Link tags') !!}
                 {!! Form::select('etiqueta', $etiqueta, NULL, ['class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
             </div>
+
             <div class="form-group">
                 {!! Form::label('image', 'Upload Image') !!}
                 {!! Form::file('imagen') !!}

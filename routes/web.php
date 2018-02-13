@@ -29,6 +29,8 @@ Route::get('Admin/usuario/{admin}', function($admin){
     return view('Admin.setUsuario')->with('admin',Sentinel::findById($admin));
 });
 
+
+
 Route::get('/Admin/nuevoUsuario', 'AdminController@getNuevoUsuario')->name('nuevoUsuario');
 Route::post('register', 'AdminController@register');
 Route::get('Admin/crearEtiqueta',function(){
@@ -37,7 +39,7 @@ Route::get('Admin/crearEtiqueta',function(){
 
 Route::post('Admin/crearEtiqueta','AdminController@crearNuevaEtiqueta')->name('guardarEtiqueta');
 
-Route::get('/Alumno/alumnoDashboard','AlumnoController@getDashboard');
+Route::get('/Alumno/alumnoDashboard','AlumnoController@getDashboard')->name('alumnoDashboard');
 
 
 Auth::routes();

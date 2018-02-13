@@ -19,11 +19,14 @@ class AlumnoController extends Controller
     public function getDashboard(){
         $user=Sentinel::getUser();
 //        console.log($user->getHechos());
-
+        
         $hechos=$user->getHechos()->get();
         return view('Alumno.alumnoDashboard')->with('hechos',$hechos);
 
     }
+
+
+
 
 
 }
