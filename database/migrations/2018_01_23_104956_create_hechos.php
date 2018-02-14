@@ -19,7 +19,7 @@ class CreateHechos extends Migration
             $table->integer('categoria_id')->unsigned()->index();
             $table->string('titulo_hecho')->nullable();
             $table->string('curso')->nullable();
-            $table->string('contenido')->nullable();
+            $table->longText ('contenido')->nullable();
             $table->string('proposito')->nullable();
             $table->string('evidencia')->nullable();
             $table->string('etiqueta')->nullable();

@@ -112,7 +112,11 @@ class AdminController extends Controller
      * @return Response
      */
 
+    public function verUsuario($usuario){
 
+        Sentinel::findById($usuario);
+        return view('Admin.setUsuario')->with('admin',Sentinel::findById($usuario));
+    }
     public function actualizarUsuario($email)
     {
 

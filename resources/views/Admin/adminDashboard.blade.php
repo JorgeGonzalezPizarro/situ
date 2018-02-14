@@ -47,7 +47,32 @@
         var url = "/Admin";
 
         var tr = $('#clickable');
-        var table=$('#usuarios').DataTable({ "scrollX": false});
+        var table=$('#usuarios').DataTable({
+                "scrollX": false,
+
+                "language": {
+                    "lengthMenu": "Ver _MENU_ Número de registros por página",
+                    "zeroRecords": "No encontrado",
+                    "info": "Página  _PAGE_ de  _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(filtered from _MAX_ Total de usuarios)",
+                    "paginate": {
+                        "first":      "Primero",
+                        "previous":   "Anterior",
+                       "next":       "Siguiente",
+                        "last":       "Último"
+                    },
+                    "search":         "Buscar &nbsp;:",
+
+                }
+            }
+
+
+        );
+
+
+
+
         $('#clickable').on('click','tr', function () {
 
             var data = table

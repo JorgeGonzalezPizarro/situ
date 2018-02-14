@@ -24,11 +24,15 @@ Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/Admin/adminDashboard','AdminController@getDashboard');
 Route::get('Admin/getUsuario/', 'AdminController@getactualizarUsuario')->name('actualizarUsuario');
-Route::get('Admin/usuario/{admin}', function($admin){
-    Sentinel::findById($admin);
-    return view('Admin.setUsuario')->with('admin',Sentinel::findById($admin));
-});
+//Route::get('Admin/usuario/{admin}', function($admin){
+//    Sentinel::findById($admin);
+//    return view('Admin.setUsuario')->with('admin',Sentinel::findById($admin));
+//});
 
+
+
+
+Route::get('Admin/usuario/{usuario}', 'AdminCOntroller@verUsuario');
 
 
 Route::get('/Admin/nuevoUsuario', 'AdminController@getNuevoUsuario')->name('nuevoUsuario');
@@ -39,13 +43,30 @@ Route::get('Admin/crearEtiqueta',function(){
 
 Route::post('Admin/crearEtiqueta','AdminController@crearNuevaEtiqueta')->name('guardarEtiqueta');
 
+
+
+
+/*ALUMNO*/
 Route::get('/Alumno/alumnoDashboard','AlumnoController@getDashboard')->name('alumnoDashboard');
+Route::get('Alumno/crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
+Route::POST('Alumno/guardar_Hecho', array('as' => 'guardar_Hecho', 'uses' => 'HechoController@guardar_Hecho'));
+Route::get('/Alumno/hecho/singleHecho/','AlumnoController@getHechoUsuario')->name('showHecho');
+
+Route::get('Alumno/hecho/{id}/singleHecho', 'AlumnoController@showHecho');
+
+
+
+
+
+
+
+
+
+
 
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('Alumno/crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
-Route::POST('Alumno/guardar_Hecho', array('as' => 'guardar_Hecho', 'uses' => 'HechoController@guardar_Hecho'));
 Route::get('mail', 'HomeController@mail');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('auth');
 Route::post('login', 'Auth\LoginController@login');

@@ -33,49 +33,14 @@
 
                         <div style="padding-left: 10px;">
 
-                        {{ Form::checkbox('categoria_id', $categoria->id) }}
+                        {{ Form::radio('categoria_id', $categoria->id) }}
                         {!! Form::label($categoria->id, $categoria->categoria) !!}
 
                     </div>
             @endforeach
                 </div>
             </div>
-            {{--<div class="form-group">--}}
-                {{--<div class='input-group date' id='fecha_hecho'>--}}
 
-                    {{--{!! Form::label('Tipo de Hecho', 'Tipo de Hecho') !!}--}}
-                    {{--<br>--}}
-                    {{--<div style="padding-left: 10px;">--}}
-                        {{--{{ Form::checkbox('tipo_hecho', 'Trabajo académico') }}--}}
-                        {{--{!! Form::label('Trabajo académico', 'Trabajo académico') !!}--}}
-                        {{--<br>--}}
-
-                        {{--{{ Form::checkbox('Calificaciones', 'Calificaciones') }}--}}
-                        {{--{{ Form::label('tipo_hecho', 'Calificaciones') }}--}}
-                        {{--<br>--}}
-
-                        {{--{{ Form::checkbox('tipo_hecho', 'Recuerdos') }}--}}
-                        {{--{{ Form::label('Recuerdos', 'Recuerdos') }}--}}
-                        {{--<br>--}}
-
-                        {{--{{ Form::checkbox('tipo_hecho', 'Frases guía') }}--}}
-                        {{--{{ Form::label('Frases guía', 'Frases guía') }}--}}
-                        {{--<br>--}}
-
-                        {{--{{ Form::checkbox('tipo_hecho', 'Reflexiones') }}--}}
-                        {{--{{ Form::label('Reflexiones', 'Reflexiones') }}--}}
-                        {{--<br>--}}
-
-                        {{--{{ Form::checkbox('tipo_hecho', 'Portafolios profesional ') }}--}}
-                        {{--{{ Form::label('Portafolios profesional', 'Portafolios profesional') }}--}}
-                        {{--<br>--}}
-
-                        {{--{{ Form::checkbox('tipo_hecho', 'Proyectos de investigación') }}--}}
-                        {{--{{ Form::label('Proyectos de investigación', 'Proyectos de investigación') }}--}}
-
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
             <div class="form-group" style="">
                 {!! Form::label('Etiquetas', 'Link tags') !!}
                 {!! Form::select('etiqueta', $etiqueta, NULL, ['class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
@@ -96,10 +61,10 @@
 
                 {!! Form::select('tags', array('IMAGEN' => 'imagen', NULL, ['class' => 'form-control chosen-select', 'name' => 'tags[]', 'multiple tabindex' => 6])) !!}
             </div>
-
             <div class="form-group">
                 {!! Form::label('text', 'Text as Markdown') !!} Click <a href="https://blog.ghost.org/markdown/" target="_blank" >here</a> to get some tips on how to write Markdown.
                 {!! Form::textarea('contenido', Input::old('contenido')) !!}
+
             </div>
 
             <div class='col-md-5'>
@@ -151,9 +116,13 @@
 
 
     <!--  jQuery -->
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+    <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>
+    <script src="/js/tinymce/js/tinymce/langs/es.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <script>
@@ -213,38 +182,12 @@
 
                 );
 
-            //     $('#endDate').datepicker();
-            //
-            //
-            //
             });
 
         });
-        // $('#endDate').datepicker({
-        //     minDate: $( "#startDate" ).datepicker( "option", "minDate" )
-        // });
-
-           // var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-           //  var date = new Date();
-           //  var currentMonth = date.getMonth();
-           //  var currentDate = date.getDate();
-           //  var currentYear = date.getFullYear();
-
-            // $('#endDate').datepicker({
-            //     minDate:function () {
-            //         return $('#startDate').val();
-            //     }
-            // });
-            // $('#endDate').datepicker({
-            //
-            //     dateFormat: 'dd/mm/yy',
-            //
-            //     minDate: function () {
-            //         return
-            //     }
-            // });
 
     </script>
+    {{--<script src="{{URL::to('/public/js/tinymce/js/tinymce/tincymce.min.js')}}"> </script>--}}
 
     <script>
         $('.en_curso').change(function(ev) {
@@ -264,5 +207,45 @@
 
         });
     </script>
+    <script>
+        var editor_config = {
+            path_absolute : "{{ URL::to('/') }}/",
+            selector : "textarea",
+            plugins: [
+                "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen",
+                "insertdatetime media nonbreaking save table contextmenu directionality",
+                "emoticons template paste textcolor colorpicker textpattern"
+            ],
+            image_advtab: true ,
 
+            external_filemanager_path:"/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/",
+            filemanager_title:"Responsive Filemanager" ,
+            external_plugins: { "filemanager" : "plugins/responsive_filemanager/filemanager/plugin.min.js"},
+            language: 'es',
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
+            relative_urls: false,
+            file_browser_callback : function(field_name, url, type, win) {
+                var x = window.innerWidth || document.documentElement.clientWidth || document.getElementByTagName('body')[0].clientWidth;
+                var y = window.innerHeight|| document.documentElement.clientHeight|| document.grtElementByTagName('body')[0].clientHeight;
+                var cmsURL = editor_config.path_absolute+'laravel-filemanaget?field_name'+field_name;
+                if (type = 'image') {
+                    cmsURL = cmsURL+'&type=Images';
+                } else {
+                    cmsUrl = cmsURL+'&type=Files';
+                }
+
+                tinyMCE.activeEditor.windowManager.open({
+                    file : cmsURL,
+                    title : 'Filemanager',
+                    width : x * 0.8,
+                    height : y * 0.8,
+                    resizeble : 'yes',
+                    close_previous : 'no'
+                });
+            }
+        };
+
+        tinymce.init(editor_config);
+    </script>﻿
 @stop
