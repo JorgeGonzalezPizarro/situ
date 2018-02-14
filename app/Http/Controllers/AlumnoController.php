@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\hechos;
 use App\Http\Controllers\HechoController;
 use Sentinel;
+use App\Categorias;
 class AlumnoController extends Controller
 
 {
@@ -19,9 +20,9 @@ class AlumnoController extends Controller
     public function getDashboard(){
         $user=Sentinel::getUser();
 //        console.log($user->getHechos());
-        
+        $categorias = Categorias::all();
         $hechos=$user->getHechos()->get();
-        return view('Alumno.alumnoDashboard')->with('hechos',$hechos);
+        return view('Alumno.alumnoDashboard')->with('hechos',$hechos)->with('categorias',$categorias);
 
     }
 

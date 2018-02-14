@@ -190,9 +190,12 @@
                     <li class="">
                         <a href="{{ route('crear') }}"><i class="fa fa-fw fa-dashboard"></i> Nuevo Hecho</a>
                     </li>
+                @foreach($categorias as $categoria)
                     <li class="">
-                        <a href=""><i class="fa fa-fw fa-dashboard"></i> Alumno Link 3</a>
+                        <a href=""><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
                     </li>
+                    @endforeach
+
                 @endif
             </ul>
         </div>

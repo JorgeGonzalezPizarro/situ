@@ -131,7 +131,7 @@ ul.alert-dropdown {
         position: fixed;
         top: 50px;
         /*left: 225px;*/
-        width: 145px;
+        width: min-content;
         margin-left: -225px;
         border: none;
         border-radius: 0;
