@@ -132,15 +132,23 @@
                                         <tr>
                                             <td><strong class="">Password:</strong></td>
                                             <td>
-                                                <input class="field" readonly name="new_password" id="new_password" type="password" value="{{$user->password}}">
+                                                <input class="field" readonly name="password" id="password" type="password" >
 
                                                 <a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a>
                                             </td>
+                                            </div>
                                         </tr>
                                         <tr>
+                                            @if (Session::has('error'))
+                                                <div class="alert alert-danger">{{ Session::get('error') }}</div>
+                                            @endif
+                                                @if (Session::has('msg'))
+                                                    <div class="alert alert-info">{{ Session::get('msg') }}</div>
+                                                @endif
                                             <td><strong class=""> </strong></td>
                                             <td>
-                                                <input class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required readonly name="new_password2" id="new_password2" type="password" value="">
+
+                                                <input name="password_confirmation" class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required readonly  id="password_confirmation" type="password" value="">
                                                 <a href="#" id="clickable4"> <i id=" " class="fa fa-pencil"></i></a>
 
                                             </td>
@@ -331,7 +339,7 @@
 
 
 
-
+</div>
 @endsection
 
 <script>
@@ -360,9 +368,9 @@
         });
         $('#clickable3').on('click', function () {
 
-            $('#new_password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
+            $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
 
-            $('#new_password2').attr('readonly', false).css("background-color", "#bfe1e847");
+            $('#password_confirmation').attr('readonly', false).css("background-color", "#bfe1e847");
 
         });
 
