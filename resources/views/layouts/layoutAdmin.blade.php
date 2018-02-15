@@ -11,6 +11,7 @@
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
@@ -39,7 +40,6 @@
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -142,7 +142,11 @@
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                 <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+                    <li class="dropdown">
+                        <a href="{{route('misDatos')}}">Mi perfil <b class="caret"></b></a>
+
+                    </li>
+                    <li class="dropdown">
                 @if (Sentinel::check())
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Sentinel::getUser()->email }} <b class="caret"></b></a>
                 @else

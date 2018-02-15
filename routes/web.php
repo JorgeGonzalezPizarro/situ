@@ -45,7 +45,6 @@ Route::post('Admin/crearEtiqueta','AdminController@crearNuevaEtiqueta')->name('g
 
 
 
-
 /*ALUMNO*/
 Route::get('/Alumno/alumnoDashboard','AlumnoController@getDashboard')->name('alumnoDashboard');
 Route::get('Alumno/crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
@@ -53,6 +52,8 @@ Route::POST('Alumno/guardar_Hecho', array('as' => 'guardar_Hecho', 'uses' => 'He
 Route::get('/Alumno/hecho/singleHecho/','AlumnoController@getHechoUsuario')->name('showHecho');
 
 Route::get('Alumno/hecho/{id}/singleHecho', 'AlumnoController@showHecho');
+Route::get('Alumno/alumnoDatos','AlumnoController@alumnoDatos')->name('misDatos');
+Route::post('Alumno/alumnoDatos','AlumnoController@actualizarMisDatos')->name('actualizarDatos');
 
 
 
