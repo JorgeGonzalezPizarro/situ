@@ -1,6 +1,9 @@
 @extends('layouts.layoutAdmin')
 <script src="/js/jquery-3.3.1.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>
+
 @section('content')
     <hr class="">
 
@@ -13,12 +16,22 @@
                 <button type="button" class="btn btn-info">Enviar mensaje</button>
                 <br>
             </div>
-            <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image"
-                                                                           class="img-circle img-responsive"
-                                                                           src="http://www.rlsandbox.com/img/profile.jpg"></a>
 
-            </div>
         </div>
+        <div class="input-append">
+            <input id="fieldID4" type="text" value="">
+            <a data-toggle="modal" href="javascript:close_window()" data-target="#myModal" class="iframe-btn" type="button">Select</a>
+
+        </div>
+        Select Only Images:<br/>
+        <div class="input-append">
+            <strong>Using Bootstrap Modal:</strong><br/>
+            <!-- <a data-toggle="modal" class="btn btn-warning" href="javascript:;" data-target="#myModal">Open in bootstrap Modal</a> -->
+            <div class="input-append">
+            </div><br/>
+
+        </div><br/>
+
 
         <div class="row">
             <div class="col-sm-3">
@@ -206,7 +219,7 @@
                 </div>
                 <div class="span3">
                     <p>
-                        <a data-toggle="modal" role="button" href="#contactModal">Contact Us</a><br>
+                        <a data-toggle="" role="button" href="#contactModal">Contact Us</a><br>
                         <a href="/tags">Tags</a><br>
                         <a href="/bootstrap-community">Community</a><br>
                         <a href="/upgrade">Upgrade</a><br>
@@ -228,124 +241,78 @@
                                 href="/about#privacy">Privacy</a></span>
                 </div>
             </div>
+
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Modal Header</h4>
+                        </div>
+                        <div class="modal-body">
+                            <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {{--<div class="modal fade" id="myModal" role="dialog">--}}
+                {{--<div class="modal-dialog">--}}
+
+                    {{--<!-- Modal content-->--}}
+                    {{--<div class="modal-content">--}}
+                        {{--<div class="modal-header">--}}
+                            {{--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>--}}
+                            {{--<h4 class="modal-title">Modal title</h4>--}}
+                        {{--</div>--}}
+                        {{--<div class="modal-body" style="padding:0px; margin:0px; width: 700px;">--}}
+                            {{--<iframe width="700" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>--}}
+                        {{--</div>--}}
+                    {{--</div><!-- /.modal-content -->--}}
+                {{--</div><!-- /.modal-dialog -->--}}
+            {{--</div><!-- /.modal -->--}}
+
         </footer>
 
 
-        <!-- End Quantcast tag -->
-        {{--<div id="completeLoginModal" class="modal hide">--}}
-            {{--<div class="modal-header">--}}
-                {{--<a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>--}}
-                {{--<h3>Do you want to proceed?</h3>--}}
-            {{--</div>--}}
-            {{--<div class="modal-body">--}}
-                {{--<p>This page must be refreshed to complete your login.</p>--}}
-                {{--<p>You will lose any unsaved work once the page is refreshed.</p>--}}
-                {{--<br><br>--}}
-                {{--<p>Click "No" to cancel the login process.</p>--}}
-                {{--<p>Click "Yes" to continue...</p>--}}
-            {{--</div>--}}
-            {{--<div class="modal-footer">--}}
-                {{--<a href="#" id="btnYes" class="btn danger">Yes, complete login</a>--}}
-                {{--<a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div id="forgotPasswordModal" class="modal hide">--}}
-            {{--<div class="modal-header">--}}
-                {{--<a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>--}}
-                {{--<h3>Password Lookup</h3>--}}
-            {{--</div>--}}
-            {{--<div class="modal-body">--}}
-                {{--<form class="form form-horizontal" id="formForgotPassword">--}}
-                    {{--<div class="control-group">--}}
-                        {{--<label class="control-label" for="inputEmail">Email</label>--}}
-                        {{--<div class="controls">--}}
-                            {{--<input name="_csrf" id="token" value="CkMEALL0JBMf5KSrOvu9izzMXCXtFQ/Hs6QUY=" type="hidden">--}}
-                            {{--<input name="email" id="inputEmail" placeholder="you@youremail.com" required=""--}}
-                                   {{--type="email">--}}
-                            {{--<span class="help-block"><small>Enter the email address you used to sign-up.</small></span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</form>--}}
-            {{--</div>--}}
-            {{--<div class="modal-footer pull-center">--}}
-                {{--<a href="#" data-dismiss="modal" aria-hidden="true" class="btn">Cancel</a>--}}
-                {{--<a href="#" data-dismiss="modal" id="btnForgotPassword" class="btn btn-success">Reset Password</a>--}}
-            {{--</div>--}}
-
-        {{--</div>--}}
-        {{--<div id="upgradeModal" class="modal hide">--}}
-            {{--<div class="modal-header">--}}
-                {{--<a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>--}}
-                {{--<h4>Would you like to upgrade?</h4>--}}
-            {{--</div>--}}
-            {{--<div class="modal-body">--}}
-                {{--<p class="text-center"><strong></strong></p>--}}
-                {{--<h1 class="text-center">$4--}}
-                    {{--<small>/mo</small>--}}
-                {{--</h1>--}}
-                {{--<p class="text-center">--}}
-                    {{--<small>Unlimited plys. Unlimited downloads. No Ads.</small>--}}
-                {{--</p>--}}
-                {{--<p class="text-center"><img src="/assets/i_visa.png" alt="visa" width="50"> <img src="/assets/i_mc.png" alt="mastercard" width="50"> <img src="/assets/i_amex.png" alt="amex" width="50"> <img src="/assets/i_discover.png" alt="discover" width="50"> <img src="/assets/i_paypal.png" alt="paypal" width="50"></p>--}}
-            {{--</div>--}}
-            {{--<div class="modal-footer pull-center">--}}
-                {{--<a href="/upgrade" class="btn btn-block btn-huge btn-success"><strong>Upgrade Now</strong></a>--}}
-                {{--<a href="#" data-dismiss="modal" class="btn btn-block btn-huge">No Thanks, Maybe Later</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-        {{--<div id="contactModal" class="modal hide">--}}
-            {{--<div class="modal-header">--}}
-                {{--<a href="#" data-dismiss="modal" aria-hidden="true" class="close">×</a>--}}
-                {{--<h3>Contact Us</h3>--}}
-                {{--<p>suggestions, questions or feedback</p>--}}
-            {{--</div>--}}
-            {{--<div class="modal-body">--}}
-                {{--<form class="form form-horizontal" id="formContact">--}}
-                    {{--<input name="_csrf" id="token" value="CkMEALL0JBMf5KSrOvu9izzMXCXtFQ/Hs6QUY=" type="hidden">--}}
-                    {{--<div class="control-group">--}}
-                        {{--<label class="control-label" for="inputSender">Name</label>--}}
-                        {{--<div class="controls">--}}
-                            {{--<input name="sender" id="inputSender" class="input-large" placeholder="Your name"--}}
-                                   {{--type="text">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="control-group">--}}
-                        {{--<label class="control-label" for="inputMessage">Message</label>--}}
-                        {{--<div class="controls">--}}
-                            {{--<textarea name="notes" rows="5" id="inputMessage" class="input-large"--}}
-                                      {{--placeholder="Type your message here"></textarea>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="control-group">--}}
-                        {{--<label class="control-label" for="inputEmail">Email</label>--}}
-                        {{--<div class="controls">--}}
-                            {{--<input name="email" id="inputEmail" class="input-large"--}}
-                                   {{--placeholder="you@youremail.com (for reply)" required="" type="text">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</form>--}}
-            {{--</div>--}}
-            {{--<div class="modal-footer pull-center">--}}
-                {{--<a href="#" data-dismiss="modal" aria-hidden="true" class="btn">Cancel</a>--}}
-                {{--<a href="#" data-dismiss="modal" aria-hidden="true" id="btnContact" role="button"--}}
-                   {{--class="btn btn-success">Send</a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-
-
-        {{--<script src="/plugins/bootstrap-pager.js"></script>--}}
-    {{--</div>--}}
 
 
 
-
-</div>
 @endsection
 
+<script type="text/javascript">
+    $(function(){
+        $('.iframe-btn').fancybox({
+            'width'	: 1024,
+            'minHeight'	: 600,
+            'type'	: 'iframe',
+            'autoScale'   : true
+        });
+    });
+</script>
 <script>
 
 
     $(document).ready(function () {
+        $(function(){
+            $('.iframe-btn').fancybox({
+                'width'	: 1024,
+                'minHeight'	: 600,
+                'type'	: 'iframe',
+                'autoScale'   : true
+            });
+        });
+
+        parent.$.fancybox.close();
 
         var tr = $('#clickable');
 
@@ -375,8 +342,6 @@
         });
 
 
-
-
         {{--var data = table--}}
         {{--.rows()--}}
         {{--.data();--}}
@@ -385,31 +350,34 @@
         {{--//alert( 'You clicked on '+data[2]+'\'s row' );--}}
         {{--var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');--}}
 
+            $.ajax({
+                type: "get",
+                url: "{{ route('actualizarDatos') }}",
+                datatype: "json",
+                encode: true,
+                data: {
+                    first_name: document.getElementById('first_name'),
+                    first_name: document.getElementById('last_name'),
+                    email: document.getElementById('email'),
 
-$.ajax({
-        type:"get",
-        url     : "{{ route('actualizarDatos') }}",
-        datatype:"json",
-        encode  : true,
-        data: {
-        first_name: document.getElementById('first_name'),
-        first_name: document.getElementById('last_name'),
-        email: document.getElementById('email'),
+                    _token: CSRF_TOKEN
+                },
+                success: function (response) { // What to do if we succeed
+                    {{--window.location.href= "{{ url('Alumno/hecho') }}"+"/"+response['id'] + "/singleHecho";--}}
+                    console.log("aa+ " + response);
 
-        _token: CSRF_TOKEN
-        },
-        success: function(response){ // What to do if we succeed
-        {{--window.location.href= "{{ url('Alumno/hecho') }}"+"/"+response['id'] + "/singleHecho";--}}
-        console.log("aa+ " + response);
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-        console.log(JSON.stringify(jqXHR));
-        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-        }
-        });
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
 
 
 
     });
+
+
+
+
 </script>
