@@ -20,12 +20,11 @@
         </div>
         <div class="input-append">
             <input id="fieldID4" type="text" value="">
-            <a data-toggle="modal" href="javascript:close_window()" data-target="#myModal" class="iframe-btn" type="button">Select</a>
+            <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">Select</a>
 
         </div>
         Select Only Images:<br/>
         <div class="input-append">
-            <strong>Using Bootstrap Modal:</strong><br/>
             <!-- <a data-toggle="modal" class="btn btn-warning" href="javascript:;" data-target="#myModal">Open in bootstrap Modal</a> -->
             <div class="input-append">
             </div><br/>
@@ -149,7 +148,6 @@
 
                                                 <a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a>
                                             </td>
-                                            </div>
                                         </tr>
                                         <tr>
                                             @if (Session::has('error'))
@@ -219,7 +217,7 @@
                 </div>
                 <div class="span3">
                     <p>
-                        <a data-toggle="" role="button" href="#contactModal">Contact Us</a><br>
+                        <a data-toggle="" role="button" href="">Contact Us</a><br>
                         <a href="/tags">Tags</a><br>
                         <a href="/bootstrap-community">Community</a><br>
                         <a href="/upgrade">Upgrade</a><br>
@@ -239,22 +237,20 @@
                     <span class="pull-right">©Copyright 2013-2014 <a href="/"
                                                                      title="The Bootstrap Playground">Bootply</a> | <a
                                 href="/about#privacy">Privacy</a></span>
+                    <a href="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" class="btn iframe-btn" type="button">Open Filemanager</a>
+
                 </div>
             </div>
+        </footer>
 
+    </div>
 
-
-
-            <!-- Modal -->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
 
                     <!-- Modal content-->
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Modal Header</h4>
-                        </div>
+                       
                         <div class="modal-body">
                             <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
                         </div>
@@ -265,6 +261,23 @@
 
                 </div>
             </div>
+    </div><!-- /#wrapper -->
+    <!-- jQuery -->
+    {{--<div class="modal fade" id="myModal" style="width:700px; ">--}}
+        {{--<div class="modal-dialog">--}}
+            {{--<div class="modal-content">--}}
+                {{--<div class="modal-header">--}}
+                    {{--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>--}}
+                    {{--<h4 class="modal-title">Modal title</h4>--}}
+                {{--</div>--}}
+                {{--<div class="modal-body" style="padding:0px; margin:0px; width: 700px;">--}}
+                    {{--<iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>--}}
+                {{--</div>--}}
+            {{--</div><!-- /.modal-content -->--}}
+        {{--</div><!-- /.modal-dialog -->--}}
+    {{--</div><!-- /.modal -->--}}
+            {{--<!-- Modal -->--}}
+
             {{--<div class="modal fade" id="myModal" role="dialog">--}}
                 {{--<div class="modal-dialog">--}}
 
@@ -281,7 +294,6 @@
                 {{--</div><!-- /.modal-dialog -->--}}
             {{--</div><!-- /.modal -->--}}
 
-        </footer>
 
 
 
@@ -289,30 +301,31 @@
 
 @endsection
 
-<script type="text/javascript">
-    $(function(){
-        $('.iframe-btn').fancybox({
-            'width'	: 1024,
-            'minHeight'	: 600,
-            'type'	: 'iframe',
-            'autoScale'   : true
-        });
-    });
-</script>
+
+{{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
+
+{{--<script type="text/javascript">--}}
+    {{--$(function(){--}}
+        {{--$('.iframe-btn').fancybox({--}}
+            {{--'width'	: 1024,--}}
+            {{--'minHeight'	: 600,--}}
+            {{--'type'	: 'iframe',--}}
+            {{--'autoScale'   : true--}}
+        {{--});--}}
+    {{--});--}}
+{{--</script>--}}
 <script>
-
-
     $(document).ready(function () {
-        $(function(){
-            $('.iframe-btn').fancybox({
-                'width'	: 1024,
-                'minHeight'	: 600,
-                'type'	: 'iframe',
-                'autoScale'   : true
-            });
-        });
+    //     $(function(){
+    //         $('.iframe-btn').fancybox({
+    //             'width'	: 1024,
+    //             'minHeight'	: 600,
+    //             'type'	: 'iframe',
+    //             'autoScale'   : true
+    //         });
+    //     });
 
-        parent.$.fancybox.close();
+        // parent.$.fancybox.close();
 
         var tr = $('#clickable');
 
@@ -350,33 +363,47 @@
         {{--//alert( 'You clicked on '+data[2]+'\'s row' );--}}
         {{--var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');--}}
 
-            $.ajax({
-                type: "get",
-                url: "{{ route('actualizarDatos') }}",
-                datatype: "json",
-                encode: true,
-                data: {
-                    first_name: document.getElementById('first_name'),
-                    first_name: document.getElementById('last_name'),
-                    email: document.getElementById('email'),
+            {{--$.ajax({--}}
+                {{--type: "get",--}}
+                {{--url: "{{ route('actualizarDatos') }}",--}}
+                {{--datatype: "json",--}}
+                {{--encode: true,--}}
+                {{--data: {--}}
+                    {{--first_name: document.getElementById('first_name'),--}}
+                    {{--first_name: document.getElementById('last_name'),--}}
+                    {{--email: document.getElementById('email'),--}}
 
-                    _token: CSRF_TOKEN
-                },
-                success: function (response) { // What to do if we succeed
+                    {{--_token: CSRF_TOKEN--}}
+                {{--},--}}
+                {{--success: function (response) { // What to do if we succeed--}}
                     {{--window.location.href= "{{ url('Alumno/hecho') }}"+"/"+response['id'] + "/singleHecho";--}}
-                    console.log("aa+ " + response);
+                    {{--console.log("aa+ " + response);--}}
 
-                },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
+                {{--},--}}
+                {{--error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
+                    {{--console.log(JSON.stringify(jqXHR));--}}
+                    {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
+                {{--}--}}
 
 
+
+    {{--});--}}
 
     });
 
+
+
+
+</script>
+<script>function responsive_filemanager_callback(field_id){
+        console.log(field_id);
+
+        var url=jQuery('#'+field_id).val();
+        // $('#myModal').modal('hide');
+
+        alert('update '+field_id+" with "+url);
+
+    }
 
 
 
