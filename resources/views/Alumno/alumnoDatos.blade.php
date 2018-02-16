@@ -12,24 +12,16 @@
             <div class="col-sm-10">
                 <h1 class="">{{ $user->first_name  }}</h1>
 
-                <button type="button" class="btn btn-success">Enviar Correo</button>
-                <button type="button" class="btn btn-info">Enviar mensaje</button>
+                <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button"  class="btn btn-info">Enviar mensaje</button>
                 <br>
             </div>
-
+            <div class="col-sm-2"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+                    <img  id="myimage" title="profile image" src="https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png" class="img-circle img-responsive" name="imagen">
+                    <i id=" " class="fa fa-pencil"></i></a>
+            </div>
         </div>
-        <div class="input-append">
-            <input id="fieldID4" type="text" value="">
-            <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">Select</a>
 
-        </div>
-        Select Only Images:<br/>
-        <div class="input-append">
-            <!-- <a data-toggle="modal" class="btn btn-warning" href="javascript:;" data-target="#myModal">Open in bootstrap Modal</a> -->
-            <div class="input-append">
-            </div><br/>
 
-        </div><br/>
 
 
         <div class="row">
@@ -102,23 +94,16 @@
                         <div class="panel-body">
                             <div class="row">
 
-                                <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
-                                  <dl>
-                                    <dt>DEPARTMENT:</dt>
-                                    <dd>Administrator</dd>
-                                    <dt>HIRE DATE</dt>
-                                    <dd>11/12/2013</dd>
-                                    <dt>DATE OF BIRTH</dt>
-                                       <dd>11/12/2013</dd>
-                                    <dt>GENDER</dt>
-                                    <dd>Male</dd>
-                                  </dl>
-                                </div>-->
+
 
                                 <div class=" col-md-12 col-lg-12 ">
                                     <table class="table table-user-information">
                                         {{ Form::open(array('route' => 'actualizarDatos', 'class' => 'form-style-8','files' => true)) }}
+                                        <div class="input-append">
+                                            {{--<input id="fieldID4" type="text" name="imagen" style="display: none;">--}}
+                                            {!! Form::text('imagen', null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
 
+                                        </div>
                                         <tbody>
                                         <tr>
                                             <td><strong class="">Department:</strong></td>
@@ -298,7 +283,6 @@
 
 
 
-
 @endsection
 
 
@@ -326,6 +310,13 @@
     //     });
 
         // parent.$.fancybox.close();
+        $('input[name=imagen]').change(function() {
+
+
+
+        });
+
+
 
         var tr = $('#clickable');
 
@@ -402,6 +393,7 @@
         // $('#myModal').modal('hide');
 
         alert('update '+field_id+" with "+url);
+        $('#myimage').attr('src', url);
 
     }
 

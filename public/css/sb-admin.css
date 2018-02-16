@@ -246,8 +246,8 @@ ul.alert-dropdown {
 /*CUSTOM CSS JORGE*/
 .adminMenu{
     position: relative;
-    float: left;
     z-index: 9990;
+    float: left;
 	    width: 160px;
     background-color: #23282d;
 
