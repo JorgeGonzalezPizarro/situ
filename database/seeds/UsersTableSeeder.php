@@ -56,6 +56,7 @@ class UsersTableSeeder extends Seeder
             'first_name' =>('Antonio'),
             'last_name'=> ('Fernandez'),
             'permissions'=> ['Administrator'],
+
         ]);
 
 

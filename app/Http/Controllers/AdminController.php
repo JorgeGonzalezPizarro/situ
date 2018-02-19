@@ -36,7 +36,7 @@ class AdminController extends Controller
 
         $user = Sentinel::getUser();
 
-        return view('Admin.Admin')->withUser($user);;
+        return view('Admin.Admin')->withUser($user);
 
 
     }
@@ -112,10 +112,11 @@ class AdminController extends Controller
      * @return Response
      */
 
-    public function verUsuario($usuario){
+    public function verUsuario($usuario)
+    {
 
         Sentinel::findById($usuario);
-        return view('Admin.setUsuario')->with('admin',Sentinel::findById($usuario));
+        return view('Admin.setUsuario')->with('admin', Sentinel::findById($usuario));
     }
     public function actualizarUsuario($email)
     {

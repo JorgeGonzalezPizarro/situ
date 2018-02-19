@@ -75,21 +75,28 @@ class RegisterController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'password' => 'required|string|min:6|confirmed',
                 'permissions' =>  'string|min:6|confirmed',
+                'otros_datos' => 'nullable',
             ]);
 
           if ($validation->fails()) {
                 return Redirect::back()->withErrors($validation)->withInput();
          }
+         $otros_datos=array('facebook'=>'https://www.facebook.com');
         $rol=$request['roles'];
         $role=$rol[0];
-        \Log::info($rol);
 
         $user = Sentinel::register($request->all());
         $user->roles()->sync([$role]);
+        $user->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
         $user->permissions = [(Sentinel::findRoleById($role)->name)];
-        $user->save();
+        $user->rrss=json_encode($otros_datos);
 
-        //Activate the user ** 
+
+        $user->save();
+//        $user ->otros_datos['img' => '\js\tinymce\plugins\responsive_filemanager\source\user_default.png']);
+//        $user->otros_datos->img = 'some_other_value';
+
+        //Activate the user **
          $activation = Activation::create($user);
          $activation = Activation::complete($user, $activation->code);
         //End activation

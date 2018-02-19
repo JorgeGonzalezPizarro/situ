@@ -150,10 +150,14 @@
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                 <ul class="nav navbar-nav navbar-right">
+                    @if(Sentinel::check() && Sentinel::inRole('Alu'))
+
                     <li class="dropdown">
                         <a href="{{route('misDatos')}}">Mi perfil <b class="caret"></b></a>
 
                     </li>
+
+                    @endif
                     <li class="dropdown">
                 @if (Sentinel::check())
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Sentinel::getUser()->email }} <b class="caret"></b></a>

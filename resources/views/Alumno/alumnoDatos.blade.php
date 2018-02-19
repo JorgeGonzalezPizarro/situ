@@ -247,40 +247,6 @@
                 </div>
             </div>
     </div><!-- /#wrapper -->
-    <!-- jQuery -->
-    {{--<div class="modal fade" id="myModal" style="width:700px; ">--}}
-        {{--<div class="modal-dialog">--}}
-            {{--<div class="modal-content">--}}
-                {{--<div class="modal-header">--}}
-                    {{--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>--}}
-                    {{--<h4 class="modal-title">Modal title</h4>--}}
-                {{--</div>--}}
-                {{--<div class="modal-body" style="padding:0px; margin:0px; width: 700px;">--}}
-                    {{--<iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>--}}
-                {{--</div>--}}
-            {{--</div><!-- /.modal-content -->--}}
-        {{--</div><!-- /.modal-dialog -->--}}
-    {{--</div><!-- /.modal -->--}}
-            {{--<!-- Modal -->--}}
-
-            {{--<div class="modal fade" id="myModal" role="dialog">--}}
-                {{--<div class="modal-dialog">--}}
-
-                    {{--<!-- Modal content-->--}}
-                    {{--<div class="modal-content">--}}
-                        {{--<div class="modal-header">--}}
-                            {{--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>--}}
-                            {{--<h4 class="modal-title">Modal title</h4>--}}
-                        {{--</div>--}}
-                        {{--<div class="modal-body" style="padding:0px; margin:0px; width: 700px;">--}}
-                            {{--<iframe width="700" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>--}}
-                        {{--</div>--}}
-                    {{--</div><!-- /.modal-content -->--}}
-                {{--</div><!-- /.modal-dialog -->--}}
-            {{--</div><!-- /.modal -->--}}
-
-
-
 
 
 @endsection
