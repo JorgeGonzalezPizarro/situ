@@ -52,7 +52,6 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
         'first_name',
         'permissions',
         'remember_token',
-        'img',
         'otros_datos'=>'array'
     ];
 

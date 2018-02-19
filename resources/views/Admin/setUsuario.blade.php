@@ -11,8 +11,10 @@
                 <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button" class="btn btn-info">Enviar mensaje</button>
                 <br>
             </div>
-                <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="{{$admin->img}}"></a>
-            </div>
+                <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="{!! ($otros_datos['img']);!!}"></a>
+
+                    </div>
+
         </div>
         <br>
         <div class="row">
@@ -36,7 +38,7 @@
                     <div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>
 
                     </div>
-                    <div class="panel-body"><a href="http://bootply.com" class="">{{ $admin->first_name  }}</a>
+                    <div class="panel-body"><a href="{!! ($otros_datos['facebook']);!!}" class="">Facebook</a>
 
                     </div>
                 </div>

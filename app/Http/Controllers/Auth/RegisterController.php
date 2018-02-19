@@ -81,15 +81,15 @@ class RegisterController extends Controller
           if ($validation->fails()) {
                 return Redirect::back()->withErrors($validation)->withInput();
          }
-         $otros_datos=array('facebook'=>'https://www.facebook.com');
+         $otros_datos=array('facebook'=>'https://www.facebook.com','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
         $rol=$request['roles'];
         $role=$rol[0];
 
         $user = Sentinel::register($request->all());
         $user->roles()->sync([$role]);
-        $user->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
+//        $user->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
         $user->permissions = [(Sentinel::findRoleById($role)->name)];
-        $user->rrss=json_encode($otros_datos);
+        $user->otros_datos=json_encode($otros_datos);
 
 
         $user->save();

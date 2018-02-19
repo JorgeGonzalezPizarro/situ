@@ -14,6 +14,7 @@ use Router;
 use View;
 use Response;
 use Validator;
+use Json;
 class AdminController extends Controller
 {
     public function __construct()
@@ -116,7 +117,10 @@ class AdminController extends Controller
     {
 
         Sentinel::findById($usuario);
-        return view('Admin.setUsuario')->with('admin', Sentinel::findById($usuario));
+        $json= Sentinel::findById($usuario);
+        $otros_datos=json_decode($json->otros_datos,true);
+        return view('Admin.setUsuario')->with('admin', Sentinel::findById($usuario))
+            ->with('otros_datos', $otros_datos);
     }
     public function actualizarUsuario($email)
     {
