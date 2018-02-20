@@ -60,11 +60,24 @@ class AlumnoController extends Controller
 
         $user = Sentinel::getUser();
 
-        return view('Alumno.alumnoDatos')->with('user',$user);;
+        return view('Alumno.datos.alumnoDatos')->with('user',$user);;
 
     }
+    public function alumnoDatosAcademicos (){
 
 
+        $user = Sentinel::getUser();
+
+        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user);;
+
+    }
+    public function actualizarMisDatosAcademicos(Request $request)
+    {
+
+       return response($request);
+
+
+    }
     public function actualizarMisDatos(Request $request){
       $user=Sentinel::getUser();
 

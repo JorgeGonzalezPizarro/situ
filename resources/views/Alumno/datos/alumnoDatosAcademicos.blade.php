@@ -81,79 +81,88 @@
                     </div>
                 </div>
             </div>
-            <!--/col-3-->
+
             <div class="col-sm-9" style="" contenteditable="false">
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
 
 
                     <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Sheena Shrestha</h3>
-                        </div>
+                        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                            <div class="collapse navbar-collapse" id="navbarColor03">
+                                <ul class="nav navbar-nav ">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Profesionales</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Otros datos</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </nav>
                         <div class="panel-body">
                             <div class="row">
 
 
 
                                 <div class=" col-md-12 col-lg-12 ">
-                                    <table class="table table-user-information">
-                                        {{ Form::open(array('route' => 'actualizarDatos', 'class' => 'form-style-8','files' => true)) }}
+                                    {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'id'=>'form','class' => 'form-style-8','files' => true)) }}
+
+                                    <table class="table table-user-information" id="mitabla">
                                         <div class="input-append">
+
                                             {{--<input id="fieldID4" type="text" name="imagen" style="display: none;">--}}
                                             {!! Form::text('imagen', null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
 
                                         </div>
-                                        <tbody>
+                                        <tbody id="tbody">
                                         <tr>
-                                            <td><strong class="">Department:</strong></td>
+                                            <td><strong class="">Grado:</strong></td>
                                             <td>{!! Form::text('first_name', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $user->first_name ]) !!}
                                                 <a href="#" id="clickable"> <i id=" " class="fa fa-pencil"></i></a>
 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><strong class="">Department:</strong></td>
+                                            <td><strong class="">Curso:</strong></td>
                                             <td>{!! Form::text('last_name', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name ]) !!}
                                                 <a href="#" id="clickable1"> <i id=" " class="fa fa-pencil"></i></a>
 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><strong class="">Department:</strong></td>
-                                            <td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}
+                                            <td><strong class="">Asignatura:</strong></td>
+                                            <td>{!! Form::text('asignatura[]', null, ['id'=>'asignatura','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}
                                                 <a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong class="">Password:</strong></td>
-                                            <td>
-                                                <input class="field" readonly name="password" id="password" type="password" >
 
-                                                <a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a>
+                                                {{ Form::select('semestre', ['Primer Semestre','Segundo Semestre'], null, ['class' => 'misDatos']) }}
+
+                                                <a  id="mas"  value="" onclick="addInput();"  >
+                                                    <i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
+
+                                                </a>
                                             </td>
                                         </tr>
+
                                         <tr>
                                             @if (Session::has('error'))
                                                 <div class="alert alert-danger">{{ Session::get('error') }}</div>
                                             @endif
-                                                @if (Session::has('msg'))
-                                                    <div class="alert alert-info">{{ Session::get('msg') }}</div>
-                                                @endif
-                                            <td><strong class=""> </strong></td>
-                                            <td>
+                                            @if (Session::has('msg'))
+                                                <div class="alert alert-info">{{ Session::get('msg') }}</div>
+                                            @endif
 
-                                                <input name="password_confirmation" class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required readonly  id="password_confirmation" type="password" value="">
-                                                <a href="#" id="clickable4"> <i id=" " class="fa fa-pencil"></i></a>
-
-                                            </td>
                                         </tr>
 
-                                        <tr>
-                                            <td><strong class="">Department:</strong></td>
-                                            <td><a href="mailto:info@support.com">info@support.com</a></td>
-                                        </tr>
+
                                         <input class="field" name="old_password"  id="old_password" type="hidden" value="{{$user->password}}">
 
 
@@ -162,16 +171,18 @@
                                     </table>
                                     <div class='col-md-5' style="    margin-top: 10px;
                                       margin-left: 240px;">
+                                        {{--<input type="button" value="Add another text input" onClick="addInput();">--}}
 
                                         {!! Form::submit('Create Post', array('class'=>'btn btn-primary' , 'style="margin-right:30px"')) !!}</td>
+                                        {{ Form::close() }}
 
                                     </div>
 
-                                    {!! Form::close() !!}
 
                                 </div>
                             </div>
                         </div>
+
                         <div class="panel-footer">
                             <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
                                class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
@@ -230,22 +241,22 @@
 
     </div>
 
-            <div class="modal fade" id="myModal" role="dialog">
-                <div class="modal-dialog">
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                       
-                        <div class="modal-body">
-                            <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
+            <!-- Modal content-->
+            <div class="modal-content">
 
+                <div class="modal-body">
+                    <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
+
+        </div>
+    </div>
     </div><!-- /#wrapper -->
 
 
@@ -255,25 +266,25 @@
 {{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
 
 {{--<script type="text/javascript">--}}
-    {{--$(function(){--}}
-        {{--$('.iframe-btn').fancybox({--}}
-            {{--'width'	: 1024,--}}
-            {{--'minHeight'	: 600,--}}
-            {{--'type'	: 'iframe',--}}
-            {{--'autoScale'   : true--}}
-        {{--});--}}
-    {{--});--}}
+{{--$(function(){--}}
+{{--$('.iframe-btn').fancybox({--}}
+{{--'width'	: 1024,--}}
+{{--'minHeight'	: 600,--}}
+{{--'type'	: 'iframe',--}}
+{{--'autoScale'   : true--}}
+{{--});--}}
+{{--});--}}
 {{--</script>--}}
 <script>
     $(document).ready(function () {
-    //     $(function(){
-    //         $('.iframe-btn').fancybox({
-    //             'width'	: 1024,
-    //             'minHeight'	: 600,
-    //             'type'	: 'iframe',
-    //             'autoScale'   : true
-    //         });
-    //     });
+        //     $(function(){
+        //         $('.iframe-btn').fancybox({
+        //             'width'	: 1024,
+        //             'minHeight'	: 600,
+        //             'type'	: 'iframe',
+        //             'autoScale'   : true
+        //         });
+        //     });
 
         // parent.$.fancybox.close();
         $('input[name=imagen]').change(function() {
@@ -281,6 +292,11 @@
 
 
         });
+
+        // $('#mas').click(function() {
+        //     $("form").append('             <tr>        <td><strong class="">Asignatura:</strong></td> <td>    <input class=misDatos, readonly ,name="asignatura1" id="" type="text" value="aa" > <a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a><a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>');
+        //
+        // });
 
 
 
@@ -312,39 +328,7 @@
         });
 
 
-        {{--var data = table--}}
-        {{--.rows()--}}
-        {{--.data();--}}
-        {{--var cData = table.cell(this).data();--}}
-        {{--var data = table.row( this ).data();--}}
-        {{--//alert( 'You clicked on '+data[2]+'\'s row' );--}}
-        {{--var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');--}}
 
-            {{--$.ajax({--}}
-                {{--type: "get",--}}
-                {{--url: "{{ route('actualizarDatos') }}",--}}
-                {{--datatype: "json",--}}
-                {{--encode: true,--}}
-                {{--data: {--}}
-                    {{--first_name: document.getElementById('first_name'),--}}
-                    {{--first_name: document.getElementById('last_name'),--}}
-                    {{--email: document.getElementById('email'),--}}
-
-                    {{--_token: CSRF_TOKEN--}}
-                {{--},--}}
-                {{--success: function (response) { // What to do if we succeed--}}
-                    {{--window.location.href= "{{ url('Alumno/hecho') }}"+"/"+response['id'] + "/singleHecho";--}}
-                    {{--console.log("aa+ " + response);--}}
-
-                {{--},--}}
-                {{--error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
-                    {{--console.log(JSON.stringify(jqXHR));--}}
-                    {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
-                {{--}--}}
-
-
-
-    {{--});--}}
 
     });
 
@@ -363,6 +347,34 @@
 
     }
 
+    function add_fields() {
+         {{--document.getElementById("mitabla").insertRow(-1).innerHTML = ' <tr><td><strong class="">Asignatura:</strong></td><td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}--}}
+                                                             {{--<a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>{{ Form::select('semestre', ['Primer Semestre\',\'Segundo Semestre\'], null, [\'class\' => \'misDatos\']) }}--}}
+                                                             {{--<a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a>--}}
+             {{--'                                            </td>\n' +--}}
+             {{--'                                        </tr>>';--}}
+         {{--var count = $('#mitabla tr').length;--}}
+         {{--document.getElementById("mitabla").insertRow(-1).innerHTML =    ' <tr>        <td><strong class="">Asignatura:</strong></td>        <td>{!! Form::text('asignatura[]', null, ['id'=>'asignatura','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}<a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>{{ Form::select('semestre', ['Primer Semestre','Segundo Semestre'], null, ['class' => 'misDatos']) }}<a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>';--}}
+        {{--// document.getElementById("asignatura").setAttribute('name','Asignatura'+count);--}}
+        {{--' <tr>        <td><strong class="">Asignatura:</strong></td>        <td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}<a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>{{ Form::select('semestre', ['Primer Semestre','Segundo Semestre'], null, ['class' => 'misDatos']) }}<a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>';--}}
+        {{--var x = Math.floor((Math.random() * 10) + 1);--}}
+        {{--document.getElementById("asignatura").setAttribute('name','asignatura'+x);--}}
+         {{--$("#mitabla").append('             <tr>        <td><strong class="">Asignatura:</strong></td> <td>{!! Form::text('asignatura[]', null, ['id'=>'asignatura','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}<a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>{{ Form::select('semestre', ['Primer Semestre','Segundo Semestre'], null, ['class' => 'misDatos']) }}<a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>');--}}
+         //    $("#mitabla").append('             <tr>        <td><strong class="">Asignatura:</strong></td> <td>    <input class=misDatos, readonly ,name="asignatura[]" id="" type="text" value="aa" > <a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a><a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>');
 
+
+    }
+
+    var counter = 1;
+    var limit = 3;
+    function addInput(){
+
+            var newdiv = document.createElement('tr');
+            newdiv.innerHTML =  "<td><strong class=''>Asignatura:</strong></td> <td><br><input type='text' class='misDatos' name='asignatura[]'></td>";
+            document.getElementById("tbody").appendChild(newdiv);
+
+            counter++;
+
+    }
 
 </script>
