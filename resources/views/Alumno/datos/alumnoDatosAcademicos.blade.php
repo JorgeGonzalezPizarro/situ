@@ -148,7 +148,7 @@
                                             <td><strong class="">Curso:</strong></td>
                                             <td>
                                                 {{--{!! Form::text('curso', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name ]) !!}--}}
-                                                {{ Form::select('curso', ['1º','2º','3º','4º','OTROS'], null, ['class' => 'misDatos','onChange'=>'getAsignaturas()' ,'id'=>'curso']) }}
+                                                {{ Form::select('curso', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], null, ['class' => 'misDatos','onChange'=>'getAsignaturas()' ,'id'=>'curso']) }}
 
                                                 <a href="#" id="clickable1"> <i id=" " class="fa fa-pencil"></i></a>
 
@@ -203,6 +203,30 @@
 
                     </div>
                         <div class="panel-footer">
+                            <table id="asignaturas" class="mdl-data-table" cellspacing="0" width="100%">
+                                @if(isset($curso))
+                                    <thead>
+                                    <tr>
+                                        <th>Curso</th>
+                                        <th>Asignatura</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody id="clickable">
+                                    @foreach ($asignaturas as $asignatura)
+                                        <tr>
+                                            <td>{{$curso->curso}}</td>
+                                            <td>    {!! $asignatura!!}</td>
+
+                                        </tr>
+
+                                    @endforeach
+
+                                    @endif
+                                    </tbody>
+
+                            </table>
+
                             <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
                                class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
                             <span class="pull-right">
@@ -213,41 +237,11 @@
                         </span>
                         </div>
 
-
                     </div>
                 </div>
             </div>
-        @if(isset($curso))
 
-        <table id="asignaturas" class="mdl-data-table" cellspacing="0" width="100%">
 
-            <thead>
-            <tr>
-                <th>Curso</th>
-                <th>Asignatura</th>
-            </tr>
-            </thead>
-
-            <tbody id="clickable">
-
-            <tr>
-                <td>{{$curso->curso}}</td>
-                <td>{!! $curso->asignaturas!!}</td>
-                <td>{!! $asignaturas=json_decode($curso->asignaturas)!!}</td>
-
-            </tr>
-
-            @foreach ($asignaturas as $asignatura)
-                <tr id="" style="cursor: pointer">
-                    <td>{!! $curso->asignaturas!!}</td>
-
-                </tr>
-            @endforeach
-
-            </tbody>
-
-        </table>
-        @endif
             <div id="push"></div>
         </div>
         <footer id="footer">
@@ -370,23 +364,7 @@
 
 </script>
 <script>
-    function add_fields() {
-         {{--document.getElementById("mitabla").insertRow(-1).innerHTML = ' <tr><td><strong class="">Asignatura:</strong></td><td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}--}}
-                                                             {{--<a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>{{ Form::select('semestre', ['Primer Semestre\',\'Segundo Semestre\'], null, [\'class\' => \'misDatos\']) }}--}}
-                                                             {{--<a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a>--}}
-             {{--'                                            </td>\n' +--}}
-             {{--'                                        </tr>>';--}}
-         {{--var count = $('#mitabla tr').length;--}}
-         {{--document.getElementById("mitabla").insertRow(-1).innerHTML =    ' <tr>        <td><strong class="">Asignatura:</strong></td>        <td>{!! Form::text('asignatura[]', null, ['id'=>'asignatura','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}<a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>{{ Form::select('semestre', ['Primer Semestre','Segundo Semestre'], null, ['class' => 'misDatos']) }}<a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>';--}}
-        {{--// document.getElementById("asignatura").setAttribute('name','Asignatura'+count);--}}
-        {{--' <tr>        <td><strong class="">Asignatura:</strong></td>        <td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}<a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>{{ Form::select('semestre', ['Primer Semestre','Segundo Semestre'], null, ['class' => 'misDatos']) }}<a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>';--}}
-        {{--var x = Math.floor((Math.random() * 10) + 1);--}}
-        {{--document.getElementById("asignatura").setAttribute('name','asignatura'+x);--}}
-         {{--$("#mitabla").append('             <tr>        <td><strong class="">Asignatura:</strong></td> <td>{!! Form::text('asignatura[]', null, ['id'=>'asignatura','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}<a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>{{ Form::select('semestre', ['Primer Semestre','Segundo Semestre'], null, ['class' => 'misDatos']) }}<a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>');--}}
-         //    $("#mitabla").append('             <tr>        <td><strong class="">Asignatura:</strong></td> <td>    <input class=misDatos, readonly ,name="asignatura[]" id="" type="text" value="aa" > <a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a><a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a> </td> </tr>');
 
-
-    }
 
     var counter = 1;
     var limit = 3;
@@ -406,16 +384,14 @@
 
         $.ajax({
             type:"get",
-            url     : "{{ url('Alumno/AlumnoDatos/datosAcademicos') }}/"+curso ,
+            url     : "{{ url('Alumno/alumnoDatos/datosAcademicos/') }}/"+curso ,
             encode  : true,
-            // url: url + '/' + 'actualizarUsuario'+ '/',
             data: {
                 curso: curso,
             },
             success: function(response){ // What to do if we succeed
-                {{--window.location.href= "{{ url('Admin/usuario') }}"+"/"+response;--}}
+                window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;
                 console.log(response);
-                {{--$(location).attr('href', "{{route('Admin/actualizar')}}"+"/"+ data[2]+"");--}}
 
             },
             error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail

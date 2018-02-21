@@ -71,13 +71,17 @@ class AlumnoController extends Controller
         $user = Sentinel::getUser();
 
         $otros_datos=json_decode($user->otros_datos,true);
-        $curso= $user->getDatosAcademicos()->get()->first();
 
+        $curso= $user->getDatosAcademicos()->get()->first();
+        if (!empty($curso->asignaturas)) {
+            $asignaturas = json_decode($curso->asignaturas, true);
+        }else{$asignaturas="";}
 //        return view('Alumno.alumnoDatos')->with('user',$user);
 
         return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user)
             ->with('otros_datos', $otros_datos)
-            ->with('curso',$curso);
+            ->with('curso',$curso)
+        ->with('asignaturas',$asignaturas);
 
 
     }
