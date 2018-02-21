@@ -59,12 +59,30 @@ class AlumnoController extends Controller
 
 
         $user = Sentinel::getUser();
+<<<<<<< HEAD
         $otros_datos=json_decode($user->otros_datos,true);
         return view('Alumno.alumnoDatos')->with('user',$user)->with('otros_datos', $otros_datos);;
+=======
+
+        return view('Alumno.datos.alumnoDatos')->with('user',$user);;
+>>>>>>> 198b7f3aed6a247e5aa8c546ed25712c81f22254
 
     }
+    public function alumnoDatosAcademicos (){
 
 
+        $user = Sentinel::getUser();
+
+        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user);;
+
+    }
+    public function actualizarMisDatosAcademicos(Request $request)
+    {
+
+       return response($request);
+
+
+    }
     public function actualizarMisDatos(Request $request){
       $user=Sentinel::getUser();
 
