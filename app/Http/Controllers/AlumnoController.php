@@ -59,8 +59,8 @@ class AlumnoController extends Controller
 
 
         $user = Sentinel::getUser();
-
-        return view('Alumno.alumnoDatos')->with('user',$user);;
+        $otros_datos=json_decode($user->otros_datos,true);
+        return view('Alumno.alumnoDatos')->with('user',$user)->with('otros_datos', $otros_datos);;
 
     }
 
@@ -70,6 +70,10 @@ class AlumnoController extends Controller
 
         $user->first_name=Input::get('first_name');
         $user->last_name=Input::get('last_name');
+        $otros_datos=array('facebook'=>'https://www.facebook.com','img'=>Input::get('imagen'));
+
+        $user->otros_datos=json_encode($otros_datos);
+
 
         $credentials = [
             'email'    => $user->email,
@@ -100,9 +104,7 @@ class AlumnoController extends Controller
             } else{
                 return response("fallo al completar");
             }
-//            $user->password=Input::get('password');
 
-//          $user->save();
 
 
 
@@ -113,44 +115,6 @@ class AlumnoController extends Controller
 
             return Redirect::back();
         }
-//        $user->save();
-//
-//
-//        return Redirect::back();
-//
-
-
-//        if(Input::get('new_password')){
-//            if(Input::get('new_password')==Input::get('old_password'))
-//        $credentials = [
-//            'email'    => Input::get('email') ,
-//            'password' => Input::get('old_password'),
-//        ];
-//
-//        }
-//        elseif (Input::get('email')){
-//            $credentials = [
-//                'email'    => Input::get('email') ,
-//                'password' => Input::get('old_password'),
-//            ];
-//        }
-//
-//        elseif (Input::get('new_password')){
-//            $credentials = [
-//                'email'    => $user->email,
-//                'password' => Input::get('new_password'),
-//            ];
-//        }
-//
-//
-//            $user->email=$credentials->email;
-//            $user->password=$credentials->password;
-//            $user->save();
-
-//            return Redirect::back();
-
-
-
 
 
 

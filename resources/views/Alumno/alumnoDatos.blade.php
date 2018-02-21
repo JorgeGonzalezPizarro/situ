@@ -3,12 +3,21 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>
-
+<style>
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid #ddd !important;
+        padding: 7px !important;
+        width:  80%;
+    }
+</style>
 @section('content')
     <hr class="">
 
     <div class="container target">
         <div class="row">
+            {{ Form::open(array('route' => 'actualizarDatos', 'class' => 'form-style-8','files' => true)) }}
+
             <div class="col-sm-10">
                 <h1 class="">{{ $user->first_name  }}</h1>
 
@@ -16,7 +25,7 @@
                 <br>
             </div>
             <div class="col-sm-2"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
-                    <img  id="myimage" title="profile image" src="https://upload.wikimedia.org/wikipedia/commons/7/70/User_icon_BLACK-01.png" class="img-circle img-responsive" name="imagen">
+                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
                     <i id=" " class="fa fa-pencil"></i></a>
             </div>
         </div>
@@ -50,7 +59,10 @@
                     <div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>
 
                     </div>
-                    <div class="panel-body"><a href="http://bootply.com" class="">{{ $user->first_name  }}</a>
+                    <div class="panel-body">
+                        <i class="fa fa-facebook fa-2x"></i>  {!! Form::text('imagen', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
+                        <a href="{!! $otros_datos['facebook'] !!}" class="">
+                            <a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>
 
                     </div>
                 </div>
@@ -310,9 +322,17 @@
             $('#password_confirmation').attr('readonly', false).css("background-color", "#bfe1e847");
 
         });
+        $('#clickableFb').on('click', function () {
+
+            $('#fieldIDfacebook').attr('readonly', false).focus().css("background-color", "#bfe1e847")
 
 
-        {{--var data = table--}}
+
+        });
+
+
+
+    {{--var data = table--}}
         {{--.rows()--}}
         {{--.data();--}}
         {{--var cData = table.cell(this).data();--}}
@@ -358,7 +378,7 @@
         var url=jQuery('#'+field_id).val();
         // $('#myModal').modal('hide');
 
-        alert('update '+field_id+" with "+url);
+
         $('#myimage').attr('src', url);
 
     }

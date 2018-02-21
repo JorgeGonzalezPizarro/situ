@@ -11,7 +11,8 @@
                 <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button" class="btn btn-info">Enviar mensaje</button>
                 <br>
             </div>
-                <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="{!! ($otros_datos['img']);!!}"></a>
+                <div class="col-sm-2"><a href="/users" class="pull-right">
+                        <img title="profile image" class="img-circle img-responsive" src="{!! ($otros_datos['img']);!!}"></a>
 
                     </div>
 
