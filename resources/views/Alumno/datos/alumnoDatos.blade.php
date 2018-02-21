@@ -60,7 +60,7 @@
 
                     </div>
                     <div class="panel-body">
-                        <i class="fa fa-facebook fa-2x"></i>  {!! Form::text('imagen', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
+                        <i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
                         <a href="{!! $otros_datos['facebook'] !!}" class="">
                             <a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>
 
@@ -126,7 +126,6 @@
 
                                 <div class=" col-md-12 col-lg-12 ">
                                     <table class="table table-user-information">
-                                        {{ Form::open(array('route' => 'actualizarDatos', 'class' => 'form-style-8','files' => true)) }}
                                         <div class="input-append">
                                             {{--<input id="fieldID4" type="text" name="imagen" style="display: none;">--}}
                                             {!! Form::text('imagen', null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
@@ -347,7 +346,6 @@
         });
 
 
-<<<<<<< HEAD:resources/views/Alumno/alumnoDatos.blade.php
 
     {{--var data = table--}}
         {{--.rows()--}}
@@ -380,8 +378,6 @@
                 {{--}--}}
 
 
-=======
->>>>>>> 198b7f3aed6a247e5aa8c546ed25712c81f22254:resources/views/Alumno/datos/alumnoDatos.blade.php
 
 
     });

@@ -14,6 +14,7 @@ use View;
 use Validator;
 use Hash;
 use Session;
+use App\CursoAlumno;
 use App\Categorias;
 class AlumnoController extends Controller
 
@@ -59,36 +60,66 @@ class AlumnoController extends Controller
 
 
         $user = Sentinel::getUser();
-<<<<<<< HEAD
         $otros_datos=json_decode($user->otros_datos,true);
-        return view('Alumno.alumnoDatos')->with('user',$user)->with('otros_datos', $otros_datos);;
-=======
+//        return view('Alumno.alumnoDatos')->with('user',$user);
 
-        return view('Alumno.datos.alumnoDatos')->with('user',$user);;
->>>>>>> 198b7f3aed6a247e5aa8c546ed25712c81f22254
-
+        return view('Alumno.datos.alumnoDatos')->with('user',$user)->with('otros_datos', $otros_datos);
     }
     public function alumnoDatosAcademicos (){
 
 
         $user = Sentinel::getUser();
 
-        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user);;
+        $otros_datos=json_decode($user->otros_datos,true);
+        $curso= $user->getDatosAcademicos()->get()->first();
+
+//        return view('Alumno.alumnoDatos')->with('user',$user);
+
+        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user)
+            ->with('otros_datos', $otros_datos)
+            ->with('curso',$curso);
+
+
+    }
+
+    public function getAsignaturas(Request $request){
+
+        $user=Sentinel::getUser();
+
 
     }
     public function actualizarMisDatosAcademicos(Request $request)
     {
+        $user=Sentinel::getUser();
+       $cursoAlumno= new CursoAlumno();
+       $asignaturas=count($request->asignatura);
+       $asignatura=array();
+       for ($i =0;$i<$asignaturas;$i++){
 
-       return response($request);
+        $asignatura[$i]=$request->asignatura[$i];
+       }
+
+       $cursoAlumno->user_id=$user->id;
+       $cursoAlumno->curso=Input::get('curso');
+       $cursoAlumno->grado=Input::get('grado');
+       $cursoAlumno->asignaturas=json_encode($asignatura);
+       $cursoAlumno->save();
+        Session::flash('msg', "cambios realizados");
+
+        return Redirect::back();
 
 
     }
+
+
+
+
     public function actualizarMisDatos(Request $request){
       $user=Sentinel::getUser();
 
         $user->first_name=Input::get('first_name');
         $user->last_name=Input::get('last_name');
-        $otros_datos=array('facebook'=>'https://www.facebook.com','img'=>Input::get('imagen'));
+        $otros_datos=array('facebook'=>Input::get('facebook'),'img'=>Input::get('imagen'));
 
         $user->otros_datos=json_encode($otros_datos);
 

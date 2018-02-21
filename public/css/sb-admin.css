@@ -41,10 +41,10 @@ body {
     line-height: normal;
 }
 
-@media(min-width:1200px) {
+@media(min-width:769px) {
     #wrapper {
- padding-left: 30px;
-		    height: auto;
+        padding-left: 230px;
+        height: auto;
     min-height: 100%;
     width: 100%;
     position: relative;
@@ -265,18 +265,18 @@ ul.alert-dropdown {
 }
 
 
-.form-style-8 .misDatos {
+/*.form-style-8 .misDatos {*/
 
-    outline: 0;
-    display: block;
-    width: 100%;
-    padding: 7px;
-    border: 0;
-    border-bottom: 1px solid #ddd;
-    background: transparent;
-    margin-bottom: 10px;
-    font: 16px Arial,Helvetica,sans-serif;
-    height: 45px;
+    /*outline: 0;*/
+    /*display: block;*/
+    /*width: 100%;*/
+    /*padding: 7px;*/
+    /*border: 0;*/
+    /*border-bottom: 1px solid #ddd;*/
+    /*background: transparent;*/
+    /*margin-bottom: 10px;*/
+    /*font: 16px Arial,Helvetica,sans-serif;*/
+    /*height: 45px;*/
 
 
-}
+/*}*/

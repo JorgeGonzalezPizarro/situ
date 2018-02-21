@@ -67,6 +67,12 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
 
     }
 
+    public function getDatosAcademicos(){
+        return $this->hasMany('App\CursoAlumno','user_id', 'id');
+
+    }
+
+
 
     //Change Password
     public function getRememberToken()

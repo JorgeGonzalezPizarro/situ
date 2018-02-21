@@ -110,13 +110,31 @@ class MigrationCartalystSentinel extends Migration
             $table->engine = 'InnoDB';
             $table->unique('email');
         });
-    }
+
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
+
+Schema::create('alumno_curso', function (Blueprint $table) {
+    $table->increments('id');
+    $table->integer('user_id')->unsigned();
+    $table->integer('curso')->index();
+    $table->string('grado')->nullable();
+
+    $table->json('asignaturas')->nullable();
+
+    $table->softDeletes();
+    $table->timestamps();
+
+
+
+
+      });
+
+}
     public function down()
     {
         Schema::drop('activations');
