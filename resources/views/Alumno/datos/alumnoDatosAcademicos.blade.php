@@ -202,9 +202,7 @@
 
                     </div>
                         <div class="panel-footer">
-                            <table id="asignaturas" class="mdl-data-table" cellspacing="0" width="100%">
-                                {{ Form::select('', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], null, ['class' => 'misDatos','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}
-                            {!! $response1!!}
+                            <table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">
                             @if(isset($curso))
                                     <thead>
                                     <tr>
@@ -214,12 +212,19 @@
                                     </thead>
 
                                     <tbody id="clickable">
+                                    <div class="form-group">
+                                        {!! Form::label('text', 'Curso Académico') !!}
+                                        {{ Form::select('', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], $year,
+                                        ['aria-controls'=>'asignaturas','class' => 'form-control input-sm','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}
+
+                                    </div>
+
                                     @if(!empty($curso->asignaturas))
-                                    {{--{{  $asignaturas=json_decode( ($curso->asignaturas),true)}}--}}
-                                    @foreach (json_decode($asignaturas,true) as $asignatura)
+                                    {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
+                                    @foreach (json_decode($asignaturas) as $asignatura)
                                         <tr>
                                             <td>{{$curso->curso}}</td>
-                                            <td>{!!  ($asignatura[0]) !!}</td>
+                                            <td>{!!  print_r($asignatura[0]) !!}</td>
 
                                         </tr>
 
@@ -406,5 +411,41 @@
 
 
     }
+
+
+
+
+</script>
+
+<script>
+
+    $(document).ready(function() {
+        var table=$('#asignaturas').DataTable({
+            "scrollX": false,
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "language": {
+                "lengthMenu": "Ver _MENU_ Número de registros por página",
+                "zeroRecords": "No encontrado",
+                "info": "Página  _PAGE_ de  _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+
+                "infoFiltered": "(filtered from _MAX_ Total de usuarios)",
+                "paginate": {
+                    "first":      "Primero",
+                    "previous":   "Anterior",
+                    "next":       "Siguiente",
+                    "last":       "Último"
+                },
+                "search":         "Buscar &nbsp;:",
+
+            }
+        });
+
+    });
+
 
 </script>

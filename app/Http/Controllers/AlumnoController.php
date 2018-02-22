@@ -65,14 +65,16 @@ class AlumnoController extends Controller
 
         return view('Alumno.datos.alumnoDatos')->with('user',$user)->with('otros_datos', $otros_datos);
     }
-    public function alumnoDatosAcademicos (){
+    public function alumnoDatosAcademicos ($year=null){
 
-
+        if(empty($year)){
+            $year=1;
+        }
         $user = Sentinel::getUser();
 
         $otros_datos=json_decode($user->otros_datos,true);
 
-        $curso= $user->getDatosAcademicos()->get();
+        $curso= $user->getDatosAcademicos()->where('curso',$year)->get()->first();
 //        if (!empty($curso->asignaturas)) {
 ////            $asignaturas = json_decode($curso->asignaturas, true);
 //        }else{$curso=new CursoAlumno();
@@ -80,12 +82,12 @@ class AlumnoController extends Controller
 //
 //        }
 //        return view('Alumno.alumnoDatos')->with('user',$user);
-
-//        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user)
-//            ->with('otros_datos', $otros_datos)
-//            ->with('curso',$curso)
-//            ->with('asignaturas',$curso);
-     return response($curso->all());
+        $asignaturas=($curso->asignaturas);
+        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user)
+            ->with('otros_datos', $otros_datos)
+            ->with('curso',$curso)
+            ->with('asignaturas',$asignaturas)->with('year',$year);
+//     return response($curso->all());
 
     }
 
@@ -139,6 +141,7 @@ class AlumnoController extends Controller
 
 //         $cursoAlumno->asignaturas=json_encode(Input::get('asignatura'));
         $cursoAlumno->asignaturas=json_encode($nuevasAsignaturas);
+        $cursoAlumno->grado=Input::get('grado');
          $cursoAlumno->save();
         Session::flash('msg', "cambios realizados");
 

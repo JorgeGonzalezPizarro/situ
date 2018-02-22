@@ -54,7 +54,7 @@ Route::get('/Alumno/hecho/singleHecho/','AlumnoController@getHechoUsuario')->nam
 Route::get('Alumno/hecho/{id}/singleHecho', 'AlumnoController@showHecho');
 Route::get('Alumno/alumnoDatos','AlumnoController@alumnoDatos')->name('misDatos');
 Route::post('Alumno/alumnoDatos','AlumnoController@actualizarMisDatos')->name('actualizarDatos');
-Route::get('Alumno/alumnoDatos/datosAcademicos/{curso?}','AlumnoController@alumnoDatosAcademicos')->name('misDatosAcademicos');
+Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}','AlumnoController@alumnoDatosAcademicos')->name('misDatosAcademicos');
 Route::post('Alumno/alumnoDatos/datosAcademicos','AlumnoController@actualizarMisDatosAcademicos')->name('actualizarDatosAcademicos');
 
 //Route::get('Alumno/AlumnoDatos/datosAcademicos/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
