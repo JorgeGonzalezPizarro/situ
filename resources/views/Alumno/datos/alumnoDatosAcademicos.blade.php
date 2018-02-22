@@ -138,7 +138,7 @@
                                         <tbody id="tbody">
                                         <tr>
                                             <td><strong class="">Grado:</strong></td>
-                                            <td>{!! Form::text('grado', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $user->first_name ]) !!}
+                                            <td>{!! Form::text('grado', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $curso->grado ]) !!}
 
                                                 <a href="#" id="clickable"> <i id=" " class="fa fa-pencil"></i></a>
 
@@ -148,19 +148,18 @@
                                             <td><strong class="">Curso:</strong></td>
                                             <td>
                                                 {{--{!! Form::text('curso', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name ]) !!}--}}
-                                                {{ Form::select('curso', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], null, ['class' => 'misDatos','onChange'=>'getAsignaturas()' ,'id'=>'curso']) }}
+                                                {{ Form::select('curso', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], ['class' => 'misDatos','id'=>'curso']) }}
 
                                                 <a href="#" id="clickable1"> <i id=" " class="fa fa-pencil"></i></a>
 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><strong class="">Asignatura:</strong></td>
-                                            <td>{!! Form::text('asignatura[]', null, ['id'=>'asignatura','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}
-                                                <a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>
+                                            <td><strong class="">Agregar Asignatura:</strong></td>
+                                            <td>{!! Form::text('asignatura[]', null, ['id'=>'asignatura','class' => 'misDatos' ]) !!}
 
 
-                                                {{ Form::select('semestre', ['Primer Semestre','Segundo Semestre'], null, ['class' => 'misDatos']) }}
+
 
                                                 <a  id="mas"  value="" onclick="addInput();"  >
                                                     <i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
@@ -192,7 +191,7 @@
 
 
                                     </div>
-                                    {!! Form::submit('Create Post', array('class'=>'btn btn-primary' , 'style="margin-right:30px"')) !!}</td>
+                                    {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'style="margin-right:30px"')) !!}</td>
 
 
                                 </div>
@@ -204,7 +203,9 @@
                     </div>
                         <div class="panel-footer">
                             <table id="asignaturas" class="mdl-data-table" cellspacing="0" width="100%">
-                                @if(isset($curso))
+                                {{ Form::select('', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], null, ['class' => 'misDatos','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}
+                            {!! $response1!!}
+                            @if(isset($curso))
                                     <thead>
                                     <tr>
                                         <th>Curso</th>
@@ -213,15 +214,17 @@
                                     </thead>
 
                                     <tbody id="clickable">
-                                    @foreach ($asignaturas as $asignatura)
+                                    @if(!empty($curso->asignaturas))
+                                    {{--{{  $asignaturas=json_decode( ($curso->asignaturas),true)}}--}}
+                                    @foreach (json_decode($asignaturas,true) as $asignatura)
                                         <tr>
                                             <td>{{$curso->curso}}</td>
-                                            <td>    {!! $asignatura!!}</td>
+                                            <td>{!!  ($asignatura[0]) !!}</td>
 
                                         </tr>
 
                                     @endforeach
-
+                                    @endif
                                     @endif
                                     </tbody>
 
@@ -379,7 +382,7 @@
     }
 
     function getAsignaturas () {
-        var x = document.getElementById("curso").selectedIndex;
+        var x = document.getElementById("cursoSelect").selectedIndex;
         var curso=(document.getElementsByTagName("option")[x].value);
 
         $.ajax({

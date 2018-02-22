@@ -72,17 +72,20 @@ class AlumnoController extends Controller
 
         $otros_datos=json_decode($user->otros_datos,true);
 
-        $curso= $user->getDatosAcademicos()->get()->first();
-        if (!empty($curso->asignaturas)) {
-            $asignaturas = json_decode($curso->asignaturas, true);
-        }else{$asignaturas="";}
+        $curso= $user->getDatosAcademicos()->get();
+//        if (!empty($curso->asignaturas)) {
+////            $asignaturas = json_decode($curso->asignaturas, true);
+//        }else{$curso=new CursoAlumno();
+//
+//
+//        }
 //        return view('Alumno.alumnoDatos')->with('user',$user);
 
-        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user)
-            ->with('otros_datos', $otros_datos)
-            ->with('curso',$curso)
-        ->with('asignaturas',$asignaturas);
-
+//        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user)
+//            ->with('otros_datos', $otros_datos)
+//            ->with('curso',$curso)
+//            ->with('asignaturas',$curso);
+     return response($curso->all());
 
     }
 
@@ -95,19 +98,48 @@ class AlumnoController extends Controller
     public function actualizarMisDatosAcademicos(Request $request)
     {
         $user=Sentinel::getUser();
-       $cursoAlumno= new CursoAlumno();
-       $asignaturas=count($request->asignatura);
-       $asignatura=array();
-       for ($i =0;$i<$asignaturas;$i++){
+        $cursoAlumno= CursoAlumno::firstOrCreate(['curso'=>Input::get('curso'),'user_id'=>$user->id],
+            ['curso'=>Input::get('curso'),'user_id'=>Input::get('user´_id')]
 
-        $asignatura[$i]=$request->asignatura[$i];
-       }
 
-       $cursoAlumno->user_id=$user->id;
-       $cursoAlumno->curso=Input::get('curso');
-       $cursoAlumno->grado=Input::get('grado');
-       $cursoAlumno->asignaturas=json_encode($asignatura);
-       $cursoAlumno->save();
+
+
+
+        );
+//         $cursoAlumno->fill(Input::get());
+//       $cursoAlumno=CursoAlumno::updateOrCreate(['user_id'=>$user->id,'curso'=>Input::get('curso')],
+//          [ 'asignaturas'=>Input::get('asignaturas'),'grado'=>Input::get('grado')]);
+//
+
+
+//        $cursoAlumno->grado="aaaa";
+
+
+//        $asignatura=array($cursoAlumno>asignaturas);
+//        $asignatura=json_decode($cursoAlumno->asignaturas);
+//        $asignaturas=count($asignatura);
+//
+//        for ($i =0;$i<$asignaturas;$i++){
+//
+//         array_add($asignatura,$i,Input::get('asignatura'));
+//       }
+//
+//       $cursoAlumno->user_id=$user->id;
+//       $cursoAlumno->curso=Input::get('curso');
+//       $cursoAlumno->grado=Input::get('grado');
+
+        if(!empty($cursoAlumno->asignaturas)){
+            $asignaturas=json_decode($cursoAlumno->asignaturas);
+
+        }else{
+
+            $asignaturas=array();
+        }
+        $nuevasAsignaturas=array_prepend($asignaturas,(Input::get('asignatura')));
+
+//         $cursoAlumno->asignaturas=json_encode(Input::get('asignatura'));
+        $cursoAlumno->asignaturas=json_encode($nuevasAsignaturas);
+         $cursoAlumno->save();
         Session::flash('msg', "cambios realizados");
 
         return Redirect::back();
