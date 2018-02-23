@@ -208,6 +208,7 @@
                                     <tr>
                                         <th>Curso</th>
                                         <th>Asignatura</th>
+                                        <th>Seleccionar</th>
                                     </tr>
                                     </thead>
 
@@ -224,8 +225,9 @@
                                     @foreach (json_decode($asignaturas) as $asignatura)
                                         <tr>
                                             <td>{{$curso->curso}}</td>
-                                            <td>{!!  print_r($asignatura[0]) !!}</td>
-
+                                            <td id="asignatura">{!!  print_r($asignatura[0]) !!}</td>
+                                            <td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
+                                                                     class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
                                         </tr>
 
                                     @endforeach
@@ -317,17 +319,11 @@
 <script>
     $(document).ready(function () {
 
-        $('input[name=imagen]').change(function() {
-
+        $('input[name=seleccionar]').change(function() {
+        alert('aaa');
 
 
         });
-
-
-
-
-
-
 
         var tr = $('#clickable');
 
@@ -442,10 +438,48 @@
                 },
                 "search":         "Buscar &nbsp;:",
 
-            }
+            },
+            "columnDefs": [ {
+                "targets": 1,
+                "searchable": true
+            } ]
         });
+        $('#asignaturas').on('click', 'td a ', function (e) {
+            e.preventDefault();
+            var table = $('#asignaturas').DataTable();
 
+            var data = table.row($(this).closest('tr')).data()
+
+        alert(data[1]);
+
+            $.ajax({
+                type:"post",
+                url     : "{{ route('eliminarAsignatura') }}/"+data[1]+"/"+ data[0],
+                encode  : true,
+                data: {
+                    asignatura: data[1],
+                    year:data[0]
+                },
+                success: function(response){ // What to do if we succeed
+                    window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;
+                    console.log(response);
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+
+
+
+        });
     });
 
-
+    // function seleccionar() {
+    //
+    //     var table = $('#asignaturas').DataTable();
+    //     var data = table.row($(this).closest('td')).data()
+    //     alert(data['Curso']);
+   // }
 </script>
