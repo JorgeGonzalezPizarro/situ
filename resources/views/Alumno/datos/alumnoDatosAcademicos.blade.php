@@ -222,10 +222,10 @@
 
                                     @if(!empty($curso->asignaturas))
                                     {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
-                                    @foreach (json_decode($asignaturas) as $asignatura)
+                                    @foreach (json_decode($asignaturas,true) as $asignatura)
                                         <tr>
                                             <td>{{$curso->curso}}</td>
-                                            <td id="asignatura">{!!  print_r($asignatura[0]) !!}</td>
+                                            <td id="asignatura">{!!    print_r($asignatura[0])[0] !!}</td>
                                             <td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
                                                                      class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
                                         </tr>
@@ -449,11 +449,12 @@
             var table = $('#asignaturas').DataTable();
 
             var data = table.row($(this).closest('tr')).data()
-
+            var x = document.getElementById("cursoSelect").selectedIndex;
+            var curso=(document.getElementsByTagName("option")[x].value);
         alert(data[1]);
 
             $.ajax({
-                type:"post",
+                type:"get",
                 url     : "{{ route('eliminarAsignatura') }}/"+data[1]+"/"+ data[0],
                 encode  : true,
                 data: {
@@ -461,7 +462,7 @@
                     year:data[0]
                 },
                 success: function(response){ // What to do if we succeed
-                    window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;
+                    {{--window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;--}}
                     console.log(response);
 
                 },
