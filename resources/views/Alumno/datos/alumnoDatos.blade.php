@@ -60,10 +60,11 @@
 
                     </div>
                     <div class="panel-body">
-                        <i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
+                        <i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook',
+                        'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
                         <a href="{!! $otros_datos['facebook'] !!}" class="">
                             <a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>
-
+                        </a>
                     </div>
                 </div>
 
@@ -128,7 +129,7 @@
                                     <table class="table table-user-information">
                                         <div class="input-append">
                                             {{--<input id="fieldID4" type="text" name="imagen" style="display: none;">--}}
-                                            {!! Form::text('imagen', null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
+                                            {!! Form::text('imagen', $otros_datos['img'], ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
 
                                         </div>
                                         <tbody>
@@ -190,7 +191,7 @@
                                     <div class='col-md-5' style="    margin-top: 10px;
                                       margin-left: 240px;">
 
-                                        {!! Form::submit('Create Post', array('class'=>'btn btn-primary' , 'style="margin-right:30px"')) !!}</td>
+                                        {!! Form::submit('Create Post', array('class'=>'btn btn-info disabled' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
 
                                     </div>
 
@@ -308,8 +309,14 @@
 
 
         });
+        document.getElementById('boton').disabled = true;
+        $('i').on('click',function () {
+          $('#boton').removeClass('btn btn-info disabled');
+            $('#boton').addClass('btn btn-success');
+            document.getElementById('boton').disabled = false;
 
 
+        })
 
         var tr = $('#clickable');
 

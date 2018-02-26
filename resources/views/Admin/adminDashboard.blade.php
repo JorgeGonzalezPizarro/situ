@@ -36,7 +36,6 @@
             </table>
         </div>
 
-        <a href="/register" class="btn btn-success">Add User</a>
 
     </div>
 

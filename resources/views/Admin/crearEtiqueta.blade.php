@@ -64,6 +64,7 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                         {!! Form::text('color', null, array('class' => 'form-control color', 'placeholder' => 'Color')) !!}
+                        {!! Form::text('color', null, array('class' => 'form-control color', 'placeholder' => 'Color')) !!}
                     </div>
                     {!! $errors->first('color', '<p class="help-block">:message</p>') !!}
                 </div>

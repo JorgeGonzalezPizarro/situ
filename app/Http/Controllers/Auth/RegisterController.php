@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\CursoAlumno;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -81,7 +83,7 @@ class RegisterController extends Controller
           if ($validation->fails()) {
                 return Redirect::back()->withErrors($validation)->withInput();
          }
-         $otros_datos=array('facebook'=>'https://www.facebook.com','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
+         $otros_datos=array('facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
         $rol=$request['roles'];
         $role=$rol[0];
 
@@ -93,6 +95,14 @@ class RegisterController extends Controller
 
 
         $user->save();
+        $cursoAlumno=new CursoAlumno();
+        $cursoAlumno->user_id=$user->id;
+        $cursoAlumno->curso=1;
+
+        $cursoAlumno->save();
+
+
+
 //        $user ->otros_datos['img' => '\js\tinymce\plugins\responsive_filemanager\source\user_default.png']);
 //        $user->otros_datos->img = 'some_other_value';
 

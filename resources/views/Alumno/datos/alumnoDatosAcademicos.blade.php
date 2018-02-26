@@ -25,9 +25,11 @@
                 <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button"  class="btn btn-info">Enviar mensaje</button>
                 <br>
             </div>
-            <div class="col-sm-2"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
-                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-                    <i id=" " class="fa fa-pencil"></i></a>
+            <div class="col-sm-2">                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+
+                {{--<a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">--}}
+                    {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
+                    {{--<i id=" " class="fa fa-pencil"></i></a>--}}
             </div>
         </div>
 
@@ -150,7 +152,6 @@
                                                 {{--{!! Form::text('curso', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name ]) !!}--}}
                                                 {{ Form::select('curso', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], ['class' => 'misDatos','id'=>'curso']) }}
 
-                                                <a href="#" id="clickable1"> <i id=" " class="fa fa-pencil"></i></a>
 
                                             </td>
                                         </tr>
@@ -191,7 +192,7 @@
 
 
                                     </div>
-                                    {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'style="margin-right:30px"')) !!}</td>
+                                    {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
 
 
                                 </div>
@@ -225,7 +226,7 @@
                                     @foreach (json_decode($asignaturas) as $asignatura)
                                         <tr>
                                             <td>{{$curso->curso}}</td>
-                                            <td id="asignatura">{!!  print_r($asignatura[0]) !!}</td>
+                                            <td id="asignatura">{!!  print_r($asignatura)[0] !!}</td>
                                             <td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
                                                                      class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
                                         </tr>
@@ -318,13 +319,21 @@
 
 <script>
     $(document).ready(function () {
+        document.getElementById('boton').disabled = true;
+        $('i').on('click',function () {
+            $('#boton').removeClass('btn btn-info disabled');
+            $('#boton').addClass('btn btn-success');
+            document.getElementById('boton').disabled = false;
 
-        $('input[name=seleccionar]').change(function() {
-        alert('aaa');
+
+        })
+        $('input').on('change',function () {
+            $('#boton').removeClass('btn btn-info disabled');
+            $('#boton').addClass('btn btn-success');
+            document.getElementById('boton').disabled = false;
 
 
-        });
-
+        })
         var tr = $('#clickable');
 
         $('#clickable').on('click', function () {
@@ -444,6 +453,10 @@
                 "searchable": true
             } ]
         });
+
+
+        var x = document.getElementById("cursoSelect").selectedIndex;
+        var curso=(document.getElementsByTagName("option")[x].value);
         $('#asignaturas').on('click', 'td a ', function (e) {
             e.preventDefault();
             var table = $('#asignaturas').DataTable();
@@ -453,19 +466,19 @@
         alert(data[1]);
 
             $.ajax({
-                type:"post",
+                type:"get",
                 url     : "{{ route('eliminarAsignatura') }}/"+data[1]+"/"+ data[0],
                 encode  : true,
                 data: {
                     asignatura: data[1],
                     year:data[0]
                 },
-                success: function(response){ // What to do if we succeed
+                success: function(response){
                     window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;
                     console.log(response);
 
                 },
-                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                error: function(jqXHR, textStatus, errorThrown) {
                     console.log(JSON.stringify(jqXHR));
                     console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                 }

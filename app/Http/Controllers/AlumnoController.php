@@ -9,6 +9,7 @@ use App\hechos;
 use App\Http\Controllers\HechoController;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rules\In;
 use Sentinel;
 use View;
 use Validator;
@@ -86,49 +87,64 @@ class AlumnoController extends Controller
 
     public function actualizarMisDatosAcademicos(Request $request)
     {
-        $user=Sentinel::getUser();
-        $cursoAlumno= CursoAlumno::firstOrCreate(['curso'=>Input::get('curso'),'user_id'=>$user->id],
-            ['curso'=>Input::get('curso'),'user_id'=>Input::get('user´_id')]
-
-
-
+        $user = Sentinel::getUser();
+        $cursoAlumno = CursoAlumno::firstOrCreate(['curso' => Input::get('curso'), 'user_id' => $user->id],
+            ['curso' => Input::get('curso'), 'user_id' => Input::get('user´_id')]
 
 
         );
-        $asignatura=json_decode($cursoAlumno->asignaturas,true);
 
 
-        $asignaturas=array_add($asignatura,(count($asignatura)-1),Input::get('asignatura'));
-       $cursoAlumno->user_id=$user->id;
-       $cursoAlumno->curso=Input::get('curso');
-       $cursoAlumno->grado=Input::get('grado');
+        $asignaturas = ($cursoAlumno->asignaturas);
+        $inputAsignaturas = array();
+        for ($i = 0; $i < count(Input::get('asignatura')); $i++) {
+            $inputAsignaturas[$i] = Input::get('asignatura')[$i];
 
-         $cursoAlumno->asignaturas=json_encode(Input::get('asignatura'));
-        $cursoAlumno->asignaturas=json_encode($asignaturas,true);
+        }
+
+        $cursoAlumno->user_id = $user->id;
+        $cursoAlumno->curso = Input::get('curso');
+        $cursoAlumno->grado = Input::get('grado');
+
+        if(!empty(Input::get('asignaturas'))){
+        if (!empty($asignaturas)  ){
+            $asignaturas = json_decode($cursoAlumno->asignaturas,true);
+             $resultado = array_merge($inputAsignaturas, $asignaturas);
+
+            $cursoAlumno->asignaturas = json_encode($resultado,true);
+    }
+    else{
+
+    $cursoAlumno->asignaturas = json_encode($inputAsignaturas);
+
+
+}}
         $cursoAlumno->grado=Input::get('grado');
          $cursoAlumno->save();
         Session::flash('msg', "cambios realizados");
 
-        return Redirect::back();
-
+      return Redirect::back();
+//        return response(count(json_decode($cursoAlumno->asignaturas)));
 
     }
 
 
-    public function eliminarAsignatura($asignatura,$year){
+    public function eliminarAsignatura($asignatura, $year){
 
 
         $user=Sentinel::getUser();
 
         $curso= $user->getDatosAcademicos()->where('curso',$year)->get()->first();
         $asignaturas=json_decode($curso->asignaturas,true);
-//        foreach($asignaturas as $asig) {
-//            echo $asig['asignatura'];
-//
-//        }
-        unset ($asignaturas['asignatura'][".$asignatura."]);
-//        unset($asignaturas[$asignatura]);
-        return response($asignaturas);
+        $key=array_search($asignatura,$asignaturas);
+            unset($asignaturas[$key]);
+
+//            $asignaturas=json_encode($asignaturas);
+            $curso->asignaturas=json_encode($asignaturas,true);
+            $curso->save();
+        echo var_dump($asignaturas);
+
+        return Redirect::back();
     }
 
     public function actualizarMisDatos(Request $request){

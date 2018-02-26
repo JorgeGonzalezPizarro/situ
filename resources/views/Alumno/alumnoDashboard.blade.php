@@ -39,7 +39,6 @@
 
             </table>
         </div>
-        <a href="/crear" class="btn btn-success">Add User</a>
 
     </div>
 
