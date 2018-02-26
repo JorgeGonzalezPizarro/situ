@@ -478,13 +478,9 @@
                     asignatura: data[1],
                     year:data[0]
                 },
-<<<<<<< HEAD
                 success: function(response){
                     window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;
-=======
-                success: function(response){ // What to do if we succeed
-                    {{--window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;--}}
->>>>>>> 75755f27427926f20819443172d759f877a65f54
+
                     console.log(response);
 
                 },
