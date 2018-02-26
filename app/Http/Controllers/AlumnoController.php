@@ -100,6 +100,7 @@ class AlumnoController extends Controller
         for ($i = 0; $i < count(Input::get('asignatura')); $i++) {
             $inputAsignaturas[$i] = Input::get('asignatura')[$i];
 
+<<<<<<< HEAD
         }
 
         $cursoAlumno->user_id = $user->id;
@@ -110,6 +111,10 @@ class AlumnoController extends Controller
         if (!empty($asignaturas)  ){
             $asignaturas = json_decode($cursoAlumno->asignaturas,true);
              $resultado = array_merge($inputAsignaturas, $asignaturas);
+=======
+        );
+//        $asignaturas=array('asignatura'=>json_decode($cursoAlumno->asignaturas));
+>>>>>>> 75755f27427926f20819443172d759f877a65f54
 
             $cursoAlumno->asignaturas = json_encode($resultado,true);
     }
@@ -117,8 +122,18 @@ class AlumnoController extends Controller
 
     $cursoAlumno->asignaturas = json_encode($inputAsignaturas);
 
+<<<<<<< HEAD
 
 }}
+=======
+       $asignaturas=array_add(json_decode($cursoAlumno->asignaturas),(count(json_decode($cursoAlumno->asignaturas))),Input::get('asignatura'));
+       $cursoAlumno->user_id=$user->id;
+       $cursoAlumno->curso=Input::get('curso');
+       $cursoAlumno->grado=Input::get('grado');
+
+//         $cursoAlumno->asignaturas=json_encode(Input::get('asignatura'));
+      $cursoAlumno->asignaturas=json_encode($asignaturas,true);
+>>>>>>> 75755f27427926f20819443172d759f877a65f54
         $cursoAlumno->grado=Input::get('grado');
          $cursoAlumno->save();
         Session::flash('msg', "cambios realizados");
@@ -135,6 +150,7 @@ class AlumnoController extends Controller
         $user=Sentinel::getUser();
 
         $curso= $user->getDatosAcademicos()->where('curso',$year)->get()->first();
+<<<<<<< HEAD
         $asignaturas=json_decode($curso->asignaturas,true);
         $key=array_search($asignatura,$asignaturas);
             unset($asignaturas[$key]);
@@ -145,6 +161,16 @@ class AlumnoController extends Controller
         echo var_dump($asignaturas);
 
         return Redirect::back();
+=======
+        $asignaturas=array(json_decode($curso->asignaturas,true));
+
+            print_r($asignaturas[0][0]);
+
+
+        unset ($asignaturas[0][$asignatura]);
+//        unset($asignaturas[$asignatura]);
+        return $asignaturas;
+>>>>>>> 75755f27427926f20819443172d759f877a65f54
     }
 
     public function actualizarMisDatos(Request $request){

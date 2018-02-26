@@ -223,10 +223,14 @@
 
                                     @if(!empty($curso->asignaturas))
                                     {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
-                                    @foreach (json_decode($asignaturas) as $asignatura)
+                                    @foreach (json_decode($asignaturas,true) as $asignatura)
                                         <tr>
                                             <td>{{$curso->curso}}</td>
+<<<<<<< HEAD
                                             <td id="asignatura">{!!  print_r($asignatura)[0] !!}</td>
+=======
+                                            <td id="asignatura">{!!    print_r($asignatura[0])[0] !!}</td>
+>>>>>>> 75755f27427926f20819443172d759f877a65f54
                                             <td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
                                                                      class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
                                         </tr>
@@ -462,7 +466,8 @@
             var table = $('#asignaturas').DataTable();
 
             var data = table.row($(this).closest('tr')).data()
-
+            var x = document.getElementById("cursoSelect").selectedIndex;
+            var curso=(document.getElementsByTagName("option")[x].value);
         alert(data[1]);
 
             $.ajax({
@@ -473,8 +478,13 @@
                     asignatura: data[1],
                     year:data[0]
                 },
+<<<<<<< HEAD
                 success: function(response){
                     window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;
+=======
+                success: function(response){ // What to do if we succeed
+                    {{--window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;--}}
+>>>>>>> 75755f27427926f20819443172d759f877a65f54
                     console.log(response);
 
                 },
