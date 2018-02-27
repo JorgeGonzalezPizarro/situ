@@ -88,7 +88,7 @@ class AlumnoController extends Controller
     }
 
 
-    public function actualizarMisDatosAcademicos(Request $request)
+    public function actualizarMisDatosAcademicos()
     {
         $user = Sentinel::getUser();
         $cursoAlumno = CursoAlumno::firstOrCreate(['curso' => Input::get('curso'), 'user_id' => $user->id],
@@ -96,8 +96,6 @@ class AlumnoController extends Controller
 
 
         );
-
-
         $asignaturas = ($cursoAlumno->asignaturas);
         $inputAsignaturas = array();
         for ($i = 0; $i < count(Input::get('asignatura')); $i++) {
@@ -105,25 +103,29 @@ class AlumnoController extends Controller
 
         }
 
-        $cursoAlumno->user_id = $user->id;
-        $cursoAlumno->curso = Input::get('curso');
-        $cursoAlumno->grado = Input::get('grado');
+
 
         if(!empty(Input::get('asignatura'))){
-        if (!empty($asignaturas)  ){
+            if (!empty($asignaturas)  ){
+            echo "aaaa";
             $asignaturas = json_decode($cursoAlumno->asignaturas,true);
              $resultado = array_merge($inputAsignaturas, $asignaturas);
 
-//        $asignaturas=array('asignatura'=>json_decode($cursoAlumno->asignaturas));
+           $cursoAlumno->asignaturas = json_encode($resultado,true);
+    }
+            else{
 
-            $cursoAlumno->asignaturas = json_encode($resultado,true);
-    }}
-    else{
-
-    $cursoAlumno->asignaturas = json_encode($inputAsignaturas);
+                $cursoAlumno->asignaturas = json_encode($inputAsignaturas);
 
 
-}
+            }
+        }
+
+        else{
+
+            return response("a");
+        }
+
 
        $cursoAlumno->user_id=$user->id;
        $cursoAlumno->curso=Input::get('curso');

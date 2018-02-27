@@ -125,7 +125,7 @@ Schema::create('alumno_curso', function (Blueprint $table) {
     $table->string('grado')->nullable();
 //    $table->unique(['user_id', 'curso']);
 
-    $table->json('asignaturas')->default(null)->nullable();
+    $table->json('asignaturas')->nullable();
 
     $table->softDeletes();
     $table->timestamps();

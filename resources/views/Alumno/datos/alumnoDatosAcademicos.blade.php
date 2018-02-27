@@ -157,7 +157,7 @@
                                         </tr>
                                         <tr>
                                             <td><strong class="">Agregar Asignatura:</strong></td>
-                                            <td>{!! Form::text('asignatura[]', null, ['id'=>'asignatura','class' => 'misDatos' ]) !!}
+                                            <td>{!! Form::text('asignatura[]',"", ['id'=>'asignatura','class' => 'misDatos','required'=>'true' ]) !!}
 
 
 
@@ -464,7 +464,6 @@
             var data = table.row($(this).closest('tr')).data()
             var x = document.getElementById("cursoSelect").selectedIndex;
             var curso=(document.getElementsByTagName("option")[x].value);
-        alert(data[1]);
 
             $.ajax({
                 type:"get",
