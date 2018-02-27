@@ -59,7 +59,16 @@ class CreateHechos extends Migration
 
 
         });
+        Schema::create('calificaciones', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('id_hechos');
+            $table->string('calificacion')->nullable();
+            $table->integer('asignatura')->unsigned();
+            $table->integer('profesor')->unsigned();
 
+
+
+        });
     }
 
 

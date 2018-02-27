@@ -14,7 +14,7 @@
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
 
-    <!-- jQuery library -->
+<!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
@@ -40,9 +40,9 @@
     {{--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.css">--}}
     {{--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css">--}}
 
-{{--<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">--}}
+    {{--<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">--}}
 
-    <!-- Bootstrap Core CSS -->
+<!-- Bootstrap Core CSS -->
     <link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
@@ -146,43 +146,50 @@
         </div><!-- /.navbar-header -->
 
         <!-- Top Menu Items -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" style="  padding:15px !important;
+" id="bs-example-navbar-collapse-1">
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
-                <ul class="nav navbar-nav navbar-right">
-                    @if(Sentinel::check() && Sentinel::inRole('Alu'))
+                    <ul class="nav navbar-nav navbar-right">
+                        @if(Sentinel::check() && Sentinel::inRole('Alu'))
 
-                    <li class="dropdown">
-                        <a href="{{route('misDatos')}}">Mi perfil <b class="caret"></b></a>
+                            <li class="dropdown">
+                                <a href="{{route('misDatos')}}">Mi perfil <b class="caret"></b></a>
 
-                    </li>
+                            </li>
 
-                    @endif
-                    <li class="dropdown">
-                @if (Sentinel::check())
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ Sentinel::getUser()->email }} <b class="caret"></b></a>
-                @else
-                    <a href="{{ route('login') }}">Login</a>
-                @endif
-                <ul class="dropdown-menu">
-                    {{--@if (Sentinel::check() && (Sentinel::inRole('admin') || Sentinel::inRole('mod')) )--}}
-                    @if (Sentinel::check()   )
+                        @endif
+                        <li class="dropdown">
+                            @if (Sentinel::check())
 
-                    <li>
+                                <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
+                                <div class="avatar" style="    width: 180px; float: left; margin-right: 5px;">
+                                    <img style=" width: 50px;height: 50px; float: left;"  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+                                    <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"><i class="fa fa-user"></i> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
+
+                                </div>
+                            @else
+                                <a href="{{ route('login') }}">Login</a>
+                            @endif
+                            <ul class="dropdown-menu">
+                                {{--@if (Sentinel::check() && (Sentinel::inRole('admin') || Sentinel::inRole('mod')) )--}}
+                                @if (Sentinel::check()   )
+
+                                    <li>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('logout') }}">Log Out</a>
+
+                                    </li>
+                                @else
+                                    <li>
+                                        <a href="{{ route('logout') }}">Some Text</a>
+                                    </li>
+                                @endif
+                            </ul>
                         </li>
-                        <li>
-                            <a href="{{ route('logout') }}">Log Out</a>
 
-                        </li>
-                    @else
-                        <li>
-                            <a href="{{ route('logout') }}">Some Text</a>
-                        </li>
-                    @endif
-                </ul>
-            </li>
-
-        </ul>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -190,15 +197,15 @@
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 @if(Sentinel::check() && Sentinel::inRole('Admin'))
-                <li class="">
-                    <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>
-                </li>
-                <li class="">
-                <a href="{{ route('nuevoUsuario') }}"><i class="fa fa-fw fa-dashboard"></i> Crear Usuario</a>
-                </li>
-                <li class="">
-                    <a href={{ route('crearEtiqueta') }}><i class="fa fa-fw fa-dashboard"></i> CrearEtiqueta</a>
-                </li>
+                    <li class="">
+                        <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('nuevoUsuario') }}"><i class="fa fa-fw fa-dashboard"></i> Crear Usuario</a>
+                    </li>
+                    <li class="">
+                        <a href={{ route('crearEtiqueta') }}><i class="fa fa-fw fa-dashboard"></i> CrearEtiqueta</a>
+                    </li>
                 @elseif(Sentinel::check() && Sentinel::inRole('Alu'))
                     <li class="">
                         <a href="{{ route('alumnoDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
@@ -206,10 +213,10 @@
                     <li class="">
                         <a href="{{ route('crear') }}"><i class="fa fa-fw fa-dashboard"></i> Nuevo Hecho</a>
                     </li>
-                @foreach($categorias as $categoria)
-                    <li class="">
-                        <a href=""><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
-                    </li>
+                    @foreach($categorias as $categoria)
+                        <li class="">
+                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
+                        </li>
                     @endforeach
 
                 @endif
@@ -236,12 +243,12 @@
 
 
 
-<!-- Bootstrap Core JavaScript -->
+    <!-- Bootstrap Core JavaScript -->
 
-<!-- Select Chosen -->
+    <!-- Select Chosen -->
 
 
-<!-- DataTables JavaScript -->
+    <!-- DataTables JavaScript -->
 {{--<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>--}}
 {{--<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/js/jquery.dataTables.min.js"></script>-->--}}
 {{--<script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>--}}

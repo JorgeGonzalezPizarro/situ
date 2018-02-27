@@ -5018,6 +5018,7 @@ select[multiple].input-group-sm > .form-control, select[multiple].input-group-sm
 
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
     border-color: #101010
+
 }
 
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {

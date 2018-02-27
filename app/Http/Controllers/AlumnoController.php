@@ -75,8 +75,11 @@ class AlumnoController extends Controller
         $otros_datos=json_decode($user->otros_datos,true);
 
         $curso= $user->getDatosAcademicos()->where('curso',$year)->get()->first();
-
-        $asignaturas=($curso->asignaturas);
+        if(!empty($curso->asignaturas)){
+        $asignaturas=$curso->asignaturas;
+        }else{
+            $asignaturas=array();
+        }
         return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user)
             ->with('otros_datos', $otros_datos)
             ->with('curso',$curso)
@@ -106,21 +109,22 @@ class AlumnoController extends Controller
         $cursoAlumno->curso = Input::get('curso');
         $cursoAlumno->grado = Input::get('grado');
 
-        if(!empty(Input::get('asignaturas'))){
+        if(!empty(Input::get('asignatura'))){
         if (!empty($asignaturas)  ){
             $asignaturas = json_decode($cursoAlumno->asignaturas,true);
              $resultado = array_merge($inputAsignaturas, $asignaturas);
-        );
+
 //        $asignaturas=array('asignatura'=>json_decode($cursoAlumno->asignaturas));
 
             $cursoAlumno->asignaturas = json_encode($resultado,true);
-    }
+    }}
     else{
 
     $cursoAlumno->asignaturas = json_encode($inputAsignaturas);
 
 
-}}
+}
+
        $cursoAlumno->user_id=$user->id;
        $cursoAlumno->curso=Input::get('curso');
        $cursoAlumno->grado=Input::get('grado');
@@ -204,6 +208,34 @@ class AlumnoController extends Controller
 
 
     }
+
+
+
+
+
+
+
+    public function showFormHecho($categoria){
+
+
+        $usuario= Sentinel::findById(Sentinel::getUser()->id);
+        $curso= $usuario->getDatosAcademicos()->get()->first();
+        if($categoria=='Calificaciones') {
+            return view('hechos.calificaciones')->with('user', Sentinel::getUser())
+                ->with('curso', $curso);
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
 
 
 }

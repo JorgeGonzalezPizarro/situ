@@ -6773,3 +6773,9 @@ button.close {
 
 
 /*}*/
+
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+  border-color: #101010;
+  padding-top:10px !important;
+}

@@ -226,11 +226,7 @@
                                     @foreach (json_decode($asignaturas,true) as $asignatura)
                                         <tr>
                                             <td>{{$curso->curso}}</td>
-<<<<<<< HEAD
                                             <td id="asignatura">{!!  print_r($asignatura)[0] !!}</td>
-=======
-                                            <td id="asignatura">{!!    print_r($asignatura[0])[0] !!}</td>
->>>>>>> 75755f27427926f20819443172d759f877a65f54
                                             <td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
                                                                      class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
                                         </tr>

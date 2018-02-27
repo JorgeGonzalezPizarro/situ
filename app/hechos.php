@@ -33,7 +33,10 @@ class hechos extends Model
 
         }
 
-
+    public function phone()
+    {
+        return $this->hasOne('App\Calificaciones');
+    }
     public function withTimestamps($createdAt = null, $updatedAt = null)
     {
         $this->withTimestamps = true;

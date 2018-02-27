@@ -62,8 +62,9 @@ Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}/{asignatura?}','AlumnoCon
 
 
 
+/*HEHCOS*/
 
-
+Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos');
 
 
 
