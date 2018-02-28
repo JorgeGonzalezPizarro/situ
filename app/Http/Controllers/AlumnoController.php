@@ -230,7 +230,7 @@ class AlumnoController extends Controller
             return view('hechos.calificaciones')->with('user', Sentinel::getUser())
                 ->with('curso',         $curso);
 
-        return ($curso->toArray());
+//        return ($curso->toArray()[0]);
         }
 
 
@@ -238,7 +238,11 @@ class AlumnoController extends Controller
 
 
     public function getAsignaturas($curso){
+        $usuario= Sentinel::findById(Sentinel::getUser()->id);
 
+        $curso= $usuario->getDatosAcademicos()->where('curso',$curso)->get()->first();
+
+        return response(json_decode($curso->asignaturas));
 
 
     }

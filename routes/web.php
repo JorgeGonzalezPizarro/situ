@@ -44,7 +44,6 @@ Route::get('Admin/crearEtiqueta',function(){
 Route::post('Admin/crearEtiqueta','AdminController@crearNuevaEtiqueta')->name('guardarEtiqueta');
 
 
-
 /*ALUMNO*/
 Route::get('/Alumno/alumnoDashboard','AlumnoController@getDashboard')->name('alumnoDashboard');
 Route::get('Alumno/crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
@@ -65,6 +64,7 @@ Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}/{asignatura?}','AlumnoCon
 /*HEHCOS*/
 
 Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos');
+Route::get('hechos/Calificaciones/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 
 
 

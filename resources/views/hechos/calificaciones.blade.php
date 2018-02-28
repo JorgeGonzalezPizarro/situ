@@ -11,6 +11,14 @@
         width:  80%;
     }
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+
 @section('content')
 
 
@@ -66,24 +74,34 @@
 
 
 
-                                <div class=" col-md-12 col-lg-12 ">
-                                    <table class="table table-user-information">
+                                <div class='col-md-8' style="    margin-top: 10px;
+                                      margin-left: 240px;">
+                                        <div class="form-inline" style="">
 
-                                        <tbody>
-                                        <div class="form-group" style="">
+                                                <div style="text-align: center;">
+                                                    {!! Form::label('Curso', 'Curso') !!}
+                                                    {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
-                                                <div style="padding-left: 10px;">
-                                                       {{--<input type="select" value="{{$cur->id}}">--}}
-                                                    {!! Form::select('etiqueta', $curso, NULL, ['class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 0]) !!}
                                                     {{--{{Form::select('etiqueta', $c->curso)}}--}}
+                                                    {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
+                                                    {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
+                                                    <select  style="width:40%;"class="form-control" id="asignaturas"></select>
 
                                                 </div>
                                         </div>
-                                        </tbody>
+                                            <div class="form-inline" style="margin-top: 40px;">
+                                                <div style=" text-align: center">
 
-                                    </table>
-                                    <div class='col-md-8' style="    margin-top: 10px;
-                                      margin-left: 240px;">
+
+                                            {!! Form::label('Calificacion', 'Calificacion') !!}
+                                            {!! Form::text('Calificacion', null, array('class' => 'form-control', 'placeholder' => 'Calificacion')) !!}
+
+                                            {!! Form::label('Profesor', 'Profesor') !!}
+                                            {!! Form::text('Profesor', null, array('class' => 'form-control', 'placeholder' => 'Profesor')) !!}
+                                            </div>
+                                            </div>
+                                    <div class='col-md-6' style="    margin-top: 30px;text-align: center;
+                                      margin-left: 200px;">
 
                                         {!! Form::submit('Create Post', array('class'=>'btn btn-info disabled' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
 
@@ -95,14 +113,8 @@
                             </div>
                         </div>
                         <div class="panel-footer">
-                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                            <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
+
+
                         </div>
 
                     </div>
@@ -113,41 +125,7 @@
             <div id="push"></div>
         </div>
         <footer id="footer">
-            <div class="row-fluid">
-                <div class="span3">
-                    <p>
-                        <a href="http://twitter.com/Bootply" rel="nofollow" title="Bootply on Twitter" target="ext">Twitter</a><br>
-                        <a href="https://plus.google.com/+Bootply" rel="publisher">Google+</a><br>
-                        <a href="http://facebook.com/Bootply" rel="nofollow" title="Bootply on Facebook" target="ext">Facebook</a><br>
-                        <a href="https://github.com/iatek/bootply" title="Bootply on GitHub" target="ext">GitHub</a><br>
-                    </p>
-                </div>
-                <div class="span3">
-                    <p>
-                        <a data-toggle="" role="button" href="">Contact Us</a><br>
-                        <a href="/tags">Tags</a><br>
-                        <a href="/bootstrap-community">Community</a><br>
-                        <a href="/upgrade">Upgrade</a><br>
-                    </p>
-                </div>
-                <div class="span3">
-                    <p>
-                        <a href="http://www.bootbundle.com" target="ext" rel="nofollow">BootBundle</a><br>
-                        <a href="https://bootstrapbay.com/?ref=skelly" target="_ext" rel="nofollow"
-                           title="Premium Bootstrap themes">Bootstrap Themes</a><br>
-                        <a href="http://www.bootstrapzero.com" target="_ext" rel="nofollow"
-                           title="Free Bootstrap templates">BootstrapZero</a><br>
-                        <a href="http://upgrade-bootstrap.bootply.com/">2.x Upgrade Tool</a><br>
-                    </p>
-                </div>
-                <div class="span3">
-                    <span class="pull-right">©Copyright 2013-2014 <a href="/"
-                                                                     title="The Bootstrap Playground">Bootply</a> | <a
-                                href="/about#privacy">Privacy</a></span>
-                    <a href="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" class="btn iframe-btn" type="button">Open Filemanager</a>
 
-                </div>
-            </div>
         </footer>
 
     </div>
@@ -160,35 +138,77 @@
 @endsection
 
 
-{{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
 
-{{--<script type="text/javascript">--}}
-{{--$(function(){--}}
-{{--$('.iframe-btn').fancybox({--}}
-{{--'width'	: 1024,--}}
-{{--'minHeight'	: 600,--}}
-{{--'type'	: 'iframe',--}}
-{{--'autoScale'   : true--}}
-{{--});--}}
-{{--});--}}
-{{--</script>--}}
 <script>
     $(document).ready(function () {
-        //     $(function(){
-        //         $('.iframe-btn').fancybox({
-        //             'width'	: 1024,
-        //             'minHeight'	: 600,
-        //             'type'	: 'iframe',
-        //             'autoScale'   : true
-        //         });
-        //     });
+        if( $('#inputCurso').has('option').length > 0 ) {
+            var x = document.getElementById("inputCurso").selectedIndex;
+            var curso = (document.getElementsByTagName("option")[x].text);
+            $('#inputCurso').attr('value', curso);
+            $('#asignaturas').empty();
+            $.ajax({
+                type: "get",
+                url: "{{ route('getAsignaturas') }}/" + curso,
+                encode: true,
+                data: {
+                    curso: curso,
+                },
+                success: function (response) { // What to do if we succeed
+                    response.forEach(function (element) {
+                        $('#asignaturas')
+                            .append($("<option></option>")
+                                .attr("value", element)
+                                .text(element));
+                    });
 
-        // parent.$.fancybox.close();
-        $('input[name=imagen]').change(function() {
+
+                    console.log(response);
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+        }
 
 
+
+
+        $('#inputCurso').on('change', function() {
+            var x = document.getElementById("inputCurso").selectedIndex;
+            var curso=(document.getElementsByTagName("option")[x].text);
+            $('#inputCurso').attr('value',curso);
+            $('#asignaturas').empty();
+            $.ajax({
+                type:"get",
+                url     : "{{ route('getAsignaturas') }}/" +curso,
+                encode  : true,
+                data: {
+                    curso: curso,
+                },
+                success: function(response){ // What to do if we succeed
+                    response.forEach(function(element) {
+                        $('#asignaturas')
+                            .append($("<option></option>")
+                                .attr("value",element)
+                                .text(element));
+                    });
+
+
+        console.log(response);
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
 
         });
+
+
+
         document.getElementById('boton').disabled = true;
         $('i').on('click',function () {
             $('#boton').removeClass('btn btn-info disabled');
@@ -233,36 +253,6 @@
         });
 
 
-
-        {{--var data = table--}}
-        {{--.rows()--}}
-        {{--.data();--}}
-        {{--var cData = table.cell(this).data();--}}
-        {{--var data = table.row( this ).data();--}}
-        {{--//alert( 'You clicked on '+data[2]+'\'s row' );--}}
-        {{--var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');--}}
-
-        {{--$.ajax({--}}
-        {{--type: "get",--}}
-        {{--url: "{{ route('actualizarDatos') }}",--}}
-        {{--datatype: "json",--}}
-        {{--encode: true,--}}
-        {{--data: {--}}
-        {{--first_name: document.getElementById('first_name'),--}}
-        {{--first_name: document.getElementById('last_name'),--}}
-        {{--email: document.getElementById('email'),--}}
-
-        {{--_token: CSRF_TOKEN--}}
-        {{--},--}}
-        {{--success: function (response) { // What to do if we succeed--}}
-        {{--window.location.href= "{{ url('Alumno/hecho') }}"+"/"+response['id'] + "/singleHecho";--}}
-        {{--console.log("aa+ " + response);--}}
-
-        {{--},--}}
-        {{--error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
-        {{--console.log(JSON.stringify(jqXHR));--}}
-        {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
-        {{--}--}}
 
 
 
