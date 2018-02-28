@@ -71,8 +71,13 @@
 
                                         <tbody>
                                         <div class="form-group" style="">
-                                            {!! Form::label('Etiquetas', 'Link tags') !!}
-                                            {!! Form::select('curso', $curso->grado, NULL, ['class' => 'form-control chosen-select', 'name' => 'curso[]', 'multiple tabindex' => 6]) !!}
+
+                                                <div style="padding-left: 10px;">
+                                                       {{--<input type="select" value="{{$cur->id}}">--}}
+                                                    {!! Form::select('etiqueta', $curso, NULL, ['class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 0]) !!}
+                                                    {{--{{Form::select('etiqueta', $c->curso)}}--}}
+
+                                                </div>
                                         </div>
                                         </tbody>
 

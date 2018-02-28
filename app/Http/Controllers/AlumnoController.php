@@ -221,11 +221,24 @@ class AlumnoController extends Controller
 
 
         $usuario= Sentinel::findById(Sentinel::getUser()->id);
-        $curso= $usuario->getDatosAcademicos()->get()->first();
+        $curso= $usuario->getDatosAcademicos()->pluck('curso');
+        $curso->all();
+//        $asignaturas=json_decode($curso->asignaturas);
+//        $curso=array($curso);
+
         if($categoria=='Calificaciones') {
             return view('hechos.calificaciones')->with('user', Sentinel::getUser())
-                ->with('curso', $curso);
+                ->with('curso',         $curso);
+
+        return ($curso->toArray());
         }
+
+
+    }
+
+
+    public function getAsignaturas($curso){
+
 
 
     }
