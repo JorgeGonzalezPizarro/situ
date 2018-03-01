@@ -8,8 +8,7 @@ class Categorias extends Model
 {
     public $table = "categorias";
 
-    protected $fillable = [
-        'categoria' , 'user_id',
+    protected $fillable = ['categoria' , 'user_id',
 
     ];
 

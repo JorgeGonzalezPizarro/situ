@@ -136,7 +136,7 @@
             });
 
 
-        $(document).ready(function () {
+
             $.datepicker.regional['es'] = {
                 closeText: 'Cerrar',
                 prevText: '< Ant',
@@ -184,7 +184,7 @@
 
             });
 
-        });
+
 
     </script>
     {{--<script src="{{URL::to('/public/js/tinymce/js/tinymce/tincymce.min.js')}}"> </script>--}}

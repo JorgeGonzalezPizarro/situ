@@ -12,6 +12,7 @@ class Calificaciones extends Model
         'calificacion' , 'profesor','asignatura'
 
     ];
+    public $timestamps = false;
 
 
     public function getHecho(){

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\User;
+use App\Etiqueta;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Http\Request;
 use App\hechos;
@@ -146,10 +147,12 @@ class AlumnoController extends Controller
 
         $curso= $user->getDatosAcademicos()->where('curso',$year)->get()->first();
         $asignaturas=json_decode($curso->asignaturas,true);
-        $key=array_search($asignatura,$asignaturas);
+//        $key=array_search($asignatura,$asignaturas);
+//            unset($asignaturas[$asignatura]);
+        foreach (array_keys($asignaturas, $asignatura) as $key) {
             unset($asignaturas[$key]);
-
-            $curso->asignaturas=json_encode($asignaturas,true);
+        }
+            $curso->asignaturas=json_encode($asignaturas);
             $curso->save();
 
         return Redirect::back();
@@ -217,27 +220,33 @@ class AlumnoController extends Controller
 
 
 
-    public function showFormHecho($categoria){
+    public function showFormHecho($categoria)
+    {
 
 
-        $usuario= Sentinel::findById(Sentinel::getUser()->id);
-        $curso= $usuario->getDatosAcademicos()->pluck('curso');
+        $usuario = Sentinel::findById(Sentinel::getUser()->id);
+        $curso = $usuario->getDatosAcademicos()->pluck('curso');
         $curso->all();
-//        $asignaturas=json_decode($curso->asignaturas);
-//        $curso=array($curso);
+        $etiqueta=Etiqueta::pluck('slug');
+        $categoria= Categorias::where('categoria', $categoria)->get()->first();
 
-        if($categoria=='Calificaciones') {
+        if ($categoria->categoria == 'Calificaciones') {
             return view('hechos.calificaciones')->with('user', Sentinel::getUser())
-                ->with('curso',         $curso);
+                ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta);
 
-//        return ($curso->toArray()[0]);
         }
+        if ($categoria->categoria == 'Trabajo Académico') {
+            return view('hechos.trabajoAcademico')->with('user', Sentinel::getUser())
+                ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta);
+//            return response($categorias->id);
 
-
+        }
+        else{
+            return "aa";
+        }
     }
 
-
-    public function getAsignaturas($curso){
+    public function getAsignaturas($categoria,$curso){
         $usuario= Sentinel::findById(Sentinel::getUser()->id);
 
         $curso= $usuario->getDatosAcademicos()->where('curso',$curso)->get()->first();

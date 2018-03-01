@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Calificaciones;
 use App\Etiqueta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controllers;
@@ -19,36 +20,35 @@ class HechoController extends Controller
 
         public function guardar_Hecho(Request $request){
 
-            $rules = array( 'titulo_hecho' => 'required');
+            $rules = array( );
 
             $validator = Validator::make(Input::all(),$rules);
 
 
             if($validator->fails()){
-                return Redirect::to('hechos/crear')->withErrors($validator)->withInput();
+                return Redirect::back()->withErrors($validator)->withInput();
             }
-            else{
+            else {
                 $hecho = new hechos();
-                $hecho -> user_id = Sentinel::getUser()->id;
-                $hecho -> titulo_hecho = Input::get('titulo_hecho');
-                $hecho -> categoria_id = Input::get('categoria_id');
-                $hecho -> curso= Input::get('curso');
-                $hecho -> contenido= Input::get('contenido');
-                $hecho -> proposito= Input::get('proposito');
-                $hecho -> evidencia= Input::get('evidencia');
+                $hecho->user_id = Sentinel::getUser()->id;
+                $hecho->titulo_hecho = Input::get('titulo_hecho');
+                $hecho->categoria_id = Input::get('categoria_id');
+                $hecho->curso = Input::get('curso');
+                $hecho->contenido = Input::get('contenido');
+                $hecho->proposito = Input::get('proposito');
+                $hecho->evidencia = Input::get('evidencia');
 //                $hecho -> etiqueta= Input::get('etiqueta');
-                $hecho -> nivel_autorizacion= Input::get('nivel_autorizacion');
-                $hecho -> hechos_relacionados= Input::get('hechos_relacionados');
+                $hecho->nivel_autorizacion = Input::get('nivel_autorizacion');
+                $hecho->hechos_relacionados = Input::get('hechos_relacionados');
                 $format = 'd/m/Y';
-
-
-
                 $fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
+                $hecho->fecha_inicio = $fecha_inicio;
+                if (isset($request->endDate)) {
 
-               $hecho -> fecha_inicio= $fecha_inicio;
                 $fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
+                    $hecho -> fecha_fin= $fecha_fin;
 
-                $hecho -> fecha_fin= $fecha_fin;
+                }
 
                 if (Input::hasfile('imagen')) {
                     $extension = Input::file('imagen')->getClientOriginalExtension(); // Get image extension
@@ -94,7 +94,24 @@ class HechoController extends Controller
                     imagedestroy($dst);
 
                 }
+
+                /*CALIFICACIONES*/
+
+
                 $hecho->save();
+
+                if(($request->categoria_id)==2) {
+                    $calificacion=new Calificaciones();
+                    $calificacion->id_hechos=$hecho->id;
+                    $calificacion->calificacion=$request->calificacion;
+                    $calificacion->asignatura=$request->asignatura;
+                    $calificacion->profesor=$request->profesor;
+                    $calificacion->save();
+
+                }
+
+
+
 
                 $etiqueta=Input::get('etiqueta');
                 $hecho1= hechos::find($hecho->id);

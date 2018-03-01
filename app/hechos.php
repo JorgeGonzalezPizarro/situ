@@ -48,7 +48,7 @@ class hechos extends Model
     }
     public   function getCategoria() {
 
-        return $this->belongsTo(static::$categoriaModel, 'id', 'id', 'categoria_id');
+        return $this->belongsTo('App\Categorias');
 
 
 
