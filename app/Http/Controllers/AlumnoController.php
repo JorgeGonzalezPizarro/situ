@@ -146,7 +146,7 @@ class AlumnoController extends Controller
         $user=Sentinel::getUser();
 
         $curso= $user->getDatosAcademicos()->where('curso',$year)->get()->first();
-        $asignaturas=json_decode($curso->asignaturas,true);
+        $asignaturas=json_decode($curso->asignaturas);
 //        $key=array_search($asignatura,$asignaturas);
 //            unset($asignaturas[$asignatura]);
         foreach (array_keys($asignaturas, $asignatura) as $key) {

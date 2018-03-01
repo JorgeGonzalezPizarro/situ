@@ -32,6 +32,13 @@ class hechos extends Model
 
 
         }
+    public   function getCategoria() {
+
+        return $this->belongsTo('App\Categorias','categoria_id','id');
+
+
+
+    }
 
     public function phone()
     {
@@ -46,13 +53,7 @@ class hechos extends Model
 
         return $this->withPivot($this->createdAt(), $this->updatedAt());
     }
-    public   function getCategoria() {
 
-        return $this->belongsTo('App\Categorias');
-
-
-
-    }
 
 
 

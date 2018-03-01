@@ -29,9 +29,9 @@
                     <tr id="" style="cursor: pointer">
                         <td>{{$hecho->id}}</td>
                         <td>{{$hecho->created_at}}</td>
-                        <td>{{$hecho->titulo_hecho}}</td>
+                        <td>{{$hecho->contenido}}</td>
                         <td>{{$hecho->fecha_inicio}}</td>
-                        <td>{{$hecho->getCategoria()->get()->first() }}</td>
+                        <td>{{$hecho->getCategoria()->get()->first()->categoria }}</td>
                     </tr>
                 @endforeach
 
