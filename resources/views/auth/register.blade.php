@@ -91,7 +91,7 @@
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
 
                         {{--{!! Form::select($role->Slug, null, ['class' => 'form-control','placeholder '=>'Enter your  name']) !!}--}}
-                        {!! Form::select('roles[]', $roles ,$roles,[ 'multiple' => 'multiple' ]) !!}
+                        {!! Form::select($role->Slug, null, [ 'multiple' => 'multiple' ]) !!}
                       </div>
                       {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
 

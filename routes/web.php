@@ -55,6 +55,8 @@ Route::post('Alumno/alumnoDatos','AlumnoController@actualizarMisDatos')->name('a
 Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}','AlumnoController@alumnoDatosAcademicos')->name('misDatosAcademicos');
 Route::post('Alumno/alumnoDatos/datosAcademicos','AlumnoController@actualizarMisDatosAcademicos')->name('actualizarDatosAcademicos');
 Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}/{asignatura?}','AlumnoController@eliminarAsignatura')->name('eliminarAsignatura');
+Route::get('Alumno/invitar','AlumnoController@showInvitarUsuario')->name('invitar');
+Route::post('Alumno/invitar','AlumnoController@invitarUsuario')->name('invitar');
 
 //Route::get('Alumno/AlumnoDatos/datosAcademicos/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 
@@ -68,7 +70,8 @@ Route::get('hechos/{categoria?}/{curso?}','AlumnoController@getAsignaturas')->na
 Route::POST('\'hechos/{categoria?}/{curso?}', 'HechoController@guardar_Hecho')->name('guardarHecho');
 
 
-
+/*PUBLICO*/
+Route::get('/Situ/public','SituController@getIndex')->name('index');
 
 
 Auth::routes();
