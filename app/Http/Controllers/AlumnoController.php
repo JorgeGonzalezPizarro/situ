@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Invitados;
 use DB;
+use Mail;
 use App\User;
+use App\Role;
 use App\Etiqueta;
 use Cartalyst\Sentinel\Laravel\Facades\Activation;
 use Illuminate\Http\Request;
@@ -256,13 +259,78 @@ class AlumnoController extends Controller
 
     }
 
+    public function showInvitarUsuario(Request $request)
+    {
+        $roles=Role::pluck('Slug','id');
+
+        $usuario = Sentinel::findById(Sentinel::getUser()->id);
+        $otros_datos = json_decode($usuario->otros_datos, true);
+
+        return view('Alumno.invitar')->with('user', $usuario)->with('otros_datos', $otros_datos)->withRoles($roles);;
+
+    }
+
+
+
+        public function invitarUsuario(Request $request){
+            $usuario = Sentinel::findById(Sentinel::getUser()->id);
+
+
+
+            $credentials = [
+                'email'    => Input::get('email'),
+                'password' => Input::get('password'),
+            ];
+
+            $rol=$request['roles'];
+            $role=$rol[0];
+
+            $invitado = Sentinel::register($request->all());
+            $invitado->roles()->sync([$role]);
+//            $invitado->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
+            $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
+
+            $invitado->save();
 
 
 
 
 
+            $activation = Activation::create($invitado);
+            $activation = Activation::complete($invitado, $activation->code);
+
+            $request['name'];
+            $rol=$request['roles'];
+            $rol=$rol[0];
 
 
+
+            $invitado2=new Invitados();
+            $invitado2->invitado_id=$invitado->id;
+            $invitado2->alumno_id=$usuario->id;
+            $invitado2->save();
+
+            if($invitado){
+                $invitado->roles()->sync([$rol]);
+
+                Session::flash('message', 'Registration is completed');
+
+
+                Mail::send('email',['request' => $request->all()],function ($mensaje) use($request){
+
+                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                    $mensaje->subject("Welcome to site name");
+                    $mensaje->to($request['email'],$request['name']);
+
+
+                });
+//           return redirect('/');
+                return redirect()->back();
+            }
+            // Session::flash('message', 'There was an error with the registration' );
+            //Session::flash('status', 'error');
+            return Redirect::back();
+        }
 
 
 

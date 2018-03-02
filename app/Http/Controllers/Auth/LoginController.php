@@ -81,7 +81,11 @@ class LoginController extends Controller
                  if ((Sentinel::check() && Sentinel::inRole('Alu'))) {
                      return redirect('Alumno/alumnoDashboard')->withUser($user);
 
-            }}
+            }
+                if (Sentinel::check() && Sentinel::inRole('Prof')) {
+                    return redirect('Situ/public')->withUser($user);;
+                }
+            }
             return Redirect::back()->withErrors(['global' => 'Invalid password or this user does not exist' ]);
 
         } catch (NotActivatedException $e) {

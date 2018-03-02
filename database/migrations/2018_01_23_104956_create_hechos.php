@@ -28,6 +28,7 @@ class CreateHechos extends Migration
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
             $table->string('ruta_imagen')->nullable();
+            $table->string('publico')->nullable();
 
             $table->timestamps();
         });
@@ -63,14 +64,24 @@ class CreateHechos extends Migration
             $table->increments('id');
             $table->string('id_hechos');
             $table->string('calificacion')->nullable();
-            $table->string('asignatura')->unsigned();
-            $table->string('profesor')->unsigned();
+            $table->string('asignatura');
+            $table->string('profesor');
 
 
 
         });
-    }
 
+Schema::create('invitados', function (Blueprint $table) {
+    $table->increments('id');
+    $table->integer('invitado_id');
+    $table->integer('alumno_id');
+
+
+    $table->timestamps();
+
+
+});
+}
 
 
     /**

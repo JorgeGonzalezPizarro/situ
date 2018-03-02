@@ -146,22 +146,36 @@
         </div><!-- /.navbar-header -->
 
         <!-- Top Menu Items -->
-        <div class="collapse navbar-collapse" style="  padding:15px !important;
-" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" style="  padding:15px !important;" id="bs-example-navbar-collapse-1">
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
-                            @if (Sentinel::check())
+                            <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
 
-                                <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
-                                <div class="avatar" style="    width: 180px; float: left; margin-right: 5px;">
-                                    <img style=" width: 50px;height: 50px; float: left;"  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-                                    <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
+                        @if (Sentinel::check() )
+                                    @if( !empty($otros_datos))
+                                        <div class="avatar" style="    width: 180px; float: left; margin-right: 5px;">
 
-                                </div>
-                            @else
+                                             <img style=" width: 50px;height: 50px; float: left;"  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+
+                                            <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
+                                        </div>
+
+                                    @else
+                                    <div>
+                                        <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
+                                    </div>
+
+                                        <div>
+                                            <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;" data-toggle="dropdown">
+                                                <span>{{$alumno}} </span><b class="caret"></b></a>
+                                        </div>
+                                    @endif
+
+
+                                @else
                                 <a href="{{ route('login') }}">Login</a>
                             @endif
                             <ul class="dropdown-menu">
@@ -234,7 +248,7 @@
         </div>
         <!-- /.navbar-collapse -->
     </nav>
-
+</div>
     <div id="page-wrapper">
 
         <div class="container-fluid">
