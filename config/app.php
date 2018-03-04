@@ -238,6 +238,8 @@ return [
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
         'hechos'=> \App\hechos::class,
+        'Str'   => Illuminate\Support\Str::class,
+
     ],
 
 ];

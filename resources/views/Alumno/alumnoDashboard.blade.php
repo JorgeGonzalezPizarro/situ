@@ -29,7 +29,7 @@
                     <tr id="" style="cursor: pointer">
                         <td>{{$hecho->id}}</td>
                         <td>{{$hecho->created_at}}</td>
-                        <td>{{$hecho->contenido}}</td>
+                        <td>{!! \Illuminate\Support\Str::words($hecho->contenido,10,'...' )!!}</td>
                         <td>{{$hecho->fecha_inicio}}</td>
                         <td>{{$hecho->getCategoria()->get()->first()->categoria }}</td>
                     </tr>
@@ -39,7 +39,12 @@
 
             </table>
         </div>
+        @foreach ($hechos as $hecho)
+            <tr id="" style="cursor: pointer">
 
+
+            </tr>
+        @endforeach
     </div>
 
 @endsection

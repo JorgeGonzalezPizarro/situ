@@ -213,15 +213,7 @@ class AlumnoController extends Controller
         }
 
 
-
-
     }
-
-
-
-
-
-
 
     public function showFormHecho($categoria)
     {
@@ -331,7 +323,4 @@ class AlumnoController extends Controller
             //Session::flash('status', 'error');
             return Redirect::back();
         }
-
-
-
 }

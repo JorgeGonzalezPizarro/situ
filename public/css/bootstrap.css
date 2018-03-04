@@ -6779,3 +6779,8 @@ button.close {
   border-color: #101010;
   padding-top:10px !important;
 }
+
+
+#mceu_34-body span{
+  display: none !important;
+}

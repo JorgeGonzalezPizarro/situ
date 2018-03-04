@@ -64,13 +64,9 @@ class CreateHechos extends Migration
             $table->increments('id');
             $table->string('id_hechos');
             $table->string('calificacion')->nullable();
-<<<<<<< HEAD
             $table->string('asignatura')->nullable();
             $table->string('profesor')->nullable();
-=======
-            $table->string('asignatura');
-            $table->string('profesor');
->>>>>>> 2bd82fe727944cca6cd68c0bbd9cbd095b72eb75
+
 
 
 

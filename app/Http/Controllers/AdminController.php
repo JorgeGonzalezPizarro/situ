@@ -173,17 +173,6 @@ class AdminController extends Controller
         return Redirect::to('Admin/adminDashboard');
     }
 
-
-
-
-
-
-
-
-
-
-
-
     public function create()
     {
         return View::make('user.create');
@@ -255,10 +244,6 @@ class AdminController extends Controller
 
         return Redirect::to('/user');
     }
-
-
-
-
 
 
 }
