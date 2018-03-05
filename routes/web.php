@@ -68,6 +68,7 @@ Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos
 
 Route::get('hechos/{categoria?}/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 Route::POST('\'hechos/{categoria?}/{curso?}', 'HechoController@guardar_Hecho')->name('guardarHecho');
+Route::POST('/Alumno/alumnoDashboard/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('guardarHecho');
 
 
 /*PUBLICO*/

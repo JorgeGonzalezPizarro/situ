@@ -22,8 +22,7 @@
                 <h1 class="" style="text-align: center">{{ $user->first_name  }}</h1>
 
                 <h1 class="" id="categoria"style="text-align: center">{!! $categoria->categoria!!}</h1>
-                <br>
-                <br>
+
             </div>
         </div>
 
@@ -39,33 +38,14 @@
 
 
                     <div class="panel panel-info">
-                        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-                            <div class="collapse navbar-collapse" id="navbarColor03">
-                                <ul class="nav navbar-nav ">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Profesionales</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Otros datos</a>
-                                    </li>
-                                </ul>
 
-                            </div>
-                        </nav>
                         <div class="panel-body">
                             <div class="row">
 
                                 {{ Form::hidden('categoria_id',$categoria->id) }}
 
 
-                                <div class='col-md-9' style="    margin-top: 10px;
-                                      margin-left: 100px;">
+                                <div class='col-md-12' style="    ">
                                     <div class="form-group">
                                         {!! Form::label('title', 'Post Title') !!}
                                         {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('class' => 'form-control', 'placeholder' => 'Title')) !!}

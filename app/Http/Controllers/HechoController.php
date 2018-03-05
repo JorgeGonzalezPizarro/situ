@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Calificaciones;
 use App\Etiqueta;
+use Redirect;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controllers;
 use App\hechos;
@@ -130,6 +131,36 @@ class HechoController extends Controller
 
 
         }
+    public function fraseguia(Request $request){
+
+
+
+
+            $hecho = new hechos();
+            $hecho->user_id = Sentinel::getUser()->id;
+            $hecho->titulo_hecho ='Frase guia';
+            $hecho->categoria_id = Input::get('categoria_id');
+            $hecho->contenido = Input::get('contenido');
+            $hecho->nivel_autorizacion = Input::get('nivel_autorizacion');
+            $hecho->hechos_relacionados = Input::get('hechos_relacionados');
+            $format = 'd/m/Y';
+
+            /*CALIFICACIONES*/
+
+
+            $hecho->save();
+
+
+
+
+
+            Session::flash('message', 'Hecho creado');
+
+        return Redirect::back();
+
+        }
+
+
 
 
     public function crear(Request $request){

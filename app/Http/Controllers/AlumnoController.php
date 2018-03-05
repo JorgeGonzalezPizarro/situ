@@ -215,6 +215,10 @@ class AlumnoController extends Controller
 
     }
 
+
+
+
+
     public function showFormHecho($categoria)
     {
 
