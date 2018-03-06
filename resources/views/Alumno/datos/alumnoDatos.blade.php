@@ -111,7 +111,7 @@
                                         <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Profesionales</a>
+                                        <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="#">Otros datos</a>

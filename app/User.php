@@ -71,6 +71,10 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
         return $this->hasMany('App\CursoAlumno','user_id', 'id');
 
     }
+    public function getLaboral(){
+        return $this->hasMany('App\Laboral','user_id', 'id');
+
+    }
 
 
 

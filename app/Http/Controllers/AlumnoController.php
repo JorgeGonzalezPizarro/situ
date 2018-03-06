@@ -339,4 +339,21 @@ class AlumnoController extends Controller
             //Session::flash('status', 'error');
             return Redirect::back();
         }
+
+    public function alumnoDatosLaborales ($year=null){
+
+        if(empty($year)){
+            $year=1;
+        }
+        $user = Sentinel::getUser();
+
+        $otros_datos=json_decode($user->otros_datos,true);
+
+
+        return view('Alumno.datos.alumnoDatosLaboral')->with('user',$user)
+            ->with('otros_datos', $otros_datos)->with('year',$year);
+
+    }
+
+
 }

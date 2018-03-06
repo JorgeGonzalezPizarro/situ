@@ -72,17 +72,17 @@ class CreateHechos extends Migration
 
         });
 
-Schema::create('invitados', function (Blueprint $table) {
-    $table->increments('id');
-    $table->integer('invitado_id');
-    $table->integer('alumno_id');
+        Schema::create('invitados', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('invitado_id');
+            $table->integer('alumno_id');
 
 
-    $table->timestamps();
+            $table->timestamps();
 
 
-});
-}
+        });
+        }
 
 
     /**

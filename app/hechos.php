@@ -40,7 +40,7 @@ class hechos extends Model
 
     }
 
-    public function phone()
+    public function calificaciones()
     {
         return $this->hasOne('App\Calificaciones');
     }
