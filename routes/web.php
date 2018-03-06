@@ -22,7 +22,7 @@ Route::get('/', function () {
 
 Route::auth();
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/Admin/adminDashboard','AdminController@getDashboard');
+Route::get('/Admin/adminDashboard','AdminController@getDashboard')->name('alumnoDashboard');
 Route::get('Admin/getUsuario/', 'AdminController@getactualizarUsuario')->name('actualizarUsuario');
 //Route::get('Admin/usuario/{admin}', function($admin){
 //    Sentinel::findById($admin);
@@ -68,7 +68,7 @@ Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos
 
 Route::get('hechos/{categoria?}/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 Route::POST('\'hechos/{categoria?}/{curso?}', 'HechoController@guardar_Hecho')->name('guardarHecho');
-Route::POST('/Alumno/alumnoDashboard/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('guardarHecho');
+Route::POST('/Alumno/alumnoDashboard/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('fraseguia');
 
 
 /*PUBLICO*/

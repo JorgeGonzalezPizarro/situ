@@ -9,8 +9,9 @@ use App\Http\Controllers\Controllers;
 use App\hechos;
 use Validator;
 use Sentinel;
-use Session;
 use Carbon;
+use Session;
+use Datetime;
 use App\Categorias;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -44,6 +45,8 @@ class HechoController extends Controller
                 $format = 'd/m/Y';
                 $fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
                 $hecho->fecha_inicio = $fecha_inicio;
+                $hecho->publico = Input::get('acceso');
+
                 if (isset($request->endDate)) {
 
                 $fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
@@ -116,15 +119,18 @@ class HechoController extends Controller
 
                 $etiqueta=Input::get('etiqueta');
                 $hecho1= hechos::find($hecho->id);
-                foreach ($etiqueta as $etiquet){
+                if(!empty($etiqueta)) {
+                    foreach ($etiqueta as $etiquet) {
 
-                    $hecho->getEtiqueta()->attach($etiquet);
+                        $hecho->getEtiqueta()->attach($etiquet);
 
 
-
+                    }
                 }
-                Session::flash('message', 'Hecho creado');
+                $user=Sentinel::getUser();
 
+                $hechos=$user->getHechos()->get();
+                Session::flash('message', 'Hecho creado');
                 return redirect()->back();
 
             }
@@ -144,7 +150,9 @@ class HechoController extends Controller
             $hecho->nivel_autorizacion = Input::get('nivel_autorizacion');
             $hecho->hechos_relacionados = Input::get('hechos_relacionados');
             $format = 'd/m/Y';
-
+        $dt = new DateTime();
+        $fecha_inicio =$dt->format('Y-m-d H:i:s');
+        $hecho->fecha_inicio = $fecha_inicio;
             /*CALIFICACIONES*/
 
 

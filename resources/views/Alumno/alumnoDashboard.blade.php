@@ -14,7 +14,6 @@
             </div>
                 <div class="col-md-3" style="margin-top: 30px">
                     {!! Form::button('Guardar', array('class'=>'btn btn-info ' ,'id'=>'fraseButton' , 'style=""')) !!}</td>
-                    <button class="btn btn-info" id="fraseButton" >Guardar</button>
 
                 </div>
             <div class="clearfix"></div>
@@ -127,7 +126,7 @@
 
             $.ajax({
                 type:"post",
-                url     : "{{ route('guardarHecho') }}",
+                url     : "{{ route('fraseguia') }}",
                 encode  : true,
                 data: {
                     contenido: data,
@@ -136,8 +135,11 @@
 
                 },
                 success: function(response){ // What to do if we succeed
-                    window.location.href= "{{ url('Alumno/alumnoDashboard') }} ";
+                    {{--window.location.href= "{{ url('Alumno/alumnoDashboard') }} ";--}}
+                        window.location.href= "{{ route('alumnoDashboard') }}";
+                    // console.log(JSON.stringify(response));
 
+                    // table.ajax.reload();
                 },
                 error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
                     console.log(JSON.stringify(jqXHR));

@@ -112,10 +112,10 @@ class AlumnoController extends Controller
         if(!empty(Input::get('asignatura'))){
             if (!empty($asignaturas)  ){
             echo "aaaa";
-            $asignaturas = json_decode($cursoAlumno->asignaturas,true);
+            $asignaturas = json_decode($cursoAlumno->asignaturas);
              $resultado = array_merge($inputAsignaturas, $asignaturas);
 
-           $cursoAlumno->asignaturas = json_encode($resultado,true);
+           $cursoAlumno->asignaturas = json_encode($resultado);
     }
             else{
 
@@ -148,18 +148,30 @@ class AlumnoController extends Controller
 
         $user=Sentinel::getUser();
 
-        $curso= $user->getDatosAcademicos()->where('curso',$year)->get()->first();
-        $asignaturas=json_decode($curso->asignaturas);
+        $curso= $user->getDatosAcademicos()->where('curso',$year)->first();
+        $asignaturas=json_decode($curso->asignaturas,true);
 //        $key=array_search($asignatura,$asignaturas);
 //            unset($asignaturas[$asignatura]);
-        foreach (array_keys($asignaturas, $asignatura) as $key) {
+//        foreach (array_keys($asignaturas, $asignatura) as $key) {
+//            unset($asignaturas[$key]);
+//
+//
+//        }
+        if (($key = array_search($asignatura, $asignaturas)) !== false) {
             unset($asignaturas[$key]);
         }
-            $curso->asignaturas=json_encode($asignaturas);
+
+            $curso->asignaturas=json_encode($asignaturas,false);
             $curso->save();
 
         return Redirect::back();
     }
+
+
+
+
+
+
 
     public function actualizarMisDatos(Request $request){
       $user=Sentinel::getUser();

@@ -76,7 +76,8 @@
                                                     {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
                                                     {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
                                                     <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
-
+                                                    <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
+                                                        Añadir Asignaturas</a>
                                                 </div>
                                         </div>
                                             <div class="form-inline" style="margin-top: 40px;">
@@ -88,7 +89,8 @@
 
                                             {!! Form::label('Profesor', 'Profesor') !!}
                                             {!! Form::text('profesor', null, array('class' => 'form-control', 'placeholder' => 'Profesor')) !!}
-                                            </div>
+
+                                                </div>
 
                                             </div>
 
@@ -130,67 +132,68 @@
                                         {!! Form::label('text', 'En curso') !!}
 
                                         {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}
-                                    </div>
-                                    <div class='col-md-9' style="    margin-top: 30px;text-align: center;
-                                      margin-left: 200px;">
-
-                                        {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
 
                                     </div>
+                                    <div class='col-md-5'>
+                                        {!! Form::label('Acceso', 'Acceso') !!}
+                                        {!! Form::select('acceso', array('publico' => 'Publico', 'privado' => 'Privado'), NULL, ['class' => 'form-control','style'=>'width:40%;' ,'name' => 'acceso']) !!}
 
-                                    {!! Form::close() !!}
+                                        {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
+                                        {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
+                                        </div>
+                                        <div class='col-md-9' style="    margin-top: 30px;text-align: center;
+                                          margin-left: 200px;">
 
+                                            {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
+
+                                        </div>
+
+                                        {!! Form::close() !!}
+
+                                    </div>
                                 </div>
                             </div>
+
+
                         </div>
-
-
                     </div>
                 </div>
+
+
+                <div id="push"></div>
             </div>
+            <footer id="footer">
 
+            </footer>
 
-            <div id="push"></div>
         </div>
-        <footer id="footer">
-
-        </footer>
-
-    </div>
 
 
-    </div><!-- /#wrapper -->
+        </div><!-- /#wrapper -->
 
+    <!--  jQuery -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+    <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>
+    <script src="/js/tinymce/js/tinymce/langs/es.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-
-
-
-
-
-<!--  jQuery -->
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-<script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
-<script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
-<script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>
-<script src="/js/tinymce/js/tinymce/langs/es.js"></script>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-<script>      $(function() {
-        $('.chosen-select').chosen();
-        $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
-    });
-</script>
-
-    <script>
-
+    <script>      $(function() {
+            $('.chosen-select').chosen();
+            $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
+        });
     </script>
-    <script>
-        var editor_config = {
-            path_absolute : "{{ URL::to('/') }}/",
+
+        <script>
+
+        </script>
+        <script>
+            var editor_config = {
+                path_absolute : "{{ URL::to('/') }}/",
             selector : "textarea",
             plugins: [
                 "advlist autolink lists link image charmap print preview hr anchor pagebreak",
@@ -233,6 +236,8 @@
 <script>
 
     $(document).ready(function () {
+
+
         var categoria=document.getElementById("categoria").innerHTML;
         if( $('#inputCurso').has('option').length > 0 ) {
             var x = document.getElementById("inputCurso").selectedIndex;
@@ -248,12 +253,30 @@
                 },
                 success: function (response) {
                     console.log(response);
-                    response.forEach(function (element) {
-                        $('#asignaturas')
-                            .append($("<option></option>")
-                                .attr("value", element)
-                                .text(element));
-                    });
+                    if (response.length  == 0) {
+                        document.getElementById('boton').disabled = true;
+                        // $( '#añadir_asignaturas').show();
+
+                        $('#asignaturas ').hide();
+                    }
+
+                    else{
+                        $( '#añadir_asignaturas').hide();
+
+                        $('#boton').removeClass('btn btn-info disabled');
+                        $('#boton').addClass('btn btn-success');
+                        document.getElementById('boton').disabled = false;
+                        document.getElementById('boton').disabled = false;
+                        response.forEach(function (element) {
+
+
+                            $('#asignaturas')
+                                .append($("<option></option>")
+                                    .attr("value", element)
+                                    .text(element));
+                        });
+                    }
+
 
 
                     {{--window.location.href = "{{url('hechos') }}" +"/" +categoria+"/" +curso--}}
@@ -285,12 +308,31 @@
                     curso: curso,
                 },
                 success: function(response){ // What to do if we succeed
-                    response.forEach(function(element) {
-                        $('#asignaturas')
-                            .append($("<option></option>")
-                                .attr("value",element)
-                                .text(element));
-                    });
+                    if (response.length  == 0) {
+                        document.getElementById('boton').disabled = true;
+                        $( '#añadir_asignaturas').show();
+
+                        $('#asignaturas ').hide();
+                    }
+
+                    else{
+                        $( '#añadir_asignaturas').hide();
+                        $('#asignaturas ').show();
+
+                        $('#boton').removeClass('btn btn-info disabled');
+                        $('#boton').addClass('btn btn-success');
+                        document.getElementById('boton').disabled = false;
+                        document.getElementById('boton').disabled = false;
+                        response.forEach(function(element) {
+                            $('#asignaturas')
+                                .append($("<option></option>")
+                                    .attr("value",element)
+                                    .text(element));
+                        });
+
+                    }
+
+
 
 
         console.log(response);
@@ -306,14 +348,14 @@
 
 
 
-        document.getElementById('boton').disabled = true;
-        $('input').on('change',function () {
-            $('#boton').removeClass('btn btn-info disabled');
-            $('#boton').addClass('btn btn-success');
-            document.getElementById('boton').disabled = false;
-
-
-        })
+        // document.getElementById('boton').disabled = true;
+        // $('input').on('change',function () {
+        //     $('#boton').removeClass('btn btn-info disabled');
+        //     $('#boton').addClass('btn btn-success');
+        //     document.getElementById('boton').disabled = false;
+        //
+        //
+        // })
 
 
         $.datepicker.setDefaults($.datepicker.regional['es']);
@@ -345,6 +387,7 @@
             );
 
         });
+
 
 
     });
