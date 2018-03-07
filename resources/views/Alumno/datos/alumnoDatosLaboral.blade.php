@@ -21,7 +21,7 @@
 @section('content')
 
     <div class="container target">
-        {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}
+        {{ Form::open(array('route' => 'actualizarDatosLaboral', 'class' => 'form-style-8','files' => true)) }}
 
         <div class="row">
 
@@ -141,7 +141,7 @@
                                         <tr>
                                             <td><strong class="">Sector-Actividad</strong></td>
                                             <td>
-                                                <select class="selectpicker dropup" id="sector" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
+                                                <select class="selectpicker dropup" id="sector" data-live-search="true" data-dropupAuto="true" name="sector" title = " Seleccione " data-noneSelectedText="">
                                                     <option value="-1"></option>
                                                     <option value="11">Actividades financieras, banca y seguros</option>
                                                     <option value="22">Agencia de publicidad</option>
@@ -330,19 +330,23 @@
                                                 </select>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td><strong class="">Ubicacion</strong></td>
+                                            <td>
+                                                <select class="selectpicker dropup" name="ubicacioN" id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
 
+                                                </select>
+                                            </td>
+                                        </tr>
 
                                         <tr>
-                                            <td><strong class="">Agregar Asignatura:</strong></td>
-                                            <td>{!! Form::text('asignatura[]',"", ['id'=>'asignatura','class' => 'misDatos','required'=>'true' ]) !!}
+                                            <td><strong class="">Cargo</strong></td>
+                                            <td>{!! Form::text('cargo',"", ['id'=>'cargo','class' => 'misDatos','required'=>'true' ]) !!}
 
 
 
 
-                                                <a  id="mas"  value="" onclick="addInput();"  >
-                                                    <i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
 
-                                                </a>
                                             </td>
                                         </tr>
 
@@ -548,7 +552,7 @@
     function addInput(){
 
         var newdiv = document.createElement('tr');
-        newdiv.innerHTML =  "<td><strong class=''>Asignatura:</strong></td> <td><br><input type='text' class='misDatos' name='asignatura[]'></td>";
+        newdiv.innerHTML =  "<td><strong class=''>Cargo:</strong></td> <td><br><input type='text' class='misDatos' name='cargo[]'></td>";
         document.getElementById("tbody").appendChild(newdiv);
 
         counter++;
@@ -593,9 +597,9 @@
         var opts = sel.options;
 
 
-        for (var i=0;i<opts.length;i++){
+        for (var i=0;i<opts.length;i++) {
             opts[i].value = opts[i].text;
-
+        }
             // $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
             $('.en_curso').change(function(ev) {
                 if ( $(this).is(':checked') ) {
@@ -614,7 +618,7 @@
 
             });
 
-        }
+
 
         // $.datepicker.setDefaults($.datepicker.regional['es']);
         $(function () {
@@ -650,6 +654,29 @@
 
     </script>
 <script>
+    $(document).ready(function() {
+        var sel = document.getElementById('ubicacion');
+        // var opts = sel.options;
+
+        var ciudades= "Andalucia|Aragon|Asturias|Baleares|" +
+            "Canarias|Cantabria|Castilla y Leon|Castilla-La Mancha|Cataluña|Ceuta|" +
+            "Communidad Valenciana|Extremadura|Galicia|La Rioja|" +
+            "Madrid|Melilla|Murcia|Navarra|Pais Vasco" ;
+        var state_arr = ciudades.split("|");
+
+            $.each(state_arr, function (i, item) {
+                $('#ubicacion').append($('<option>', {
+                    value: item,
+                    text : item
+                }));
+            });
+
+
+
+
+
+    });
+
 
 </script>
 
