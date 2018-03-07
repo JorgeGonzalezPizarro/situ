@@ -1,17 +1,22 @@
 @extends('layouts.layoutAdmin')
 <script src="/js/jquery-3.3.1.min.js"></script>
-<link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
+{{--<link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">--}}
 
 
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>--}}
 <style>
-    input {
+    input[type=text]{
         border: 0 !important;
         border-bottom: 1px solid #ddd !important;
         padding: 7px !important;
-        width:  80%;
+        width:  80% !important;
+        height: auto !important;
     }
+    input[type=checkbox]{
+        height: 10px !important;
+    }
+
 </style>
 @section('content')
 
@@ -132,14 +137,7 @@
 
                                         </div>
                                         <tbody id="tbody">
-                                        <tr>
-                                            <td><strong class="">Grado:</strong></td>
-                                            <td>{!! Form::text('grado', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true']) !!}
 
-                                                <a href="#" id="clickable"> <i id=" " class="fa fa-pencil"></i></a>
-
-                                            </td>
-                                        </tr>
                                         <tr>
                                             <td><strong class="">Sector-Actividad</strong></td>
                                             <td>
@@ -358,8 +356,46 @@
 
                                         </tr>
 
+                                        <tr>
+                                            <td><strong class=""> Fecha de Inicio</strong> </td>
+                                            <td><span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
+                                                <div class="form-group">
+                                                    {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY')) !!}
+                                                </div>
 
-                                        <input class="field" name="old_password"  id="old_password" type="hidden" value="{{$user->password}}">
+
+
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td> <strong class="">Fecha de Finalizacion </strong></td>
+                                            <td><span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
+                                                <div class="form-group">
+                                                    {!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}
+                                                </div>
+
+                                                {!! Form::label('text', 'En curso') !!}
+
+                                                {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso' ,"style"=>'height:auto;'])}}
+
+
+                                            </td>
+                                        </tr>
+
+                                        {{--</tr>--}}
+                                {{--<div class='col-md-5'>--}}
+                                    {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
+
+                                    {{--<div class="input-group">--}}
+                                        {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
+                                        {{--<div class="form-group">--}}
+
+
+                                        {{--</div>--}}
+
+                                    {{--</div>--}}
+
 
 
                                         </tbody>
@@ -382,68 +418,7 @@
 
                     </div>
                     <div class="panel-footer">
-                        <div class='col-md-5'>
-                            <label for="Fecha de  Inicio" class="cols-sm-2 control-label">Fecha de Inicio</label>
-
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
-                                <div class="form-group">
-                                    {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY')) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class='col-md-5'>
-                            <label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>
-
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
-                                <div class="form-group">
-                                    {!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}
-
-
-                                </div>
-
-                            </div>
-                            {!! Form::label('text', 'En curso') !!}
-
-                            {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}
-
-                        </div>
-
-                        {{--<table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">--}}
-                            {{--@if(isset($curso))--}}
-                                {{--<thead>--}}
-                                {{--<tr>--}}
-                                    {{--<th>Curso</th>--}}
-                                    {{--<th>Asignatura</th>--}}
-                                    {{--<th>Seleccionar</th>--}}
-                                {{--</tr>--}}
-                                {{--</thead>--}}
-
-                                {{--<tbody id="clickable">--}}
-                                {{--<div class="form-group">--}}
-                                    {{--{!! Form::label('text', 'Curso Académico') !!}--}}
-                                    {{--{{ Form::select('', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], $year,--}}
-                                    {{--['aria-controls'=>'asignaturas','class' => 'form-control input-sm','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}--}}
-
-                                {{--</div>--}}
-
-                                {{--@if(!empty($curso->asignaturas))--}}
-                                    {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
-                                    {{--@foreach (json_decode($asignaturas,true) as $asignatura)--}}
-                                        {{--<tr>--}}
-                                            {{--<td>{{$curso->curso}}</td>--}}
-                                            {{--<td id="asignatura">{!!  print_r($asignatura)[0] !!}</td>--}}
-                                            {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
-                                                                     {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
-                                        {{--</tr>--}}
-
-                                    {{--@endforeach--}}
-                                {{--@endif--}}
-                                {{--@endif--}}
-                                {{--</tbody>--}}
-
-                        {{--</table>--}}
+                        <
 
                         <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
                            class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
@@ -462,45 +437,7 @@
 
         <div id="push"></div>
     </div>
-    <footer id="footer">
-        <div class="row-fluid">
-            <div class="span3">
-                <p>
-                    <a href="http://twitter.com/Bootply" rel="nofollow" title="Bootply on Twitter" target="ext">Twitter</a><br>
-                    <a href="https://plus.google.com/+Bootply" rel="publisher">Google+</a><br>
-                    <a href="http://facebook.com/Bootply" rel="nofollow" title="Bootply on Facebook" target="ext">Facebook</a><br>
-                    <a href="https://github.com/iatek/bootply" title="Bootply on GitHub" target="ext">GitHub</a><br>
-                </p>
-            </div>
-            <div class="span3">
-                <p>
-                    <a data-toggle="" role="button" href="">Contact Us</a><br>
-                    <a href="/tags">Tags</a><br>
-                    <a href="/bootstrap-community">Community</a><br>
-                    <a href="/upgrade">Upgrade</a><br>
-                </p>
-            </div>
-            <div class="span3">
-                <p>
-                    <a href="http://www.bootbundle.com" target="ext" rel="nofollow">BootBundle</a><br>
-                    <a href="https://bootstrapbay.com/?ref=skelly" target="_ext" rel="nofollow"
-                       title="Premium Bootstrap themes">Bootstrap Themes</a><br>
-                    <a href="http://www.bootstrapzero.com" target="_ext" rel="nofollow"
-                       title="Free Bootstrap templates">BootstrapZero</a><br>
-                    <a href="http://upgrade-bootstrap.bootply.com/">2.x Upgrade Tool</a><br>
-                </p>
-            </div>
-            <div class="span3">
-                    <span class="pull-right">©Copyright 2013-2014 <a href="/"
-                                                                     title="The Bootstrap Playground">Bootply</a> | <a
-                                href="/about#privacy">Privacy</a></span>
-                <a href="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" class="btn iframe-btn" type="button">Open Filemanager</a>
 
-            </div>
-        </div>
-    </footer>
-
-    </div>
 
 
     <div class="modal fade" id="myModal" role="dialog">
@@ -521,11 +458,25 @@
     </div>
     </div><!-- /#wrapper -->
 
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+    <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>
+    <script src="/js/tinymce/js/tinymce/langs/es.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-@endsection
 
+@endsection
+<script>      $(function() {
+        $('.chosen-select').chosen();
+        $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
+    });
+</script>
 <script>
+
     $(document).ready(function () {
         $.datepicker.setDefaults($.datepicker.regional['es']);
         $(function () {
@@ -564,39 +515,14 @@
 
 
         })
-        $('input').on('change',function () {
+        $('#mitabla input').on('change',function () {
             $('#boton').removeClass('btn btn-info disabled');
             $('#boton').addClass('btn btn-success');
             document.getElementById('boton').disabled = false;
 
 
         })
-        var tr = $('#clickable');
 
-        $('#clickable').on('click', function () {
-
-
-            $('#first_name').attr('readonly', false).focus().css("background-color", "#bfe1e847");
-        });
-        $('#clickable1').on('click', function () {
-            $('#last_name').attr('readonly', false).focus().css("background-color", "#bfe1e847");
-            ;
-
-
-        });
-
-        $('#clickable2').on('click', function () {
-
-            $('#email').attr('readonly', false).focus().css("background-color", "#bfe1e847");
-            ;
-        });
-        $('#clickable3').on('click', function () {
-
-            $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
-
-            $('#password_confirmation').attr('readonly', false).css("background-color", "#bfe1e847");
-
-        });
     });
 </script>
 <script>function responsive_filemanager_callback(field_id){
@@ -613,6 +539,7 @@
 
 
 </script>
+
 <script>
 
 
@@ -670,7 +597,22 @@
             opts[i].value = opts[i].text;
 
             // $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
+            $('.en_curso').change(function(ev) {
+                if ( $(this).is(':checked') ) {
+                    document.getElementById("endDate").disabled = true;
+                }
+                else {
 
+                    $("#endDate").datepicker({
+                        inline : false
+
+                    })
+                    $( "#endDate" ).datepicker("refresh");
+
+                    document.getElementById("endDate").disabled = false;
+                }
+
+            });
 
         }
 
@@ -704,96 +646,10 @@
 
         });
 
-
-
-        var table=$('#asignaturas').DataTable({
-            "scrollX": false,
-            "bPaginate": false,
-            "bLengthChange": false,
-            "bFilter": false,
-            "bInfo": false,
-            "bAutoWidth": true,
-            "language": {
-                "lengthMenu": "Ver _MENU_ Número de registros por página",
-                "zeroRecords": "No encontrado",
-                "info": "Página  _PAGE_ de  _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-
-                "infoFiltered": "(filtered from _MAX_ Total de usuarios)",
-                "paginate": {
-                    "first":      "Primero",
-                    "previous":   "Anterior",
-                    "next":       "Siguiente",
-                    "last":       "Último"
-                },
-                "search":         "Buscar &nbsp;:",
-
-            },
-            "columnDefs": [ {
-                "targets": 1,
-                "searchable": true
-            } ]
-        });
-
-
-        var x = document.getElementById("cursoSelect").selectedIndex;
-        var curso=(document.getElementsByTagName("option")[x].value);
-        $('#asignaturas').on('click', 'td a ', function (e) {
-            e.preventDefault();
-            var table = $('#asignaturas').DataTable();
-
-            var data = table.row($(this).closest('tr')).data()
-            var x = document.getElementById("cursoSelect").selectedIndex;
-            var curso=(document.getElementsByTagName("option")[x].value);
-
-            $.ajax({
-                type:"get",
-                url     : "{{ route('eliminarAsignatura') }}/"+data[1]+"/"+ data[0],
-                encode  : true,
-                data: {
-                    asignatura: data[1],
-                    year:data[0]
-                },
-                success: function(response){
-                    window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;
-
-                    console.log(response);
-
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
-
-
-
-        });
     });
 
-    // function seleccionar() {
-    //
-    //     var table = $('#asignaturas').DataTable();
-    //     var data = table.row($(this).closest('td')).data()
-    //     alert(data['Curso']);
-    // }
     </script>
 <script>
-    $('.en_curso').change(function(ev) {
-        if ( $(this).is(':checked') ) {
-            document.getElementById("endDate").disabled = true;
-        }
-        else {
 
-            $("#endDate").datepicker({
-                inline : false
-
-            })
-            $( "#endDate" ).datepicker("refresh");
-
-            document.getElementById("endDate").disabled = false;
-        }
-
-    });
 </script>
 

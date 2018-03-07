@@ -348,15 +348,6 @@
 
 
 
-        // document.getElementById('boton').disabled = true;
-        // $('input').on('change',function () {
-        //     $('#boton').removeClass('btn btn-info disabled');
-        //     $('#boton').addClass('btn btn-success');
-        //     document.getElementById('boton').disabled = false;
-        //
-        //
-        // })
-
 
         $.datepicker.setDefaults($.datepicker.regional['es']);
         $(function () {
