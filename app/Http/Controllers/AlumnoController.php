@@ -116,14 +116,14 @@ class AlumnoController extends Controller
         if(!empty(Input::get('asignatura'))){
             if (!empty($asignaturas)  ){
             echo "aaaa";
-            $asignaturas = json_decode($cursoAlumno->asignaturas);
+            $asignaturas = json_decode($cursoAlumno->asignaturas,false);
              $resultado = array_merge($inputAsignaturas, $asignaturas);
 
-           $cursoAlumno->asignaturas = json_encode($resultado);
+           $cursoAlumno->asignaturas = json_encode($resultado,false);
     }
             else{
 
-                $cursoAlumno->asignaturas = json_encode($inputAsignaturas);
+                $cursoAlumno->asignaturas = json_encode($inputAsignaturas,false);
 
 
             }
@@ -151,22 +151,28 @@ class AlumnoController extends Controller
 
 
         $user=Sentinel::getUser();
+        $inputAsignaturas = array();
 
         $curso= $user->getDatosAcademicos()->where('curso',$year)->first();
-        $asignaturas=json_decode($curso->asignaturas,true);
+        $asignaturas=json_decode($curso->asignaturas,false);
 //        $key=array_search($asignatura,$asignaturas);
 //            unset($asignaturas[$asignatura]);
-//        foreach (array_keys($asignaturas, $asignatura) as $key) {
-//            unset($asignaturas[$key]);
-//
-//
-//        }
-        if (($key = array_search($asignatura, $asignaturas)) !== false) {
-            unset($asignaturas[$key]);
-        }
 
-            $curso->asignaturas=json_encode($asignaturas,false);
-            $curso->save();
+        foreach (array_keys($asignaturas, $asignatura) as $key) {
+            unset($asignaturas[$key]);
+
+
+        }
+        $resultado = array_merge($inputAsignaturas, $asignaturas);
+
+        $curso->asignaturas = json_encode($resultado,false);
+//        if (($key = array_search($asignatura, $asignaturas)) !== false) {
+//            unset($asignaturas[$key]);
+//        }
+//            $curso->asignaturas=json_encode($asignaturas);
+
+        $curso->save();
+//        return response(var_dump(  $curso->asignaturas));
 
         return Redirect::back();
     }
@@ -294,22 +300,26 @@ class AlumnoController extends Controller
 
         public function invitarUsuario(Request $request){
             $usuario = Sentinel::findById(Sentinel::getUser()->id);
-
-
-
             $credentials = [
                 'email'    => Input::get('email'),
                 'password' => Input::get('password'),
             ];
-
             $rol=$request['roles'];
             $role=$rol[0];
-
             $invitado = Sentinel::register($request->all());
             $invitado->roles()->sync([$role]);
-//            $invitado->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
             $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
+            if($role=='4'){
+                $invitado->nivel_acceso='2';
+            }
+            elseif($role=='3'){
 
+                $invitado->nivel_acceso='3';
+            }
+            else{
+
+                $invitado->nivel_acceso='4';
+            }
             $invitado->save();
 
 
@@ -328,6 +338,7 @@ class AlumnoController extends Controller
             $invitado2=new Invitados();
             $invitado2->invitado_id=$invitado->id;
             $invitado2->alumno_id=$usuario->id;
+            $invitado2->nivel_acceso=$invitado->nivel_acceso;
             $invitado2->save();
 
             if($invitado){

@@ -23,7 +23,7 @@ class CreateHechos extends Migration
             $table->string('proposito')->nullable();
             $table->string('evidencia')->nullable();
             $table->string('etiqueta')->nullable();
-            $table->string('nivel_autorizacion')->nullable();
+            $table->string('nivel_acceso')->default('1');
             $table->string('hechos_relacionados')->nullable();
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
@@ -77,7 +77,7 @@ class CreateHechos extends Migration
             $table->increments('id');
             $table->integer('invitado_id');
             $table->integer('alumno_id');
-
+            $table->string('nivel_acceso');
 
             $table->timestamps();
 

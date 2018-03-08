@@ -51,8 +51,9 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
         'last_name',
         'first_name',
         'permissions',
+        'nivel_acceso',
         'remember_token',
-        'otros_datos'=>'array'
+        'otros_datos'=>'array',
     ];
 
     /**

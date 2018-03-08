@@ -18,7 +18,7 @@ class CursoAlumno extends Model
         'user_id',
         'curso',
         'grado',
-        'asignaturas'=>'array',
+        'asignaturas'=>'object',
 
     ];//
 

@@ -56,7 +56,7 @@ class UsersTableSeeder extends Seeder
             'first_name' =>('Antonio'),
             'last_name'=> ('Fernandez'),
             'permissions'=> ['Administrator'],
-
+            'nivel_acceso'=>('1')
         ]);
 
 
@@ -73,6 +73,7 @@ class UsersTableSeeder extends Seeder
             'first_name' =>('Antonio'),
             'last_name'=> ('Fernandez'),
             'permissions'=> ['Administrator'],
+            'nivel_acceso'=>('1')
 
 
     ]);

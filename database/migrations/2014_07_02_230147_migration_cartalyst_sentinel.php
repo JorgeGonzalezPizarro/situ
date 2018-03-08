@@ -106,7 +106,7 @@ class MigrationCartalystSentinel extends Migration
             $table->json('otros_datos')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
+            $table->string('nivel_acceso')->nullable();
             $table->engine = 'InnoDB';
             $table->unique('email');
         });
@@ -125,7 +125,7 @@ Schema::create('alumno_curso', function (Blueprint $table) {
     $table->string('grado')->nullable();
 //    $table->unique(['user_id', 'curso']);
 
-    $table->json('asignaturas')->nullable();
+    $table->string('asignaturas')->nullable();
 
     $table->softDeletes();
     $table->timestamps();

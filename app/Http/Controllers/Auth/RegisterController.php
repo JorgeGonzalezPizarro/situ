@@ -92,7 +92,7 @@ class RegisterController extends Controller
 //        $user->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
         $user->permissions = [(Sentinel::findRoleById($role)->name)];
         $user->otros_datos=json_encode($otros_datos);
-
+        $user->nivel_acceso='1';
 
         $user->save();
         $cursoAlumno=new CursoAlumno();
