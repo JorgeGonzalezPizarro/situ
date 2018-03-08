@@ -333,7 +333,7 @@
                                         <tr>
                                             <td><strong class="">Ubicacion</strong></td>
                                             <td>
-                                                <select class="selectpicker dropup" name="ubicacioN" id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
+                                                <select class="selectpicker dropup" name="ubicacion" id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
 
                                                 </select>
                                             </td>
@@ -343,13 +343,19 @@
                                             <td><strong class="">Cargo</strong></td>
                                             <td>{!! Form::text('cargo',"", ['id'=>'cargo','class' => 'misDatos','required'=>'true' ]) !!}
 
-
-
-
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="">Empresa</strong></td>
+                                            <td>{!! Form::text('empresa',"", ['id'=>'empresa','class' => 'misDatos','required'=>'true' ]) !!}
 
                                             </td>
                                         </tr>
-
+                                        <tr>
+                                            <td><strong class="">Descripción</strong></td>
+                                            <td><textarea  class="form-control" rows="4" cols="50" placeholder="Añade algun detalle..."></textarea>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             @if (Session::has('error'))
                                                 <div class="alert alert-danger">{{ Session::get('error') }}</div>
@@ -362,26 +368,33 @@
 
                                         <tr>
                                             <td><strong class=""> Fecha de Inicio</strong> </td>
-                                            <td><span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
+                                         <td>  <div class="input-group">
+                                                <span   class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
                                                 <div class="form-group">
-                                                    {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY')) !!}
+                                                    {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY','style'=>'    margin-bottom: 0px !important;')) !!}
                                                 </div>
+                                                    {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
+                                                    {{--<div class="form-group">--}}
+                                                        {{--{!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}--}}
 
 
+                                                    </div>
+                                                {{--</div>--}}
+                                         </td>
 
 
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td> <strong class="">Fecha de Finalizacion </strong></td>
-                                            <td><span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
-                                                <div class="form-group">
-                                                    {!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}
+                                            <td>  <div class="input-group">
+                                                    <span   class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
+                                                    <div class="form-group">
+                                                    {!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY' , 'style'=>'    margin-bottom: 0px !important;')) !!}
                                                 </div>
-
+                                                </div>
                                                 {!! Form::label('text', 'En curso') !!}
 
-                                                {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso' ,"style"=>'height:auto;'])}}
+                                                {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'form-check-input' ,"style"=>'height:auto;'])}}
 
 
                                             </td>

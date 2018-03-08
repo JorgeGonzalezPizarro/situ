@@ -76,6 +76,10 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
 
     }
 
+    public function getEtiquetas(){
+        return $this->hasMany('App\Etiqueta','user_id', 'id');
+
+    }
 
 
     //Change Password

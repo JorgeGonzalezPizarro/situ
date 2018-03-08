@@ -139,13 +139,14 @@ Schema::create('alumno_curso', function (Blueprint $table) {
 Schema::create('alumno_laboral', function (Blueprint $table) {
     $table->increments('id');
     $table->integer('user_id')->unsigned();
-    $table->integer('sector')->nullable();
+    $table->string('sector')->nullable();
+    $table->string('ubicacion')->nullable();
     $table->integer('cargo')->nullable();
     $table->string('empresa')->nullable();
-    $table->string('ubicacion')->nullable();
     $table->timestamp('fecha_inicio')->nullable();
     $table->timestamp('fecha_fin')->nullable();
     $table->string('descripcion')->nullable();
+    $table->string('actual')->nullable();
 
 
     $table->softDeletes();

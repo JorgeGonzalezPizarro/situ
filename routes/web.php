@@ -56,8 +56,12 @@ Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}','AlumnoController@alumno
 Route::post('Alumno/alumnoDatos/datosAcademicos','AlumnoController@actualizarMisDatosAcademicos')->name('actualizarDatosAcademicos');
 Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}/{asignatura?}','AlumnoController@eliminarAsignatura')->name('eliminarAsignatura');
 Route::get('Alumno/alumnoDatos/datosLaboral/{year?}/{asignatura?}','AlumnoController@alumnoDatosLaborales')->name('misDatosLaborales');
+Route::post('Alumno/alumnoDatos/datosLaboral/','AlumnoController@actualizarMisDatosLaborales')->name('actualizarDatosLaboral');
 Route::get('Alumno/invitar','AlumnoController@showInvitarUsuario')->name('invitar');
 Route::post('Alumno/invitar','AlumnoController@invitarUsuario')->name('invitar');
+Route::get('Alumno/crearEtiqueta','AlumnoController@showCrearCategoria')->name('crearEtiquetaAlumno');
+
+Route::post('Alumno/crearEtiqueta','AlumnoController@crearNuevaEtiqueta')->name('guardarEtiquetaAlumno');
 
 //Route::get('Alumno/AlumnoDatos/datosAcademicos/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 

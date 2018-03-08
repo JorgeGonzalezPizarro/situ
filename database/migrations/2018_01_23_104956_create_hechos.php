@@ -36,6 +36,7 @@ class CreateHechos extends Migration
 
         Schema::create('etiqueta', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->nullable();
             $table->string('nombre');
             $table->string('slug')->unique();
             $table->string('color')->nullable();

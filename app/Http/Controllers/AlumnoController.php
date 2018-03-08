@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Invitados;
+use App\Laboral;
 use DB;
+use Carbon;
 use Mail;
 use App\User;
 use App\Role;
@@ -66,8 +68,10 @@ class AlumnoController extends Controller
 
         $user = Sentinel::getUser();
         $otros_datos=json_decode($user->otros_datos,true);
-
-        return view('Alumno.datos.alumnoDatos')->with('user',$user)->with('otros_datos', $otros_datos);
+        $etiquetas=$user->getEtiquetas()->get()->all();
+        $etiquetasPublic=Etiqueta::where('user_id',null)->get()->all();
+        return view('Alumno.datos.alumnoDatos')->with('user',$user)
+            ->with('etiquetas',$etiquetas)->with('etiquetasPublic',$etiquetasPublic)->with('otros_datos', $otros_datos);
     }
     public function alumnoDatosAcademicos ($year=null){
 
@@ -240,6 +244,7 @@ class AlumnoController extends Controller
         $curso->all();
         $etiqueta=Etiqueta::pluck('slug');
         $categoria= Categorias::where('categoria', $categoria)->get()->first();
+        $otros_datos = json_decode($usuario->otros_datos, true);
 
         if ($categoria->categoria == 'Calificaciones') {
             return view('hechos.calificaciones')->with('user', Sentinel::getUser())
@@ -249,6 +254,13 @@ class AlumnoController extends Controller
         if ($categoria->categoria == 'Trabajo Académico') {
             return view('hechos.trabajoAcademico')->with('user', Sentinel::getUser())
                 ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta);
+//            return response($categorias->id);
+
+        }
+        if ($categoria->categoria == 'Recuerdos') {
+            return view('hechos.recuerdos')->with('user', Sentinel::getUser())
+                ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta)
+                ->with('otros_datos',$otros_datos);
 //            return response($categorias->id);
 
         }
@@ -354,6 +366,57 @@ class AlumnoController extends Controller
             ->with('otros_datos', $otros_datos)->with('year',$year);
 
     }
+    public function actualizarMisDatosLaborales (){
 
+        $user=Sentinel::getUser();
+        $alumnoLaboral=new Laboral();
+        $alumnoLaboral->user_id=$user->id;
+        $alumnoLaboral->sector=Input::get('sector');
+        $alumnoLaboral->ubicacion=Input::get('ubicacion');
+        $alumnoLaboral->empresa=Input::get('empresa');
+        $alumnoLaboral->cargo=Input::get('cargo');
+
+        $alumnoLaboral->descripcion=Input::get('descripcion');
+        $format = 'm/d/Y';
+        $alumnoLaboral->fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
+
+        if(Input::get('endDate')){
+
+            $alumnoLaboral->fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
+            $alumnoLaboral->actual = "0";
+
+        }
+        else{
+            $alumnoLaboral->actual = "1";
+        }
+
+            $alumnoLaboral->save();
+            return Redirect::back();
+
+
+    }
+
+    public function showCrearCategoria(Request $request){
+
+        $etiqueta=Etiqueta::pluck('slug');
+
+        return view('Alumno.crearEtiqueta')->with('etiqueta',$etiqueta);
+    }
+
+
+
+    public function crearNuevaEtiqueta(Request $request){
+
+        $user=Sentinel::getUser();
+
+        $etiqueta=new Etiqueta();
+        $etiqueta->user_id=$user->id;
+        $etiqueta->nombre=Input::get('nombre');
+        $etiqueta->slug=Input::get('slug');
+        $etiqueta->save();
+
+
+        return redirect()->back();
+    }
 
 }

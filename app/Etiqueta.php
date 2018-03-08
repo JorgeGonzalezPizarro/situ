@@ -9,7 +9,7 @@ class Etiqueta extends Model
     public $table = "etiqueta";
 
     protected $fillable = [
-        'nombre' , 'slug','color'
+       'user_id','nombre' , 'slug','color'
 
     ];
 
