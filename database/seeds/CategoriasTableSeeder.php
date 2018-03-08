@@ -20,7 +20,7 @@ class CategoriasTableSeeder extends Seeder
      */
     public function run()
     {
-         $categoria = ['Trabajo Académico', 'Calificaciones', 'Frases guía','Reflexiones','Portafolios profesional','Proyectos de investigación'];
+         $categoria = ['Trabajo Académico', 'Calificaciones','Frases guía','Reflexiones','Portafolios profesional','Proyectos de investigación', 'Recuerdos'];
 
         for ($i=0;$i<count($categoria);$i++){
             DB::table('categorias')->insert([

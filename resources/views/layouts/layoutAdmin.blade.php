@@ -143,15 +143,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand pull-left" href="{{ route('home') }}">Back to site</a>
-        </div><!-- /.navbar-header -->
+
 
         <!-- Top Menu Items -->
         <div class="collapse navbar-collapse" style="  padding:15px !important;
@@ -228,9 +220,7 @@
                     <li class="">
                         <a href="{{ route('alumnoDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
                     </li>
-                    <li class="">
-                        <a href="{{ route('crear') }}"><i class="fa fa-fw fa-dashboard"></i> Nuevo Hecho</a>
-                    </li>
+
                     @foreach($categorias as $categoria)
                         <li class="">
                             <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
