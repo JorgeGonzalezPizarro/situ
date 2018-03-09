@@ -86,13 +86,26 @@ class RegisterController extends Controller
          $otros_datos=array('facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
         $rol=$request['roles'];
         $role=$rol[0];
-
+//        return response($role);
         $user = Sentinel::register($request->all());
         $user->roles()->sync([$role]);
 //        $user->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
         $user->permissions = [(Sentinel::findRoleById($role)->name)];
         $user->otros_datos=json_encode($otros_datos);
-        $user->nivel_acceso='1';
+//        $user->nivel_acceso='1';
+
+        if($role=="2"){
+          $user->nivel_acceso='1';
+        }
+        if($role=='4'){
+            $user->nivel_acceso='2';
+        }
+        //PROFESOR . A CURRICULUM
+
+        elseif($role=='3'){
+
+            $user->nivel_acceso='3';
+        }
 
         $user->save();
         $cursoAlumno=new CursoAlumno();

@@ -97,7 +97,7 @@
 
                                     <div class="form-group" style="">
                                         {!! Form::label('Etiquetas', 'Link tags') !!}
-                                        {!! Form::select('etiqueta', $etiqueta, NULL, ['class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                                        {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
                                     </div>
                                     <div class='col-md-12' style="    margin-top: 30px;">
                                         <div class="form-group">
@@ -236,6 +236,16 @@
 <script>
 
     $(document).ready(function () {
+
+        var sel = document.getElementById('etiquetas');
+        var opts = sel.options;
+
+
+        for (var i=0;i<opts.length;i++) {
+            opts[i].value = opts[i].text;
+        }
+        // $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
+
 
 
         var categoria=document.getElementById("categoria").innerHTML;
@@ -419,5 +429,14 @@
 
         });
     </script>
+    <script>
 
+        $(document).ready(function() {
+
+
+
+
+        });
+
+    </script>
 @stop

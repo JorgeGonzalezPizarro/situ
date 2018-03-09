@@ -14,11 +14,7 @@ class Etiqueta extends Model
     ];
 
 
-    public function getHecho(){
 
-        return $this->belongsToMany('App\hechos','hecho_etiqueta');
-
-    }
 }
 
 

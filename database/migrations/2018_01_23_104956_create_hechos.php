@@ -23,7 +23,7 @@ class CreateHechos extends Migration
             $table->string('proposito')->nullable();
             $table->string('evidencia')->nullable();
             $table->string('etiqueta')->nullable();
-            $table->string('nivel_acceso')->default('1');
+            $table->string('nivel_acceso')->default('1')->nullable();
             $table->string('hechos_relacionados')->nullable();
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
@@ -47,7 +47,7 @@ class CreateHechos extends Migration
         Schema::create('hecho_etiqueta', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('hechos_id')->unsigned()->index();
-            $table->integer('etiqueta_id')->unsigned()->index();
+            $table->string('etiqueta_id')->nullable();
 
         });
 

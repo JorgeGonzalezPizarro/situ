@@ -30,9 +30,9 @@ class EtiquetasTableSeeder extends Seeder
 
 
 
-        $slug = ['UFV', 'Proyecto', 'Voluntariado','Evento'];
+        $slug = ['UFV', 'Proyecto', 'Voluntariado','Evento','CV'];
 
-        $nombre = ['UFV', 'Proyecto', 'Voluntariado','Evento'];
+        $nombre = ['UFV', 'Proyecto', 'Voluntariado','Evento','CV'];
         for ($i=0;$i<count($nombre);$i++){
             DB::table('etiqueta')->insert([
 

@@ -8,23 +8,30 @@ class hechos extends Model
 {
     protected $categoria;
     protected static $categoriaModel = 'App\Categorias';
-
+    protected static $etiquetasModel = 'App\hecho_etiqueta';
 
     protected $fillable = [ 'user_id' ,
         'categoria_id','titulo_hecho', 'curso', 'contenido', 'proposito', 'evidencia',
-        'nivel_autorizacion', 'hechos_relacionados', 'fecha_inicio','fecha_fin','proposito', 'evidencia',
+        'nivel_acceso', 'hechos_relacionados', 'fecha_inicio','fecha_fin','proposito', 'evidencia',
         'ruta_imagen',
     ];
     public $timestamps = true;
 
 
-    public function getEtiqueta()
-    {
+//    public function getEtiqueta()
+//    {
+//        return $this->belongsTo(static::$etiquetasModel,'hecho_etiqueta');
+//
+////        return $this->hasOne('App\Etiqueta', 'hechos_id','id');
+//
+//    }
+    public   function getEtiqueta() {
 
-        return $this->belongsToMany('App\Etiqueta', 'hecho_etiqueta');
+        return $this->belongsTo('App\hecho_etiqueta','id','hechos_id');
+
+
 
     }
-
 
         public function user() {
 

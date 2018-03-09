@@ -40,6 +40,7 @@ class AlumnoController extends Controller
 //        console.log($user->getHechos());
         $categorias = Categorias::all();
         $hechos=$user->getHechos()->get();
+//        $etiquetas=Etiqueta::where
         view()->share('categorias',$categorias);
         return view('Alumno.alumnoDashboard')->with('hechos',$hechos)->with('categorias',$categorias);
 
@@ -248,7 +249,8 @@ class AlumnoController extends Controller
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
         $curso = $usuario->getDatosAcademicos()->pluck('curso');
         $curso->all();
-        $etiqueta=Etiqueta::pluck('slug');
+        $etiqueta=Etiqueta::pluck('slug')->sortByDesc('id');
+
         $categoria= Categorias::where('categoria', $categoria)->get()->first();
         $otros_datos = json_decode($usuario->otros_datos, true);
 
@@ -309,9 +311,12 @@ class AlumnoController extends Controller
             $invitado = Sentinel::register($request->all());
             $invitado->roles()->sync([$role]);
             $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
+            //INVITADO . A LOS HECHOS QUE QUIERA EL USUARIO
             if($role=='4'){
                 $invitado->nivel_acceso='2';
             }
+            //PROFESOR . A CURRICULUM
+
             elseif($role=='3'){
 
                 $invitado->nivel_acceso='3';

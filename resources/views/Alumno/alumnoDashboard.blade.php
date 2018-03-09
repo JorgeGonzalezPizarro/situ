@@ -31,6 +31,7 @@
                     <th>Contenido</th>
                     <th>Fecha del hecho</th>
                     <th>Categoria</th>
+                    <th>Etiquetas</th>
 
                 </tr>
                 </thead>
@@ -46,6 +47,10 @@
                         <td>{!! \Illuminate\Support\Str::words($hecho->contenido,10,'...' )!!}</td>
                         <td>{{$hecho->fecha_inicio}}</td>
                         <td>{{$hecho->getCategoria()->get()->first()->categoria }}</td>
+                        <td> @foreach ( $hecho->getEtiqueta()->get() as $etiq)
+
+                       {!! $etiq->etiqueta_id .' | '!!}
+                           @endforeach</td>
                     </tr>
                 @endforeach
 

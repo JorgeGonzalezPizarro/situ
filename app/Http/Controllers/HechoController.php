@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Calificaciones;
 use App\Etiqueta;
+use App\hecho_etiqueta;
 use Redirect;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controllers;
@@ -40,13 +41,20 @@ class HechoController extends Controller
                 $hecho->proposito = Input::get('proposito');
                 $hecho->evidencia = Input::get('evidencia');
 //                $hecho -> etiqueta= Input::get('etiqueta');
-                $hecho->nivel_autorizacion = Input::get('nivel_autorizacion');
                 $hecho->hechos_relacionados = Input::get('hechos_relacionados');
                 $format = 'd/m/Y';
                 $fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
                 $hecho->fecha_inicio = $fecha_inicio;
                 $hecho->publico = Input::get('acceso');
 
+                if(Input::get('acceso')=='publico'){
+                    $hecho->nivel_acceso = "2";
+
+                }else{
+
+                    $hecho->nivel_acceso = "1";
+
+                }
                 if (isset($request->endDate)) {
 
                 $fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
@@ -121,9 +129,10 @@ class HechoController extends Controller
                 $hecho1= hechos::find($hecho->id);
                 if(!empty($etiqueta)) {
                     foreach ($etiqueta as $etiquet) {
-
-                        $hecho->getEtiqueta()->attach($etiquet);
-
+                    $etiqueta1=new hecho_etiqueta();
+                        $etiqueta1->hechos_id=$hecho->id;
+                        $etiqueta1->etiqueta_id=$etiquet;
+                        $etiqueta1->save();
 
                     }
                 }
@@ -147,7 +156,7 @@ class HechoController extends Controller
             $hecho->titulo_hecho ='Frase guia';
             $hecho->categoria_id = Input::get('categoria_id');
             $hecho->contenido = Input::get('contenido');
-            $hecho->nivel_autorizacion = Input::get('nivel_autorizacion');
+            $hecho->nivel_acceso = Input::get('nivel_acceso');
             $hecho->hechos_relacionados = Input::get('hechos_relacionados');
             $format = 'd/m/Y';
         $dt = new DateTime();
