@@ -1,23 +1,44 @@
 @extends('layouts.layoutFront')
+<link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
 
 @section('content')
+    <!-- Page Content -->
     <div class="container">
+    @foreach($hechos as $hecho)
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Dashboard</div>
 
-                    <div class="panel-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
 
-                        You are logged in!
-                    </div>
-                </div>
+                <!-- Title -->
+                <h1 class="mt-4">{{$hecho->titulo_hecho}}</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by
+                    <a href="#">Start Bootstrap</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p>{{$hecho->fecha_inicio}}</p>
+
+                <hr>
+
+                <!-- Preview Image -->
+
+                <hr>
+
+                <!-- Post Content -->
+                {!! $hecho->contenido !!}
+
+
             </div>
-        </div>
+
+
     </div>
+        @endforeach
+    </div>
+    <!-- /.container -->
 @endsection

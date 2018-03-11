@@ -141,7 +141,7 @@ Schema::create('alumno_laboral', function (Blueprint $table) {
     $table->integer('user_id')->unsigned();
     $table->string('sector')->nullable();
     $table->string('ubicacion')->nullable();
-    $table->integer('cargo')->nullable();
+    $table->string('cargo')->nullable();
     $table->string('empresa')->nullable();
     $table->timestamp('fecha_inicio')->nullable();
     $table->timestamp('fecha_fin')->nullable();

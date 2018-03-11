@@ -157,7 +157,7 @@
 
                                 <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
                                 <div class="avatar" style="    width: 180px; float: left; margin-right: 5px;">
-                                    <img style=" width: 50px;height: 50px; float: left;"  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+                                    <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
                                     <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
 
                                 </div>
@@ -257,7 +257,7 @@
 
 
     <!-- DataTables JavaScript -->
-{{--<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>--}}
+</div>{{--<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>--}}
 {{--<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/js/jquery.dataTables.min.js"></script>-->--}}
 {{--<script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>--}}
 {{--<script src="{{ asset('dataTables/js/dataTables.bootstrap.min.js') }}"></script>--}}

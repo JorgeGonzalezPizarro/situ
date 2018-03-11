@@ -13,10 +13,12 @@
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+    <script src="/js/jquery-3.3.1.min.js"></script>
 
-<!-- jQuery library -->
+    <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <!-- Latest compiled JavaScript -->
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -41,8 +43,14 @@
     {{--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css">--}}
 
     {{--<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">--}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
-<!-- Bootstrap Core CSS -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <!-- Bootstrap Core CSS -->
     <link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
@@ -135,47 +143,25 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand pull-left" href="{{ route('home') }}">Back to site</a>
-        </div><!-- /.navbar-header -->
+
 
         <!-- Top Menu Items -->
-        <div class="collapse navbar-collapse" style="  padding:15px !important;" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" style="  padding:15px !important;
+" id="bs-example-navbar-collapse-1">
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
-                            <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
+                            @if (Sentinel::check())
 
-                        @if (Sentinel::check() )
-                                    @if( !empty($otros_datos))
-                                        <div class="avatar" style="    width: 180px; float: left; margin-right: 5px;">
+                                <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
+                                <div class="avatar" style="    width: 180px; float: left; margin-right: 5px;">
+                                    <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+                                    <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
 
-                                             <img style=" width: 50px;height: 50px; float: left;"  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-
-                                            <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
-                                        </div>
-
-                                    @else
-                                    <div>
-                                        <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
-                                    </div>
-
-                                        <div>
-                                            <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;" data-toggle="dropdown">
-                                                <span>{{$alumno}} </span><b class="caret"></b></a>
-                                        </div>
-                                    @endif
-
-
-                                @else
+                                </div>
+                            @else
                                 <a href="{{ route('login') }}">Login</a>
                             @endif
                             <ul class="dropdown-menu">
@@ -234,9 +220,7 @@
                     <li class="">
                         <a href="{{ route('alumnoDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
                     </li>
-                    <li class="">
-                        <a href="{{ route('crear') }}"><i class="fa fa-fw fa-dashboard"></i> Nuevo Hecho</a>
-                    </li>
+
                     @foreach($categorias as $categoria)
                         <li class="">
                             <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
@@ -248,7 +232,7 @@
         </div>
         <!-- /.navbar-collapse -->
     </nav>
-</div>
+
     <div id="page-wrapper">
 
         <div class="container-fluid">
@@ -273,7 +257,7 @@
 
 
     <!-- DataTables JavaScript -->
-{{--<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>--}}
+</div>{{--<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>--}}
 {{--<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/js/jquery.dataTables.min.js"></script>-->--}}
 {{--<script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>--}}
 {{--<script src="{{ asset('dataTables/js/dataTables.bootstrap.min.js') }}"></script>--}}

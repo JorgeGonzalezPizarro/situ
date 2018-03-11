@@ -34,7 +34,14 @@ class HechoController extends Controller
             else {
                 $hecho = new hechos();
                 $hecho->user_id = Sentinel::getUser()->id;
-                $hecho->titulo_hecho = Input::get('titulo_hecho');
+                if(empty(Input::get('titulo_hecho'))){
+                    $categoria=Categorias::where('id',Input::get('categoria_id'))->get()->first();
+                    $hecho->titulo_hecho=$categoria->categoria;
+
+                }else{
+                    $hecho->titulo_hecho = Input::get('titulo_hecho');
+
+                }
                 $hecho->categoria_id = Input::get('categoria_id');
                 $hecho->curso = Input::get('curso');
                 $hecho->contenido = Input::get('contenido');

@@ -37,4 +37,15 @@ class SituController extends Controller
         }
 
 
+        public function getHechosPublicos(){
+             $user=Sentinel::getUser();
+            $alumno=Invitados::where('invitado_id',$user->id)->get()->first();
+
+            $hechosPublicos=hechos::where('nivel_acceso','>=',$user->nivel_acceso)->get();
+//            return response($hechosPublicos);
+            return view('situ.index')->with('user',$user)->with('alumno',$alumno)
+                ->with('hechos',$hechosPublicos);
+
+}
+
 }

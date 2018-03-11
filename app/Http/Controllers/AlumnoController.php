@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Invitados;
 use App\Laboral;
 use DB;
+use App\hecho_etiqueta;
 use Carbon;
 use Mail;
 use App\User;
@@ -271,7 +272,20 @@ class AlumnoController extends Controller
                 ->with('otros_datos',$otros_datos);
 //            return response($categorias->id);
 
-        }
+        }if ($categoria->categoria == 'Portafolios profesional') {
+        return view('Alumno.datos.alumnoDatosLaboral')->with('user', Sentinel::getUser())
+            ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta)
+            ->with('otros_datos',$otros_datos);
+//            return response($categorias->id);
+
+    }if ($categoria->categoria == 'Frases guía') {
+            $hechos=hechos::where('categoria_id',3)->get();
+        return view('hechos.frasesGuia')->with('user', Sentinel::getUser())
+            ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta)
+            ->with('otros_datos',$otros_datos)->with('hechos',$hechos);
+//            return response($categorias->id);
+
+    }
         else{
             return "aa";
         }
@@ -301,6 +315,16 @@ class AlumnoController extends Controller
 
 
         public function invitarUsuario(Request $request){
+            $validation = Validator::make($request->all(), [
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+
+            ]);
+
+            if ($validation->fails()) {
+                return Redirect::back()->withErrors($validation)->withInput();
+            }
             $usuario = Sentinel::findById(Sentinel::getUser()->id);
             $credentials = [
                 'email'    => Input::get('email'),
@@ -311,6 +335,8 @@ class AlumnoController extends Controller
             $invitado = Sentinel::register($request->all());
             $invitado->roles()->sync([$role]);
             $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
+            $invitado->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
+
             //INVITADO . A LOS HECHOS QUE QUIERA EL USUARIO
             if($role=='4'){
                 $invitado->nivel_acceso='2';
@@ -407,7 +433,41 @@ class AlumnoController extends Controller
         }
 
             $alumnoLaboral->save();
-            return Redirect::back();
+
+
+
+        $hecho=new hechos();
+        $hecho->user_id=$user->id;
+        $hecho->titulo_hecho='Trabajo';
+        $hecho->categoria_id=5;
+        $hecho->curso='';
+        $hecho->contenido="";
+        $hecho->proposito="";
+        $hecho->evidencia="";
+        $hecho->hechos_relacionados="";
+        $hecho->fecha_inicio=$alumnoLaboral->fecha_inicio;
+        $hecho->publico = Input::get('acceso');
+        if(Input::get('acceso')=='publico'){
+            $hecho->nivel_acceso = "2";
+
+        }else{
+
+            $hecho->nivel_acceso = "1";
+
+        }
+        if (isset($request->endDate)) {
+
+            $fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
+            $hecho -> fecha_fin= $fecha_fin;
+
+        }
+        $hecho->save();
+        $etiqueta1=new hecho_etiqueta();
+        $etiqueta1->hechos_id=$hecho->id;
+        $etiqueta1->etiqueta_id='CV';
+        $etiqueta1->save();
+
+        return Redirect::back();
 
 
     }

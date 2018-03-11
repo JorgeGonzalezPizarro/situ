@@ -394,13 +394,20 @@
                                                 </div>
                                                 {!! Form::label('text', 'En curso') !!}
 
-                                                {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'form-check-input' ,"style"=>'height:auto;'])}}
+                                                {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso' ,"style"=>'height:auto;'])}}
 
 
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td> <strong class="">Acceso </strong></td>
+                                            <td>
+                                            {!! Form::select('acceso', array('publico' => 'Publico', 'privado' => 'Privado'), NULL, ['class' => 'form-control','style'=>'width:40%;' ,'name' => 'acceso']) !!}
 
-                                        {{--</tr>--}}
+                                            {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
+                                            {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
+                                            </td>
+                                        </tr>                                        {{--</tr>--}}
                                 {{--<div class='col-md-5'>--}}
                                     {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
 

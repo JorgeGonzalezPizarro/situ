@@ -77,7 +77,7 @@ Route::POST('/Alumno/alumnoDashboard/{categoria?}/{curso?}', 'HechoController@fr
 
 
 /*PUBLICO*/
-Route::get('/Situ/public','SituController@getIndex')->name('index');
+Route::get('/Situ/public','SituController@getHechosPublicos')->name('index');
 
 
 Auth::routes();

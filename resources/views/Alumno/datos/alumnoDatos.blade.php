@@ -307,7 +307,11 @@
         //     });
 
         // parent.$.fancybox.close();
-        $('input[name=imagen]').change(function() {
+        $('#myimage').on('click',function () {
+
+            $('#boton').removeClass('btn btn-info disabled');
+            $('#boton').addClass('btn btn-success');
+            document.getElementById('boton').disabled = false;
 
 
 

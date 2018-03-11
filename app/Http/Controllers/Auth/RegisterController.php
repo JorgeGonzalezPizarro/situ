@@ -89,7 +89,7 @@ class RegisterController extends Controller
 //        return response($role);
         $user = Sentinel::register($request->all());
         $user->roles()->sync([$role]);
-//        $user->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
+       $user->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
         $user->permissions = [(Sentinel::findRoleById($role)->name)];
         $user->otros_datos=json_encode($otros_datos);
 //        $user->nivel_acceso='1';

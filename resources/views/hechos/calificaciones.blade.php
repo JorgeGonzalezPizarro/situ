@@ -41,20 +41,7 @@
                     <div class="panel panel-info">
                         <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
                             <div class="collapse navbar-collapse" id="navbarColor03">
-                                <ul class="nav navbar-nav ">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Profesionales</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Otros datos</a>
-                                    </li>
-                                </ul>
+
 
                             </div>
                         </nav>
@@ -113,7 +100,7 @@
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
                                             <div class="form-group">
-                                                {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY')) !!}
+                                                {!! Form::text('startDate',null, array('class' => 'form-control','required'=>'true', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY')) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -239,11 +226,17 @@
 
         var sel = document.getElementById('etiquetas');
         var opts = sel.options;
-
-
         for (var i=0;i<opts.length;i++) {
             opts[i].value = opts[i].text;
         }
+        var sel1 = document.getElementById('inputCurso');
+        var opts1 = sel1.options;
+
+
+        for (var i=0;i<opts1.length;i++) {
+            opts1[i].value = opts1[i].text;
+        }
+
         // $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
 
 

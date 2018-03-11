@@ -87,10 +87,16 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <div class="form-group  {{ $errors->has('email') ? 'has-error' : ''}}">
+
                                             <td><strong class="">Correo Invitado:</strong></td>
                                             <td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos']) !!}
 
                                             </td>
+                                                {!! $errors->first('email', '<div class="alert alert-danger"><p>
+El correo electronico ya existe</p></div>') !!}
+
+                                            </div>
                                         </tr>
                                         <tr>
                                             <td><strong class="">Password:</strong></td>
