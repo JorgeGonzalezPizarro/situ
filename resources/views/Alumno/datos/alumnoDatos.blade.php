@@ -34,6 +34,23 @@
 
 
         <div class="row">
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <div class="collapse navbar-collapse" id="navbarColor03">
+                    <ul class="nav navbar-nav ">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
             <div class="col-sm-3">
                 <!--left col-->
                 <ul class="list-group">
@@ -85,25 +102,25 @@
 
 
                     <div class="panel panel-info">
-                        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-                            <div class="collapse navbar-collapse" id="navbarColor03">
-                                <ul class="nav navbar-nav ">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Otros datos</a>
-                                    </li>
-                                </ul>
+                        {{--<nav class="navbar navbar-light" style="background-color: #e3f2fd;">--}}
+                            {{--<div class="collapse navbar-collapse" id="navbarColor03">--}}
+                                {{--<ul class="nav navbar-nav ">--}}
+                                    {{--<li class="nav-item active">--}}
+                                        {{--<a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="nav-item">--}}
+                                        {{--<a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="nav-item">--}}
+                                        {{--<a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="nav-item">--}}
+                                        {{--<a class="nav-link" href="#">Otros datos</a>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
 
-                            </div>
-                        </nav>
+                            {{--</div>--}}
+                        {{--</nav>--}}
                         <div class="panel-body">
                             <div class="row">
 
@@ -118,28 +135,28 @@
                                         </div>
                                         <tbody>
                                         <tr>
-                                            <td><strong class="">Department:</strong></td>
+                                            <td><strong class="">Nombre:</strong></td>
                                             <td>{!! Form::text('first_name', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $user->first_name ]) !!}
                                                 <a href="#" id="clickable"> <i id=" " class="fa fa-pencil"></i></a>
 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><strong class="">Department:</strong></td>
+                                            <td><strong class="">Apellido:</strong></td>
                                             <td>{!! Form::text('last_name', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name ]) !!}
                                                 <a href="#" id="clickable1"> <i id=" " class="fa fa-pencil"></i></a>
 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><strong class="">Department:</strong></td>
+                                            <td><strong class="">Email:</strong></td>
                                             <td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}
                                                 <a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>
 
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><strong class="">Password:</strong></td>
+                                            <td><strong class="">Contraseña:</strong></td>
                                             <td>
                                                 <input class="field" readonly name="password" id="password" type="password" >
 
@@ -162,10 +179,7 @@
                                             </td>
                                         </tr>
 
-                                        <tr>
-                                            <td><strong class="">Department:</strong></td>
-                                            <td><a href="mailto:info@support.com">info@support.com</a></td>
-                                        </tr>
+
                                         <input class="field" name="old_password"  id="old_password" type="hidden" value="{{$user->password}}">
 
 
@@ -173,9 +187,9 @@
 
                                     </table>
                                     <div class='col-md-5' style="    margin-top: 10px;
-                                      margin-left: 240px;">
+                                      margin-left: 200px;">
 
-                                        {!! Form::submit('Create Post', array('class'=>'btn btn-info disabled' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
+                                        {!! Form::submit('Actualizar', array('class'=>'btn btn-info disabled' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
 
                                     </div>
 

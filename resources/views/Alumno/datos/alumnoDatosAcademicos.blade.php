@@ -37,89 +37,106 @@
 
 
         <div class="row">
-            <div class="col-sm-3">
-                <!--left col-->
-                <ul class="list-group">
-                    <li class="list-group-item text-muted" contenteditable="false">Perfil</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span>
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Rol </strong></span> {{ $user->roles()->first()->slug }}</li>
-                </ul>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Curso / Carrera
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <div class="collapse navbar-collapse" id="navbarColor03">
+                    <ul class="nav navbar-nav ">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
+                        </li>
 
-                    </div>
-                    <div class="panel-body"><i style="color:green"
-                                               class="fa fa-check-square"></i>{{ $user->first_name  }}.
+                    </ul>
 
-                    </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>
+            </nav>
+            {{--<div class="col-sm-3">--}}
+                {{--<!--left col-->--}}
+                {{--<ul class="list-group">--}}
+                    {{--<li class="list-group-item text-muted" contenteditable="false">Perfil</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span>--}}
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Rol </strong></span> {{ $user->roles()->first()->slug }}</li>--}}
+                {{--</ul>--}}
+                {{--<div class="panel panel-default">--}}
+                    {{--<div class="panel-heading">Curso / Carrera--}}
 
-                    </div>
-                    <div class="panel-body">
-                        <i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
-                        <a href="{!! $otros_datos['facebook'] !!}" class="">
-                            <a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>
-                        </a>
-                    </div>
-                </div>
+                    {{--</div>--}}
+                    {{--<div class="panel-body"><i style="color:green"--}}
+                                               {{--class="fa fa-check-square"></i>{{ $user->first_name  }}.--}}
 
-                <ul class="list-group">
-                    <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="panel panel-default">--}}
+                    {{--<div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>--}}
 
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Shares</strong></span> 125
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Likes</strong></span> 13
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Posts</strong></span> 37
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Followers</strong></span> 78
-                    </li>
-                </ul>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Social Media</div>
-                    <div class="panel-body"><i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i>
-                        <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
-                                class="fa fa-google-plus fa-2x"></i>
+                    {{--</div>--}}
+                    {{--<div class="panel-body">--}}
+                        {{--<i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}--}}
+                        {{--<a href="{!! $otros_datos['facebook'] !!}" class="">--}}
+                            {{--<a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
-                    </div>
-                </div>
-            </div>
+                {{--<ul class="list-group">--}}
+                    {{--<li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>--}}
 
-            <div class="col-sm-9" style="" contenteditable="false">
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Shares</strong></span> 125--}}
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Likes</strong></span> 13--}}
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Posts</strong></span> 37--}}
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Followers</strong></span> 78--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+                {{--<div class="panel panel-default">--}}
+                    {{--<div class="panel-heading">Social Media</div>--}}
+                    {{--<div class="panel-body"><i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i>--}}
+                        {{--<i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i--}}
+                                {{--class="fa fa-google-plus fa-2x"></i>--}}
+
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+            <div class="col-sm-12" style="" contenteditable="false">
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
 
 
                     <div class="panel panel-info">
-                        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-                            <div class="collapse navbar-collapse" id="navbarColor03">
-                                <ul class="nav navbar-nav ">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
-                                    </li>
+                        {{--<nav class="navbar navbar-light" style="background-color: #e3f2fd;">--}}
+                            {{--<div class="collapse navbar-collapse" id="navbarColor03">--}}
+                                {{--<ul class="nav navbar-nav ">--}}
+                                    {{--<li class="nav-item active">--}}
+                                        {{--<a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="nav-item">--}}
+                                        {{--<a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="nav-item">--}}
+                                        {{--<a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>--}}
+                                    {{--</li>--}}
 
-                                </ul>
+                                {{--</ul>--}}
 
-                            </div>
-                        </nav>
+                            {{--</div>--}}
+                        {{--</nav>--}}
 
                         <div class="panel-body">
                             <div class="row">
@@ -184,17 +201,15 @@
                                         </tbody>
 
                                     </table>
-                                    <div class='col-md-5' style="    margin-top: 10px;
-                                      margin-left: 240px;">
-                                        {{--<input type="button" value="Add another text input" onClick="addInput();">--}}
+                                    <tr>
 
-
-                                    </div>
-                                    {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
+                                   <td>     {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
+                                    </td>
+                                    </tr>
+                                    {{ Form::close() }}
 
 
                                 </div>
-                                {{ Form::close() }}
 
                             </div>
                         </div>
@@ -253,43 +268,43 @@
 
             <div id="push"></div>
         </div>
-        <footer id="footer">
-            <div class="row-fluid">
-                <div class="span3">
-                    <p>
-                        <a href="http://twitter.com/Bootply" rel="nofollow" title="Bootply on Twitter" target="ext">Twitter</a><br>
-                        <a href="https://plus.google.com/+Bootply" rel="publisher">Google+</a><br>
-                        <a href="http://facebook.com/Bootply" rel="nofollow" title="Bootply on Facebook" target="ext">Facebook</a><br>
-                        <a href="https://github.com/iatek/bootply" title="Bootply on GitHub" target="ext">GitHub</a><br>
-                    </p>
-                </div>
-                <div class="span3">
-                    <p>
-                        <a data-toggle="" role="button" href="">Contact Us</a><br>
-                        <a href="/tags">Tags</a><br>
-                        <a href="/bootstrap-community">Community</a><br>
-                        <a href="/upgrade">Upgrade</a><br>
-                    </p>
-                </div>
-                <div class="span3">
-                    <p>
-                        <a href="http://www.bootbundle.com" target="ext" rel="nofollow">BootBundle</a><br>
-                        <a href="https://bootstrapbay.com/?ref=skelly" target="_ext" rel="nofollow"
-                           title="Premium Bootstrap themes">Bootstrap Themes</a><br>
-                        <a href="http://www.bootstrapzero.com" target="_ext" rel="nofollow"
-                           title="Free Bootstrap templates">BootstrapZero</a><br>
-                        <a href="http://upgrade-bootstrap.bootply.com/">2.x Upgrade Tool</a><br>
-                    </p>
-                </div>
-                <div class="span3">
-                    <span class="pull-right">©Copyright 2013-2014 <a href="/"
-                                                                     title="The Bootstrap Playground">Bootply</a> | <a
-                                href="/about#privacy">Privacy</a></span>
-                    <a href="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" class="btn iframe-btn" type="button">Open Filemanager</a>
+        {{--<footer id="footer">--}}
+            {{--<div class="row-fluid">--}}
+                {{--<div class="span3">--}}
+                    {{--<p>--}}
+                        {{--<a href="http://twitter.com/Bootply" rel="nofollow" title="Bootply on Twitter" target="ext">Twitter</a><br>--}}
+                        {{--<a href="https://plus.google.com/+Bootply" rel="publisher">Google+</a><br>--}}
+                        {{--<a href="http://facebook.com/Bootply" rel="nofollow" title="Bootply on Facebook" target="ext">Facebook</a><br>--}}
+                        {{--<a href="https://github.com/iatek/bootply" title="Bootply on GitHub" target="ext">GitHub</a><br>--}}
+                    {{--</p>--}}
+                {{--</div>--}}
+                {{--<div class="span3">--}}
+                    {{--<p>--}}
+                        {{--<a data-toggle="" role="button" href="">Contact Us</a><br>--}}
+                        {{--<a href="/tags">Tags</a><br>--}}
+                        {{--<a href="/bootstrap-community">Community</a><br>--}}
+                        {{--<a href="/upgrade">Upgrade</a><br>--}}
+                    {{--</p>--}}
+                {{--</div>--}}
+                {{--<div class="span3">--}}
+                    {{--<p>--}}
+                        {{--<a href="http://www.bootbundle.com" target="ext" rel="nofollow">BootBundle</a><br>--}}
+                        {{--<a href="https://bootstrapbay.com/?ref=skelly" target="_ext" rel="nofollow"--}}
+                           {{--title="Premium Bootstrap themes">Bootstrap Themes</a><br>--}}
+                        {{--<a href="http://www.bootstrapzero.com" target="_ext" rel="nofollow"--}}
+                           {{--title="Free Bootstrap templates">BootstrapZero</a><br>--}}
+                        {{--<a href="http://upgrade-bootstrap.bootply.com/">2.x Upgrade Tool</a><br>--}}
+                    {{--</p>--}}
+                {{--</div>--}}
+                {{--<div class="span3">--}}
+                    {{--<span class="pull-right">©Copyright 2013-2014 <a href="/"--}}
+                                                                     {{--title="The Bootstrap Playground">Bootply</a> | <a--}}
+                                {{--href="/about#privacy">Privacy</a></span>--}}
+                    {{--<a href="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" class="btn iframe-btn" type="button">Open Filemanager</a>--}}
 
-                </div>
-            </div>
-        </footer>
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</footer>--}}
 
     </div>
 

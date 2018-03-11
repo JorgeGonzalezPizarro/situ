@@ -32,7 +32,7 @@
                 <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button"  class="btn btn-info">Enviar mensaje</button>
                 <br>
             </div>
-            <div class="col-sm-2">                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+            <div class="col-sm-2"> <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
 
                 {{--<a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">--}}
                 {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
@@ -44,59 +44,59 @@
 
 
         <div class="row">
-            <div class="col-sm-3">
-                <!--left col-->
-                <ul class="list-group">
-                    <li class="list-group-item text-muted" contenteditable="false">Perfil</li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span>
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Rol </strong></span> {{ $user->roles()->first()->slug }}</li>
-                </ul>
+            {{--<div class="col-sm-3">--}}
+                {{--<!--left col-->--}}
+                {{--<ul class="list-group">--}}
+                    {{--<li class="list-group-item text-muted" contenteditable="false">Perfil</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span>--}}
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Rol </strong></span> {{ $user->roles()->first()->slug }}</li>--}}
+                {{--</ul>--}}
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>
+                {{--<div class="panel panel-default">--}}
+                    {{--<div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>--}}
 
-                    </div>
-                    <div class="panel-body">
-                        <i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
-                        <a href="{!! $otros_datos['facebook'] !!}" class="">
-                            <a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>
-                        </a>
-                    </div>
-                </div>
+                    {{--</div>--}}
+                    {{--<div class="panel-body">--}}
+                        {{--<i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}--}}
+                        {{--<a href="{!! $otros_datos['facebook'] !!}" class="">--}}
+                            {{--<a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>--}}
+                        {{--</a>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
 
-                <ul class="list-group">
-                    <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>
+                {{--<ul class="list-group">--}}
+                    {{--<li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>--}}
 
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Shares</strong></span> 125
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Likes</strong></span> 13
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Posts</strong></span> 37
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Followers</strong></span> 78
-                    </li>
-                </ul>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Social Media</div>
-                    <div class="panel-body"><i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i>
-                        <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
-                                class="fa fa-google-plus fa-2x"></i>
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Shares</strong></span> 125--}}
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Likes</strong></span> 13--}}
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Posts</strong></span> 37--}}
+                    {{--</li>--}}
+                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Followers</strong></span> 78--}}
+                    {{--</li>--}}
+                {{--</ul>--}}
+                {{--<div class="panel panel-default">--}}
+                    {{--<div class="panel-heading">Social Media</div>--}}
+                    {{--<div class="panel-body"><i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i>--}}
+                        {{--<i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i--}}
+                                {{--class="fa fa-google-plus fa-2x"></i>--}}
 
-                    </div>
-                </div>
-            </div>
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
 
-            <div class="col-sm-9" style="" contenteditable="false">
+            <div class="col-sm-12" style="" contenteditable="false">
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
 
