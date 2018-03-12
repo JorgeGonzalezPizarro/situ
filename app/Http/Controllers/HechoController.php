@@ -52,14 +52,16 @@ class HechoController extends Controller
                 $format = 'd/m/Y';
                 $fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
                 $hecho->fecha_inicio = $fecha_inicio;
-                $hecho->publico = Input::get('acceso');
+//                $hecho->publico = Input::get('acceso');
 
                 if(Input::get('acceso')=='publico'){
                     $hecho->nivel_acceso = "2";
+                    $hecho->publico = "publico";
 
                 }else{
 
                     $hecho->nivel_acceso = "1";
+                    $hecho->publico = "privado";
 
                 }
                 if (isset($request->endDate)) {

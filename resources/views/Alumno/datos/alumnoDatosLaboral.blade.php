@@ -1,10 +1,8 @@
 @extends('layouts.layoutAdmin')
 <script src="/js/jquery-3.3.1.min.js"></script>
-{{--<link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">--}}
 
-
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>--}}
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>
 <style>
     input[type=text]{
         border: 0 !important;
@@ -21,22 +19,13 @@
 @section('content')
 
     <div class="container target">
-        {{ Form::open(array('route' => 'actualizarDatosLaboral', 'class' => 'form-style-8','files' => true)) }}
-
         <div class="row">
+            {{ Form::open(array('route' => 'actualizarDatosLaboral', 'class' => 'form-style-8','files' => true)) }}
 
-            <div class="col-sm-10">
-                <h1 class="">{{ $user->first_name  }}<?php
-                    ?></h1>
 
-                <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button"  class="btn btn-info">Enviar mensaje</button>
-                <br>
-            </div>
-            <div class="col-sm-2"> <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-
-                {{--<a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">--}}
-                {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
-                {{--<i id=" " class="fa fa-pencil"></i></a>--}}
+            <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+                    <i id=" " class="fa fa-pencil"></i></a>
             </div>
         </div>
 
@@ -44,57 +33,29 @@
 
 
         <div class="row">
-            {{--<div class="col-sm-3">--}}
-                {{--<!--left col-->--}}
-                {{--<ul class="list-group">--}}
-                    {{--<li class="list-group-item text-muted" contenteditable="false">Perfil</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span>--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Rol </strong></span> {{ $user->roles()->first()->slug }}</li>--}}
-                {{--</ul>--}}
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <div class="collapse navbar-collapse" id="navbarColor03">
+                    <ul class="nav navbar-nav ">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('invitar')}}">Invitados</a>
+                        </li>
 
-                {{--<div class="panel panel-default">--}}
-                    {{--<div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>--}}
+                    </ul>
 
-                    {{--</div>--}}
-                    {{--<div class="panel-body">--}}
-                        {{--<i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}--}}
-                        {{--<a href="{!! $otros_datos['facebook'] !!}" class="">--}}
-                            {{--<a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>--}}
-                        {{--</a>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+                </div>
+            </nav>
 
-                {{--<ul class="list-group">--}}
-                    {{--<li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>--}}
 
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Shares</strong></span> 125--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Likes</strong></span> 13--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Posts</strong></span> 37--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Followers</strong></span> 78--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
-                {{--<div class="panel panel-default">--}}
-                    {{--<div class="panel-heading">Social Media</div>--}}
-                    {{--<div class="panel-body"><i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i>--}}
-                        {{--<i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i--}}
-                                {{--class="fa fa-google-plus fa-2x"></i>--}}
 
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
 
             <div class="col-sm-12" style="" contenteditable="false">
 
@@ -102,25 +63,7 @@
 
 
                     <div class="panel panel-info">
-                        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-                            <div class="collapse navbar-collapse" id="navbarColor03">
-                                <ul class="nav navbar-nav ">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Profesionales</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Otros datos</a>
-                                    </li>
-                                </ul>
 
-                            </div>
-                        </nav>
 
                         <div class="panel-body">
                             <div class="row">
@@ -441,18 +384,49 @@
                         </div>
 
                     </div>
-                    <div class="panel-footer">
-                        <
 
-                        <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
-                           class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                        <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
-                    </div>
+
+                </div>
+                <div class="panel-footer">
+                    <table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">
+                        @if(isset($laboral))
+                            <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Cargo</th>
+                                <th>Fecha Inicio</th>
+                                <th>Fecha Fin</th>
+                                <th>Fecha Fin</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody id="clickable">
+
+
+                            @if(!empty($laboral))
+                                {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
+                                @foreach ($laboral as $labor)
+                                    <tr>
+                                        <td>{{$labor->empresa}}</td>
+                                        <td id="asignatura">{!!  $labor->cargo !!}</td>
+                                        <td id="fechainicio">{!!  $labor->fecha_inicio !!}</td>
+                                        @if($labor->actual=="1")
+                                        <td id="fechafin">  Actualidad </td>
+                                        @else
+                                            <td id="fechafin">{!!  $labor->fecha_fin !!}</td>
+                                        @endif
+                                            {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
+                                                                 {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
+                                    </tr>
+
+                                @endforeach
+                            @endif
+                            @endif
+                            </tbody>
+
+                    </table>
+
 
                 </div>
             </div>
@@ -466,31 +440,31 @@
 
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
+            <iframe width="550" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
 
             <!-- Modal content-->
-            <div class="modal-content">
+            {{--<div class="modal-content">--}}
+                {{--<iframe width="550" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>--}}
 
-                <div class="modal-body">
-                    <iframe width="700" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+                {{--<div class="modal-body">--}}
+                    {{--<iframe width="550" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>--}}
+                {{--</div>--}}
+
+            {{--</div>--}}
 
         </div>
     </div>
     </div><!-- /#wrapper -->
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
     <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-    <script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
-    <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
-    <script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>
-    <script src="/js/tinymce/js/tinymce/langs/es.js"></script>
+    {{--<script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>--}}
+    {{--<script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>--}}
+    {{--<script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>--}}
+    {{--<script src="/js/tinymce/js/tinymce/langs/es.js"></script>--}}
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>--}}
 
 
 @endsection
@@ -613,6 +587,34 @@
 <script>
 
     $(document).ready(function() {
+        var table=$('#asignaturas').DataTable({
+            "scrollX": false,
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "language": {
+                "lengthMenu": "Ver _MENU_ Número de registros por página",
+                "zeroRecords": "No encontrado",
+                "info": "Página  _PAGE_ de  _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+
+                "infoFiltered": "(filtered from _MAX_ Total de usuarios)",
+                "paginate": {
+                    "first":      "Primero",
+                    "previous":   "Anterior",
+                    "next":       "Siguiente",
+                    "last":       "Último"
+                },
+                "search":         "Buscar &nbsp;:",
+
+            },
+            "columnDefs": [ {
+                "targets": 1,
+                "searchable": true
+            } ]
+        });
         var sel = document.getElementById('sector');
         var opts = sel.options;
 

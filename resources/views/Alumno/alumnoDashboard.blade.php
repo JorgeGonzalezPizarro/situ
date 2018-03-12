@@ -32,6 +32,7 @@
                     <th>Fecha del hecho</th>
                     <th>Categoria</th>
                     <th>Etiquetas</th>
+                    <th>Acceso</th>
 
                 </tr>
                 </thead>
@@ -51,116 +52,128 @@
 
                        {!! $etiq->etiqueta_id .' | '!!}
                            @endforeach</td>
-                    </tr>
-                @endforeach
+                      <?php $publico = array( "publico" => "publico",
+                        "privado" => "privado",);?>
+                        <td id="seleccionar">
+                      @foreach($publico as $public)
+                          @if('publico'==$public)
+                              {!!  $checked=true !!}
+                              @else
+                              {!! $checked=false!!}
+                               @endif
+                             {{$public}} {!!  Form::radio($checked, $public,$checked,['class' => 'field'])  !!}
+                         @endforeach
+                         </td>
+                     </tr>
+                 @endforeach
 
-                </tbody>
+                 </tbody>
 
-            </table>
-        </div>
+             </table>
+         </div>
 
-    </div>
-    </div>
-@endsection
+     </div>
+     </div>
+ @endsection
 
-<script>
+ <script>
 
-    $(document).ready(function() {
-        var url = "/Alumno";
+     $(document).ready(function() {
+         var url = "/Alumno";
 
-        var tr = $('#clickable');
-        var table=$('#hechos').DataTable({
-
-
-
-            "scrollX": false,
-
-            "language": {
-                "lengthMenu": "Ver _MENU_ Número de registros por página",
-                "zeroRecords": "No encontrado",
-                "info": "Página  _PAGE_ de  _PAGES_",
-                "infoEmpty": "No hay registros disponibles",
-                "infoFiltered": "(filtered from _MAX_ Total de usuarios)",
-                "paginate": {
-                    "first":      "Primero",
-                    "previous":   "Anterior",
-                    "next":       "Siguiente",
-                    "last":       "Último"
-                },
-                "search":         "Buscar &nbsp;:",
-
-            }
-        });
-        $('#clickable').on('click','tr', function () {
-
-            var data = table
-                .rows()
-                .data();
-            var cData = table.cell(this).data();
-            var data = table.row( this ).data();
-            //alert( 'You clicked on '+data[2]+'\'s row' );
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-
-
-            $.ajax({
-                type:"get",
-                url     : "{{ route('showHecho') }}",
-                datatype:"json",
-                encode  : true,
-                data: {
-                    id: data[0],
-                    _token: CSRF_TOKEN
-                },
-                success: function(response){ // What to do if we succeed
-                    window.location.href= "{{ url('Alumno/hecho') }}"+"/"+response['id'] + "/singleHecho";
-                    console.log("aa+ " + response);
-
-                },
-                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
+         var tr = $('#clickable');
+         var table=$('#hechos').DataTable({
 
 
 
-        } );
-        $('#fraseButton').on('click', function () {
-            var data =  $('#contenido').val();
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+             "scrollX": false,
 
-            $.ajax({
-                type:"post",
-                url     : "{{ route('fraseguia') }}",
-                encode  : true,
-                data: {
-                    contenido: data,
-                    categoria_id:3,
-                    _token: CSRF_TOKEN
+             "language": {
+                 "lengthMenu": "Ver _MENU_ Número de registros por página",
+                 "zeroRecords": "No encontrado",
+                 "info": "Página  _PAGE_ de  _PAGES_",
+                 "infoEmpty": "No hay registros disponibles",
+                 "infoFiltered": "(filtered from _MAX_ Total de usuarios)",
+                 "paginate": {
+                     "first":      "Primero",
+                     "previous":   "Anterior",
+                     "next":       "Siguiente",
+                     "last":       "Último"
+                 },
+                 "search":         "Buscar &nbsp;:",
 
-                },
-                success: function(response){ // What to do if we succeed
-                    {{--window.location.href= "{{ url('Alumno/alumnoDashboard') }} ";--}}
-                        window.location.href= "{{ route('alumnoDashboard') }}";
-                    // console.log(JSON.stringify(response));
+             }
+         });
+         $('#clickable').on('click','tr', function () {
 
-                    // table.ajax.reload();
-                },
-                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
-
-
-
-        } );
-    } );
-
-</script>
-<script>
+             var data = table
+                 .rows()
+                 .data();
+             var cData = table.cell(this).data();
+             var data = table.row( this ).data();
+             //alert( 'You clicked on '+data[2]+'\'s row' );
+             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 
+             $.ajax({
+                 type:"get",
+                 url     : "{{ route('showHecho') }}",
+                 datatype:"json",
+                 encode  : true,
+                 data: {
+                     id: data[0],
+                     _token: CSRF_TOKEN
+                 },
+                 success: function(response){ // What to do if we succeed
+                     window.location.href= "{{ url('Alumno/hecho') }}"+"/"+response['id'] + "/singleHecho";
+                     console.log("aa+ " + response);
 
-</script>
+                 },
+                 error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                     console.log(JSON.stringify(jqXHR));
+                     console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                 }
+             });
+
+
+
+         } );
+         $('#fraseButton').on('click', function () {
+             var data =  $('#contenido').val();
+             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+             $.ajax({
+                 type:"post",
+                 url     : "{{ route('fraseguia') }}",
+                 encode  : true,
+                 data: {
+                     contenido: data,
+                     categoria_id:3,
+                     _token: CSRF_TOKEN
+
+                 },
+                 success: function(response){ // What to do if we succeed
+                     {{--window.location.href= "{{ url('Alumno/alumnoDashboard') }} ";--}}
+                         window.location.href= "{{ route('alumnoDashboard') }}";
+                     // console.log(JSON.stringify(response));
+
+                     // table.ajax.reload();
+                 },
+                 error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                     console.log(JSON.stringify(jqXHR));
+                     console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                 }
+             });
+
+
+
+         } );
+     } );
+
+ </script>
+ <script>
+
+
+
+ </script>
 

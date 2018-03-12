@@ -402,10 +402,11 @@ class AlumnoController extends Controller
         $user = Sentinel::getUser();
 
         $otros_datos=json_decode($user->otros_datos,true);
-
+        $laboral=$user->getLaboral()->get();
 
         return view('Alumno.datos.alumnoDatosLaboral')->with('user',$user)
-            ->with('otros_datos', $otros_datos)->with('year',$year);
+            ->with('otros_datos', $otros_datos)->with('year',$year)
+            ->with('laboral',$laboral);
 
     }
     public function actualizarMisDatosLaborales (){

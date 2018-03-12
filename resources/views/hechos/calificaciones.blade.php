@@ -51,8 +51,8 @@
 
                                 {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
-                                <div class='col-md-8' style="    margin-top: 10px;
-                                      margin-left: 240px;">
+                                <div class='col-md-12' style="    margin-top: 10px;
+                                    ">
                                         <div class="form-inline" style="">
 
                                                 <div style="text-align: center;">
@@ -67,24 +67,26 @@
                                                         Añadir Asignaturas</a>
                                                 </div>
                                         </div>
-                                            <div class="form-inline" style="margin-top: 40px;">
-                                                <div style=" text-align: center">
+                                            <div class="form-inline" style=" margin-top: 40px !important;">
+                                                <div style="text-align: center;">
 
 
-                                            {!! Form::label('Calificacion', 'Calificacion') !!}
-                                            {!! Form::text('calificacion', null, array('class' => 'form-control', 'placeholder' => 'Calificacion')) !!}
+                                            {!! Form::label('Calificación', 'Calificación') !!}
+                                            {!! Form::text('calificacion', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'Calificacion')) !!}
 
-                                            {!! Form::label('Profesor', 'Profesor') !!}
-                                            {!! Form::text('profesor', null, array('class' => 'form-control', 'placeholder' => 'Profesor')) !!}
+                                            {!! Form::text('profesor', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'Profesor')) !!}
 
                                                 </div>
 
                                             </div>
 
 
-                                    <div class="form-group" style="">
-                                        {!! Form::label('Etiquetas', 'Link tags') !!}
-                                        {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                                    <div class="form-inline" style="">
+
+                                        <div style="text-align: center;">
+                                            {!! Form::label('Etiquetas', 'Etiquetas') !!}
+                                        {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','style'=>'width:40%;','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                                        </div>
                                     </div>
                                     <div class='col-md-12' style="    margin-top: 30px;">
                                         <div class="form-group">
@@ -94,7 +96,7 @@
 
                                             </div>
                                     </div>
-                                    <div class='col-md-5'>
+                                    <div class='col-md-12'>
                                         <label for="Fecha de  Inicio" class="cols-sm-2 control-label">Fecha de Inicio</label>
 
                                         <div class="input-group">
@@ -104,7 +106,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class='col-md-5'>
+                                    <div class='col-md-12'>
                                         <label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>
 
                                         <div class="input-group">

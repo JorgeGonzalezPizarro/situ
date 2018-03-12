@@ -14,22 +14,13 @@
 @section('content')
 
     <div class="container target">
-        {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}
-
         <div class="row">
+            {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}
 
-            <div class="col-sm-10">
-                <h1 class="">{{ $user->first_name  }}<?php
-                   ?></h1>
 
-                <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button"  class="btn btn-info">Enviar mensaje</button>
-                <br>
-            </div>
-            <div class="col-sm-2">                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-
-                {{--<a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">--}}
-                    {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
-                    {{--<i id=" " class="fa fa-pencil"></i></a>--}}
+            <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+                    <i id=" " class="fa fa-pencil"></i></a>
             </div>
         </div>
 
@@ -49,70 +40,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('invitar')}}">Invitados</a>
+                        </li>
 
                     </ul>
 
                 </div>
             </nav>
-            {{--<div class="col-sm-3">--}}
-                {{--<!--left col-->--}}
-                {{--<ul class="list-group">--}}
-                    {{--<li class="list-group-item text-muted" contenteditable="false">Perfil</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span>--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Rol </strong></span> {{ $user->roles()->first()->slug }}</li>--}}
-                {{--</ul>--}}
-                {{--<div class="panel panel-default">--}}
-                    {{--<div class="panel-heading">Curso / Carrera--}}
 
-                    {{--</div>--}}
-                    {{--<div class="panel-body"><i style="color:green"--}}
-                                               {{--class="fa fa-check-square"></i>{{ $user->first_name  }}.--}}
 
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="panel panel-default">--}}
-                    {{--<div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>--}}
-
-                    {{--</div>--}}
-                    {{--<div class="panel-body">--}}
-                        {{--<i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook','class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}--}}
-                        {{--<a href="{!! $otros_datos['facebook'] !!}" class="">--}}
-                            {{--<a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>--}}
-                        {{--</a>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-
-                {{--<ul class="list-group">--}}
-                    {{--<li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>--}}
-
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Shares</strong></span> 125--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Likes</strong></span> 13--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Posts</strong></span> 37--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Followers</strong></span> 78--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
-                {{--<div class="panel panel-default">--}}
-                    {{--<div class="panel-heading">Social Media</div>--}}
-                    {{--<div class="panel-body"><i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i>--}}
-                        {{--<i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i--}}
-                                {{--class="fa fa-google-plus fa-2x"></i>--}}
-
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
 
             <div class="col-sm-12" style="" contenteditable="false">
 
@@ -120,23 +57,7 @@
 
 
                     <div class="panel panel-info">
-                        {{--<nav class="navbar navbar-light" style="background-color: #e3f2fd;">--}}
-                            {{--<div class="collapse navbar-collapse" id="navbarColor03">--}}
-                                {{--<ul class="nav navbar-nav ">--}}
-                                    {{--<li class="nav-item active">--}}
-                                        {{--<a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="nav-item">--}}
-                                        {{--<a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="nav-item">--}}
-                                        {{--<a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>--}}
-                                    {{--</li>--}}
 
-                                {{--</ul>--}}
-
-                            {{--</div>--}}
-                        {{--</nav>--}}
 
                         <div class="panel-body">
                             <div class="row">
@@ -251,14 +172,7 @@
 
                             </table>
 
-                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                            <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
+
                         </div>
 
                     </div>
@@ -266,7 +180,6 @@
             </div>
 
 
-            <div id="push"></div>
         </div>
         {{--<footer id="footer">--}}
             {{--<div class="row-fluid">--}}

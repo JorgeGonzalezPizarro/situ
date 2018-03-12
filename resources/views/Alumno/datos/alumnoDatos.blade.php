@@ -12,19 +12,13 @@
     }
 </style>
 @section('content')
-    <hr class="">
 
     <div class="container target">
         <div class="row">
             {{ Form::open(array('route' => 'actualizarDatos', 'class' => 'form-style-8','files' => true)) }}
 
-            <div class="col-sm-10">
-                <h1 class="">{{ $user->first_name  }}</h1>
 
-                <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button"  class="btn btn-info">Enviar mensaje</button>
-                <br>
-            </div>
-            <div class="col-sm-2"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+            <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
                     <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
                     <i id=" " class="fa fa-pencil"></i></a>
             </div>
@@ -45,6 +39,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('invitar')}}">Invitados</a>
                         </li>
 
                     </ul>
@@ -102,25 +99,7 @@
 
 
                     <div class="panel panel-info">
-                        {{--<nav class="navbar navbar-light" style="background-color: #e3f2fd;">--}}
-                            {{--<div class="collapse navbar-collapse" id="navbarColor03">--}}
-                                {{--<ul class="nav navbar-nav ">--}}
-                                    {{--<li class="nav-item active">--}}
-                                        {{--<a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="nav-item">--}}
-                                        {{--<a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="nav-item">--}}
-                                        {{--<a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="nav-item">--}}
-                                        {{--<a class="nav-link" href="#">Otros datos</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
 
-                            {{--</div>--}}
-                        {{--</nav>--}}
                         <div class="panel-body">
                             <div class="row">
 

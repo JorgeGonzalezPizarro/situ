@@ -10,21 +10,14 @@
         padding: 7px !important;
         width:  80%;
     }
-</style>
-@section('content')
-    <hr class="">
+</style>@section('content')
 
     <div class="container target">
         <div class="row">
-            {{ Form::open(array('route' => 'invitar', 'class' => 'form-style-8','files' => true)) }}
+            {{ Form::open(array('route' => 'actualizarDatos', 'class' => 'form-style-8','files' => true)) }}
 
-            <div class="col-sm-10">
-                <h1 class="">{{ $user->first_name  }}</h1>
 
-                <button type="button" class="btn btn-success">Enviar Correo</button>  <button type="button"  class="btn btn-info">Enviar mensaje</button>
-                <br>
-            </div>
-            <div class="col-sm-2"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+            <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
                     <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
                     <i id=" " class="fa fa-pencil"></i></a>
             </div>
@@ -34,6 +27,28 @@
 
 
         <div class="row">
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+                <div class="collapse navbar-collapse" id="navbarColor03">
+                    <ul class="nav navbar-nav ">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('invitar')}}">Invitados</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+
+
 
 
             <div class="col-sm-12" style="" contenteditable="false">
@@ -42,32 +57,16 @@
 
 
                     <div class="panel panel-info">
-                        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-                            <div class="collapse navbar-collapse" id="navbarColor03">
-                                <ul class="nav navbar-nav ">
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Profesionales</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Otros datos</a>
-                                    </li>
-                                </ul>
 
-                            </div>
-                        </nav>
+
                         <div class="panel-body">
                             <div class="row">
 
 
 
                                 <div class=" col-md-12 col-lg-12 ">
-                                    <table class="table table-user-information">
+
+                                    <table class="table table-user-information" id="mitabla">
                                         <div class="input-append">
                                             {{--<input id="fieldID4" type="text" name="imagen" style="display: none;">--}}
                                             {!! Form::text('imagen', $otros_datos['img'], ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
@@ -145,16 +144,7 @@ El correo electronico ya existe</p></div>') !!}
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-footer">
-                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                            <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
-                        </div>
+
 
                     </div>
                 </div>
