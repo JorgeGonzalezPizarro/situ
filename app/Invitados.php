@@ -11,8 +11,8 @@ class Invitados extends Model
     protected $fillable = ['id' , 'user_id','user_id'
 
     ];
-    public function categorias(){
-        return $this->belongsToMany(User::class);
+    public function getUsuario(){
+        return $this->hasOne('App\User','id','user_id');
     }
 
 

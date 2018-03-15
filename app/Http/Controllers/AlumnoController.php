@@ -107,8 +107,11 @@ class AlumnoController extends Controller
         $otros_datos = json_decode($user->otros_datos, true);
         $etiquetas = $user->getEtiquetas()->get()->all();
         $etiquetasPublic = Etiqueta::where('user_id', null)->get()->all();
-        return view('Alumno.datos.alumnoDatos')->with('user', $user)
-            ->with('etiquetas', $etiquetas)->with('etiquetasPublic', $etiquetasPublic)->with('otros_datos', $otros_datos);
+        $hechos=$user->getHechos()->get();
+        $invitados=$user->getInvitados($user->id)->all();
+        $profesores=$user->getProfesores($user->id)->all();
+        return view('Alumno.datos.alumnoDatos')->with('user', $user)->with('hechos',$hechos)->with('invitados',$invitados)
+            ->with('profesores',$profesores)->with('etiquetas', $etiquetas)->with('etiquetasPublic', $etiquetasPublic)->with('otros_datos', $otros_datos);
     }
 
     public function alumnoDatosAcademicos($year = null)
@@ -334,8 +337,10 @@ class AlumnoController extends Controller
 
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
         $otros_datos = json_decode($usuario->otros_datos, true);
-
-        return view('Alumno.invitar')->with('user', $usuario)->with('otros_datos', $otros_datos)->withRoles($roles);;
+        $invitados=$usuario->getProfesores($usuario->id)->all();
+        $profesores=$usuario->getInvitados($usuario->id)->all();
+        $invitados=array_merge($invitados,$profesores);
+        return view('Alumno.invitar')->with('user', $usuario)->with('otros_datos', $otros_datos)->withRoles($roles)->with('invitados',$invitados);
 
     }
 
@@ -362,7 +367,9 @@ class AlumnoController extends Controller
         $invitado = Sentinel::register($request->all());
         $invitado->roles()->sync([$role]);
         $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
-        $invitado->img = "/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
+//        $invitado->img = "/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
+        $otros_datos=array('facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
+        $invitado->otros_datos=json_encode($otros_datos);
 
         //INVITADO . A LOS HECHOS QUE QUIERA EL USUARIO
         if ($role == '4') {
@@ -376,6 +383,7 @@ class AlumnoController extends Controller
 
             $invitado->nivel_acceso = '4';
         }
+
         $invitado->save();
 
 
@@ -391,6 +399,8 @@ class AlumnoController extends Controller
         $invitado2->invitado_id = $invitado->id;
         $invitado2->alumno_id = $usuario->id;
         $invitado2->nivel_acceso = $invitado->nivel_acceso;
+       $invitado2->rol=$invitado->roles()->get()->first()->name;
+
         $invitado2->save();
 
         if ($invitado) {

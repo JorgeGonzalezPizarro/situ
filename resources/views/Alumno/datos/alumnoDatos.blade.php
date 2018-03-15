@@ -58,7 +58,7 @@
                                     class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span>
                     </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Rol </strong></span> {{ $user->roles()->first()->slug }}</li>
+                                    class="">Rol </strong></span> {{ $user->roles()->first()->name }}</li>
                 </ul>
                 <div class="panel panel-default">
                     <div class="panel-heading">Curso / Carrera
@@ -201,13 +201,13 @@
 
                     </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Shares</strong></span> 125
+                                    class="">Hechos</strong></span> {!! count($hechos) !!}
                     </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Likes</strong></span> 13
+                                    class="">Invitados</strong></span> {!! count($invitados) !!}
                     </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Posts</strong></span> 37
+                                    class="">Profesores Invitados</strong></span> {!! count($profesores) !!}
                     </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                     class="">Followers</strong></span> 78

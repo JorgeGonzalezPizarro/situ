@@ -78,6 +78,7 @@ class CreateHechos extends Migration
             $table->integer('invitado_id');
             $table->integer('alumno_id');
             $table->string('nivel_acceso');
+            $table->string('rol');
 
             $table->timestamps();
 

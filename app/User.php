@@ -76,7 +76,20 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
         return $this->hasMany('App\Laboral','user_id', 'id');
 
     }
+    public function getInvitados($id){
 
+        $invitados=Invitados::where([['alumno_id',$id],['rol','Invitado']])->get();
+        if(!empty($invitados)) {
+            return $invitados;
+        }else return collect();
+    }
+    public function getProfesores($id){
+
+        $invitados=Invitados::where([['alumno_id',$id],['rol','Profesor']])->get();
+        if(!empty($invitados)) {
+            return $invitados;
+        }else return collect();
+    }
     public function getEtiquetas(){
         return $this->hasMany('App\Etiqueta','user_id', 'id');
 
