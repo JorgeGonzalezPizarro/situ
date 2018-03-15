@@ -32,68 +32,105 @@ class AlumnoController extends Controller
         //$this->middleware('auth')->except('orders');
         $this->middleware('Alumno');
         $categorias = Categorias::all();
-        view()->share('categorias',$categorias);
+        view()->share('categorias', $categorias);
 
     }
 
-    public function getDashboard(){
-        $user=Sentinel::getUser();
+    public function getDashboard()
+    {
+        $user = Sentinel::getUser();
 //        console.log($user->getHechos());
         $categorias = Categorias::all();
-        $hechos=$user->getHechos()->get();
+        $hechos = $user->getHechos()->get();
 //        $etiquetas=Etiqueta::where
-        view()->share('categorias',$categorias);
-        return view('Alumno.alumnoDashboard')->with('hechos',$hechos)->with('categorias',$categorias);
+        view()->share('categorias', $categorias);
+        return view('Alumno.alumnoDashboard')->with('hechos', $hechos)->with('categorias', $categorias);
 
     }
 
 
-    public function showHecho($id){
-        $user=Sentinel::getUser();
+    public function showHecho($id,$categoria)
+    {
+        $usuario = Sentinel::getUser();
 //        console.log($user->getHechos());
 
-        $hecho= hechos::find($id);
-        return view('Alumno.hecho.singleHecho')->with('hecho',$hecho);
+        $hecho = hechos::find($id);
+        $hechosPublicos=hechos::where('nivel_acceso','>=',$usuario->nivel_acceso)->get();
+        $categoria = $hecho->getCategoria()->get()->first();
+        $curso=$hecho->curso;
+
+        $otros_datos = json_decode($usuario->otros_datos, true);
+
+        if ($categoria->categoria == 'Calificaciones') {
+            return view('Situ.hechos.singleHecho')->with('hechos',$hechosPublicos);
+
+        }
+        if ($categoria->categoria == 'Trabajo Académico') {
+            return view('Situ.hechos.singleHecho')->with('hechos',$hechosPublicos);
+
+        }
+        if ($categoria->categoria == 'Recuerdos') {
+            return view('Situ.hechos.singleHecho')->with('hechos',$hechosPublicos);
+
+        }
+        if ($categoria->categoria == 'Portafolios profesional') {
+            return view('Situ.hechos.singleHecho')->with('hechos',$hechosPublicos);
+
+        }
+        if ($categoria->categoria == 'Frases guía') {
+            return view('Situ.hechos.singleHecho')->with('hechos',$hechosPublicos);
+
+        }
+        else {
+            return "aa";
+        }
+
+
+//        return view('Alumno.hecho.singleHecho')->with('hecho', $hecho);
 
     }
 
-    public function getHechoUsuario(Request $request){
-        $id =$request->id;
+    public function getHechoUsuario(Request $request)
+    {
+        $id = $request->id;
         $hecho = hechos::find($id);
 
         return response($hecho);
     }
 
 
-    public function alumnoDatos (){
+    public function alumnoDatos()
+    {
 
 
         $user = Sentinel::getUser();
-        $otros_datos=json_decode($user->otros_datos,true);
-        $etiquetas=$user->getEtiquetas()->get()->all();
-        $etiquetasPublic=Etiqueta::where('user_id',null)->get()->all();
-        return view('Alumno.datos.alumnoDatos')->with('user',$user)
-            ->with('etiquetas',$etiquetas)->with('etiquetasPublic',$etiquetasPublic)->with('otros_datos', $otros_datos);
+        $otros_datos = json_decode($user->otros_datos, true);
+        $etiquetas = $user->getEtiquetas()->get()->all();
+        $etiquetasPublic = Etiqueta::where('user_id', null)->get()->all();
+        return view('Alumno.datos.alumnoDatos')->with('user', $user)
+            ->with('etiquetas', $etiquetas)->with('etiquetasPublic', $etiquetasPublic)->with('otros_datos', $otros_datos);
     }
-    public function alumnoDatosAcademicos ($year=null){
 
-        if(empty($year)){
-            $year=1;
+    public function alumnoDatosAcademicos($year = null)
+    {
+
+        if (empty($year)) {
+            $year = 1;
         }
         $user = Sentinel::getUser();
 
-        $otros_datos=json_decode($user->otros_datos,true);
+        $otros_datos = json_decode($user->otros_datos, true);
 
-        $curso= $user->getDatosAcademicos()->where('curso',$year)->get()->first();
-        if(!empty($curso->asignaturas)){
-        $asignaturas=$curso->asignaturas;
-        }else{
-            $asignaturas=array();
+        $curso = $user->getDatosAcademicos()->where('curso', $year)->get()->first();
+        if (!empty($curso->asignaturas)) {
+            $asignaturas = $curso->asignaturas;
+        } else {
+            $asignaturas = array();
         }
-        return view('Alumno.datos.alumnoDatosAcademicos')->with('user',$user)
+        return view('Alumno.datos.alumnoDatosAcademicos')->with('user', $user)
             ->with('otros_datos', $otros_datos)
-            ->with('curso',$curso)
-            ->with('asignaturas',$asignaturas)->with('year',$year);
+            ->with('curso', $curso)
+            ->with('asignaturas', $asignaturas)->with('year', $year);
 
     }
 
@@ -114,49 +151,46 @@ class AlumnoController extends Controller
         }
 
 
+        if (!empty(Input::get('asignatura'))) {
+            if (!empty($asignaturas)) {
+                echo "aaaa";
+                $asignaturas = json_decode($cursoAlumno->asignaturas, false);
+                $resultado = array_merge($inputAsignaturas, $asignaturas);
 
-        if(!empty(Input::get('asignatura'))){
-            if (!empty($asignaturas)  ){
-            echo "aaaa";
-            $asignaturas = json_decode($cursoAlumno->asignaturas,false);
-             $resultado = array_merge($inputAsignaturas, $asignaturas);
+                $cursoAlumno->asignaturas = json_encode($resultado, false);
+            } else {
 
-           $cursoAlumno->asignaturas = json_encode($resultado,false);
-    }
-            else{
-
-                $cursoAlumno->asignaturas = json_encode($inputAsignaturas,false);
+                $cursoAlumno->asignaturas = json_encode($inputAsignaturas, false);
 
 
             }
-        }
-
-        else{
+        } else {
 
             return response("a");
         }
 
 
-       $cursoAlumno->user_id=$user->id;
-       $cursoAlumno->curso=Input::get('curso');
-       $cursoAlumno->grado=Input::get('grado');
+        $cursoAlumno->user_id = $user->id;
+        $cursoAlumno->curso = Input::get('curso');
+        $cursoAlumno->grado = Input::get('grado');
 
-         $cursoAlumno->save();
+        $cursoAlumno->save();
         Session::flash('msg', "cambios realizados");
 
-      return Redirect::back();
+        return Redirect::back();
 
     }
 
 
-    public function eliminarAsignatura($asignatura, $year){
+    public function eliminarAsignatura($asignatura, $year)
+    {
 
 
-        $user=Sentinel::getUser();
+        $user = Sentinel::getUser();
         $inputAsignaturas = array();
 
-        $curso= $user->getDatosAcademicos()->where('curso',$year)->first();
-        $asignaturas=json_decode($curso->asignaturas,false);
+        $curso = $user->getDatosAcademicos()->where('curso', $year)->first();
+        $asignaturas = json_decode($curso->asignaturas, false);
 //        $key=array_search($asignatura,$asignaturas);
 //            unset($asignaturas[$asignatura]);
 
@@ -167,7 +201,7 @@ class AlumnoController extends Controller
         }
         $resultado = array_merge($inputAsignaturas, $asignaturas);
 
-        $curso->asignaturas = json_encode($resultado,false);
+        $curso->asignaturas = json_encode($resultado, false);
 //        if (($key = array_search($asignatura, $asignaturas)) !== false) {
 //            unset($asignaturas[$key]);
 //        }
@@ -180,23 +214,19 @@ class AlumnoController extends Controller
     }
 
 
+    public function actualizarMisDatos(Request $request)
+    {
+        $user = Sentinel::getUser();
 
+        $user->first_name = Input::get('first_name');
+        $user->last_name = Input::get('last_name');
+        $otros_datos = array('facebook' => Input::get('facebook'), 'img' => Input::get('imagen'));
 
-
-
-
-    public function actualizarMisDatos(Request $request){
-      $user=Sentinel::getUser();
-
-        $user->first_name=Input::get('first_name');
-        $user->last_name=Input::get('last_name');
-        $otros_datos=array('facebook'=>Input::get('facebook'),'img'=>Input::get('imagen'));
-
-        $user->otros_datos=json_encode($otros_datos);
+        $user->otros_datos = json_encode($otros_datos);
 
 
         $credentials = [
-            'email'    => $user->email,
+            'email' => $user->email,
             'password' => Input::get('old_password'),
         ];
 
@@ -205,30 +235,28 @@ class AlumnoController extends Controller
             'password' => 'confirmed',
         );
 
-        $validator= Validator::make(Input::all(), $rules);
+        $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
             Session::flash('error', "Las contraseñas no coinciden");
 
             return Redirect::back()->withErrors(['msg', 'The Message']);
         }
 
-        if(Input::get('password')!=null){
+        if (Input::get('password') != null) {
 
             if (Activation::completed($user)) {
                 // If it is the case check credentials
-                    $user->password = Hash::make(Input::get('password'));
-                    $user->save();
+                $user->password = Hash::make(Input::get('password'));
+                $user->save();
                 Session::flash('msg', "cambios realizados");
                 return Redirect::back();
 
-            } else{
+            } else {
                 return response("fallo al completar");
             }
 
 
-
-
-        } else{
+        } else {
             $user->save();
 
             Session::flash('msg', "cambios realizados");
@@ -240,9 +268,6 @@ class AlumnoController extends Controller
     }
 
 
-
-
-
     public function showFormHecho($categoria)
     {
 
@@ -250,51 +275,53 @@ class AlumnoController extends Controller
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
         $curso = $usuario->getDatosAcademicos()->pluck('curso');
         $curso->all();
-        $etiqueta=Etiqueta::pluck('slug')->sortByDesc('id');
+        $etiqueta = Etiqueta::pluck('slug')->sortByDesc('id');
 
-        $categoria= Categorias::where('categoria', $categoria)->get()->first();
+        $categoria = Categorias::where('categoria', $categoria)->get()->first();
         $otros_datos = json_decode($usuario->otros_datos, true);
 
         if ($categoria->categoria == 'Calificaciones') {
             return view('hechos.calificaciones')->with('user', Sentinel::getUser())
-                ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta);
+                ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
 
         }
         if ($categoria->categoria == 'Trabajo Académico') {
             return view('hechos.trabajoAcademico')->with('user', Sentinel::getUser())
-                ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta);
+                ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
 //            return response($categorias->id);
 
         }
         if ($categoria->categoria == 'Recuerdos') {
             return view('hechos.recuerdos')->with('user', Sentinel::getUser())
-                ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta)
-                ->with('otros_datos',$otros_datos);
+                ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
+                ->with('otros_datos', $otros_datos);
 //            return response($categorias->id);
 
-        }if ($categoria->categoria == 'Portafolios profesional') {
-        return view('Alumno.datos.alumnoDatosLaboral')->with('user', Sentinel::getUser())
-            ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta)
-            ->with('otros_datos',$otros_datos);
+        }
+        if ($categoria->categoria == 'Portafolios profesional') {
+            return view('Alumno.datos.alumnoDatosLaboral')->with('user', Sentinel::getUser())
+                ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
+                ->with('otros_datos', $otros_datos);
 //            return response($categorias->id);
 
-    }if ($categoria->categoria == 'Frases guía') {
-            $hechos=hechos::where('categoria_id',3)->get();
-        return view('hechos.frasesGuia')->with('user', Sentinel::getUser())
-            ->with('curso', $curso)->with('categoria',$categoria)->with('etiqueta',$etiqueta)
-            ->with('otros_datos',$otros_datos)->with('hechos',$hechos);
+        }
+        if ($categoria->categoria == 'Frases guía') {
+            $hechos = hechos::where('categoria_id', 3)->get();
+            return view('hechos.frasesGuia')->with('user', Sentinel::getUser())
+                ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
+                ->with('otros_datos', $otros_datos)->with('hechos', $hechos);
 //            return response($categorias->id);
 
-    }
-        else{
+        } else {
             return "aa";
         }
     }
 
-    public function getAsignaturas($categoria,$curso){
-        $usuario= Sentinel::findById(Sentinel::getUser()->id);
+    public function getAsignaturas($categoria, $curso)
+    {
+        $usuario = Sentinel::findById(Sentinel::getUser()->id);
 
-        $curso= $usuario->getDatosAcademicos()->where('curso',$curso)->get()->first();
+        $curso = $usuario->getDatosAcademicos()->where('curso', $curso)->get()->first();
 
         return response(json_decode($curso->asignaturas));
 
@@ -303,7 +330,7 @@ class AlumnoController extends Controller
 
     public function showInvitarUsuario(Request $request)
     {
-        $roles=Role::pluck('Slug','id');
+        $roles = Role::pluck('Slug', 'id');
 
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
         $otros_datos = json_decode($usuario->otros_datos, true);
@@ -313,145 +340,140 @@ class AlumnoController extends Controller
     }
 
 
+    public function invitarUsuario(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
 
-        public function invitarUsuario(Request $request){
-            $validation = Validator::make($request->all(), [
-                'first_name' => 'required|string|max:255',
-                'last_name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
+        ]);
 
-            ]);
-
-            if ($validation->fails()) {
-                return Redirect::back()->withErrors($validation)->withInput();
-            }
-            $usuario = Sentinel::findById(Sentinel::getUser()->id);
-            $credentials = [
-                'email'    => Input::get('email'),
-                'password' => Input::get('password'),
-            ];
-            $rol=$request['roles'];
-            $role=$rol[0];
-            $invitado = Sentinel::register($request->all());
-            $invitado->roles()->sync([$role]);
-            $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
-            $invitado->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
-
-            //INVITADO . A LOS HECHOS QUE QUIERA EL USUARIO
-            if($role=='4'){
-                $invitado->nivel_acceso='2';
-            }
-            //PROFESOR . A CURRICULUM
-
-            elseif($role=='3'){
-
-                $invitado->nivel_acceso='3';
-            }
-            else{
-
-                $invitado->nivel_acceso='4';
-            }
-            $invitado->save();
-
-
-
-
-
-            $activation = Activation::create($invitado);
-            $activation = Activation::complete($invitado, $activation->code);
-
-            $request['name'];
-            $rol=$request['roles'];
-            $rol=$rol[0];
-
-
-
-            $invitado2=new Invitados();
-            $invitado2->invitado_id=$invitado->id;
-            $invitado2->alumno_id=$usuario->id;
-            $invitado2->nivel_acceso=$invitado->nivel_acceso;
-            $invitado2->save();
-
-            if($invitado){
-                $invitado->roles()->sync([$rol]);
-
-                Session::flash('message', 'Registration is completed');
-
-
-                Mail::send('email',['request' => $request->all()],function ($mensaje) use($request){
-
-                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
-                    $mensaje->subject("Welcome to site name");
-                    $mensaje->to($request['email'],$request['name']);
-
-
-                });
-//           return redirect('/');
-                return redirect()->back();
-            }
-            // Session::flash('message', 'There was an error with the registration' );
-            //Session::flash('status', 'error');
-            return Redirect::back();
+        if ($validation->fails()) {
+            return Redirect::back()->withErrors($validation)->withInput();
         }
+        $usuario = Sentinel::findById(Sentinel::getUser()->id);
+        $credentials = [
+            'email' => Input::get('email'),
+            'password' => Input::get('password'),
+        ];
+        $rol = $request['roles'];
+        $role = $rol[0];
+        $invitado = Sentinel::register($request->all());
+        $invitado->roles()->sync([$role]);
+        $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
+        $invitado->img = "/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
 
-    public function alumnoDatosLaborales ($year=null){
+        //INVITADO . A LOS HECHOS QUE QUIERA EL USUARIO
+        if ($role == '4') {
+            $invitado->nivel_acceso = '2';
+        } //PROFESOR . A CURRICULUM
 
-        if(empty($year)){
-            $year=1;
+        elseif ($role == '3') {
+
+            $invitado->nivel_acceso = '3';
+        } else {
+
+            $invitado->nivel_acceso = '4';
+        }
+        $invitado->save();
+
+
+        $activation = Activation::create($invitado);
+        $activation = Activation::complete($invitado, $activation->code);
+
+        $request['name'];
+        $rol = $request['roles'];
+        $rol = $rol[0];
+
+
+        $invitado2 = new Invitados();
+        $invitado2->invitado_id = $invitado->id;
+        $invitado2->alumno_id = $usuario->id;
+        $invitado2->nivel_acceso = $invitado->nivel_acceso;
+        $invitado2->save();
+
+        if ($invitado) {
+            $invitado->roles()->sync([$rol]);
+
+            Session::flash('message', 'Registration is completed');
+
+
+            Mail::send('email', ['request' => $request->all()], function ($mensaje) use ($request) {
+
+                $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "Site name");
+                $mensaje->subject("Welcome to site name");
+                $mensaje->to($request['email'], $request['name']);
+
+
+            });
+//           return redirect('/');
+            return redirect()->back();
+        }
+        // Session::flash('message', 'There was an error with the registration' );
+        //Session::flash('status', 'error');
+        return Redirect::back();
+    }
+
+    public function alumnoDatosLaborales($year = null)
+    {
+
+        if (empty($year)) {
+            $year = 1;
         }
         $user = Sentinel::getUser();
 
-        $otros_datos=json_decode($user->otros_datos,true);
-        $laboral=$user->getLaboral()->get();
+        $otros_datos = json_decode($user->otros_datos, true);
+        $laboral = $user->getLaboral()->get();
 
-        return view('Alumno.datos.alumnoDatosLaboral')->with('user',$user)
-            ->with('otros_datos', $otros_datos)->with('year',$year)
-            ->with('laboral',$laboral);
+        return view('Alumno.datos.alumnoDatosLaboral')->with('user', $user)
+            ->with('otros_datos', $otros_datos)->with('year', $year)
+            ->with('laboral', $laboral);
 
     }
-    public function actualizarMisDatosLaborales (){
 
-        $user=Sentinel::getUser();
-        $alumnoLaboral=new Laboral();
-        $alumnoLaboral->user_id=$user->id;
-        $alumnoLaboral->sector=Input::get('sector');
-        $alumnoLaboral->ubicacion=Input::get('ubicacion');
-        $alumnoLaboral->empresa=Input::get('empresa');
-        $alumnoLaboral->cargo=Input::get('cargo');
+    public function actualizarMisDatosLaborales()
+    {
 
-        $alumnoLaboral->descripcion=Input::get('descripcion');
+        $user = Sentinel::getUser();
+        $alumnoLaboral = new Laboral();
+        $alumnoLaboral->user_id = $user->id;
+        $alumnoLaboral->sector = Input::get('sector');
+        $alumnoLaboral->ubicacion = Input::get('ubicacion');
+        $alumnoLaboral->empresa = Input::get('empresa');
+        $alumnoLaboral->cargo = Input::get('cargo');
+
+        $alumnoLaboral->descripcion = Input::get('descripcion');
         $format = 'm/d/Y';
         $alumnoLaboral->fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
 
-        if(Input::get('endDate')){
+        if (Input::get('endDate')) {
 
             $alumnoLaboral->fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
             $alumnoLaboral->actual = "0";
 
-        }
-        else{
+        } else {
             $alumnoLaboral->actual = "1";
         }
 
-            $alumnoLaboral->save();
+        $alumnoLaboral->save();
 
 
-
-        $hecho=new hechos();
-        $hecho->user_id=$user->id;
-        $hecho->titulo_hecho='Trabajo';
-        $hecho->categoria_id=5;
-        $hecho->curso='';
-        $hecho->contenido="";
-        $hecho->proposito="";
-        $hecho->evidencia="";
-        $hecho->hechos_relacionados="";
-        $hecho->fecha_inicio=$alumnoLaboral->fecha_inicio;
+        $hecho = new hechos();
+        $hecho->user_id = $user->id;
+        $hecho->titulo_hecho = 'Trabajo';
+        $hecho->categoria_id = 5;
+        $hecho->curso = '';
+        $hecho->contenido = "";
+        $hecho->proposito = "";
+        $hecho->evidencia = "";
+        $hecho->hechos_relacionados = "";
+        $hecho->fecha_inicio = $alumnoLaboral->fecha_inicio;
         $hecho->publico = Input::get('acceso');
-        if(Input::get('acceso')=='publico'){
+        if (Input::get('acceso') == 'publico') {
             $hecho->nivel_acceso = "2";
 
-        }else{
+        } else {
 
             $hecho->nivel_acceso = "1";
 
@@ -459,13 +481,13 @@ class AlumnoController extends Controller
         if (isset($request->endDate)) {
 
             $fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
-            $hecho -> fecha_fin= $fecha_fin;
+            $hecho->fecha_fin = $fecha_fin;
 
         }
         $hecho->save();
-        $etiqueta1=new hecho_etiqueta();
-        $etiqueta1->hechos_id=$hecho->id;
-        $etiqueta1->etiqueta_id='CV';
+        $etiqueta1 = new hecho_etiqueta();
+        $etiqueta1->hechos_id = $hecho->id;
+        $etiqueta1->etiqueta_id = 'CV';
         $etiqueta1->save();
 
         return Redirect::back();
@@ -473,27 +495,55 @@ class AlumnoController extends Controller
 
     }
 
-    public function showCrearCategoria(Request $request){
+    public function showCrearCategoria(Request $request)
+    {
 
-        $etiqueta=Etiqueta::pluck('slug');
+        $etiqueta = Etiqueta::pluck('slug');
 
-        return view('Alumno.crearEtiqueta')->with('etiqueta',$etiqueta);
+        return view('Alumno.crearEtiqueta')->with('etiqueta', $etiqueta);
     }
 
 
+    public function crearNuevaEtiqueta(Request $request)
+    {
 
-    public function crearNuevaEtiqueta(Request $request){
+        $user = Sentinel::getUser();
 
-        $user=Sentinel::getUser();
-
-        $etiqueta=new Etiqueta();
-        $etiqueta->user_id=$user->id;
-        $etiqueta->nombre=Input::get('nombre');
-        $etiqueta->slug=Input::get('slug');
+        $etiqueta = new Etiqueta();
+        $etiqueta->user_id = $user->id;
+        $etiqueta->nombre = Input::get('nombre');
+        $etiqueta->slug = Input::get('slug');
         $etiqueta->save();
 
 
         return redirect()->back();
     }
+
+
+    public function actualizaAcceso(Request $request)
+    {
+        $user = Sentinel::getUser();
+        $hecho = hechos::where('id', $request->hecho)->first();
+//        return response($hecho->nivel_acceso);
+        if  (($hecho->publico)== "publico"){
+            $hecho->nivel_acceso = "1";
+            $hecho->publico = "privado";
+//            return response("aa");
+
+        }
+        else{
+
+            $hecho->nivel_acceso = "2";
+            $hecho->publico = "publico";
+//            return response("bb");
+
+        }
+
+        $hecho->save();
+       return response($hecho);
+    }
+
+
+
 
 }
