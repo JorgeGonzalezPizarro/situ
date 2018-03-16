@@ -159,34 +159,27 @@ El correo electronico ya existe</p></div>') !!}
                     <thead>
                     <tr>
                         <th>Invitado</th>
-                        <th>Cargo</th>
-                        <th>Fecha Inicio</th>
-                        <th>Fecha Fin</th>
-                        <th>Fecha Fin</th>
+                        <th>Rol</th>
+                        <th>Fecha Registro</th>
+                        <th>Último Login</th>
+                        <th>Número de Logins </th>
 
                     </tr>
                     </thead>
 
                     <tbody id="clickable">
 
-
                     @if(!empty($invitados))
-                        {{print_r($invitados)}}
+                        {{--{{print_r($invitados)}}--}}
                         {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
                         @foreach ($invitados as $invitado)
                             <tr>
-                                {{print_r($invitado)}}
+                                <td>{{$invitado->getUsuario()->get()->first()->first_name }}</td>
+                                <td>{{$invitado->get()->first()->rol }}</td>
+                                <td>{{$invitado->getUsuario()->get()->first()->created_at }}</td>
+                                <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
 
-                                <td>{{$invitado->getUsuario()->first()}}</td>
-                                {{--<td id="asignatura">{!!  $labor->cargo !!}</td>--}}
-                                {{--<td id="fechainicio">{!!  $labor->fecha_inicio !!}</td>--}}
-                                {{--@if($labor->actual=="1")--}}
-                                    {{--<td id="fechafin">  Actualidad </td>--}}
-                                {{--@else--}}
-                                    {{--<td id="fechafin">{!!  $labor->fecha_fin !!}</td>--}}
-                                {{--@endif--}}
-                                {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
-                                {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
+
                             </tr>
 
                         @endforeach

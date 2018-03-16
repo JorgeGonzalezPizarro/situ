@@ -60,15 +60,19 @@
                                     </div>
                                     <div class="form-inline" style="">
 
-                                        <div style="">
-                                            {!! Form::label('Curso', 'Curso') !!}
-                                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso','name' => 'curso']) !!}
+                                        <div class="form-inline" style="">
 
-                                            {{--{{Form::select('etiqueta', $c->curso)}}--}}
-                                            {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
-                                            {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
-                                            <select  style="width:40%;"class="form-control" id="asignaturas"></select>
+                                            <div style="text-align: center;">
+                                                {!! Form::label('Curso', 'Curso') !!}
+                                                {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
+                                                {{--{{Form::select('etiqueta', $c->curso)}}--}}
+                                                {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
+                                                {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
+                                                <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
+                                                <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
+                                                    Añadir Asignaturas</a>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -78,10 +82,13 @@
                                         {!! Form::file('archivo') !!}
                                     </div>
 
-                                        <div class="form-group" style="">
-                                            {!! Form::label('Etiquetas', 'Link tags') !!}
-                                            {!! Form::select('etiqueta', $etiqueta, NULL, ['class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                                    <div class="form-inline" style="">
+
+                                        <div style="text-align: center;">
+                                            {!! Form::label('Etiquetas', 'Etiquetas') !!}
+                                            {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','style'=>'width:40%;','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
                                         </div>
+                                    </div>
 
                                     <div class='col-md-12' style="    margin-top: 30px;">
                                         <div class="form-group">
@@ -216,13 +223,31 @@
         tinymce.init(editor_config);
     </script>﻿
 
+
     <script>
 
         $(document).ready(function () {
+
+            var sel = document.getElementById('etiquetas');
+            var opts = sel.options;
+            for (var i=0;i<opts.length;i++) {
+                opts[i].value = opts[i].text;
+            }
+            var sel1 = document.getElementById('inputCurso');
+            var opts1 = sel1.options;
+
+
+            for (var i=0;i<opts1.length;i++) {
+                opts1[i].value = opts1[i].text;
+            }
+
+            // $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
+
+
+
             var categoria=document.getElementById("categoria").innerHTML;
             if( $('#inputCurso').has('option').length > 0 ) {
                 var x = document.getElementById("inputCurso").selectedIndex;
-
                 var curso = (document.getElementsByTagName("option")[x].text);
                 $('#inputCurso').attr('value', curso);
                 $('#asignaturas').empty();
@@ -235,12 +260,30 @@
                     },
                     success: function (response) {
                         console.log(response);
-                        response.forEach(function (element) {
-                            $('#asignaturas')
-                                .append($("<option></option>")
-                                    .attr("value", element)
-                                    .text(element));
-                        });
+                        if (response.length  == 0) {
+                            document.getElementById('boton').disabled = true;
+                            // $( '#añadir_asignaturas').show();
+
+                            $('#asignaturas ').hide();
+                        }
+
+                        else{
+                            $( '#añadir_asignaturas').hide();
+
+                            $('#boton').removeClass('btn btn-info disabled');
+                            $('#boton').addClass('btn btn-success');
+                            document.getElementById('boton').disabled = false;
+                            document.getElementById('boton').disabled = false;
+                            response.forEach(function (element) {
+
+
+                                $('#asignaturas')
+                                    .append($("<option></option>")
+                                        .attr("value", element)
+                                        .text(element));
+                            });
+                        }
+
 
 
                         {{--window.location.href = "{{url('hechos') }}" +"/" +categoria+"/" +curso--}}
@@ -272,12 +315,31 @@
                         curso: curso,
                     },
                     success: function(response){ // What to do if we succeed
-                        response.forEach(function(element) {
-                            $('#asignaturas')
-                                .append($("<option></option>")
-                                    .attr("value",element)
-                                    .text(element));
-                        });
+                        if (response.length  == 0) {
+                            document.getElementById('boton').disabled = true;
+                            $( '#añadir_asignaturas').show();
+
+                            $('#asignaturas ').hide();
+                        }
+
+                        else{
+                            $( '#añadir_asignaturas').hide();
+                            $('#asignaturas ').show();
+
+                            $('#boton').removeClass('btn btn-info disabled');
+                            $('#boton').addClass('btn btn-success');
+                            document.getElementById('boton').disabled = false;
+                            document.getElementById('boton').disabled = false;
+                            response.forEach(function(element) {
+                                $('#asignaturas')
+                                    .append($("<option></option>")
+                                        .attr("value",element)
+                                        .text(element));
+                            });
+
+                        }
+
+
 
 
                         console.log(response);
@@ -292,16 +354,6 @@
             });
 
 
-
-
-            document.getElementById('boton').disabled = true;
-            $('i').on('click',function () {
-                $('#boton').removeClass('btn btn-info disabled');
-                $('#boton').addClass('btn btn-success');
-                document.getElementById('boton').disabled = false;
-
-
-            })
 
 
             $.datepicker.setDefaults($.datepicker.regional['es']);
@@ -333,6 +385,7 @@
                 );
 
             });
+
 
 
         });

@@ -337,10 +337,12 @@ class AlumnoController extends Controller
 
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
         $otros_datos = json_decode($usuario->otros_datos, true);
-        $invitados=$usuario->getProfesores($usuario->id)->all();
-        $profesores=$usuario->getInvitados($usuario->id)->all();
-        $invitados=array_merge($invitados,$profesores);
-        return view('Alumno.invitar')->with('user', $usuario)->with('otros_datos', $otros_datos)->withRoles($roles)->with('invitados',$invitados);
+        $invitados=$usuario->getProfesores($usuario->id);
+        $profesores=$usuario->getInvitados($usuario->id);
+        $invitados=$invitados->merge($profesores);
+        return view('Alumno.invitar')->with('user', $usuario)
+            ->with('otros_datos', $otros_datos)->withRoles($roles)
+            ->with('invitados',$invitados);
 
     }
 

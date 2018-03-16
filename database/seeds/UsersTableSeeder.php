@@ -32,6 +32,7 @@ class UsersTableSeeder extends Seeder
 
 
         $slug = ['Admin', 'Alu', 'Prof','Inv'];
+        $otros_datos=array('facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
 
         $name = ['Administrator', 'Alumno', 'Profesor','Invitado'];
         for ($i=0;$i<count($name);$i++){
@@ -45,18 +46,15 @@ class UsersTableSeeder extends Seeder
             ]);
         }
 
-
-
         $role=Sentinel::findRoleById(1);
-
-
         $user = Sentinel::register([
             'email' => 'ADMIN@gmail.com',
             'password'=> ('ADMIN'),
             'first_name' =>('Antonio'),
             'last_name'=> ('Fernandez'),
             'permissions'=> ['Administrator'],
-            'nivel_acceso'=>('1')
+            'nivel_acceso'=>('1'),
+            'otros_datos'=>json_encode($otros_datos)
         ]);
 
 
