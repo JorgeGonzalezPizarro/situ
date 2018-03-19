@@ -214,7 +214,7 @@
                     </li>
                 </ul>
                 <ul class="list-group">
-                    <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>
+                    <li class="list-group-item text-muted"> Etiquetas <i class="fa fa-dashboard fa-1x"></i>
 
                     </li>
                     @foreach($etiquetas as $etiqueta)

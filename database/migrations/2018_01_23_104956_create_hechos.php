@@ -79,7 +79,7 @@ class CreateHechos extends Migration
             $table->integer('alumno_id');
             $table->string('nivel_acceso');
             $table->string('rol');
-
+            $table->integer('numero_accesos');
             $table->timestamps();
 
 

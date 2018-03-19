@@ -8,7 +8,7 @@ class Invitados extends Model
 {
     public $table = "Invitados";
 
-    protected $fillable = ['id' , 'invitado_id','user_id'
+    protected $fillable = ['id' , 'invitado_id','user_id','numero_accesos'
 
     ];
     public function getUsuario(){

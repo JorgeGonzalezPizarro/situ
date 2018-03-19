@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Invitados;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -86,6 +87,10 @@ class LoginController extends Controller
                     return redirect('Situ/public')->withUser($user);
                 }
                 if (Sentinel::check() && Sentinel::inRole('Inv')) {
+
+                    $invitado=Invitados::where('invitado_id',Sentinel::getUser()->id)->get()->first();
+                    $invitado->numero_accesos=($invitado->numero_accesos)+1;
+                    $invitado->update();
                     return redirect('Situ/public')->withUser($user);
                 }
             }

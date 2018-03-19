@@ -178,6 +178,7 @@ El correo electronico ya existe</p></div>') !!}
                                 <td>{{$invitado->get()->first()->rol }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->created_at }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
+                                <td>{{$invitado->get()->first()->numero_accesos }}</td>
 
 
                             </tr>
