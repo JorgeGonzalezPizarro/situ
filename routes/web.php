@@ -51,7 +51,7 @@ Route::post('/Alumno/alumnoDashboard','AlumnoController@actualizaAcceso')->name(
 Route::get('Alumno/crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
 Route::get('/Alumno/hecho/singleHecho/','AlumnoController@getHechoUsuario')->name('showHecho');
 
-Route::get('Alumno/hecho/{id}/{categoria}', 'AlumnoController@showHecho');
+Route::get('Situ/public/{id?}/{categoria?}', 'SituController@showHecho');
 
 
 

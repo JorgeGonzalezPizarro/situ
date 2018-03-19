@@ -150,6 +150,22 @@
 " id="bs-example-navbar-collapse-1">
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
+                    <ul class="nav navbar-nav navbar-left">
+                        <a class="navbar-brand" href="#">
+                            <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+                        </a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Plataforma de Trayectoria Universitaria</a>
+                            </li>
+                    </ul>
+                    @if(Sentinel::check() &&( Sentinel::inRole('Inv') ||  Sentinel::inRole('Prof') ) )
+
+                    <div style="width:600px; height: auto; margin:0 auto;">
+                        <ul class="nav navbar-nav ">
+                            <li ><h2>Bienvenido al portal  de {{$alumno->getUsuario()->get()->first()->first_name}}  {{$alumno->getUsuario()->get()->first()->last_name}}</h2></li>
+                        </ul>
+                    </div>
+                    @endif
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
@@ -205,7 +221,7 @@
         </div>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav">
+            <ul class="nav navbar-nav side-nav"  style="  margin-top: 15px !important;">
                 @if(Sentinel::check() && Sentinel::inRole('Admin'))
                     <li class="">
                         <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>

@@ -126,7 +126,6 @@
                 .data();
             var cData = table.cell(this).data();
             var data = table.row(this).data();
-//alert( 'You clicked on '+data[2]+'\'s row' );
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
 
@@ -140,7 +139,7 @@
                     _token: CSRF_TOKEN
                 },
                 success: function (response) {
-                    window.location.href = "{{ url('Alumno/hecho') }}" + "/" + response['id'] + "/"+response['categoria'];
+                    window.location.href = "{{ url('Situ/public') }}" + "/" + response['id'] + "/"+response['categoria_id'];
                     console.log("aa+ " + response);
 
                 },

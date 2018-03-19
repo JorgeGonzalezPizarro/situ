@@ -123,9 +123,12 @@ class HechoController extends Controller
 
                 if(($request->categoria_id)==2) {
                     $calificacion=new Calificaciones();
-                    $calificacion->id_hechos=$hecho->id;
+
+                    $calificacion->hechos_id=$hecho->id;
                     $calificacion->calificacion=$request->calificacion;
                     $calificacion->asignatura=$request->asignatura;
+                    $calificacion->curso=$request->curso;
+
                     $calificacion->profesor=$request->profesor;
                     $calificacion->save();
 

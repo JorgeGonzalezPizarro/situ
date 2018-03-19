@@ -17,7 +17,7 @@ class Calificaciones extends Model
 
     public function getHecho(){
 
-        return $this->hasOne('App\hechos','id','id_hecho');
+        return $this->hasOne('App\hechos','id','hechos_id');
 
 
 
