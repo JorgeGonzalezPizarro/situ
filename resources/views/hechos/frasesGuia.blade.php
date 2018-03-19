@@ -8,29 +8,27 @@
 {{--<!-- (Optional) Latest compiled and minified JavaScript translation files -->--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>--}}
 
+
 @section('content')
 
 
 
 
     <div class="container target">
+
+
+        <h1 class="" style="display: none;">{{ $user->first_name  }}</h1>
+
+        <h1 class="" id="categoria"style="display: none;">{!! $categoria->categoria !!}</h1>
+        <br>
+        <br>
+
+
+
+
         <div class="row">
             {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true)) }}
 
-
-            <div class="col-sm-12">
-                <h1 class="" style="text-align: center">{{ $user->first_name  }}</h1>
-
-                <h1 class="" id="categoria"style="text-align: center">{!! $categoria->categoria !!}</h1>
-                <br>
-                <br>
-            </div>
-        </div>
-
-
-
-
-        <div class="row">
             <input type="hidden" value="{{count($hechos)}}" id="count">
 
             <div class="col-sm-12" style="" contenteditable="false">
@@ -134,146 +132,146 @@
 
 
 
-            var categoria=document.getElementById("categoria").innerHTML;
-            if( $('#inputCurso').has('option').length > 0 ) {
-                var x = document.getElementById("inputCurso").selectedIndex;
-                var curso = (document.getElementsByTagName("option")[x].text);
-                $('#inputCurso').attr('value', curso);
-                $('#asignaturas').empty();
-                $.ajax({
-                    type: "get",
-                    url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,
-                    encode: true,
-                    data: {
-                        curso: curso,
-                    },
-                    success: function (response) {
-                        console.log(response);
-                        if (response.length  == 0) {
-                            document.getElementById('boton').disabled = true;
-                            // $( '#añadir_asignaturas').show();
+            {{--var categoria=document.getElementById("categoria").innerHTML;--}}
+            {{--if( $('#inputCurso').has('option').length > 0 ) {--}}
+                {{--var x = document.getElementById("inputCurso").selectedIndex;--}}
+                {{--var curso = (document.getElementsByTagName("option")[x].text);--}}
+                {{--$('#inputCurso').attr('value', curso);--}}
+                {{--$('#asignaturas').empty();--}}
+                {{--$.ajax({--}}
+                    {{--type: "get",--}}
+                    {{--url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,--}}
+                    {{--encode: true,--}}
+                    {{--data: {--}}
+                        {{--curso: curso,--}}
+                    {{--},--}}
+                    {{--success: function (response) {--}}
+                        {{--console.log(response);--}}
+                        {{--if (response.length  == 0) {--}}
+                            {{--document.getElementById('boton').disabled = true;--}}
+                            {{--// $( '#añadir_asignaturas').show();--}}
 
-                            $('#asignaturas ').hide();
-                        }
+                            {{--$('#asignaturas ').hide();--}}
+                        {{--}--}}
 
-                        else{
-                            $( '#añadir_asignaturas').hide();
+                        {{--else{--}}
+                            {{--$( '#añadir_asignaturas').hide();--}}
 
-                            $('#boton').removeClass('btn btn-info disabled');
-                            $('#boton').addClass('btn btn-success');
-                            document.getElementById('boton').disabled = false;
-                            document.getElementById('boton').disabled = false;
-                            response.forEach(function (element) {
+                            {{--$('#boton').removeClass('btn btn-info disabled');--}}
+                            {{--$('#boton').addClass('btn btn-success');--}}
+                            {{--document.getElementById('boton').disabled = false;--}}
+                            {{--document.getElementById('boton').disabled = false;--}}
+                            {{--response.forEach(function (element) {--}}
 
 
-                                $('#asignaturas')
-                                    .append($("<option></option>")
-                                        .attr("value", element)
-                                        .text(element));
-                            });
-                        }
+                                {{--$('#asignaturas')--}}
+                                    {{--.append($("<option></option>")--}}
+                                        {{--.attr("value", element)--}}
+                                        {{--.text(element));--}}
+                            {{--});--}}
+                        {{--}--}}
 
 
 
                         {{--window.location.href = "{{url('hechos') }}" +"/" +categoria+"/" +curso--}}
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                        console.log(JSON.stringify(jqXHR));
-                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                    }
-                });
-            }
+                    {{--},--}}
+                    {{--error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
+                        {{--console.log(JSON.stringify(jqXHR));--}}
+                        {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--}--}}
 
 
 
 
-            $('#inputCurso').on('change', function() {
-                var x = document.getElementById("inputCurso").selectedIndex;
-                var x = document.getElementById("inputCurso").selectedIndex;
-                var pathArray = window.location.pathname.split( '/,' );
-                var secondLevelLocation = pathArray[0];
+            {{--$('#inputCurso').on('change', function() {--}}
+                {{--var x = document.getElementById("inputCurso").selectedIndex;--}}
+                {{--var x = document.getElementById("inputCurso").selectedIndex;--}}
+                {{--var pathArray = window.location.pathname.split( '/,' );--}}
+                {{--var secondLevelLocation = pathArray[0];--}}
 
-                var curso=(document.getElementsByTagName("option")[x].text);
-                $('#inputCurso').attr('value',curso);
-                $('#asignaturas').empty();
-                $.ajax({
-                    type:"get",
-                    url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,
-                    encode  : true,
-                    data: {
-                        curso: curso,
-                    },
-                    success: function(response){ // What to do if we succeed
-                        if (response.length  == 0) {
-                            document.getElementById('boton').disabled = true;
-                            $( '#añadir_asignaturas').show();
+                {{--var curso=(document.getElementsByTagName("option")[x].text);--}}
+                {{--$('#inputCurso').attr('value',curso);--}}
+                {{--$('#asignaturas').empty();--}}
+                {{--$.ajax({--}}
+                    {{--type:"get",--}}
+                    {{--url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,--}}
+                    {{--encode  : true,--}}
+                    {{--data: {--}}
+                        {{--curso: curso,--}}
+                    {{--},--}}
+                    {{--success: function(response){ // What to do if we succeed--}}
+                        {{--if (response.length  == 0) {--}}
+                            {{--document.getElementById('boton').disabled = true;--}}
+                            {{--$( '#añadir_asignaturas').show();--}}
 
-                            $('#asignaturas ').hide();
-                        }
+                            {{--$('#asignaturas ').hide();--}}
+                        {{--}--}}
 
-                        else{
-                            $( '#añadir_asignaturas').hide();
-                            $('#asignaturas ').show();
+                        {{--else{--}}
+                            {{--$( '#añadir_asignaturas').hide();--}}
+                            {{--$('#asignaturas ').show();--}}
 
-                            $('#boton').removeClass('btn btn-info disabled');
-                            $('#boton').addClass('btn btn-success');
-                            document.getElementById('boton').disabled = false;
-                            document.getElementById('boton').disabled = false;
-                            response.forEach(function(element) {
-                                $('#asignaturas')
-                                    .append($("<option></option>")
-                                        .attr("value",element)
-                                        .text(element));
-                            });
+                            {{--$('#boton').removeClass('btn btn-info disabled');--}}
+                            {{--$('#boton').addClass('btn btn-success');--}}
+                            {{--document.getElementById('boton').disabled = false;--}}
+                            {{--document.getElementById('boton').disabled = false;--}}
+                            {{--response.forEach(function(element) {--}}
+                                {{--$('#asignaturas')--}}
+                                    {{--.append($("<option></option>")--}}
+                                        {{--.attr("value",element)--}}
+                                        {{--.text(element));--}}
+                            {{--});--}}
 
-                        }
-
-
-
-
-                        console.log(response);
-
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-                        console.log(JSON.stringify(jqXHR));
-                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                    }
-                });
-
-            });
+                        {{--}--}}
 
 
 
 
-            $.datepicker.setDefaults($.datepicker.regional['es']);
-            $(function () {
-                document.getElementById("endDate").disabled = true;
+                        {{--console.log(response);--}}
 
-                $("#startDate").datepicker({
+                    {{--},--}}
+                    {{--error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
+                        {{--console.log(JSON.stringify(jqXHR));--}}
+                        {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
+                    {{--}--}}
+                {{--});--}}
 
-                        onSelect: function(date) {
-                            document.getElementById("endDate").disabled = false;
-
-                            $("#endDate" ).datepicker("destroy");
-
-                            $("#endDate").datepicker({
-                                minDate: date,
-                                inline : false
-
-                            })
-                            $( "#endDate" ).datepicker("refresh");
-                            $("#endDate").datepicker('setDate', null);
-
-                        },
-
-                    }
+            {{--});--}}
 
 
 
 
-                );
+            {{--$.datepicker.setDefaults($.datepicker.regional['es']);--}}
+            {{--$(function () {--}}
+                {{--document.getElementById("endDate").disabled = true;--}}
 
-            });
+                {{--$("#startDate").datepicker({--}}
+
+                        {{--onSelect: function(date) {--}}
+                            {{--document.getElementById("endDate").disabled = false;--}}
+
+                            {{--$("#endDate" ).datepicker("destroy");--}}
+
+                            {{--$("#endDate").datepicker({--}}
+                                {{--minDate: date,--}}
+                                {{--inline : false--}}
+
+                            {{--})--}}
+                            {{--$( "#endDate" ).datepicker("refresh");--}}
+                            {{--$("#endDate").datepicker('setDate', null);--}}
+
+                        {{--},--}}
+
+                    {{--}--}}
+
+
+
+
+                {{--);--}}
+
+            {{--});--}}
 
 
 
@@ -297,24 +295,24 @@
 
 
     </script>
-    <script>
-        $('.en_curso').change(function(ev) {
-            if ( $(this).is(':checked') ) {
-                document.getElementById("endDate").disabled = true;
-            }
-            else {
+    {{--<script>--}}
+        {{--$('.en_curso').change(function(ev) {--}}
+            {{--if ( $(this).is(':checked') ) {--}}
+                {{--document.getElementById("endDate").disabled = true;--}}
+            {{--}--}}
+            {{--else {--}}
 
-                $("#endDate").datepicker({
-                    inline : false
+                {{--$("#endDate").datepicker({--}}
+                    {{--inline : false--}}
 
-                })
-                $( "#endDate" ).datepicker("refresh");
+                {{--})--}}
+                {{--$( "#endDate" ).datepicker("refresh");--}}
 
-                document.getElementById("endDate").disabled = false;
-            }
+                {{--document.getElementById("endDate").disabled = false;--}}
+            {{--}--}}
 
-        });
-    </script>
+        {{--});--}}
+    {{--</script>--}}
     <script>
 
         $('#fraseButton').on('click', function () {

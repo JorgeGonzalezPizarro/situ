@@ -1,6 +1,11 @@
 @extends('layouts.layoutAdmin')
 <link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
+<style>
+    li{
+        border: 0px !important;
+    }
 
+</style>
 
 <!-- Latest compiled and minified JavaScript -->
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>--}}
@@ -12,51 +17,43 @@
 
 
 
+    <div class="row">
 
-    <div class="container target">
-        <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+                <h1 class="" style="display: none;">{{ $user->first_name  }}</h1>
+
+                <h1 class="" id="categoria"style="display: none;">{!! $categoria->categoria !!}</h1>
+                <br>
+                <br>
+
+
+
+
+
             {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true)) }}
-
-
-            <div class="col-sm-12">
-                <h1 class="" style="text-align: center">{{ $user->first_name  }}</h1>
-
-                <h1 class="" id="categoria"style="text-align: center">{!! $categoria->categoria !!}</h1>
-                <br>
-                <br>
-            </div>
-        </div>
-
-
-
-
-        <div class="row">
-
 
             <div class="col-sm-12" style="" contenteditable="false">
 
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
 
 
                     <div class="panel panel-info">
-                        <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-                            <div class="collapse navbar-collapse" id="navbarColor03">
+                        {{--<nav class="navbar navbar-light" style="background-color: #e3f2fd;">--}}
+                            {{--<div class="collapse navbar-collapse" id="navbarColor03">--}}
 
 
-                            </div>
-                        </nav>
+                            {{--</div>--}}
+                        {{--</nav>--}}
                         <div class="panel-body">
-                            <div class="row">
 
 
                                 {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
-                                <div class='col-md-12' style="    margin-top: 10px;
-                                    ">
                                         <div class="form-inline" style="">
 
-                                                <div style="text-align: center;">
-                                                    {!! Form::label('Curso', 'Curso') !!}
+                                            {!! Form::label('Curso', 'Curso') !!}<br>
                                                     {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
                                                     {{--{{Form::select('etiqueta', $c->curso)}}--}}
@@ -65,29 +62,25 @@
                                                     <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
                                                     <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
                                                         Añadir Asignaturas</a>
-                                                </div>
                                         </div>
-                                            <div class="form-inline" style=" margin-top: 40px !important;">
-                                                <div style="text-align: center;">
+                                    <hr>
+                                    <div class="form-inline" style="">
 
 
-                                            {!! Form::label('Calificación', 'Calificación') !!}
+                                            {!! Form::label('Calificación', 'Calificación') !!}<br>
                                             {!! Form::text('calificacion', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'Calificacion')) !!}
 
                                             {!! Form::text('profesor', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'Profesor')) !!}
-
-                                                </div>
-
-                                            </div>
-
-
-                                    <div class="form-inline" style="">
-
-                                        <div style="text-align: center;">
-                                            {!! Form::label('Etiquetas', 'Etiquetas') !!}
-                                        {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','style'=>'width:40%;','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
-                                        </div>
                                     </div>
+                                    <br>
+                                    <hr>
+
+
+
+
+
+                                <br>
+                                <hr>
                                     <div class='col-md-12' style="    margin-top: 30px;">
                                         <div class="form-group">
                                             {!! Form::label('text', 'Detalles') !!}
@@ -96,58 +89,80 @@
 
                                             </div>
                                     </div>
-                                    <div class='col-md-12'>
-                                        <label for="Fecha de  Inicio" class="cols-sm-2 control-label">Fecha de Inicio</label>
-
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
-                                            <div class="form-group">
-                                                {!! Form::text('startDate',null, array('class' => 'form-control','required'=>'true', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY')) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='col-md-12'>
-                                        <label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>
-
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
-                                            <div class="form-group">
-                                                {!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}
-
-
-                                            </div>
-
-                                        </div>
-                                        {!! Form::label('text', 'En curso') !!}
-
-                                        {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}
-
-                                    </div>
-                                    <div class='col-md-5'>
-                                        {!! Form::label('Acceso', 'Acceso') !!}
-                                        {!! Form::select('acceso', array('publico' => 'Publico', 'privado' => 'Privado'), NULL, ['class' => 'form-control','style'=>'width:40%;' ,'name' => 'acceso']) !!}
-
-                                        {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
-                                        {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
-                                        </div>
-                                        <div class='col-md-9' style="    margin-top: 30px;text-align: center;
-                                          margin-left: 200px;">
-
-                                            {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
-
-                                        </div>
-
-                                        {!! Form::close() !!}
-
-                                    </div>
-                                </div>
-                            </div>
-
-
                         </div>
                     </div>
+            </div>
+        </div>
+        <br>
+        <br>
+
+
+
+                    {{--<div class="panel panel-info">--}}
+                        {{--<nav class="navbar navbar-light" style="background-color: #e3f2fd;">--}}
+                        {{--<div class="collapse navbar-collapse" id="navbarColor03">--}}
+
+
+                        {{--</div>--}}
+                        {{--</nav>--}}
+                        {{--<div class="panel-body">--}}
+        <div class="col-md-4">
+            <div class="col-sm-12">
+                <!--left col-->
+                <ul class="list-group">
+                    <li class="list-group-item text-left">              <h5 class="card-header">Detalles de la calificacion</h5>
+                    </li>
+                    <li class="list-group-item text-left"><span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
+
+                                                {!! Form::text('startDate',null, array('class' => 'form-control','required'=>'true', 'id'=>'startDate', 'placeholder' => ' Fecha')) !!}
+                    </li>
+
+                    <li class="list-group-item text-left">
+                        <h5 class="card-header">Etiquetas</h5>
+                            <span>{!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                              </span>
+                        </li>
+
+                    <li class="list-group-item text-left">
+                        <h5 class="card-header">Acceso</h5>
+                        <span>{!! Form::select('acceso', array('publico' => 'Publico', 'privado' => 'Privado'), NULL, ['class' => 'form-control' ,'name' => 'acceso']) !!}</span>
+                    </li>
+                        {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
+                        {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
+                                    {{--<div class='col-md-12'>--}}
+                                        {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
+
+                                        {{--<div class="input-group">--}}
+                                            {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--{!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}--}}
+
+
+                                            {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--{!! Form::label('text', 'En curso') !!}--}}
+
+                                        {{--{{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}--}}
+
+                                    {{--</div>--}}
+
+
+
+                    </ul>
+            </div>
+        </div>
+
+
+                <div class='col-md-12' style="    margin-top: 30px;text-align: center;
+                                          margin-left: 200px;">
+
+                    {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
+
                 </div>
 
+                {!! Form::close() !!}
+            </div>
 
                 <div id="push"></div>
             </div>
@@ -356,22 +371,22 @@
 
         $.datepicker.setDefaults($.datepicker.regional['es']);
         $(function () {
-            document.getElementById("endDate").disabled = true;
+            // document.getElementById("endDate").disabled = true;
 
             $("#startDate").datepicker({
 
                     onSelect: function(date) {
-                        document.getElementById("endDate").disabled = false;
-
-                        $("#endDate" ).datepicker("destroy");
-
-                        $("#endDate").datepicker({
-                            minDate: date,
-                            inline : false
-
-                        })
-                        $( "#endDate" ).datepicker("refresh");
-                        $("#endDate").datepicker('setDate', null);
+                        // document.getElementById("endDate").disabled = false;
+                        //
+                        // $("#endDate" ).datepicker("destroy");
+                        //
+                        // $("#endDate").datepicker({
+                        //     minDate: date,
+                        //     inline : false
+                        //
+                        // })
+                        // $( "#endDate" ).datepicker("refresh");
+                        // $("#endDate").datepicker('setDate', null);
 
                     },
 

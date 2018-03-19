@@ -15,21 +15,12 @@
 
                         <!-- Author -->
                         <p class="lead">
-                            de
                             <a href="">{{$user-> first_name. " ". $user->last_name}} </a>
                         </p>
 
 
-                        <!-- Date/Time -->
-
-
-                        <!-- Preview Image -->
 
                         <hr>
-
-                        <!-- Post Content -->
-                        {!! $hecho->contenido !!}
-
 
 
                         @if(!empty($hecho->ruta_imagen))
@@ -39,7 +30,8 @@
                             <!--left col-->
                             <ul class="list-group">
 
-                                <li class="list-group-item text-muted" contenteditable="false">Detalles de la calificacion</li>
+                                <li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Detalles de la calificacion</h5>
+                                    </li>
                                 <li class="list-group-item text-right"><span class="pull-left"><strong
                                                 class="">Curso </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>
                                 </li>
@@ -67,61 +59,50 @@
 
 
             </div>
-
-            <!-- Sidebar Widgets Column -->
-            <div class="col-md-4">
-                <p>Fecha del hecho {{$hecho->fecha_inicio}}</p>
-                <p>Fecha de creacion {{$hecho->fecha_inicio}}</p>
-
-                <hr>
-                <!-- Search Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
+            <div class="card my-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
                   <button class="btn btn-secondary" type="button">Go!</button>
                 </span>
-                        </div>
                     </div>
                 </div>
+            </div>
+        <hr>
+            <div class="col-md-4">
+                <div class="card-body">
+                            <ul class="list-group">
 
-                <!-- Categories Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Categories</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">{{$hecho->id}}</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">HTML</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Freebies</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="list-unstyled mb-0">
-                                    <li>
-                                        <a href="#">JavaScript</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">CSS</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tutorials</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+
+                                <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                class="">Fecha  </strong></span><span><p> {{$hecho->fecha_inicio}}</p></span></li>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                class="">Creado </strong></span><span><p>{{$hecho->created_at}}</p></span></li>
+                            {{--Fecha del hecho {{$hecho->fecha_inicio}}</input>--}}
+                            </ul>
                 </div>
+            </div>
+                <hr>
+                <!-- Search Widget -->
 
+            <div class="col-md-4">
+                <ul class="list-group">
+
+                <li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Etiquetas</h5>
+                </li>
+                                    <!-- Categories Widget -->
+                @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
+
+                                        <li class="list-group-item text-left">
+                                                    <a href="#">{{$etiquetas->etiqueta_id}}</a>
+                                       </li>
+                                    @endforeach
+
+                                </ul>
+
+                </div>
                 <!-- Side Widget -->
                 <div class="card my-4">
                     <h5 class="card-header">Side Widget</h5>
@@ -132,18 +113,11 @@
 
             </div>
 
-
+            @if(!empty($hechos))
                 <!-- Post Content Column -->
                     <div class="col-lg-12">
                         <h1 class="mt-4">  Otras calificaciones</h1>
                     @foreach($hechos as $hecho)
-                        <!-- Title -->
-
-                        <!-- Author -->
-
-                        {!! $hecho->contenido !!}
-
-
 
                         @if(!empty($hecho->ruta_imagen))
                             <img class="img-fluid rounded" style="width: 600px; height: 300px;"src="{{$hecho->ruta_imagen}}" alt="">
@@ -169,8 +143,9 @@
                             </div>
 
 
-            @endforeach
+                @endforeach
                     </div>
+                @endif
 
         </div>
         <!-- /.row -->

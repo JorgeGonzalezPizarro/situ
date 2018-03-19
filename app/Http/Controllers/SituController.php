@@ -58,11 +58,14 @@ class SituController extends Controller
 //            $categoria = $hecho->getCategoria()->get()->first();
 
             view()->share('categorias', $categorias);
-        }else {
+
+        }
+        else {
             $usuario = Sentinel::getUser();
             $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
             $hecho = hechos::find($id);
-            $hechosPublicos = hechos::where('nivel_acceso', '>=', $usuario->nivel_acceso)->get()->all();
+            $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso],
+                ['categoria_id',$categoria],['id','!=',$hecho->id]])->get()->all();
             $categoria = $hecho->getCategoria()->get()->first();
             $curso = $hecho->curso;
             $categorias = Categorias::all();
@@ -72,7 +75,8 @@ class SituController extends Controller
         $otros_datos = json_decode($usuario->otros_datos, true);
         if(isset($categoria)) {
             if ($categoria->categoria == 'Calificaciones') {
-                return view('Situ.hechos.singleHecho.calificacion')->with('hecho', $hecho)->with('hechos', $hechosPublicos)->with('user', $usuario);
+                return view('Situ.hechos.singleHecho.calificacion')->with('hecho', $hecho)
+                    ->with('hechos', $hechosPublicos)->with('user', $usuario);
 
             }
             if ($categoria->categoria == 'Trabajo Académico') {

@@ -6,30 +6,25 @@
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>--}}
 
 {{--<!-- (Optional) Latest compiled and minified JavaScript translation files -->--}}
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>--}}
-
 @section('content')
 
 
 
 
     <div class="container target">
+
+
+        <h1 class="" style="display: none;">{{ $user->first_name  }}</h1>
+
+        <h1 class="" id="categoria"style="display: none;">{!! $categoria->categoria !!}</h1>
+        <br>
+        <br>
+
+
+
+
         <div class="row">
             {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true)) }}
-
-
-            <div class="col-sm-12">
-                <h1 class="" style="text-align: center">{{ $user->first_name  }}</h1>
-
-                <h1 class="" id="categoria"style="text-align: center">{!! $categoria->categoria!!}</h1>
-
-            </div>
-        </div>
-
-
-
-
-        <div class="row">
 
 
             <div class="col-sm-12" style="" contenteditable="false">

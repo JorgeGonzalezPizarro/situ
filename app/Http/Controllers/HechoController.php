@@ -175,8 +175,16 @@ class HechoController extends Controller
         $fecha_inicio =$dt->format('Y-m-d H:i:s');
         $hecho->fecha_inicio = $fecha_inicio;
             /*CALIFICACIONES*/
+        if($request->acceso){
+            $hecho->nivel_acceso = "2";
+            $hecho->publico = "publico";
 
+        }else{
 
+            $hecho->nivel_acceso = "1";
+            $hecho->publico = "privado";
+
+        }
             $hecho->save();
 
 
