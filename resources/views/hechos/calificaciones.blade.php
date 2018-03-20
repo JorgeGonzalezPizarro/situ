@@ -122,12 +122,24 @@
                             <span>{!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
                               </span>
                         </li>
-
+                    <li class="list-group-item text-left">
+                        <h5 class="card-header">Proposito</h5>
+                        <span>
+                                            {!! Form::text('proposito', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'proposito')) !!}
+                        </span>
+                    </li>
+                    <li class="list-group-item text-left">
+                        <h5 class="card-header">Evidencia</h5>
+                        <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+                            <img  id="myimage" title="profile image" src="https://www.metatube.com/assets/metatube/video/img/Upload.svg" class="img-circle img-responsive" name="evidencia">
+                          </a>                    </li>
                     <li class="list-group-item text-left">
                         <h5 class="card-header">Acceso</h5>
                         <span>{!! Form::select('acceso', array('publico' => 'Publico', 'privado' => 'Privado'), NULL, ['class' => 'form-control' ,'name' => 'acceso']) !!}</span>
                     </li>
-                        {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
+                    {!! Form::text('evidencia',null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
+
+                    {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
                         {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
                                     {{--<div class='col-md-12'>--}}
                                         {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
@@ -171,7 +183,16 @@
             </footer>
 
         </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+
+                    <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        </div>
+    </div>
 
         </div><!-- /#wrapper -->
 
@@ -449,4 +470,20 @@
         });
 
     </script>
+
+    <script>function responsive_filemanager_callback(field_id){
+            console.log(field_id);
+
+            var url=jQuery('#'+field_id).val();
+            // $('#myModal').modal('hide');
+
+
+            $('#myimage').attr('src', url);
+
+        }
+
+
+
+    </script>
+
 @stop

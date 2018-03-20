@@ -49,9 +49,10 @@
                                 <div class="panel-heading">Otros detalles
 
                                 </div>
-                                <div class="panel-body">{{ $hecho->contenido}}.
-
+                                <div class="panel-body"><span><p>{!! $hecho->contenido !!}
+                                        </p></span><img src="{{$hecho->evidencia}}"></img>
                                 </div>
+
                             </div>
 
                         </div>
@@ -82,6 +83,16 @@
                                                 class="">Creado </strong></span><span><p>{{$hecho->created_at}}</p></span></li>
                             {{--Fecha del hecho {{$hecho->fecha_inicio}}</input>--}}
                             </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card-body">
+                    <ul class="list-group">
+
+
+                        <li class="list-group-item text-right"><span class="pull-left"><strong
+                                        class="">Proposito  </strong></span><span><p> {{$hecho->proposito}}</p></span></li>
+                    </ul>
                 </div>
             </div>
                 <hr>
@@ -121,7 +132,10 @@
 
                         @if(!empty($hecho->ruta_imagen))
                             <img class="img-fluid rounded" style="width: 600px; height: 300px;"src="{{$hecho->ruta_imagen}}" alt="">
-                        @endif
+
+                            @endif
+
+
                             <!--left col-->
                             <div class="col-md-4">
                             <ul class="list-group">

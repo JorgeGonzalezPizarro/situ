@@ -11,145 +11,168 @@
 
 
 
-    <div class="container target">
+
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Title -->
+            <h1 class="" style="display: none;">{{ $user->first_name  }}</h1>
+
+            <h1 class="" id="categoria"style="display: none;">{!! $categoria->categoria !!}</h1>
+            <br>
+            <br>
 
 
-        <h1 class="" style="display: none;">{{ $user->first_name  }}</h1>
-
-        <h1 class="" id="categoria"style="display: none;">{!! $categoria->categoria !!}</h1>
-        <br>
-        <br>
 
 
 
-
-        <div class="row">
             {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true)) }}
-
 
             <div class="col-sm-12" style="" contenteditable="false">
 
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
 
 
-                    <div class="panel panel-info">
+                <div class="panel panel-info">
 
-                        <div class="panel-body">
-                            <div class="row">
-
-                                {{ Form::hidden('categoria_id',$categoria->id) }}
+                    <div class="panel-body">
 
 
-                                <div class='col-md-12' style="    ">
-                                    <div class="form-group">
-                                        {!! Form::label('title', 'Post Title') !!}
-                                        {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('class' => 'form-control', 'placeholder' => 'Title')) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('image', 'Upload Image') !!}
-                                        {!! Form::file('imagen') !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('slug', 'Post slug') !!}
-                                        {!! Form::text('proposito', Input::old('proposito'), array('class' => 'form-control', 'placeholder' => 'Proposito')) !!}
-                                    </div>
-                                    <div class="form-inline" style="">
+                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
-                                        <div class="form-inline" style="">
+                        <div class="form-inline" >
 
-                                            <div style="text-align: center;">
-                                                {!! Form::label('Curso', 'Curso') !!}
-                                                {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
-
-                                                {{--{{Form::select('etiqueta', $c->curso)}}--}}
-                                                {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
-                                                {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
-                                                <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
-                                                <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
-                                                    Añadir Asignaturas</a>
-                                            </div>
-                                        </div>
+                            {!! Form::label('Titulo', 'Titulo') !!}<br>
+                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Title')) !!}
                                     </div>
 
+<br>
+                    <hr>
+                        <div class="form-inline" style="">
 
-                                    <div class="form-group">
-                                        {!! Form::label('Archivos / Documentacion', 'Archivos / Documentacion') !!}
-                                        {!! Form::file('archivo') !!}
-                                    </div>
+                            {!! Form::label('Curso', 'Curso') !!}<br>
+                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
-                                    <div class="form-inline" style="">
+                            {{--{{Form::select('etiqueta', $c->curso)}}--}}
+                            {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
+                            {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
 
-                                        <div style="text-align: center;">
-                                            {!! Form::label('Etiquetas', 'Etiquetas') !!}
-                                            {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','style'=>'width:40%;','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
-                                        </div>
-                                    </div>
-
-                                    <div class='col-md-12' style="    margin-top: 30px;">
-                                        <div class="form-group">
-                                            {!! Form::label('text', 'Detalles') !!}
-                                            {!! Form::textarea('contenido', Input::old('contenido') , ['style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: 70px;']) !!}
+                        </div>
+                        <hr>
 
 
-                                        </div>
-                                    </div>
-                                    <div class='col-md-5'>
-                                        <label for="Fecha de  Inicio" class="cols-sm-2 control-label">Fecha de Inicio</label>
 
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
-                                            <div class="form-group">
-                                                {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY')) !!}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class='col-md-5'>
-                                        <label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>
-
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
-                                            <div class="form-group">
-                                                {!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}
+                        <div class='col-md-12' style="    margin-top: 30px;">
+                            <div class="form-group">
+                                {!! Form::label('text', 'Detalles') !!}
+                                {!! Form::textarea('contenido', Input::old('contenido') , ['style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: 70px;']) !!}
 
 
-                                            </div>
-
-                                        </div>
-                                        {!! Form::label('text', 'En curso') !!}
-
-                                        {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}
-                                    </div>
-                                    <div class='col-md-9' style="    margin-top: 30px;text-align: center;
-                                      margin-left: 200px;">
-
-                                        {!! Form::submit('Create Post', array('class'=>'btn btn-info disabled' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
-
-                                    </div>
-
-                                    {!! Form::close() !!}
-
-                                </div>
                             </div>
                         </div>
-
-
                     </div>
+
                 </div>
             </div>
-
-
-            <div id="push"></div>
         </div>
-        <footer id="footer">
+    <br>
+    <br>
 
-        </footer>
+
+    <div class="col-md-4">
+        <div class="col-sm-12">
+            <!--left col-->
+            <ul class="list-group">
+                <li class="list-group-item text-left">              <h5 class="card-header">Detalles </h5>
+                </li>
+                <li class="list-group-item text-left"><span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
+
+                    {!! Form::text('startDate',null, array('class' => 'form-control','required'=>'true', 'id'=>'startDate', 'placeholder' => ' Fecha')) !!}
+                </li>
+                <li class="list-group-item text-left"><span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
+
+                {!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}
+                   En curso {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}
+
+                </li>
+                <li class="list-group-item text-left">
+                    <h5 class="card-header">Etiquetas</h5>
+                    <span>{!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                              </span>
+                </li>
+                <li class="list-group-item text-left">
+                    <h5 class="card-header">Proposito</h5>
+                    <span>
+                                            {!! Form::text('proposito', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'proposito')) !!}
+                        </span>
+                </li>
+                <li class="list-group-item text-left">
+                    <h5 class="card-header">Evidencia</h5>
+                    <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+                        <img  id="myimage" title="profile image" src="https://www.metatube.com/assets/metatube/video/img/Upload.svg" class="img-circle img-responsive" name="evidencia">
+                    </a>                    </li>
+                <li class="list-group-item text-left">
+                    <h5 class="card-header">Acceso</h5>
+                    <span>{!! Form::select('acceso', array('publico' => 'Publico', 'privado' => 'Privado'), NULL, ['class' => 'form-control' ,'name' => 'acceso']) !!}</span>
+                </li>
+                {!! Form::text('evidencia',null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
+
+                {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
+                {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
+                {{--<div class='col-md-12'>--}}
+                {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
+
+                {{--<div class="input-group">--}}
+                {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
+                {{--<div class="form-group">--}}
+                {{--{!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}--}}
+
+
+                {{--</div>--}}
+
+                {{--</div>--}}
+                {{--{!! Form::label('text', 'En curso') !!}--}}
+
+                {{--{{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}--}}
+
+                {{--</div>--}}
+
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class='col-md-12' style="    margin-top: 30px;text-align: center;
+                                          margin-left: 200px;">
+
+        {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
 
     </div>
 
+    {!! Form::close() !!}
+    </div>
+
+    <div id="push"></div>
+    </div>
+    <footer id="footer">
+
+    </footer>
+
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+
+            <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        </div>
+    </div>
 
     </div><!-- /#wrapper -->
-
-
 
 
 
@@ -187,7 +210,7 @@
                 "emoticons template paste textcolor colorpicker textpattern"
             ],
             image_advtab: true ,
-
+            height : "480",
             external_filemanager_path:"/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/",
             filemanager_title:"Responsive Filemanager" ,
             external_plugins: { "filemanager" : "plugins/responsive_filemanager/filemanager/plugin.min.js"},
