@@ -47,6 +47,8 @@ class HechoController extends Controller
                 $hecho->contenido = Input::get('contenido');
                 $hecho->proposito = Input::get('proposito');
                 $hecho->evidencia = Input::get('evidencia');
+                $hecho->ruta_archivo = Input::get('ruta_archivo');
+
 //                $hecho -> etiqueta= Input::get('etiqueta');
                 $hecho->hechos_relacionados = Input::get('hechos_relacionados');
                 $format = 'd/m/Y';

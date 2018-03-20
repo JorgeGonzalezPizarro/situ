@@ -29,6 +29,7 @@ class CreateHechos extends Migration
             $table->date('fecha_fin')->nullable();
             $table->string('ruta_imagen')->nullable();
             $table->string('publico')->nullable();
+            $table->string('ruta_archivo')->nullable();
 
             $table->timestamps();
         });
@@ -80,7 +81,7 @@ class CreateHechos extends Migration
             $table->integer('alumno_id');
             $table->string('nivel_acceso');
             $table->string('rol');
-            $table->integer('numero_accesos');
+            $table->integer('numero_accesos')->nullable();
             $table->timestamps();
 
 

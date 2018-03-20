@@ -50,7 +50,6 @@
 
                                 </div>
                                 <div class="panel-body"><span><p>{!! $hecho->contenido !!}
-                                        </p></span><img src="{{$hecho->evidencia}}"></img>
                                 </div>
 
                             </div>
@@ -115,12 +114,17 @@
 
                 </div>
                 <!-- Side Widget -->
+            <div class="col-md-4">
                 <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
+                    <h5 class="card-header">Evidencia</h5>
                     <div class="card-body">
-                        You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                        @if(!empty($hecho->evidencia))
+                            <img class="img-fluid rounded" style="width: auto; height: auto;"src="{{$hecho->evidencia}}" alt="">
+                        @endif
                     </div>
                 </div>
+
+            </div>
 
             </div>
 

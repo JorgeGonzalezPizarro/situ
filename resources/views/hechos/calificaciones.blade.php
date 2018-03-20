@@ -68,7 +68,7 @@
 
 
                                             {!! Form::label('Calificación', 'Calificación') !!}<br>
-                                            {!! Form::text('calificacion', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'Calificacion')) !!}
+                                            {!! Form::text('calificacion', null, array('class' => 'form-control','required','style'=>'width:40%;', 'placeholder' => 'Calificacion')) !!}
 
                                             {!! Form::text('profesor', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'Profesor')) !!}
                                     </div>
@@ -124,9 +124,9 @@
                         </li>
                     <li class="list-group-item text-left">
                         <h5 class="card-header">Proposito</h5>
-                        <span>
-                                            {!! Form::text('proposito', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'proposito')) !!}
-                        </span>
+                       <p> <span>
+                                            {!! Form::text('proposito', null, array('class' => 'form-control','required','style'=>'width:40%;', 'placeholder' => 'proposito')) !!}
+                        </span></p>
                     </li>
                     <li class="list-group-item text-left">
                         <h5 class="card-header">Evidencia</h5>

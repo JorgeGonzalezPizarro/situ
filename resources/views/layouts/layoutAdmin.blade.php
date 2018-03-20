@@ -108,7 +108,12 @@
             word-wrap: normal;
             white-space: pre;
         }
-
+        .list-group-item:last-child {
+            margin-bottom: 0;
+            border-bottom-right-radius: 4px;
+            height: 50px;
+            border-bottom-left-radius: 4px;
+        }
         /* Panel */
         .panel-lightblue {
             border-color: #5bc0de;

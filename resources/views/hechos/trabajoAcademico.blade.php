@@ -44,7 +44,7 @@
                         <div class="form-inline" >
 
                             {!! Form::label('Titulo', 'Titulo') !!}<br>
-                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Title')) !!}
+                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('required','class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Title')) !!}
                                     </div>
 
 <br>
@@ -60,7 +60,12 @@
 
                         </div>
                         <hr>
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="customFile">Añadir archivo( .pdf .txt .word)</label>
+                            <a data-toggle="modal" href="" data-target="#myModal2" class="iframe-btn" type="button">
 
+                                <input type="text" name="ruta_archivo" class="form-control" id="mipdf"></a>
+                        </div>
 
 
                         <div class='col-md-12' style="    margin-top: 30px;">
@@ -104,7 +109,7 @@
                 <li class="list-group-item text-left">
                     <h5 class="card-header">Proposito</h5>
                     <span>
-                                            {!! Form::text('proposito', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'proposito')) !!}
+                                            {!! Form::text('proposito', null, array('class' => 'form-control','required','style'=>'width:40%;', 'placeholder' => 'proposito')) !!}
                         </span>
                 </li>
                 <li class="list-group-item text-left">
@@ -117,6 +122,7 @@
                     <span>{!! Form::select('acceso', array('publico' => 'Publico', 'privado' => 'Privado'), NULL, ['class' => 'form-control' ,'name' => 'acceso']) !!}</span>
                 </li>
                 {!! Form::text('evidencia',null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
+                {!! Form::text('ruta_archivo',null, ['id'=>'fieldID3','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
 
                 {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
                 {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
@@ -150,7 +156,6 @@
         {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
 
     </div>
-
     {!! Form::close() !!}
     </div>
 
@@ -166,7 +171,17 @@
 
             <!-- Modal content-->
 
-            <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
+            <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=1&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+        </div>
+    </div>
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+
+            <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID3'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
         </div>
@@ -279,7 +294,7 @@
                     success: function (response) {
                         console.log(response);
                         if (response.length  == 0) {
-                            document.getElementById('boton').disabled = true;
+                            // document.getElementById('boton').disabled = true;
                             // $( '#añadir_asignaturas').show();
 
                             $('#asignaturas ').hide();
@@ -417,10 +432,15 @@
 
             var url=jQuery('#'+field_id).val();
             // $('#myModal').modal('hide');
+            console.log(url);
 
+            if(field_id=='fieldID3'){
+                $('#mipdf').attr('value', url);
 
-            $('#myimage').attr('src', url);
-
+            }
+            else {
+                $('#myimage').attr('src', url);
+            }
         }
 
 
