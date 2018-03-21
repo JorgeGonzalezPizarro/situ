@@ -17,9 +17,8 @@
             {{ Form::open(array('route' => 'invitar', 'class' => 'form-style-8','files' => true)) }}
 
 
-            <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+            <div class="col-sm-2" style="float: right;">
                     <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-                    <i id=" " class="fa fa-pencil"></i></a>
             </div>
         </div>
 
@@ -105,10 +104,19 @@ El correo electronico ya existe</p></div>') !!}
                                             </td>
                                         </tr>
                                         <tr>
+                                        <td><strong class=""> </strong></td>
+                                        <td>
+
+                                            <input name="password_confirmation" class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required   id="password_confirmation" type="password" value="">
+
+                                        </td>
+                                        </tr>
+                                        <tr>
                                             <td><strong class="">Rol:</strong></td>
                                             <td>
                                             {{--{!! Form::select($role->Slug, null, ['class' => 'form-control','placeholder '=>'Enter your  name']) !!}--}}
                                                 {!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['class' => 'form-control chosen-select']) !!}
+
 
                                             </td>
                                         </tr>
@@ -119,12 +127,7 @@ El correo electronico ya existe</p></div>') !!}
                                             @if (Session::has('msg'))
                                                 <div class="alert alert-info">{{ Session::get('msg') }}</div>
                                             @endif
-                                            <td><strong class=""> </strong></td>
-                                            <td>
 
-                                                <input name="password_confirmation" class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required   id="password_confirmation" type="password" value="">
-
-                                            </td>
                                         </tr>
 
 

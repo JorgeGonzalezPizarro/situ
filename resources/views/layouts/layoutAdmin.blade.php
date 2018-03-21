@@ -94,6 +94,11 @@
             line-height: 1.4em;
             min-width: 600px;
         }
+        .img-circle {
+            border-radius: 50%;
+            width: 70px;
+        }
+
         pre {
             border: none;
             background: #fff;
@@ -135,6 +140,7 @@
         ul.nav li.dropdown:hover ul.dropdown-menu {
             display: block;
         }
+
     </style>
     @yield('css')
 

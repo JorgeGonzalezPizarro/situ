@@ -53,12 +53,13 @@
 
                                         <div class="form-inline" style="">
 
-                                            {!! Form::label('Curso', 'Curso') !!}<br>
+                                            {!! Form::label('Curso', 'Curso - Asignatura') !!}<br>
                                                     {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
                                                     {{--{{Form::select('etiqueta', $c->curso)}}--}}
                                                     {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
                                                     {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
+
                                                     <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
                                                     <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
                                                         Añadir Asignaturas</a>
@@ -67,7 +68,7 @@
                                     <div class="form-inline" style="">
 
 
-                                            {!! Form::label('Calificación', 'Calificación') !!}<br>
+                                            {!! Form::label('Calificación', 'Calificación - Profesor') !!}<br>
                                             {!! Form::text('calificacion', null, array('class' => 'form-control','required','style'=>'width:40%;', 'placeholder' => 'Calificacion')) !!}
 
                                             {!! Form::text('profesor', null, array('class' => 'form-control','style'=>'width:40%;', 'placeholder' => 'Profesor')) !!}
@@ -125,7 +126,7 @@
                     <li class="list-group-item text-left">
                         <h5 class="card-header">Proposito</h5>
                        <p> <span>
-                                            {!! Form::text('proposito', null, array('class' => 'form-control','required','style'=>'width:40%;', 'placeholder' => 'proposito')) !!}
+                                            {!! Form::text('proposito', null, array('class' => 'form-control','required', 'placeholder' => 'proposito')) !!}
                         </span></p>
                     </li>
                     <li class="list-group-item text-left">
@@ -188,7 +189,7 @@
 
             <!-- Modal content-->
 
-                    <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
+                    <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=1&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
         </div>

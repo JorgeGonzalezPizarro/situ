@@ -85,7 +85,8 @@ class SituController extends Controller
 
             }
             if ($categoria->categoria == 'Recuerdos') {
-                return view('Situ.hechos.singleHecho')->with('hechos', $hechosPublicos);
+                return view('Situ.hechos.singleHecho.recuerdos')->with('hecho', $hecho)
+                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario);
 
             }
             if ($categoria->categoria == 'Portafolios profesional') {

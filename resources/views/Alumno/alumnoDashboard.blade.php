@@ -3,9 +3,8 @@
 
 @section('content')
 
-    <div class="col-lg-10 col-lg-offset-1">
+    <div class="col-lg-12 col-lg-offset-0">
 
-        <h1><i class="fa fa-users"></i></h1>
         <div class='col-md-12' style="    margin-top: 30px; float: left;">
             <div class="col-md-9">
                 {!! Form::textarea('contenido', Input::old('contenido') , ['id'=>'contenido','placeholder'=>'Frase guía','style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: 70px;']) !!}
@@ -44,7 +43,7 @@
                         <tr id="" style="cursor: pointer">
                             <td id="id">{{$hecho->id}}</td>
                             <td id="click">{{$hecho->created_at}}</td>
-                            <td id="click">{{ str_limit($hecho->contenido,50,'...' )}}</td>
+                            <td id="click">{!!  str_limit($hecho->contenido,50,'...' )!!}</td>
                             <td id="click">{{$hecho->fecha_inicio}}</td>
                             <td id="click">{{$hecho->getCategoria()->get()->first()->categoria }}</td>
 

@@ -4,41 +4,27 @@
 @section('content')
     <!-- Page Content -->
     <div class="container">
+        <div class="col-lg-8">
     @foreach($hechos as $hecho)
-        <div class="row">
-
-            <!-- Post Content Column -->
-            <div class="col-lg-8">
-
-                <!-- Title -->
-                <h1 class="mt-4">{{$hecho->titulo_hecho}}</h1>
-
-                <!-- Author -->
-                <p class="lead">
-                    by
-                    <a href="#">Start Bootstrap</a>
-                </p>
-
-                <hr>
-
-                <!-- Date/Time -->
-                <p>{{$hecho->fecha_inicio}}</p>
-
-                <hr>
-
-                <!-- Preview Image -->
-
-                <hr>
-
-                <!-- Post Content -->
-                {!! $hecho->contenido !!}
+                @foreach($hechos as $hecho)
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">{{$hecho->titulo_hecho}}</h4>
+                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>{{$hecho->contenido}}</p>
+                                </div>
+                            </div>
+                        </li>
 
 
-            </div>
-
-
-    </div>
+                    </ul>
+                @endforeach
         @endforeach
+        </div>
     </div>
     <!-- /.container -->
 @endsection

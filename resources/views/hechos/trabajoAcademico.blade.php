@@ -103,14 +103,11 @@
                 </li>
                 <li class="list-group-item text-left">
                     <h5 class="card-header">Etiquetas</h5>
-                    <span>{!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
-                              </span>
+                   {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
                 </li>
                 <li class="list-group-item text-left">
                     <h5 class="card-header">Proposito</h5>
-                    <span>
-                                            {!! Form::text('proposito', null, array('class' => 'form-control','required','style'=>'width:40%;', 'placeholder' => 'proposito')) !!}
-                        </span>
+                                            {!! Form::text('proposito', null, array('class' => 'form-control','required', 'placeholder' => 'proposito')) !!}
                 </li>
                 <li class="list-group-item text-left">
                     <h5 class="card-header">Evidencia</h5>

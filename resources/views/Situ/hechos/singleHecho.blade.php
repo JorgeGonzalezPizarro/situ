@@ -9,31 +9,28 @@
 
             @foreach($hechos as $hecho)
 
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                 <!-- Post Content Column -->
 
                     <!-- Title -->
-                    <h1 class="mt-4">{{$hecho->titulo_hecho}}</h1>
+                            <ul class="timeline">
+                                <li>
+                                    <div class="timeline-panel">
+                                        <div class="timeline-heading">
+                                             <h4 class="timeline-title">{{$hecho->titulo_hecho}}</h4>
+                                           <h5 class="timeline-title">{{$hecho->getCategoria()->get()->first()->categoria}}</h5>
 
-                    <!-- Author -->
-                    <p class="lead">
-                        by
-                        <a href="#">Start Bootstrap</a>
-                    </p>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></span>
+<br>
+                                            <span class="pull-left">   {!!  str_limit($hecho->contenido,50,'...' )!!}</span>
+                                        </div>
+                                    </div>
+                                </li>
 
-                    <hr>
 
-                    <!-- Date/Time -->
-                    <p>{{$hecho->fecha_inicio}}</p>
-
-                    <hr>
-
-                    <!-- Preview Image -->
-
-                    <hr>
-
-                    <!-- Post Content -->
-                    {!! $hecho->contenido !!}
+                            </ul>
 
                     </div>
 

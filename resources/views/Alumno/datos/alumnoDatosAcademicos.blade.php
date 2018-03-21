@@ -15,17 +15,17 @@
 
     <div class="container target">
         <div class="row">
-            {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}
+            {{--{{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}--}}
 
 
-            <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+            <div class="col-sm-2" style="float: right;">
                     <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-                    <i id=" " class="fa fa-pencil"></i></a>
             </div>
         </div>
 
 
 
+        {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}
 
         <div class="row">
             <nav class="navbar navbar-light" style="background-color: #e3f2fd;">

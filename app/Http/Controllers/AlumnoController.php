@@ -301,7 +301,7 @@ class AlumnoController extends Controller
 
         }
         if ($categoria->categoria == 'Portafolios profesional') {
-            return view('Alumno.datos.alumnoDatosLaboral')->with('user', Sentinel::getUser())
+            return Redirect::to('Alumno/alumnoDatos/datosLaboral')->with('user', Sentinel::getUser())
                 ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
                 ->with('otros_datos', $otros_datos);
 //            return response($categorias->id);
@@ -312,7 +312,6 @@ class AlumnoController extends Controller
             return view('hechos.frasesGuia')->with('user', Sentinel::getUser())
                 ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
                 ->with('otros_datos', $otros_datos)->with('hechos', $hechos);
-//            return response($categorias->id);
 
         } else {
             return "aa";

@@ -49,7 +49,7 @@
                                 <div class="panel-heading">Otros detalles
 
                                 </div>
-                                <div class="panel-body"><span><p>{!! $hecho->contenido !!}
+                                <div class="panel-body"><span><p>{!! $hecho->contenido !!}</p></span>
                                 </div>
 
                             </div>
@@ -114,15 +114,23 @@
 
                 </div>
                 <!-- Side Widget -->
-            <div class="col-md-4">
-                <div class="card my-4">
-                    <h5 class="card-header">Evidencia</h5>
-                    <div class="card-body">
-                        @if(!empty($hecho->evidencia))
-                            <img class="img-fluid rounded" style="width: auto; height: auto;"src="{{$hecho->evidencia}}" alt="">
-                        @endif
-                    </div>
-                </div>
+                    <div class="col-md-4">
+                <ul class="list-group">
+
+
+                    <li class="list-group-item text-left">
+
+                        <h5 class="card-header">Evidencia</h5>
+                    </li>
+                    <li class="list-group-item text-left" style="height: auto !important;">
+                        <p>
+                            @if(!empty($hecho->evidencia))
+
+                                <img class="img-fluid rounded" style="width: 330px; height: 240px;"src="{{$hecho->evidencia}}" alt="">
+                            @endif
+                        </p>
+                    </li>
+                </ul>
 
             </div>
 
@@ -130,8 +138,10 @@
 
             @if(!empty($hechos))
                 <!-- Post Content Column -->
-                    <div class="col-lg-12">
-                        <h1 class="mt-4">  Otras calificaciones</h1>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h1 class="mt-4" style="padding-left: 15px">  Relacionado con  {{$hecho->titulo_hecho}}</h1>
+                            <hr>
                     @foreach($hechos as $hecho)
 
                         @if(!empty($hecho->ruta_imagen))
@@ -142,22 +152,35 @@
 
                             <!--left col-->
                             <div class="col-md-4">
-                            <ul class="list-group">
+                                <ul class="list-group">
 
-                                <li class="list-group-item text-muted" contenteditable="false">Detalles de la calificacion</li>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                class="">Curso </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>
-                                </li>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>
-                                </li>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>
-                                </li>
+                                    <li class="list-group-item text-muted" contenteditable="false">Detalles</li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha publicación </strong></span><span><p>{{$hecho->created_at}}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha del {{$hecho->getCategoria()->get()->first()->categoria}}  </strong></span><span><p>{{$hecho->fecha_inicio}}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Contenido </strong></span><span><p>{!!  str_limit($hecho->contenido,50,'...' )!!}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class=""> </strong></span>
+                                        <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
+                                    </p></span>  </li>
+                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
+                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
+                                    {{--</li>--}}
 
-                            </ul>
+                                </ul>
                             </div>
 
 

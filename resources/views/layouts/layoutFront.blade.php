@@ -93,7 +93,20 @@
             font-size: 13px;
             line-height: 1.4em;
             min-width: 600px;
+        }.img-circle {
+             border-radius: 50%;
+             width: 70px;
+         }
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: -1px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            min-height: 70px !important;
         }
+
         pre {
             border: none;
             background: #fff;
@@ -251,7 +264,6 @@
 
     <div id="page-wrapper">
 
-        <div class="container-fluid">
 
             @if (Session::has('permission'))
                 <div class="alert alert-danger">
@@ -261,7 +273,6 @@
         <!-- /.content -->
             @yield('content')
 
-        </div><!-- /.container-fluid -->
 
     </div><!-- /#page-wrapper -->
 

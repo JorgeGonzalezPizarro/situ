@@ -23,9 +23,8 @@
             {{ Form::open(array('route' => 'actualizarDatosLaboral', 'class' => 'form-style-8','files' => true)) }}
 
 
-            <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+            <div class="col-sm-2" style="float: right;">
                     <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-                    <i id=" " class="fa fa-pencil"></i></a>
             </div>
         </div>
 
@@ -396,13 +395,11 @@
                                 <th>Cargo</th>
                                 <th>Fecha Inicio</th>
                                 <th>Fecha Fin</th>
-                                <th>Fecha Fin</th>
 
                             </tr>
                             </thead>
 
                             <tbody id="clickable">
-
 
                             @if(!empty($laboral))
                                 {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
