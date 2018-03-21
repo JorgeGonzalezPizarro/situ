@@ -13,7 +13,7 @@ class hechos extends Model
     protected $fillable = [ 'user_id' ,
         'categoria_id','titulo_hecho', 'curso', 'contenido', 'proposito', 'evidencia',
         'nivel_acceso', 'hechos_relacionados', 'fecha_inicio','fecha_fin','proposito', 'evidencia',
-        'ruta_imagen','ruta_archivo'
+        'ruta_imagen','ruta_archivo','laboral_id'
     ];
     public $timestamps = true;
 
@@ -42,6 +42,13 @@ class hechos extends Model
     public   function getCategoria() {
 
         return $this->belongsTo('App\Categorias','categoria_id','id');
+
+
+
+    }
+    public   function getLaboral() {
+
+        return $this->belongsTo('App\Laboral','laboral_id','id');
 
 
 

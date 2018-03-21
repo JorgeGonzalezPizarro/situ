@@ -20,7 +20,7 @@
 
     <div class="container target">
         <div class="row">
-            {{ Form::open(array('route' => 'actualizarDatosLaboral', 'class' => 'form-style-8','files' => true)) }}
+            {{ Form::open(array('route' => 'actualizarDatosLaboral', 'class' => 'form-style-8','files' => true,'id'=>'formulario')) }}
 
 
             <div class="col-sm-2" style="float: right;">
@@ -83,7 +83,7 @@
                                         <tr>
                                             <td><strong class="">Sector-Actividad</strong></td>
                                             <td>
-                                                <select class="selectpicker dropup" id="sector" data-live-search="true" data-dropupAuto="true" name="sector" title = " Seleccione " data-noneSelectedText="">
+                                                <select form="formulario" class="selectpicker dropup" id="sector" data-live-search="true" data-dropupAuto="true" name="sector" title = " Seleccione " data-noneSelectedText="">
                                                     <option value="-1"></option>
                                                     <option value="11">Actividades financieras, banca y seguros</option>
                                                     <option value="22">Agencia de publicidad</option>
@@ -275,7 +275,7 @@
                                         <tr>
                                             <td><strong class="">Ubicacion</strong></td>
                                             <td>
-                                                <select class="selectpicker dropup" name="ubicacion" id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
+                                                <select form="formulario" class="selectpicker dropup" name="ubicacion" id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
 
                                                 </select>
                                             </td>
@@ -315,13 +315,9 @@
                                                 <div class="form-group">
                                                     {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY','style'=>'    margin-bottom: 0px !important;')) !!}
                                                 </div>
-                                                    {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
-                                                    {{--<div class="form-group">--}}
-                                                        {{--{!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}--}}
 
 
                                                     </div>
-                                                {{--</div>--}}
                                          </td>
 
 

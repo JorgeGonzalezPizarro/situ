@@ -80,6 +80,14 @@
                             <a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>
                         </a>
                     </div>
+                    <div class="panel-body">
+
+                        <i class="fa fa-linkedin fa-2x"></i>  {!! Form::text('linkedin', null, ['id'=>'fieldIDlinkedin',
+                        'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['linkedin'] ]) !!}
+                        <a href="{!! $otros_datos['linkedin'] !!}" class="">
+                            <a href="#" id="clickableIn"> <i id=" " class="fa fa-pencil"></i></a>
+                        </a>
+                    </div>
                 </div>
 
 
@@ -351,7 +359,13 @@
 
 
         });
+        $('#clickableIn').on('click', function () {
 
+            $('#fieldIDlinkedin').attr('readonly', false).focus().css("background-color", "#bfe1e847")
+
+
+
+        });
 
 
     {{--var data = table--}}

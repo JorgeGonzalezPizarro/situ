@@ -83,7 +83,7 @@ class RegisterController extends Controller
           if ($validation->fails()) {
                 return Redirect::back()->withErrors($validation)->withInput();
          }
-         $otros_datos=array('facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
+         $otros_datos=array('linkedin'=>'','facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
         $rol=$request['roles'];
         $role=$rol[0];
 //        return response($role);

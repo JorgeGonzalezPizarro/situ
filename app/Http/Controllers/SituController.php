@@ -60,7 +60,19 @@ class SituController extends Controller
             view()->share('categorias', $categorias);
 
         }
-        else {
+        elseif($id=='0' &&!is_null($categoria)) {
+            $usuario = Sentinel::getUser();
+            $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $hecho = hechos::find($id);
+            $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso],
+                ['categoria_id',$categoria]])->get()->all();
+            $categoria = Categorias::where('id',$categoria)->get()->first();
+//            $curso = $hecho->curso;
+            $categorias = Categorias::all();
+//            return $hechosPublicos;
+            view()->share('categorias', $categorias);
+        }
+        else{
             $usuario = Sentinel::getUser();
             $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
             $hecho = hechos::find($id);
@@ -94,7 +106,10 @@ class SituController extends Controller
 
             }
             if ($categoria->categoria == 'Portafolios profesional') {
-                return view('Situ.hechos.singleHecho')->with('hechos', $hechosPublicos);
+
+                return view('Situ.hechos.singleHecho.portafolioProfesional')->with('hecho', $hecho)
+                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
+                    ->with('alumno',$alumno);
 
             }
             if ($categoria->categoria == 'Frases guía') {

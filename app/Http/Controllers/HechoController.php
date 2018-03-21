@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Calificaciones;
 use App\Etiqueta;
 use App\hecho_etiqueta;
+use Illuminate\Validation\Rules\In;
 use Redirect;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controllers;
@@ -48,7 +49,6 @@ class HechoController extends Controller
                 $hecho->proposito = Input::get('proposito');
                 $hecho->evidencia = Input::get('evidencia');
                 $hecho->ruta_archivo = Input::get('ruta_archivo');
-
 //                $hecho -> etiqueta= Input::get('etiqueta');
                 $hecho->hechos_relacionados = Input::get('hechos_relacionados');
                 $format = 'd/m/Y';

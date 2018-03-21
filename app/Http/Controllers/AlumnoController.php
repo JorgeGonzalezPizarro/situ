@@ -222,7 +222,7 @@ class AlumnoController extends Controller
 
         $user->first_name = Input::get('first_name');
         $user->last_name = Input::get('last_name');
-        $otros_datos = array('facebook' => Input::get('facebook'), 'img' => Input::get('imagen'));
+        $otros_datos = array('linkedin'=>Input::get('linkedin'),'facebook' => Input::get('facebook'), 'img' => Input::get('imagen'));
 
         $user->otros_datos = json_encode($otros_datos);
 
@@ -301,7 +301,7 @@ class AlumnoController extends Controller
 
         }
         if ($categoria->categoria == 'Portafolios profesional') {
-            return Redirect::to('Alumno/alumnoDatos/datosLaboral')->with('user', Sentinel::getUser())
+            return Redirect::to('Situ/public/0/5')->with('user', Sentinel::getUser())
                 ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
                 ->with('otros_datos', $otros_datos);
 //            return response($categorias->id);
@@ -368,7 +368,7 @@ class AlumnoController extends Controller
         $invitado->roles()->sync([$role]);
         $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
 //        $invitado->img = "/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
-        $otros_datos=array('facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
+        $otros_datos=array('linkedin'=>'','facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png',);
         $invitado->otros_datos=json_encode($otros_datos);
 
         //INVITADO . A LOS HECHOS QUE QUIERA EL USUARIO
@@ -480,6 +480,7 @@ class AlumnoController extends Controller
         $hecho->hechos_relacionados = "";
         $hecho->fecha_inicio = $alumnoLaboral->fecha_inicio;
         $hecho->publico = Input::get('acceso');
+        $hecho->laboral_id=$alumnoLaboral->id;
         if (Input::get('acceso') == 'publico') {
             $hecho->nivel_acceso = "2";
 

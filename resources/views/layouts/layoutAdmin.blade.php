@@ -257,6 +257,7 @@
                 @endif
             </ul>
         </div>
+
         <!-- /.navbar-collapse -->
     </nav>
 
