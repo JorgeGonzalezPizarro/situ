@@ -76,17 +76,21 @@ class SituController extends Controller
         if(isset($categoria)) {
             if ($categoria->categoria == 'Calificaciones') {
                 return view('Situ.hechos.singleHecho.calificacion')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('user', $usuario);
+                    ->with('hechos', $hechosPublicos)->with('user', $usuario)->with('alumno',$alumno);
+
 
             }
             if ($categoria->categoria == 'Trabajo Académico') {
                 return view('Situ.hechos.singleHecho.trabajoAcademico')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario);
+                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
+                    ->with('alumno',$alumno);
 
             }
             if ($categoria->categoria == 'Recuerdos') {
                 return view('Situ.hechos.singleHecho.recuerdos')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario);
+                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
+                    ->with('alumno',$alumno);
+
 
             }
             if ($categoria->categoria == 'Portafolios profesional') {

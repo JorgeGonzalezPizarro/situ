@@ -82,7 +82,7 @@ Route::POST('/hechos/{categoria?}/{curso?}', 'HechoController@fraseguia')->name(
 
 
 /*PUBLICO*/
-Route::get('/Situ/public','SituController@getHechosPublicos')->name('index');
+//Route::get('/Situ/public','SituController@getHechosPublicos')->name('index');
 
 
 Auth::routes();

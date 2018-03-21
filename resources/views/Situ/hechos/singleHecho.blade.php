@@ -25,6 +25,8 @@
                                             <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></span>
 <br>
                                             <span class="pull-left">   {!!  str_limit($hecho->contenido,50,'...' )!!}</span>
+                                            <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
+                                    </p></span>
                                         </div>
                                     </div>
                                 </li>
