@@ -59,6 +59,8 @@ Route::get('Alumno/alumnoDatos','AlumnoController@alumnoDatos')->name('misDatos'
 Route::post('Alumno/alumnoDatos','AlumnoController@actualizarMisDatos')->name('actualizarDatos');
 Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}','AlumnoController@alumnoDatosAcademicos')->name('misDatosAcademicos');
 Route::post('Alumno/alumnoDatos/datosAcademicos','AlumnoController@actualizarMisDatosAcademicos')->name('actualizarDatosAcademicos');
+Route::put('Alumno/alumnoDatos/datosLaboral/','AlumnoController@actualizarMisDatosFormacion')->name('actualizarDatosFormacion');
+
 Route::get('Alumno/alumnoDatos/datosAcademicos/{year?}/{asignatura?}','AlumnoController@eliminarAsignatura')->name('eliminarAsignatura');
 Route::get('Alumno/alumnoDatos/datosLaboral/{year?}/{asignatura?}','AlumnoController@alumnoDatosLaborales')->name('misDatosLaborales');
 Route::post('Alumno/alumnoDatos/datosLaboral/','AlumnoController@actualizarMisDatosLaborales')->name('actualizarDatosLaboral');

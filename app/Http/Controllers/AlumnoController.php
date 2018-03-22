@@ -182,7 +182,51 @@ class AlumnoController extends Controller
         return Redirect::back();
 
     }
+    public function actualizarMisDatosFormacion()
+    {
+//        $user = Sentinel::getUser();
+//        $cursoAlumno = CursoAlumno::firstOrCreate(['curso' => Input::get('curso'), 'user_id' => $user->id],
+//            ['curso' => Input::get('curso'), 'user_id' => Input::get('user´_id')]
+//
+//
+//        );
+//        $asignaturas = ($cursoAlumno->asignaturas);
+//        $inputAsignaturas = array();
+//        for ($i = 0; $i < count(Input::get('asignatura')); $i++) {
+//            $inputAsignaturas[$i] = Input::get('asignatura')[$i];
+//
+//        }
+//
+//
+//        if (!empty(Input::get('asignatura'))) {
+//            if (!empty($asignaturas)) {
+//                echo "aaaa";
+//                $asignaturas = json_decode($cursoAlumno->asignaturas, false);
+//                $resultado = array_merge($inputAsignaturas, $asignaturas);
+//
+//                $cursoAlumno->asignaturas = json_encode($resultado, false);
+//            } else {
+//
+//                $cursoAlumno->asignaturas = json_encode($inputAsignaturas, false);
+//
+//
+//            }
+//        } else {
+//
+//            return response("a");
+//        }
+//
+//
+//        $cursoAlumno->user_id = $user->id;
+//        $cursoAlumno->curso = Input::get('curso');
+//        $cursoAlumno->grado = Input::get('grado');
+//
+//        $cursoAlumno->save();
+//        Session::flash('msg', "cambios realizados");
 
+        return response(Input::get('centro'));
+
+    }
 
     public function eliminarAsignatura($asignatura, $year)
     {
