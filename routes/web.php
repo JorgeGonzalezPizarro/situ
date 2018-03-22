@@ -71,7 +71,7 @@ Route::post('Alumno/crearEtiqueta','AlumnoController@crearNuevaEtiqueta')->name(
 //Route::get('Alumno/AlumnoDatos/datosAcademicos/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 
 
-
+Route::get('pdf', 'PdfController@cv');
 /*HEHCOS*/
 
 Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos');

@@ -156,6 +156,28 @@ Schema::create('alumno_laboral', function (Blueprint $table) {
 
 });
 
+
+        Schema::create('alumno_formacion', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->string('centro')->nullable();
+            $table->string('ubicacion')->nullable();
+            $table->string('titulacion')->nullable();
+            $table->string('disciplina_academica')->nullable();
+            $table->timestamp('fecha_inicio')->nullable();
+            $table->timestamp('fecha_fin')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('actual')->nullable();
+
+
+            $table->softDeletes();
+            $table->timestamps();
+
+
+
+        });
+
+
 }
 
 

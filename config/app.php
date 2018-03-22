@@ -179,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
     ],
@@ -239,6 +240,7 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         'hechos'=> \App\hechos::class,
         'Str'   => Illuminate\Support\Str::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

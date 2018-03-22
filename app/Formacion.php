@@ -4,22 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Laboral extends Model
+class Formacion extends Model
 {
-    protected $table = 'alumno_laboral';
+    protected $table = 'alumno_formacion';
 
 
     protected $fillable = [
         'user_id',
-        'cargo',
-        'empresa',
+        'centro',
         'ubicacion',
+        'titulacion',
+        'disciplina_academica',
         'fecha_inicio',
         'fecha_fin',
         'descripcion',
-        'actual'
+        'actual',
+
     ];//
-
-
-
 }

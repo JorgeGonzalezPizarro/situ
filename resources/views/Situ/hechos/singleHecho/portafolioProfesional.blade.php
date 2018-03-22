@@ -5,16 +5,26 @@
     <!-- Page Content -->
     <div class="container">
 
-        <div class="row">
 
             <!-- Post Content Column -->
             <div class="col-lg-12">
-                <h1 class="mt-4" style="padding-left: 15px"> Portfolio Profesional </h1>
+                <h1 class="mt-4" style="padding-left: 15px"> Portfolio Profesional @if(($user->roles()->first()->slug)==('Inv') ||($user->roles()->first()->slug)==( 'Prof')) de {{$alumno->getUser()->get()->first()->first_name }}
+                    <?php
+                    $img=json_decode($alumno->otros_datos,true)
+                    ?>
+                                                                                       @else
+                                                                                       <?php
+                                                                                       $img=json_decode($user->otros_datos,true)
+                         ?>
+                       <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+                               <img  id="myimage" title="profile image" src="{!!$img['img'] !!}" class="img-circle img-responsive" name="imagen"></a>
+                        </div>
+                    @endif </h1>
                 <hr>
+            </div>
                 <!-- Title -->
                 @if(!empty($hechos))
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-8">
                             <hr>
                             <div class="col-md-12">
                                 <ul class="list-group">
@@ -69,16 +79,37 @@
                             </div>
 
                         </div>
-                    </div>
+                @else
+                    <div class="row">
+                        <div class="col-md-12">
+                            <hr>
+                            <div class="col-md-12">
+                                <ul class="list-group">
+
+                                    <li class="list-group-item text-muted" contenteditable="false"></li>
+
+                                    <li class="list-group-item text-muted" style="text-align: center" contenteditable="false">No existen datos</li>
+
+
+                                </ul></div></div></div>
                 @endif
+                    <div class="col-md-4">
+                        <hr>
+                        <div class="col-md-12">
+                            <ul class="list-group">
+
+                                <li class="list-group-item text-muted" contenteditable="false">Otros datos</li>
+
+                                <li class="list-group-item text-muted" contenteditable="false"> <i class="fa fa-linkedin fa-2x"></i>
+                                    <a href="http://{!!  $img['linkedin']!!}"> Perfil en Linkedin</a></li>
 
 
-
-
-        </div>
+                            </ul>
+                        </div>
+                    </div>
         <!-- /.row -->
 
     </div>
-    </div>
+
     <!-- /.container -->
 @endsection()
