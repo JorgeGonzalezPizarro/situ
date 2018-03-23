@@ -31,6 +31,8 @@ class CreateHechos extends Migration
             $table->string('publico')->nullable();
             $table->string('ruta_archivo')->nullable();
             $table->integer('laboral_id')->nullable();
+            $table->integer('laboral_id')->nullable();
+
             $table->timestamps();
         });
 

@@ -29,8 +29,7 @@
                             <div class="col-md-12">
                                 <ul class="list-group">
 
-                                    <li class="list-group-item text-muted" contenteditable="false">Detalles</li>
-                                    <hr><hr>
+
                         @foreach($hechos as $hecho)
 
 
@@ -38,6 +37,9 @@
 
 
                             <!--left col-->
+                        @if(!is_null($hecho->laboral_id))
+                                    <li class="list-group-item text-muted"><h2 class="">Experiencia Profesional </h2>
+                                    </li>
 
                                         <li class="list-group-item text-right"><span class="pull-left"><strong
                                                         class="">Sector </strong></span><span><p>{{ $hecho->getLaboral()->get()->first()->sector  }}</p></span>
@@ -51,26 +53,61 @@
                                 <li class="list-group-item text-right"><span class="pull-left"><strong
                                                 class="">Ubicacion </strong></span><span><p>{{ $hecho->getLaboral()->get()->first()->ubicacion  }}</p></span>
                                 </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha Inicio</strong></span><span><p>{{ $hecho->getLaboral()->get()->first()->disciplina_academica  }}</p></span>
+                                    </li>
+                                    @if( $hecho->getLaboral()->get()->first()->actual=='0')
+                                        <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                        class="">Fecha Fin  </strong></span><span><p>{{ $hecho->getLaboral()->get()->first()->fecha_fin  }}</p></span>
+                                        </li>
+
+                                    @else
+                                        <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                        class="">Fecha Fin</strong></span><span><p>Actualidad</p></span>
+                                        </li>
+                                    @endif
+                                @else
+                                    <li class="list-group-item text-muted"><h2 class="">Formacion Academica </h2>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Centro </strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->centro  }}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Ubicacion </strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->ubicacion  }}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Titulacion </strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->titulacion  }}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Disciplina Academica </strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->disciplina_academica  }}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha Inicio</strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->disciplina_academica  }}</p></span>
+                                    </li>
+                                @if( $hecho->getFormacion()->get()->first()->actual=='0')
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha Fin  </strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->fecha_fin  }}</p></span>
+                                    </li>
+
+                                    @else
+                                        <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                        class="">Fecha Fin</strong></span><span><p>Actualidad</p></span>
+                                        </li>
+                                    @endif
+
+                                @endif
                                         <li class="list-group-item text-right"><span class="pull-left"><strong
                                                         class="">Etiquetas </strong></span><span><p>
+
+
+                                                    @
                             @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
 
                                                         <a href="#">{{$etiquetas->etiqueta_id}}</a>
                                                     @endforeach
                                 </p></span>
                                         </li>
-                                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                                        {{--class=""> </strong></span>--}}
-                                            {{--<span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>--}}
-                                    {{--</p></span>  </li>--}}
-                                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
-                                        {{--</li>--}}
-                                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
-                                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
-                                        {{--</li>--}}
+
 
 <hr><hr>
                             @endforeach
@@ -100,9 +137,13 @@
 
                                 <li class="list-group-item text-muted" contenteditable="false">Otros datos</li>
 
-                                <li class="list-group-item text-muted" contenteditable="false"> <i class="fa fa-linkedin fa-2x"></i>
-                                    <a href="http://{!!  $img['linkedin']!!}"> Perfil en Linkedin</a></li>
+                                <li class="list-group-item text-right"><span class="pull-left">
+                                        <i class="fa fa-linkedin fa-2x"></i></span>
 
+                                    <span><p>   <a href="http://{!!  $img['linkedin']!!}"> Perfil en Linkedin</a></p></span></li>
+
+                                <li class="list-group-item text-right"><span class="pull-left">  <strong>Generar CV</strong>
+                                    </span> <span><p><a href="{{url('Situ/public/0/5/cv')}}"><button type="button" class="btn btn-raised btn-secondary">CV</button></a></p></span></li>
 
                             </ul>
                         </div>

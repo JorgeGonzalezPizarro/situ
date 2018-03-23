@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Formacion;
 use App\Invitados;
 use App\Laboral;
 use DB;
@@ -184,47 +185,66 @@ class AlumnoController extends Controller
     }
     public function actualizarMisDatosFormacion()
     {
-//        $user = Sentinel::getUser();
-//        $cursoAlumno = CursoAlumno::firstOrCreate(['curso' => Input::get('curso'), 'user_id' => $user->id],
-//            ['curso' => Input::get('curso'), 'user_id' => Input::get('user´_id')]
-//
-//
-//        );
-//        $asignaturas = ($cursoAlumno->asignaturas);
-//        $inputAsignaturas = array();
-//        for ($i = 0; $i < count(Input::get('asignatura')); $i++) {
-//            $inputAsignaturas[$i] = Input::get('asignatura')[$i];
-//
-//        }
-//
-//
-//        if (!empty(Input::get('asignatura'))) {
-//            if (!empty($asignaturas)) {
-//                echo "aaaa";
-//                $asignaturas = json_decode($cursoAlumno->asignaturas, false);
-//                $resultado = array_merge($inputAsignaturas, $asignaturas);
-//
-//                $cursoAlumno->asignaturas = json_encode($resultado, false);
-//            } else {
-//
-//                $cursoAlumno->asignaturas = json_encode($inputAsignaturas, false);
-//
-//
-//            }
-//        } else {
-//
-//            return response("a");
-//        }
-//
-//
-//        $cursoAlumno->user_id = $user->id;
-//        $cursoAlumno->curso = Input::get('curso');
-//        $cursoAlumno->grado = Input::get('grado');
-//
-//        $cursoAlumno->save();
-//        Session::flash('msg', "cambios realizados");
+        $user = Sentinel::getUser();
+        $formacionAlumno=new Formacion();
 
-        return response(Input::get('centro'));
+        $formacionAlumno->user_id=$user->id;
+        $formacionAlumno->centro=Input::get('centro');
+        $formacionAlumno->ubicacion=Input::get('ubicacion2');
+        $formacionAlumno->titulacion=Input::get('titulacion');
+        $formacionAlumno->disciplina_academica=Input::get('disciplina_academica');
+        $format = 'm/d/Y';
+        $formacionAlumno->fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate2'));
+        if (Input::get('endDate2')) {
+
+            $formacionAlumno->fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate2'));
+            $formacionAlumno->actual = "0";
+
+        } else {
+            $formacionAlumno->actual = "1";
+        }
+        $formacionAlumno->descripcion=Input::get('descripcion');
+        $formacionAlumno->save();
+
+
+
+        $hecho = new hechos();
+        $hecho->user_id = $user->id;
+        $hecho->titulo_hecho = 'Formacion';
+        $hecho->categoria_id = 5;
+        $hecho->curso = '';
+        $hecho->contenido =  $formacionAlumno->descripcion;
+        $hecho->proposito = "";
+        $hecho->evidencia = "";
+        $hecho->hechos_relacionados = "";
+        $hecho->fecha_inicio = $formacionAlumno->fecha_inicio;
+        $hecho->publico = Input::get('acceso2');
+        $hecho->formacion_id=$formacionAlumno->id;
+        if (Input::get('acceso2') == 'publico') {
+            $hecho->nivel_acceso = "2";
+
+        } else {
+
+            $hecho->nivel_acceso = "1";
+
+        }
+        if (Input::get('endDate2')) {
+
+            $hecho->fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate2'));
+
+        }
+        $hecho->save();
+        $etiqueta1 = new hecho_etiqueta();
+        $etiqueta1->hechos_id = $hecho->id;
+        $etiqueta1->etiqueta_id = 'CV';
+        $etiqueta1->save();
+
+
+
+
+        Session::flash('msg', "cambios realizados");
+
+        return Redirect::back();
 
     }
 
@@ -479,10 +499,11 @@ class AlumnoController extends Controller
 
         $otros_datos = json_decode($user->otros_datos, true);
         $laboral = $user->getLaboral()->get();
+        $formacion = $user->getFormacion()->get();
 
         return view('Alumno.datos.alumnoDatosLaboral')->with('user', $user)
             ->with('otros_datos', $otros_datos)->with('year', $year)
-            ->with('laboral', $laboral);
+            ->with('laboral', $laboral)->with('formacion',$formacion);
 
     }
 

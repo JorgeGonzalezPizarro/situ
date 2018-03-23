@@ -368,6 +368,7 @@
                                       margin-left: 240px;">
                                         {{--<input type="button" value="Add another text input" onClick="addInput();">--}}
 
+                                        {!! csrf_field() !!}
 
                                     </div>
                                     {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
@@ -431,9 +432,10 @@
         <div class="col-sm-12" style="" contenteditable="false">
 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
-                {{ Form::open(array('route' => 'actualizarDatosFormacion','method'=>'put','class' => 'form-style-8','files' => true)) }}
+                {{ Form::open(array('route' => 'actualizarDatosFormacion','method'=>'put','class' => 'form-style-8','files' => true,'id'=>'formulario2')) }}
                 {{--{{ Form::open(array('action' => 'AlumnoController@actualizarMisDatosFormacion'))}}--}}
 
+                {!! csrf_field() !!}
 
                 <div class="panel panel-info">
 
@@ -445,7 +447,7 @@
 
                             <div class=" col-md-12 col-lg-12 ">
 
-                                <table class="table table-user-information" id="mitabla">
+                                <table class="table table-user-information" id="mitabla2">
                                     <div class="input-append">
 
                                         {{--<input id="fieldID4" type="text" name="imagen" style="display: none;">--}}
@@ -465,7 +467,7 @@
                                     <tr>
                                         <td><strong class="">Disciplina Academica</strong></td>
                                         <td>
-                                            <select form="formulario" class="selectpicker dropup" name="disciplina" id="disciplina" data-live-search="true" data-dropupAuto="false" title = " Seleccione " data-noneSelectedText="">
+                                            <select form="formulario2" class="selectpicker dropup" name="disciplina_academica" id="disciplina_academica" data-live-search="true" data-dropupAuto="false" title = " Seleccione " data-noneSelectedText="">
                                                 <option value="1" >Administración y Dirección de Empresas</option>
                                                 <option value="27" >Arquitectura</option>
                                                 <option value="23" >Bellas Artes</option>
@@ -552,9 +554,8 @@
                                     <tr>
                                         <td><strong class="">Ubicacion</strong></td>
                                         <td>
-                                            <select form="formulario" class="selectpicker dropup" name="ubicacion" id="ubicacion" data-live-search="true" data-dropupAuto="false" title = " Seleccione " data-noneSelectedText="">
+                                            <select form="formulario2" class="selectpicker dropup" name="ubicacion2" id="ubicacion2" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
 
-                                            </select>
                                             </select>
                                         </td>
                                     </tr>
@@ -606,8 +607,15 @@
                                     </tr>
 
 
-                                    <input class="field" name="old_password"  id="old_password" type="hidden" value="{{$user->password}}">
+                                    <tr>
+                                        <td> <strong class="">Acceso </strong></td>
+                                        <td>
+                                            {!! Form::select('acceso2', array('publico' => 'Publico', 'privado' => 'Privado'), NULL, ['class' => 'form-control','style'=>'width:40%;' ,'name' => 'acceso2']) !!}
 
+                                            {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
+                                            {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
+                                        </td>
+                                    </tr>
 
                                     </tbody>
 
@@ -615,7 +623,9 @@
                                 <tr>
 
                                     <td>
-                                        {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
+                                        <button type="submit" name="formulario2" class="btn btn-primary" id="boton2" style="margin-right:30px">Actualizar</button>
+
+                                        {{--{!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>--}}
                                     </td>
                                 </tr>
 
@@ -666,7 +676,54 @@
 
 
                 {{--</div>--}}
+                <div class="panel-footer">
+                    <table id="formacion"  class="mdl-data-table" cellspacing="0" width="100%">
+                        @if(isset($formacion))
+                            <thead>
+                            <tr>
+                                <th>Centro</th>
+                                <th>Ubicacion</th>
+                                <th>Titulacion</th>
+                                <th>Disciplina Academica</th>
+                                <th>Descripcion</th>
 
+                                <th>Fecha Inicio  </th>
+                                <th>Fecha Finalizacion</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody id="clickable">
+
+                            @if(!empty($formacion))
+                                {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
+                                @foreach ($formacion as $form)
+                                    <tr>
+                                        <td>{{$form->centro}}</td>
+                                        <td id="asignatura">{!!  $form->ubicacion !!}</td>
+                                        <td id="fechainicio">{!!  $form->titulacion !!}</td>
+                                        <td id="disciplina">{!!  $form->disciplina_academica !!}</td>
+                                        <td id="descripcion">{!!  $form->descripcion !!}</td>
+                                        <td id="descripcion">{!!  $form->fecha_inicio !!}</td>
+
+                                    @if($form->actual=="1")
+                                            <td id="fechafin">  Actualidad </td>
+                                        @else
+                                            <td id="fechafin">{!!  $form->fecha_fin !!}</td>
+                                        @endif
+                                        {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
+                                        {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
+                                    </tr>
+
+                                @endforeach
+                            @endif
+                            @endif
+                            </tbody>
+
+                    </table>
+
+
+                </div>
             </div>
         </div>
         <div id="push"></div>
@@ -766,7 +823,7 @@
             );
 
         });
-        document.getElementById('boton').disabled = true;
+               document.getElementById('boton').disabled = true;
         $('i').on('click',function () {
             $('#boton').removeClass('btn btn-info disabled');
             $('#boton').addClass('btn btn-success');
@@ -781,6 +838,24 @@
 
 
         })
+
+        document.getElementById('boton2').disabled = true;
+        $('i').on('click',function () {
+            $('#boton2').removeClass('btn btn-info disabled');
+            $('#boton2').addClass('btn btn-success');
+            document.getElementById('boton2').disabled = false;
+
+
+        })
+        $('#mitabla2 input').on('change',function () {
+            $('#boton2').removeClass('btn btn-info disabled');
+            $('#boton2').addClass('btn btn-success');
+            document.getElementById('boton2').disabled = false;
+
+
+        })
+
+
 
     });
 </script>
@@ -876,6 +951,67 @@
                 "searchable": true
             } ]
         });
+        var table=$('#formacion').DataTable({
+            "scrollX": false,
+            "bPaginate": false,
+            "bLengthChange": false,
+            "bFilter": false,
+            "bInfo": false,
+            "bAutoWidth": true,
+            "language": {
+                "lengthMenu": "Ver _MENU_ Número de registros por página",
+                "zeroRecords": "No encontrado",
+                "info": "Página  _PAGE_ de  _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+
+                "infoFiltered": "(filtered from _MAX_ Total de usuarios)",
+                "paginate": {
+                    "first":      "Primero",
+                    "previous":   "Anterior",
+                    "next":       "Siguiente",
+                    "last":       "Último"
+                },
+                "search":         "Buscar &nbsp;:",
+
+            },
+            "columnDefs": [ {
+                "targets": 1,
+                "searchable": true
+            } ]
+        });
+        var sel = document.getElementById('ubicacion');
+        // var opts = sel.options;
+
+        var ciudades= "Andalucia|Aragon|Asturias|Baleares|" +
+            "Canarias|Cantabria|Castilla y Leon|Castilla-La Mancha|Cataluña|Ceuta|" +
+            "Communidad Valenciana|Extremadura|Galicia|La Rioja|" +
+            "Madrid|Melilla|Murcia|Navarra|Pais Vasco" ;
+        var state_arr = ciudades.split("|");
+
+        $.each(state_arr, function (i, item) {
+            $('#ubicacion').append($('<option>', {
+                value: item,
+                text : item
+            }));
+        });
+
+        var sel = document.getElementById('ubicacion2');
+        // var opts = sel.options;
+
+        var ciudades= "Andalucia|Aragon|Asturias|Baleares|" +
+            "Canarias|Cantabria|Castilla y Leon|Castilla-La Mancha|Cataluña|Ceuta|" +
+            "Communidad Valenciana|Extremadura|Galicia|La Rioja|" +
+            "Madrid|Melilla|Murcia|Navarra|Pais Vasco" ;
+        var state_arr = ciudades.split("|");
+
+        $.each(state_arr, function (i, item) {
+            $('#ubicacion2').append($('<option>', {
+                value: item,
+                text : item
+            }));
+        });
+
+
         var sel = document.getElementById('sector');
         var opts = sel.options;
 
@@ -917,7 +1053,7 @@
             }
 
         });
-        var sel = document.getElementById('disciplina');
+        var sel = document.getElementById('disciplina_academica');
         var opts = sel.options;
 
 
@@ -988,21 +1124,6 @@
     </script>
 <script>
     $(document).ready(function() {
-        var sel = document.getElementById('ubicacion');
-        // var opts = sel.options;
-
-        var ciudades= "Andalucia|Aragon|Asturias|Baleares|" +
-            "Canarias|Cantabria|Castilla y Leon|Castilla-La Mancha|Cataluña|Ceuta|" +
-            "Communidad Valenciana|Extremadura|Galicia|La Rioja|" +
-            "Madrid|Melilla|Murcia|Navarra|Pais Vasco" ;
-        var state_arr = ciudades.split("|");
-
-            $.each(state_arr, function (i, item) {
-                $('#ubicacion').append($('<option>', {
-                    value: item,
-                    text : item
-                }));
-            });
 
 
 

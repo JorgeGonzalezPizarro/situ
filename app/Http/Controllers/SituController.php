@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Formacion;
 use App\Invitados;
 use DB;
 use Mail;
@@ -70,6 +71,7 @@ class SituController extends Controller
 //            $curso = $hecho->curso;
             $categorias = Categorias::all();
 //            return $hechosPublicos;
+//            return response($hechosPublicos);
             view()->share('categorias', $categorias);
         }
         else{
@@ -108,7 +110,7 @@ class SituController extends Controller
             if ($categoria->categoria == 'Portafolios profesional') {
 
                 return view('Situ.hechos.singleHecho.portafolioProfesional')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
+                    ->with('hechos', $hechosPublicos)->with('user', $usuario)
                     ->with('alumno',$alumno);
 
             }
@@ -125,5 +127,59 @@ class SituController extends Controller
 
 //        return view('Alumno.hecho.singleHecho')->with('hecho', $hecho);
 
+    }
+
+
+
+    public function cv()
+    {
+        if (Sentinel::inRole('Prof')) {
+            $usuario = Sentinel::getUser();
+            $invitado=Invitados::where('invitado_id',$usuario->id);
+            $alumnoCv=$invitado->
+//        $alumno = Invitados::where('invitado_id', $usuario->id)->get()->first();
+            $hecho = hechos::all();
+            $formacion = hechos::where([['nivel_acceso', '>=', $alumnoCv->nivel_acceso], ['formacion_id', '!=', null]])->get()->all();
+            $laboral = hechos::where([['nivel_acceso', '>=', $alumnoCv->nivel_acceso], ['laboral_id', '!=', null]])->get()->all();
+
+            $categorias = Categorias::all();
+
+//            $categoria = $hecho->getCategoria()->get()->first();
+
+            view()->share('categorias', $categorias);
+
+        } else {
+            $usuario = Sentinel::getUser();
+            $usuario = $usuario->id;
+            $alumnoCv = User::where('id', $usuario)->get()->first();
+//            $hecho = hechos::all();
+            $formacion = Formacion::where('user_id', $usuario)->get()->first();
+            $laboral = hechos::where('user_id', $usuario)->get()->first();
+
+            $categorias = Categorias::all();
+
+//            $categoria = $hecho->getCategoria()->get()->first();
+
+            view()->share('categorias', $categorias);
+        }
+
+        $data = $this->getData();
+        $date = date('Y-m-d');
+        $invoice = "Portolio profesional de ";
+        $view = \View::make('pdf.cv', compact('alumnoCv', 'alumnoCv', 'formacion', 'laboral'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('invoice');
+    }
+
+    public function getData()
+    {
+        $data =  [
+            'quantity'      => '1' ,
+            'description'   => 'some ramdom text',
+            'price'   => '500',
+            'total'     => '500'
+        ];
+        return $data;
     }
 }
