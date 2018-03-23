@@ -107,6 +107,12 @@
         /*.hljs {
             padding: 1.5em;
         }*/
+
+
+        .navbar-header{
+            display: none ;
+        }
+        .navbar-brand{display:none ;}
         pre code {
             border-radius: 20px;
             overflow: auto;
@@ -140,7 +146,108 @@
         ul.nav li.dropdown:hover ul.dropdown-menu {
             display: block;
         }
+        ul.nav li.dropdown:hover ul.dropdown-menu {
+            display: block;
+        }
+        .navbar{
+            min-height: 60px;
+        }
+        .navbar-nav.navbar-center {
+            position: absolute;
+            left: 50%;
+            transform: translatex(-50%);
+        }
+        @media (max-width: 1200px) {
+            .navbar-header{
+                display: block !important; ;
+            }
+            #wrapper {
+                padding-left: 0px !important;
+            }
+            .navbar-header {
+                float: none;
+            }
 
+            .navbar-brand {
+                display: block;
+            }
+
+            .navbar-left, .navbar-right {
+                float: none !important;
+            }
+
+            .navbar-left {
+                display: none !important;
+            }
+
+            .navbar-nav > li > .dropdown-menu {
+                margin-top: 0;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+                left: 100px;
+                top: 10px;
+            }
+
+            #myimagen {
+                display: none;
+            }
+
+            .navbar-nav.navbar-center {
+                position: relative;
+                /* transform: translatex(-50%); */
+            }
+
+            .navbar-toggle {
+                display: block;
+            }
+
+            .navbar-collapse {
+                border-top: 1px solid transparent;
+                box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            }
+
+            .navbar-fixed-top {
+                top: 0;
+                border-width: 0 0 1px;
+            }
+
+            .navbar-collapse.collapse {
+                display: none !important;
+            }
+
+            .navbar-nav {
+                float: none !important;
+                margin-top: 7.5px;
+            }
+
+            .navbar-nav > li {
+                float: none;
+            }
+
+            .navbar-nav > li > a {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .collapse.in {
+                display: block !important;
+            }
+
+            .navbar-nav.navbar-center {
+                float: left !important;
+                left: 0% !important;
+                transform: translatex(0%) !important;
+            }
+
+            .navbar-nav.navbar-center li {
+                float: left;
+                display: inline;
+            }
+
+            .nav.navbar-nav.side-nav{
+                margin-top: 0px !important;
+            }
+        }
     </style>
     @yield('css')
 
@@ -154,11 +261,65 @@
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav2">
+
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                @if(Sentinel::check())
+                    <a href="#" class="navbar-brand"      > <span>{{ Sentinel::getUser()->first_name }} </span></a>
+                  <a href="{{route('logout')}}" class="navbar-brand"     > <span>Salir </span></a>
+                <ul class="nav navbar-nav navbar-center">
+                    @if (Sentinel::check()   )
+
+                        @if(Sentinel::check() && Sentinel::inRole('Alu'))
+
+
+
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevo <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @foreach($categorias as $categoria)
+                                        <li class="">
+                                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+
+                            <li class="">
+                                <a href="{{route('misDatos')}}"><i class="fa fa-user"></i>
+
+                                    Mi perfil </a>
+
+                            </li>
+                            <li class="">
+                                <a href="{{route('invitar')}}"><i class="fa fa-share-square"></i>
+
+
+
+                                    Invitar  </a>
+
+                            </li>
+                        @endif
+
+
+
+                    @endif
+
+                </ul>
+                @endif
+
+        </div>
 
 
         <!-- Top Menu Items -->
-        <div class="collapse navbar-collapse" style="  padding:15px !important;
-" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" style="  padding:15px !important;" id="bs-example-navbar-collapse-1">
+
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                     <ul class="nav navbar-nav navbar-left">
@@ -169,6 +330,50 @@
                             <a class="nav-link" href="#">Plataforma de Trayectoria Universitaria</a>
                         </li>
                     </ul>
+                        <ul class="nav navbar-nav navbar-center">
+                            @if (Sentinel::check()   )
+
+                                @if(Sentinel::check() && Sentinel::inRole('Alu'))
+
+
+
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevo <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            @foreach($categorias as $categoria)
+                                                <li class="">
+                                                    <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+
+                                    <li class="">
+                                        <a href="{{route('misDatos')}}"><i class="fa fa-user"></i>
+
+                                            Mi perfil </a>
+
+                                    </li>
+                                    <li class="">
+                                        <a href="{{route('invitar')}}"><i class="fa fa-share-square"></i>
+
+
+
+                                            Invitar  </a>
+
+                                    </li>
+                                @endif
+
+
+
+                            @endif
+
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+
+
+
                     @if(Sentinel::check() &&( Sentinel::inRole('Inv') ||  Sentinel::inRole('Prof') ) )
 
                         <div style="width:600px; height: auto; margin:0 auto;">
@@ -183,7 +388,7 @@
                             @if (Sentinel::check())
 
                                 <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
-                                <div class="avatar" style="    width: 180px; float: left; margin-right: 5px;">
+                                <div class="avatar" style="    width: 250px; float: left; margin-right: 5px;">
                                     <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
                                     <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
 
@@ -225,14 +430,27 @@
                                 @endif
                             </ul>
                         </li>
-
+                     </li>
                     </ul>
+                    </ul>
+
                 </div>
             </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav2">
+                    <span class="sr-only">Toggle navigation</span>
+
+
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
         </div>
+
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav side-nav"  style="  margin-top: 15px !important;">
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav2">
+            <ul class="nav navbar-nav side-nav"  style="  margin-top: 40px ;">
                 @if(Sentinel::check() && Sentinel::inRole('Admin'))
                     <li class="">
                         <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>

@@ -29,11 +29,11 @@ body {
 
 #page-wrapper {
     /* width: 100%; */
-     padding: 100px !important;
+     padding-left: 230px ;
     /* background-color: #fff; */
 	height: 100%;
     padding-left: 20px;
-	
+	padding-top:70px;
 }
 
 .huge {
@@ -43,7 +43,9 @@ body {
 
 @media(min-width:769px) {
     #wrapper {
-        padding-left: 230px;
+        padding-left: 230px ;
+
+        /*padding-left: 230px;*/
         height: auto;
     min-height: 100%;
     width: 100%;
@@ -52,7 +54,7 @@ body {
     }
 
     #page-wrapper {
-        padding-top: 90px;    }
+        padding-top:100px;    }
 }
 
 /* Top Navigation */
