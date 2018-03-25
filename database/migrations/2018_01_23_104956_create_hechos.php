@@ -31,7 +31,7 @@ class CreateHechos extends Migration
             $table->string('publico')->nullable();
             $table->string('ruta_archivo')->nullable();
             $table->integer('laboral_id')->nullable();
-            $table->integer('laboral_id')->nullable();
+            $table->integer('formacion_id')->nullable();
 
             $table->timestamps();
         });
@@ -80,11 +80,23 @@ class CreateHechos extends Migration
         Schema::create('invitados', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('invitado_id');
-            $table->integer('alumno_id');
+            $table->integer('alumno_id')->nullable();
             $table->string('nivel_acceso');
             $table->string('rol');
             $table->integer('numero_accesos')->nullable();
             $table->timestamps();
+
+
+        });
+        Schema::create('logAccesos', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('invitado_id');
+            $table->integer('alumno_id');
+            $table->string('rol');
+            $table->integer('hechos_id')->nullable();
+            $table->integer('numero_accesos')->nullable();
+
+
 
 
         });

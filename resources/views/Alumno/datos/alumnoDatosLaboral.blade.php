@@ -296,7 +296,7 @@
                                         </tr>
                                         <tr>
                                             <td><strong class="">Descripción</strong></td>
-                                            <td><textarea  class="form-control" rows="4" cols="50" placeholder="Añade algun detalle..."></textarea>
+                                            <td><textarea name="descripcion" class="form-control" rows="4" cols="50" placeholder="Añade algun detalle..."></textarea>
                                             </td>
                                         </tr>
                                         <tr>
@@ -704,7 +704,7 @@
                                         <td id="fechainicio">{!!  $form->titulacion !!}</td>
                                         <td id="disciplina">{!!  $form->disciplina_academica !!}</td>
                                         <td id="descripcion">{!!  $form->descripcion !!}</td>
-                                        <td id="descripcion">{!!  $form->fecha_inicio !!}</td>
+                                        <td id="fecha_inicio">{!!  $form->fecha_inicio !!}</td>
 
                                     @if($form->actual=="1")
                                             <td id="fechafin">  Actualidad </td>

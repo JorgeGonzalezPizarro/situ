@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\CursoAlumno;
+use App\Invitados;
 use App\Role;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -103,7 +104,13 @@ class RegisterController extends Controller
         //PROFESOR . A CURRICULUM
 
         elseif($role=='3'){
-
+            $invitado=new Invitados();
+            $invitado->invitado_id=$user->id;
+            $invitado->alumno_id=null;
+            $invitado->nivel_acceso=3;
+            $invitado->rol="Profesor";
+            $invitado->numero_accesos=null;
+            $invitado->save();
             $user->nivel_acceso='3';
         }
 

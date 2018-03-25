@@ -51,7 +51,7 @@ Route::post('/Alumno/alumnoDashboard','AlumnoController@actualizaAcceso')->name(
 Route::get('Alumno/crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
 Route::get('/Alumno/hecho/singleHecho/','AlumnoController@getHechoUsuario')->name('showHecho');
 
-Route::get('Situ/public/{id?}/{categoria?}', 'SituController@showHecho');
+Route::get('Situ/public/{id?}/{categoria?}/{alu?}', 'SituController@showHecho');
 
 
 
@@ -73,7 +73,10 @@ Route::post('Alumno/crearEtiqueta','AlumnoController@crearNuevaEtiqueta')->name(
 //Route::get('Alumno/AlumnoDatos/datosAcademicos/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 
 
-Route::get('Situ/public/{id?}/{categoria?}/cv', 'SituController@cv')->name('CV');
+Route::get('Situ/public/{id?}/{categoria?}/{alu?}/cv', 'SituController@cv')->name('CV');
+
+Route::get('Alumno/invitar/log', 'AlumnoController@logAccesos')->name('logAccesos');
+
 /*HEHCOS*/
 
 Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos');

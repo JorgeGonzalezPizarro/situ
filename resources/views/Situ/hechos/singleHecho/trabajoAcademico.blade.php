@@ -54,7 +54,7 @@
                         <div class="panel-heading">Otros detalles
 
                         </div>
-                        <div class="panel-body"><span><p>{!!  str_limit($hecho->contenido,50,'...' )!!}</p></span>
+                        <div class="panel-body"><span><p id="descripcion">{!!  str_limit($hecho->contenido,50,'...' )!!}</p></span>
                         </div>
 
                     </div>

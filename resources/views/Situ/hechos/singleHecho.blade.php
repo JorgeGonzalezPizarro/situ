@@ -7,7 +7,8 @@
         <div class="row">
             <div class="col-lg-8">
 
-            @foreach($hechos as $hecho)
+           @if(!empty($hechos))
+                    @foreach($hechos as $hecho)
 
                     <div class="col-lg-12">
                 <!-- Post Content Column -->
@@ -17,14 +18,16 @@
                                 <li>
                                     <div class="timeline-panel">
                                         <div class="timeline-heading">
-                                             <h4 class="timeline-title">{{$hecho->titulo_hecho}}</h4>
-                                           <h5 class="timeline-title">{{$hecho->getCategoria()->get()->first()->categoria}}</h5>
+                                          <span style="float: left;">  <h4 class="timeline-title">{{$hecho->titulo_hecho}}</h4></span>
+                                            <span style="float: right;">  <h4 class="timeline-title">{{$alumno->first_name}}</h4></span>
+                                          <div class="clearfix"></div>  <h5 class="timeline-title">{{$hecho->getCategoria()->get()->first()->categoria}}</h5>
 
                                         </div>
                                         <div class="timeline-body">
                                             <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></span>
 <br>
                                             <span class="pull-left">   {!!  str_limit($hecho->contenido,50,'...' )!!}</span>
+                                            <div class="clearfix"></div>
                                             <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
                                     </p></span>
                                         </div>
@@ -86,7 +89,9 @@
                     </div>
                 </div>
             </div>
-            <div class="card my-4">
+                @endif
+
+                <div class="card my-4">
                 <h5 class="card-header">Side Widget</h5>
                 <div class="card-body">
                     You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!

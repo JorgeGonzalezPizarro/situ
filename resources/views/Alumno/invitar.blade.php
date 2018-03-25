@@ -156,7 +156,7 @@ El correo electronico ya existe</p></div>') !!}
 
             <div id="push"></div>
         </div>
-        <div class="panel-footer">
+        <div class="col-md-10">
             <table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">
                 @if(isset($invitados))
                     <thead>
@@ -178,10 +178,10 @@ El correo electronico ya existe</p></div>') !!}
                         @foreach ($invitados as $invitado)
                             <tr>
                                 <td>{{$invitado->getUsuario()->get()->first()->first_name }}</td>
-                                <td>{{$invitado->get()->first()->rol }}</td>
+                                <td>{{$invitado->rol }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->created_at }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
-                                <td>{{$invitado->get()->first()->numero_accesos }}</td>
+                                <td>{{$invitado->numero_accesos }}</td>
 
 
                             </tr>
@@ -193,6 +193,11 @@ El correo electronico ya existe</p></div>') !!}
 
             </table>
 
+
+        </div>
+        <div class="col-md-2">
+           <span class="pull-left">  <strong></strong>
+           </span> <span><p><a target="_blank" href="{{route('logAccesos')}}"><button type="button" class="btn btn-raised btn-secondary">LOGS ACCESOS</button></a></p></span>
 
         </div>
         <footer id="footer">

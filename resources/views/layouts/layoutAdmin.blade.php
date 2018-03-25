@@ -305,6 +305,7 @@
                                     Invitar  </a>
 
                             </li>
+
                         @endif
 
 
@@ -360,6 +361,14 @@
 
 
                                             Invitar  </a>
+
+                                    </li>
+                                    <li class="">
+                                        <a href="{{url('Situ/public')}}"><i class="fa fa-share-square"></i>
+
+
+
+                                            Mi SITU  </a>
 
                                     </li>
                                 @endif

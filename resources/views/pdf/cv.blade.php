@@ -20,6 +20,12 @@
             font-size: 16px;
             font-style: oblique;
         }
+        table{
+            width: 700px
+        }
+        table td {
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -29,6 +35,7 @@
         <div id="invoice">
             <h1 style="text-align: center;font-size: 42px">Curriculum Vitae </h1>
             <div class="date">A fecha de    {{ "    " .Carbon\Carbon::today()->toDateString()}}</div>
+
         </div>
     </div>
     <div class="col-lg-12"><h2 style="font-size: 32px">1. Datos Personales </h2>
@@ -36,23 +43,23 @@
         <tbody>
 
     <tr >
-        <td><span >Nombre</span></td>
+        <td><span ><strong>Nombre</strong></span>
            <td> <span style="margin-left:30px; font-style: italic; text-align: center;">{{$alumnoCv->first_name}}</span></td>
     </tr> <tr >
-        <td><span >Apellido</span></td>
+        <td><span ><strong>Apellido</strong></span></td>
            <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->last_name}}</span></td>
     </tr>
 
     <tr >
-        <td><span >Ciudad</span></td>
+        <td><span ><strong>Ciudad</strong></span></td>
          <td>   <span style="margin-left:30px; font-style: italic">{{$alumnoCv->first_name}}</span></td>
     </tr>
     <tr >
-        <td><span >Email</span></td>
+        <td><span ><strong>Email</strong></span></td>
             <td><span style="margin-left:30px; font-style: italic">{{$alumnoCv->email}}</span></td>
     </tr>
     <tr >
-        <td><span >Telefono</span></td>
+        <td><span ><strong>Telefono</strong></span></td>
            <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->first_name}}</span></td>
     </tr>
 
@@ -63,17 +70,16 @@
         {{--<li class="p"><span >Ciudad</span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
 
 
-    </tr>
         </tbody>
     </table>
     </div>
     <div class="col-lg-12"><h2 style="font-size: 32px">2.Formación </h2>
-        <table border="0" cellspacing="15" cellpadding="4"style=" margin-left:20px; width: 500px">
+        <table border="0" cellspacing="2" cellpadding="4"style=" margin-left:20px; width: 600px">
             <tbody>
             @foreach($formacion as $for)
             <tr >
                 <td><h3 >{{$for->fecha_inicio}}</h3></td>
-                <td> <span style="margin-left:30px; font-style: italic; text-align: center;">{!! $for->titulacion." en ". $for->disciplina_academica . " cursado en ". $for->centro . "</br>
+                <td> <span style="font-style: italic; text-align: center;">{!! $for->titulacion." en ". $for->disciplina_academica . " cursado en ". $for->centro . "<br>
                                                                                                 Ubicacion: ". $for->ubicacion !!}</span></td>
             </tr>
             @endforeach
@@ -86,39 +92,40 @@
             {{--<li class="p"><span >Ciudad</span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
 
 
-            </tr>
             </tbody>
         </table>
+    </div>
+    <div class="col-lg-12"><h2 style="font-size: 32px">3.Experiencia Profesional</h2>
+        <table border="0" cellspacing="2" cellpadding="4"style=" margin-left:20px; width: 600px">
+            <tbody>
+            @foreach($laboral as $labor)
+                <tr >
+                    <td><h3 >{{$labor->fecha_inicio}}</h3></td>
+                    <td> <span style="font-style: italic; text-align: center;">{!! $labor->cargo." en ". $labor->empresa ."<br>" !!}
+                            @if(!empty($labor->descripcion)){!! " <span style='font-style: italic; '> ". $labor->descripcion ."</span><br>" !!}@endif
 
-    <div class="col-lg-12"><h2 style="font-size: 32px">3.Experiencia Profesional</h2></div>
+                                    @if(!empty($labor->ubicacion)){!! "Ubicado en ". $labor->ubicacion ."<br>" !!}@endif
+                                    @if(!empty($labor->sector)){!! "Sector ". $labor->sector ."<br>" !!}@endif
 
-    <div class="col-lg-12"><h2 style="font-size: 32px">4.Otros Detalles</h2></div>
 
-    <table border="0" cellspacing="0" cellpadding="0">
-        <thead>
-        <tr>
-            <th class="no">#</th>
-            <th class="desc">DESCRIPTION </th>
-            <th class="unit">UNIT PRICE </th>
-            <th class="total">TOTAL </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td class="no">{{ $alumnoCv->first_name  }}</td>
-            <td class="desc">{{ $alumnoCv->first_name  }}</td>
-            <td class="unit">{{ $alumnoCv->first_name }}</td>
-            <td class="total">{{$alumnoCv->first_name  }} </td>
-        </tr>
+                        </span></td>
+                </tr>
+                @endforeach
 
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="2"></td>
-            <td >TOTAL</td>
-            <td>$6,500.00</td>
-        </tr>
-        </tfoot>
-    </table>
+
+                {{--<td class="p"><span >Apellido </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></td>--}}
+                {{--<li class="p"><span >Fecha Nacimiento </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
+                {{--<li class="p"><span >Email </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
+                {{--<li class="p"><span >Telefono </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
+                {{--<li class="p"><span >Ciudad</span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
+
+
+            </tbody>
+        </table>
+    </div>
+
+    {{--<div class="col-lg-12"><h2 style="font-size: 32px">4.Otros Detalles</h2></div>--}}
+
+
 </main></body>
 </html>

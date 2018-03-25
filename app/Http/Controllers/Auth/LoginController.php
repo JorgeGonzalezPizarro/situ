@@ -20,6 +20,7 @@ use Mail;
 use Carbon\Carbon;
 use Mailchimp;
 use App\ZipCode;
+use App\logAccesos;
 
 class LoginController extends Controller
 {
@@ -84,14 +85,27 @@ class LoginController extends Controller
 
             }
                 if (Sentinel::check() && Sentinel::inRole('Prof')) {
+                    $invitado=Invitados::where('invitado_id',Sentinel::getUser()->id)->get()->first();
+                    $invitado->numero_accesos=($invitado->numero_accesos)+1;
+                    $invitado->update();
                     return redirect('Situ/public')->withUser($user);
                 }
                 if (Sentinel::check() && Sentinel::inRole('Inv')) {
 
                     $invitado=Invitados::where('invitado_id',Sentinel::getUser()->id)->get()->first();
                     $invitado->numero_accesos=($invitado->numero_accesos)+1;
+                    $alumno=$invitado->getAlumno()->get()->first();
+
                     $invitado->update();
+                    $logAccesos=new logAccesos();
+                    $logAccesos->invitado_id=$invitado->id;
+                    $logAccesos->alumno_id=$alumno->id;
+                    $logAccesos->rol=$invitado->rol;
+                    $logAccesos->hechos_id=null;
+                    $logAccesos->numero_accesos=0;
+                    $logAccesos->save();
                     return redirect('Situ/public')->withUser($user);
+
                 }
             }
             return Redirect::back()->withErrors(['global' => 'Invalid password or this user does not exist' ]);

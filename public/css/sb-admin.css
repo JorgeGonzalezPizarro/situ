@@ -281,3 +281,14 @@ ul.alert-dropdown {
 
 
 /*}*/
+
+
+#descripcion{
+    white-space: -moz-pre-wrap !important;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+    white-space: normal;
+}

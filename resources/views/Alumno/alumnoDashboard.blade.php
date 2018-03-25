@@ -43,7 +43,7 @@
                         <tr id="" style="cursor: pointer">
                             <td id="id">{{$hecho->id}}</td>
                             <td id="click">{{$hecho->created_at}}</td>
-                            <td id="click">{!!  str_limit($hecho->contenido,50,'...' )!!}</td>
+                            <td id="descripcion">{!!  str_limit($hecho->contenido,50,'...' )!!}</td>
                             <td id="click">{{$hecho->fecha_inicio}}</td>
                             <td id="click">{{$hecho->getCategoria()->get()->first()->categoria }}</td>
 

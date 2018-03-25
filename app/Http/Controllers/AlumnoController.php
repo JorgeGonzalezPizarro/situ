@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 use App\Formacion;
 use App\Invitados;
 use App\Laboral;
+use App\logAccesos;
 use DB;
 use App\hecho_etiqueta;
 use Carbon;
+use Dompdf\Dompdf;
 use Mail;
 use App\User;
 use App\Role;
@@ -125,6 +127,7 @@ class AlumnoController extends Controller
         $otros_datos = json_decode($user->otros_datos, true);
 
         $curso = $user->getDatosAcademicos()->where('curso', $year)->get()->first();
+        $grado=$user->getFormacion()->get()->all();
         if (!empty($curso->asignaturas)) {
             $asignaturas = $curso->asignaturas;
         } else {
@@ -392,23 +395,52 @@ class AlumnoController extends Controller
 
 
     }
+    public function getGrado()
+    {
+        $usuario = Sentinel::findById(Sentinel::getUser()->id);
 
+        $curso = $usuario->getFormacion()->get()->all();
+
+        return response($curso);
+
+
+    }
     public function showInvitarUsuario(Request $request)
     {
         $roles = Role::pluck('Slug', 'id');
 
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
         $otros_datos = json_decode($usuario->otros_datos, true);
-        $invitados=$usuario->getProfesores($usuario->id);
+        $invitado=$usuario->getProfesores($usuario->id);
         $profesores=$usuario->getInvitados($usuario->id);
-        $invitados=$invitados->merge($profesores);
+        $invitados=$invitado->merge($profesores);
+//        return response($invitados);
         return view('Alumno.invitar')->with('user', $usuario)
             ->with('otros_datos', $otros_datos)->withRoles($roles)
             ->with('invitados',$invitados);
 
     }
 
+    public function logAccesos(){
 
+        $usuario = Sentinel::findById(Sentinel::getUser()->id);
+        $otros_datos = json_decode($usuario->otros_datos, true);
+        $invitado=$usuario->getProfesores($usuario->id);
+        $profesores=$usuario->getInvitados($usuario->id);
+        $invitados=$invitado->merge($profesores);
+        $logAccesos=logAccesos::where('alumno_id',$usuario->id)->get()->all();
+
+
+        $view = \View::make('pdf.logAccesos', compact('invitados',  'usuario','logAccesos'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+//        $pdf->set_option('isHtml5ParserEnabled', true);
+//        $pdf->set_paper('A4', 'landscape');
+
+        $pdf->loadHTML($view);
+        return $pdf->stream('invoice');
+
+
+    }
     public function invitarUsuario(Request $request)
     {
         $validation = Validator::make($request->all(), [
@@ -539,7 +571,7 @@ class AlumnoController extends Controller
         $hecho->titulo_hecho = 'Trabajo';
         $hecho->categoria_id = 5;
         $hecho->curso = '';
-        $hecho->contenido = "";
+        $hecho->contenido = $alumnoLaboral->descripcion;
         $hecho->proposito = "";
         $hecho->evidencia = "";
         $hecho->hechos_relacionados = "";

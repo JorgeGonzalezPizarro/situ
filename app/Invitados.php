@@ -14,7 +14,9 @@ class Invitados extends Model
     public function getUsuario(){
         return $this->hasOne('App\User','id','invitado_id');
     }
-
+    public function getAlumno(){
+        return $this->hasOne('App\User','id','alumno_id');
+    }
 
 
 }
