@@ -79,16 +79,17 @@
                                         <th style="border: none;"><h1>Asignaturas</h1></th>
                                         <tr>
                                             <td><strong class="">Grado:</strong></td>
-                                            <td>{!! Form::text('grado', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $curso->grado ]) !!}
+                                            <td>
+                                                {{--{!! Form::text('grado', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $curso->grado ]) !!}--}}
+                                                {{ Form::select('grado', $grado, ['class' => '','id'=>'grado','value'=>$grado]) }}
 
-                                                <a href="#" id="clickable"> <i id=" " class="fa fa-pencil"></i></a>
-
+                                                <a id="añadir_asignaturas" href="<?php echo e(route('misDatosLaborales')); ?>"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
+                                                    Añadir Formacion</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong class="">Curso:</strong></td>
                                             <td>
-                                                {{--{!! Form::text('curso', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name ]) !!}--}}
                                                 {{ Form::select('curso', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], ['class' => 'misDatos','id'=>'curso']) }}
 
 
@@ -141,9 +142,14 @@
                     </div>
                     <div class="panel-footer">
                         <table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">
-                            @if(isset($curso))
+                            {!! Form::label('text', 'Curso Académico') !!}
+                            {{ Form::select('', $grado, $year,
+                            ['aria-controls'=>'asignaturas','class' => 'form-control input-sm','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}
+
+                        @if(isset($curso))
                                 <thead>
                                 <tr>
+                                    <th>Grado</th>
                                     <th>Curso</th>
                                     <th>Asignatura</th>
                                     <th>Seleccionar</th>
@@ -152,9 +158,6 @@
 
                                 <tbody id="clickable">
                                 <div class="form-group">
-                                    {!! Form::label('text', 'Curso Académico') !!}
-                                    {{ Form::select('', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], $year,
-                                    ['aria-controls'=>'asignaturas','class' => 'form-control input-sm','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}
 
                                 </div>
 
@@ -162,7 +165,10 @@
                                     {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
                                     @foreach (json_decode($asignaturas,true) as $asignatura)
                                         <tr>
+                                            <td>{{$curso->grado}}</td>
+
                                             <td>{{$curso->curso}}</td>
+
                                             <td id="asignatura">{!!  print_r($asignatura)[0] !!}</td>
                                             <td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
                                                                      class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
@@ -282,9 +288,11 @@
     }
 
     function getAsignaturas () {
-        var x = document.getElementById("cursoSelect").selectedIndex;
-        var curso=(document.getElementsByTagName("option")[x].value);
-
+        var e = document.getElementById("cursoSelect");
+        var strUser = e.options[e.selectedIndex].value;
+        // var x = document.getElementById("cursoSelect").selectedIndex;
+        var curso = e.options[e.selectedIndex].value;
+        alert(curso);
         $.ajax({
             type:"get",
             url     : "{{ url('Alumno/alumnoDatos/datosAcademicos/') }}/"+curso ,
@@ -384,85 +392,7 @@
                 "searchable": true
             } ]
         });
-            document.getElementById("endDate").disabled = true;
-        window.onload =function() {
 
-            $("#startDate").datepicker({
-
-                    onSelect: function(date) {
-                        document.getElementById("endDate").disabled = false;
-
-                        $("#endDate" ).datepicker("destroy");
-
-                        $("#endDate").datepicker({
-                            minDate: date,
-                            inline : false
-
-                        })
-                        $( "#endDate" ).datepicker("refresh");
-                        $("#endDate").datepicker('setDate', null);
-
-                    },
-
-                }
-
-
-
-
-            );
-            alert("window is loaded");
-        }
-            document.getElementById("endDate").disabled = true;
-        window.onload =function() {
-            // executes when complete page is fully loaded, including all frames, objects and images
-
-            $("#startDate").datepicker({
-
-                    onSelect: function(date) {
-                        document.getElementById("endDate").disabled = false;
-
-                        $("#endDate" ).datepicker("destroy");
-
-                        $("#endDate").datepicker({
-                            minDate: date,
-                            inline : false
-
-                        })
-                        $( "#endDate" ).datepicker("refresh");
-                        $("#endDate").datepicker('setDate', null);
-
-                    },
-
-                }
-
-
-
-
-            );
-            alert("window is loaded");
-        }
-        var sel = document.getElementById('ubicacion');
-        // var opts = sel.options;
-
-        var ciudades= "Andalucia|Aragon|Asturias|Baleares|" +
-            "Canarias|Cantabria|Castilla y Leon|Castilla-La Mancha|Cataluña|Ceuta|" +
-            "Communidad Valenciana|Extremadura|Galicia|La Rioja|" +
-            "Madrid|Melilla|Murcia|Navarra|Pais Vasco" ;
-        var state_arr = ciudades.split("|");
-
-        $.each(state_arr, function (i, item) {
-            $('#ubicacion').append($('<option>', {
-                value: item,
-                text : item
-            }));
-        });
-        var sel = document.getElementById('disciplina');
-        var opts = sel.options;
-
-
-        for (var i=0;i<opts.length;i++) {
-            opts[i].value = opts[i].text;
-        }
 
         var x = document.getElementById("cursoSelect").selectedIndex;
         var curso=(document.getElementsByTagName("option")[x].value);
@@ -476,15 +406,17 @@
 
             $.ajax({
                 type:"get",
-                url     : "{{ route('eliminarAsignatura') }}/"+data[1]+"/"+ data[0],
+                url     : "{{ route('eliminarAsignatura') }}/"+data[2]+"/"+ data[1]+"/"+data[0],
                 encode  : true,
+
                 data: {
-                    asignatura: data[1],
-                    year:data[0]
+                    // asignatura: data[2],
+                    // year:data[1],
+                    // curso:data[0]
                 },
                 success: function(response){
                     window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;
-
+                    alert(data[1]);
                     console.log(response);
 
                 },
@@ -499,12 +431,6 @@
         });
     });
 
-    // function seleccionar() {
-    //
-    //     var table = $('#asignaturas').DataTable();
-    //     var data = table.row($(this).closest('td')).data()
-    //     alert(data['Curso']);
-   // }
 
 </script>
 @endsection

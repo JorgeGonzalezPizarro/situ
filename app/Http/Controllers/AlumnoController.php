@@ -125,9 +125,18 @@ class AlumnoController extends Controller
         $user = Sentinel::getUser();
 
         $otros_datos = json_decode($user->otros_datos, true);
+        $curso = $user->getDatosAcademicos()->where('grado', $year)->get()->first();
+        $grado = $user->getFormacion()->get()->all();
 
-        $curso = $user->getDatosAcademicos()->where('curso', $year)->get()->first();
-        $grado=$user->getFormacion()->get()->all();
+        if (!empty($grado)) {
+
+        foreach ($grado as $grad) {
+            $gradoArray[$grad['disciplina_academica']] = $grad['disciplina_academica'] . " - " . $grad['titulacion'];
+        }
+        }
+        else{
+            $gradoArray=array();
+        }
         if (!empty($curso->asignaturas)) {
             $asignaturas = $curso->asignaturas;
         } else {
@@ -136,7 +145,7 @@ class AlumnoController extends Controller
         return view('Alumno.datos.alumnoDatosAcademicos')->with('user', $user)
             ->with('otros_datos', $otros_datos)
             ->with('curso', $curso)
-            ->with('asignaturas', $asignaturas)->with('year', $year);
+            ->with('asignaturas', $asignaturas)->with('year', $year)->with('grado',$gradoArray);
 
     }
 
@@ -251,15 +260,16 @@ class AlumnoController extends Controller
 
     }
 
-    public function eliminarAsignatura($asignatura, $year)
+    public function eliminarAsignatura($asignatura, $year,$curso)
     {
 
 
         $user = Sentinel::getUser();
         $inputAsignaturas = array();
 
-        $curso = $user->getDatosAcademicos()->where('curso', $year)->first();
-        $asignaturas = json_decode($curso->asignaturas, false);
+        $curso1 = $user->getDatosAcademicos()->where([['curso', $year],['grado',$curso]])->first();
+//        return $curso1;
+        $asignaturas = json_decode($curso1->asignaturas, false);
 //        $key=array_search($asignatura,$asignaturas);
 //            unset($asignaturas[$asignatura]);
 
@@ -270,13 +280,13 @@ class AlumnoController extends Controller
         }
         $resultado = array_merge($inputAsignaturas, $asignaturas);
 
-        $curso->asignaturas = json_encode($resultado, false);
+        $curso1->asignaturas = json_encode($resultado, false);
 //        if (($key = array_search($asignatura, $asignaturas)) !== false) {
 //            unset($asignaturas[$key]);
 //        }
 //            $curso->asignaturas=json_encode($asignaturas);
 
-        $curso->save();
+        $curso1->save();
 //        return response(var_dump(  $curso->asignaturas));
 
         return Redirect::back();
@@ -343,6 +353,8 @@ class AlumnoController extends Controller
 
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
         $curso = $usuario->getDatosAcademicos()->pluck('curso');
+        $grado = $usuario->getDatosAcademicos()->pluck('grado');
+
         $curso->all();
         $etiqueta = Etiqueta::pluck('slug')->sortByDesc('id');
 
@@ -351,7 +363,7 @@ class AlumnoController extends Controller
 
         if ($categoria->categoria == 'Calificaciones') {
             return view('hechos.calificaciones')->with('user', Sentinel::getUser())
-                ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
+                ->with('grado', $grado)->with('curso',$curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
 
         }
         if ($categoria->categoria == 'Trabajo Académico') {
@@ -389,7 +401,7 @@ class AlumnoController extends Controller
     {
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
 
-        $curso = $usuario->getDatosAcademicos()->where('curso', $curso)->get()->first();
+        $curso = $usuario->getDatosAcademicos()->where('grado', $curso)->get()->first();
 
         return response(json_decode($curso->asignaturas));
 

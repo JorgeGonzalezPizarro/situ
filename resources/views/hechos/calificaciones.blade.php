@@ -49,16 +49,18 @@
                         <div class="panel-body">
 
 
-                                {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
+                                {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$grado,'name' => 'curso']) !!}
 
                                         <div class="form-inline" style="">
 
                                             {!! Form::label('Curso', 'Curso - Asignatura') !!}<br>
-                                                    {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
+                                                    {!! Form::select('curso', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$grado,'name' => 'curso']) !!}
+                                            {{--{!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso1' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}--}}
 
                                                     {{--{{Form::select('etiqueta', $c->curso)}}--}}
                                                     {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
                                                     {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
+                                            <select  style="width:40%;"class="form-control" id="curso" name="curso"></select>
 
                                                     <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
                                                     <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
@@ -286,6 +288,8 @@
             var curso = (document.getElementsByTagName("option")[x].text);
             $('#inputCurso').attr('value', curso);
             $('#asignaturas').empty();
+            $('#curso').empty();
+
             $.ajax({
                 type: "get",
                 url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,
@@ -298,17 +302,27 @@
                     if (response.length  == 0) {
                         document.getElementById('boton').disabled = true;
                         // $( '#añadir_asignaturas').show();
+                        $('#curso ').hide();
 
                         $('#asignaturas ').hide();
                     }
 
                     else{
                         $( '#añadir_asignaturas').hide();
+                        $( '#curso').hide();
 
                         $('#boton').removeClass('btn btn-info disabled');
                         $('#boton').addClass('btn btn-success');
                         document.getElementById('boton').disabled = false;
                         document.getElementById('boton').disabled = false;
+                        var curso = ["1", "2", "3","4","0TROS"];
+
+                        curso.forEach(function(element){
+                            $('#curso')
+                                .append($("<option></option>")
+                                    .attr("value",element)
+                                    .text(element));
+                        });
                         response.forEach(function (element) {
 
 
@@ -342,6 +356,8 @@
             var curso=(document.getElementsByTagName("option")[x].text);
             $('#inputCurso').attr('value',curso);
             $('#asignaturas').empty();
+            $('#curso').empty();
+
             $.ajax({
                 type:"get",
                 url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,
@@ -355,6 +371,8 @@
                         $( '#añadir_asignaturas').show();
 
                         $('#asignaturas ').hide();
+                        $('#curso ').hide();
+
                     }
 
                     else{
@@ -365,6 +383,14 @@
                         $('#boton').addClass('btn btn-success');
                         document.getElementById('boton').disabled = false;
                         document.getElementById('boton').disabled = false;
+                        var curso = ["1", "2", "3","4","0TROS"];
+
+                        curso.forEach(function(element){
+                            $('#curso')
+                            .append($("<option></option>")
+                                .attr("value",element)
+                                .text(element));
+                    });
                         response.forEach(function(element) {
                             $('#asignaturas')
                                 .append($("<option></option>")
