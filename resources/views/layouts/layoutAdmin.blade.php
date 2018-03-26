@@ -328,7 +328,7 @@
                             <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
                         </a>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Plataforma de Trayectoria Universitaria</a>
+                            <a class="nav-link" href="{{url('Situ\public')}}">Plataforma de Trayectoria Universitaria</a>
                         </li>
                     </ul>
                         <ul class="nav navbar-nav navbar-center">

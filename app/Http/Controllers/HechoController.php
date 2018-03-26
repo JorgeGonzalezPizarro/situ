@@ -130,6 +130,7 @@ class HechoController extends Controller
                     $calificacion->calificacion=$request->calificacion;
                     $calificacion->asignatura=$request->asignatura;
                     $calificacion->grado=$request->grado;
+                    $calificacion->curso=$request->curso;
 
                     $calificacion->profesor=$request->profesor;
                     $calificacion->save();

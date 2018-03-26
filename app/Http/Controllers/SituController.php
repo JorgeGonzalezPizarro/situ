@@ -103,6 +103,7 @@ class SituController extends Controller
                 $rol=Sentinel::findRoleById(2);
                 $alumnos=$rol->users()->with('roles')->get();
                 $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get();
+                $otrosHechosPublicos=$hechosPublicos;
                 $logAccesos= logAccesos::firstOrCreate(['invitado_id'=>$invitado->id,
                     'alumno_id'=>$alumno->id,'hechos_id'=>null],['invitado_id'=>$invitado->id,
                     'alumno_id'=>$alumno->id,'rol'=>$invitado->rol,'hechos_id'=>$id,'numero_accesos'=>'0']);
@@ -131,6 +132,7 @@ class SituController extends Controller
 
                 $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get()->all();
                 $hechosPublicos = $hechosPublicos->getEtiqueta()->with('CV');
+                $otrosHechosPublicos=$hechosPublicos;
 //                    ['categoria_id',$categoria],['id','!=',$hecho->id]])->get()->all();
             } else {
                 if (Sentinel::inRole('Inv')){
@@ -146,6 +148,8 @@ class SituController extends Controller
                 }
 
                 $hechosPublicos = hechos::where([['user_id',  $alumno->id],['nivel_acceso', '>=', $usuario->nivel_acceso],
+                    ['categoria_id', $categoria]])->get()->all();
+                $otrosHechosPublicos = hechos::where([['user_id',  $alumno->id],['nivel_acceso', '>=', $usuario->nivel_acceso],
                     ['categoria_id', $categoria], ['id', '!=', $hecho->id]])->get()->all();
                 $categoria = $hecho->getCategoria()->get()->first();
                 $curso = $hecho->curso;
@@ -158,20 +162,22 @@ class SituController extends Controller
         if(isset($categoria)) {
             if ($categoria->categoria == 'Calificaciones') {
                 return view('Situ.hechos.singleHecho.calificacion')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('user', $usuario)->with('alumno',$alumno);
+                    ->with('hechos', $hechosPublicos)->with('user', $usuario)->with('alumno',$alumno)
+                    ->with('otrosHechos',$otrosHechosPublicos);
+
 
 
             }
             if ($categoria->categoria == 'Trabajo Académico') {
                 return view('Situ.hechos.singleHecho.trabajoAcademico')->with('hecho', $hecho)
                     ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
-                    ->with('alumno',$alumno);
+                    ->with('alumno',$alumno)->with('otrosHechos',$otrosHechosPublicos);
 
             }
             if ($categoria->categoria == 'Recuerdos') {
                 return view('Situ.hechos.singleHecho.recuerdos')->with('hecho', $hecho)
                     ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
-                    ->with('alumno',$alumno);
+                    ->with('alumno',$alumno)->with('otrosHechos',$otrosHechosPublicos);
 
 
             }
@@ -179,7 +185,7 @@ class SituController extends Controller
 
                 return view('Situ.hechos.singleHecho.portafolioProfesional')->with('hecho', $hecho)
                     ->with('hechos', $hechosPublicos)->with('user', $usuario)
-                    ->with('alumno',$alumno);
+                    ->with('alumno',$alumno)->with('otrosHechos',$otrosHechosPublicos);
 
             }
             if ($categoria->categoria == 'Frases guía') {
@@ -218,6 +224,15 @@ class SituController extends Controller
 
     }
 
+    public function getHechos(Request $request){
+
+            $usuario=Sentinel::getUser();
+
+            $hechosPublicos = hechos::where('nivel_acceso', '>=', $usuario->nivel_acceso)
+            ->where('contenido','like', '%' . $request->input . '%')->get()->all();
+
+            return response($hechosPublicos);
+    }
 
 
     public function cv()

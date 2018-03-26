@@ -49,21 +49,19 @@
                         <div class="panel-body">
 
 
-                                {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$grado,'name' => 'curso']) !!}
+                                {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'curso' ,'data-live-search'=>'true','value'=>$grado,'name' => 'curso1']) !!}
 
                                         <div class="form-inline" style="">
 
                                             {!! Form::label('Curso', 'Curso - Asignatura') !!}<br>
-                                                    {!! Form::select('curso', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$grado,'name' => 'curso']) !!}
-                                            {{--{!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso1' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}--}}
 
-                                                    {{--{{Form::select('etiqueta', $c->curso)}}--}}
-                                                    {{--{!! Form::select('etiqueta', $curso->asignaturas, NULL, ['class' => 'selectpicker', 'data-live-search'=>'true', 'name' => 'etiqueta[]']) !!}--}}
-                                                    {{--{!! Form::select('asignaturas', $curso, NULL, ['class' => 'misDatos','id'=>'asignaturas' ,'data-live-search'=>'true','name' => 'asignatura']) !!}--}}
-                                            <select  style="width:40%;"class="form-control" id="curso" name="curso"></select>
+                                            {!! Form::select('grado', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputGrado' ,'data-live-search'=>'true','value'=>$grado,'name' => 'grado']) !!}
+                                            <select  style="width:40%;"class="form-control" id="curso" name="curso" ></select>
 
-                                                    <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
-                                                    <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
+                                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','name' => 'curso']) !!}
+                                            <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
+
+                                            <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
                                                         Añadir Asignaturas</a>
                                         </div>
                                     <hr>
@@ -270,6 +268,14 @@
         for (var i=0;i<opts.length;i++) {
             opts[i].value = opts[i].text;
         }
+        var sel1 = document.getElementById('inputGrado');
+        var opts1 = sel1.options;
+
+
+        for (var i=0;i<opts1.length;i++) {
+            opts1[i].value = opts1[i].text;
+        }
+
         var sel1 = document.getElementById('inputCurso');
         var opts1 = sel1.options;
 
@@ -278,31 +284,43 @@
             opts1[i].value = opts1[i].text;
         }
 
-        // $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
-
 
 
         var categoria=document.getElementById("categoria").innerHTML;
-        if( $('#inputCurso').has('option').length > 0 ) {
-            var x = document.getElementById("inputCurso").selectedIndex;
-            var curso = (document.getElementsByTagName("option")[x].text);
-            $('#inputCurso').attr('value', curso);
+        if( $('#inputGrado').has('option').length > 0 ) {
+
+            var e = document.getElementById("inputGrado");
+            var grado = e.options[e.selectedIndex].value;
+            var grado = e.options[e.selectedIndex].value;
+
+
+
+            var e2 = document.getElementById("inputCurso");
+            // var x = document.getElementById("cursoSelect").selectedIndex;
+            var curso = e2.options[e2.selectedIndex].text;
+
+
+            $('#inputGrado').attr('value', grado);
+
             $('#asignaturas').empty();
-            $('#curso').empty();
 
             $.ajax({
                 type: "get",
-                url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,
+                url: "{{url('hechos') }}" +"/" +categoria+"/" +grado +"/"+curso,
                 encode: true,
                 data: {
+                    grado: grado,
                     curso: curso,
+
                 },
                 success: function (response) {
-                    console.log(response);
+                    console.log(response[0]);
+
                     if (response.length  == 0) {
+                        console.log(response);
                         document.getElementById('boton').disabled = true;
                         // $( '#añadir_asignaturas').show();
-                        $('#curso ').hide();
+                        // $('#curso ').hide();
 
                         $('#asignaturas ').hide();
                     }
@@ -315,14 +333,8 @@
                         $('#boton').addClass('btn btn-success');
                         document.getElementById('boton').disabled = false;
                         document.getElementById('boton').disabled = false;
-                        var curso = ["1", "2", "3","4","0TROS"];
 
-                        curso.forEach(function(element){
-                            $('#curso')
-                                .append($("<option></option>")
-                                    .attr("value",element)
-                                    .text(element));
-                        });
+
                         response.forEach(function (element) {
 
 
@@ -333,9 +345,9 @@
                         });
                     }
 
+                    $('#asignaturas ').show();
 
 
-                    {{--window.location.href = "{{url('hechos') }}" +"/" +categoria+"/" +curso--}}
                 },
                 error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
                     console.log(JSON.stringify(jqXHR));
@@ -345,25 +357,34 @@
         }
 
 
+            var e = document.getElementById("inputGrado");
+        var grado = e.options[e.selectedIndex].value;
+        var grado = e.options[e.selectedIndex].value;
+
+        var e2 = document.getElementById("inputCurso");
+        var curso = e2.options[e2.selectedIndex].text;
 
 
-        $('#inputCurso').on('change', function() {
-            var x = document.getElementById("inputCurso").selectedIndex;
-            var x = document.getElementById("inputCurso").selectedIndex;
+
+        $('#inputGrado').on('change', function() {
+
+            var e = document.getElementById("inputGrado");
+            var grado = e.options[e.selectedIndex].value;
+            var grado = e.options[e.selectedIndex].value;
             var pathArray = window.location.pathname.split( '/,' );
-            var secondLevelLocation = pathArray[0];
 
-            var curso=(document.getElementsByTagName("option")[x].text);
-            $('#inputCurso').attr('value',curso);
-            $('#asignaturas').empty();
-            $('#curso').empty();
+            // var curso=(document.grado("option")[x].text);
+            $('#inputGrado').attr('value',grado);
+            // $('#asignaturas').empty();
+            // $('#curso').empty();
+            $('#inputCurso').empty();
 
             $.ajax({
                 type:"get",
-                url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,
+                url: "{{url('get') }}" +"/",
                 encode  : true,
                 data: {
-                    curso: curso,
+                    grado: grado,
                 },
                 success: function(response){ // What to do if we succeed
                     if (response.length  == 0) {
@@ -371,7 +392,6 @@
                         $( '#añadir_asignaturas').show();
 
                         $('#asignaturas ').hide();
-                        $('#curso ').hide();
 
                     }
 
@@ -383,18 +403,83 @@
                         $('#boton').addClass('btn btn-success');
                         document.getElementById('boton').disabled = false;
                         document.getElementById('boton').disabled = false;
-                        var curso = ["1", "2", "3","4","0TROS"];
 
-                        curso.forEach(function(element){
-                            $('#curso')
-                            .append($("<option></option>")
-                                .attr("value",element)
-                                .text(element));
-                    });
-                        response.forEach(function(element) {
+
+
+                            $('#inputCurso')
+                                .append($("<option></option>")
+                                    .attr("value", response)
+                                    .text(response));
+
+
+                    }
+
+
+
+
+                    console.log(response);
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+
+        });
+
+
+
+
+
+
+        $('#inputCurso').click( function() {
+
+            var e = document.getElementById("inputGrado");
+            var grado = e.options[e.selectedIndex].value;
+            var grado = e.options[e.selectedIndex].value;
+            var pathArray = window.location.pathname.split( '/,' );
+            var secondLevelLocation = pathArray[0];
+            var e2 = document.getElementById("inputCurso");
+            var curso = e2.options[e2.selectedIndex].value;
+
+            // var curso=(document.grado("option")[x].text);
+            $('#inputGrado').attr('value',grado);
+            $('#asignaturas').empty();
+            // $('#curso').empty();
+
+            $.ajax({
+                type:"get",
+                url: "{{url('hechos') }}" +"/" +categoria+"/" +grado +"/"+curso,
+                encode  : true,
+                data: {
+                    grado: grado,
+                    curso: curso,
+                },
+                success: function(response){ // What to do if we succeed
+                    if (response.length  == 0) {
+                        document.getElementById('boton').disabled = true;
+                        $( '#añadir_asignaturas').show();
+
+                        $('#asignaturas ').hide();
+
+                    }
+
+                    else{
+                        $( '#añadir_asignaturas').hide();
+                        $('#asignaturas ').show();
+
+                        $('#boton').removeClass('btn btn-info disabled');
+                        $('#boton').addClass('btn btn-success');
+                        document.getElementById('boton').disabled = false;
+                        document.getElementById('boton').disabled = false;
+
+                        response.forEach(function (element) {
+
+
                             $('#asignaturas')
                                 .append($("<option></option>")
-                                    .attr("value",element)
+                                    .attr("value", element)
                                     .text(element));
                         });
 

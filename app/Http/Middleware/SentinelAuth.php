@@ -32,6 +32,12 @@ class SentinelAuth
             elseif  (Sentinel::check() && Sentinel::inRole('Alu')) {
                 return redirect('Alumno\alumnoDashboard');
             }
+        elseif  (Sentinel::check() && Sentinel::inRole('Inv')) {
+            return redirect('Situ\public');
+        }
+        elseif  (Sentinel::check() && Sentinel::inRole('Prof')) {
+            return redirect('Situ\public');
+        }
                 return $next($request);
     }
 }

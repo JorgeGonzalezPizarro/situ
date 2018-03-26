@@ -352,18 +352,34 @@ class AlumnoController extends Controller
 
 
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
-        $curso = $usuario->getDatosAcademicos()->pluck('curso');
+          $curso = $usuario->getDatosAcademicos()->pluck('curso');
         $grado = $usuario->getDatosAcademicos()->pluck('grado');
+        $curso1 = $usuario->getDatosAcademicos()->where('grado', $grado)->pluck('curso');
+//        return $curso1;
+        //        $curso1=CursoAlumno::where([['user_id',$usuario->id],['grado',$grado]])->get()->all();
+//  return $curso1;
 
-        $curso->all();
+//        if (!empty($curso1)) {
+//
+//            foreach ($curso1 as $curs) {
+//                $cursoArray[] = $curs;
+//            }
+//        }
+//        else{
+//            $cursoArray=array();
+//        }
+//        return response($cursoArray);
+
+       $curso1->all();
         $etiqueta = Etiqueta::pluck('slug')->sortByDesc('id');
 
         $categoria = Categorias::where('categoria', $categoria)->get()->first();
         $otros_datos = json_decode($usuario->otros_datos, true);
 
         if ($categoria->categoria == 'Calificaciones') {
+//            return response($cursoArray);
             return view('hechos.calificaciones')->with('user', Sentinel::getUser())
-                ->with('grado', $grado)->with('curso',$curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
+                ->with('grado', $grado)->with('curso',$curso1)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
 
         }
         if ($categoria->categoria == 'Trabajo Académico') {
@@ -397,16 +413,56 @@ class AlumnoController extends Controller
         }
     }
 
-    public function getAsignaturas($categoria, $curso)
+    public function getAsignaturas($categoria,$grado, $curso)
     {
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
 
-        $curso = $usuario->getDatosAcademicos()->where('grado', $curso)->get()->first();
+        $grado = $usuario->getDatosAcademicos()->where([['curso',$curso],['grado', $grado]])->get()->first();
+        //        return "aa";
+//        $curso1 = $usuario->getDatosAcademicos()->where('grado', $curso)->get()->all();
+//        $curso1=CursoAlumno::where([['user_id',$usuario->id],['grado',$grado]])->get()->all();
+//        return $curso1;
 
-        return response(json_decode($curso->asignaturas));
+//        if (!empty($curso1)) {
+//
+//            foreach ($curso1 as $curs) {
+//                $cursoArray[$curs['curso']] = $curs['curso'];
+//            }
+//        }
+//        else{
+//            $cursoArray=array();
+//        }
+//        return $cursoArray;
+        return response([json_decode($grado->asignaturas)]);
 
 
     }
+    public function getCurso(Request  $request)
+    {
+        $usuario = Sentinel::findById(Sentinel::getUser()->id);
+
+        $grado = $usuario->getDatosAcademicos()->where('grado', $request->grado)->get()->first();
+        //        return "aa";
+//        $curso1 = $usuario->getDatosAcademicos()->where('grado', $curso)->get()->all();
+//        $curso1=CursoAlumno::where([['user_id',$usuario->id],['grado',$grado]])->get()->all();
+//        return $curso1;
+
+//        if (!empty($curso1)) {
+//
+//            foreach ($curso1 as $curs) {
+//                $cursoArray[$curs['curso']] = $curs['curso'];
+//            }
+//        }
+//        else{
+//            $cursoArray=array();
+//        }
+//        return $cursoArray;
+        return response(($grado->curso));
+
+
+    }
+
+
     public function getGrado()
     {
         $usuario = Sentinel::findById(Sentinel::getUser()->id);

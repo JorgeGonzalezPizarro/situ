@@ -80,10 +80,13 @@ Route::get('Alumno/invitar/log', 'AlumnoController@logAccesos')->name('logAcceso
 /*HEHCOS*/
 
 Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos');
+Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos');
 
-Route::get('hechos/{categoria?}/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
+Route::get('hechos/{categoria?}/{grado?}/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 Route::POST('\'hechos/{categoria?}/{curso?}', 'HechoController@guardar_Hecho')->name('guardarHecho');
 Route::POST('/hechos/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('fraseguia');
+Route::get('/get/', 'AlumnoController@getCurso');
+Route::get('/Situ/{buscar?}', 'SituController@getHechos');
 
 
 /*PUBLICO*/

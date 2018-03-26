@@ -136,13 +136,13 @@
 
             </div>
 
-            @if(!empty($hechos))
+            @if(!empty($otrosHechos))
                 <!-- Post Content Column -->
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="mt-4" style="padding-left: 15px">  Relacionado con  {{$hecho->titulo_hecho}}</h1>
                             <hr>
-                    @foreach($hechos as $hecho)
+                    @foreach($otrosHechos as $hecho)
 
                         @if(!empty($hecho->ruta_imagen))
                             <img class="img-fluid rounded" style="width: 600px; height: 300px;"src="{{$hecho->ruta_imagen}}" alt="">

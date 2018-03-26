@@ -48,7 +48,9 @@
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" id="buscar" onkeyup="buscar()" name="buscar" class="form-control" placeholder="Search for...">
+                        <select  id="buscar1"  name="buscar">
+                        </select>
                         <span class="input-group-btn">
                   <button class="btn btn-secondary" type="button">Go!</button>
                 </span>
@@ -100,5 +102,69 @@
         </div>
         </div>
     </div>
-    <!-- /.container -->
+
+
 @endsection
+
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+<script>
+
+
+
+       function buscar() {
+
+
+           var buscar = document.getElementById("buscar");
+
+           // var x = document.getElementById("cursoSelect").selectedIndex;
+           console.log($('#buscar').val());
+
+           $( '#buscar1').empty();
+
+           $.ajax({
+               type: "get",
+               url: "{{url('Situ/') }}" +"/"+ $('#buscar').val(),
+               encode: true,
+               data: {
+                   input: $('#buscar').val(),
+
+               },
+               success: function (response) {
+
+                   if (response.length == 0) {
+
+                       $( '#buscar1').hide();
+
+                   }
+
+                   else {
+
+                       $('#buscar1')
+                           .append($("<option></option>")
+                               .attr("value", response)
+                               .text(response));
+                       $( '#buscar1').show();
+
+                       response.forEach(function (element) {
+                        console.log(response);
+                           // $('#buscar1')
+                           //     .append($("<option></option>")
+                           //         .attr("value", response)
+                           //         .text(response));
+                       });
+                   }
+
+
+               },
+               error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                   console.log(JSON.stringify(jqXHR));
+                   console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+               }
+           });
+
+
+       }
+
+    </script>
