@@ -121,7 +121,7 @@ class MigrationCartalystSentinel extends Migration
 Schema::create('alumno_curso', function (Blueprint $table) {
     $table->increments('id');
     $table->integer('user_id')->unsigned();
-    $table->integer('curso');
+    $table->integer('curso')->nullable();
     $table->string('grado')->nullable();
 //    $table->unique(['user_id', 'curso']);
 

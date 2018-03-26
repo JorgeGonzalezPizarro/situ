@@ -270,7 +270,7 @@
         }
         var sel1 = document.getElementById('inputGrado');
         var opts1 = sel1.options;
-
+        alert($("#inputgGrado").children('option').length);
 
         for (var i=0;i<opts1.length;i++) {
             opts1[i].value = opts1[i].text;
@@ -283,7 +283,9 @@
         for (var i=0;i<opts1.length;i++) {
             opts1[i].value = opts1[i].text;
         }
-
+        if(($("#inputgGrado").children('option').length) >0) {
+            alert("aa");
+        }
 
 
         var categoria=document.getElementById("categoria").innerHTML;

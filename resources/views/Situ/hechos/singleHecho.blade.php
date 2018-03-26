@@ -5,7 +5,7 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8" id="contenedor">
 
            @if(!empty($hechos))
                     @foreach($hechos as $hecho)
@@ -49,7 +49,6 @@
                 <div class="card-body">
                     <div class="input-group">
                         <input type="text" id="buscar" onkeyup="buscar()" name="buscar" class="form-control" placeholder="Search for...">
-                        <select  id="buscar1"  name="buscar">
                         </select>
                         <span class="input-group-btn">
                   <button class="btn btn-secondary" type="button">Go!</button>
@@ -121,49 +120,113 @@
            // var x = document.getElementById("cursoSelect").selectedIndex;
            console.log($('#buscar').val());
 
-           $( '#buscar1').empty();
+            if(0 !=($('#buscar').val().length)) {
+                $.ajax({
+                    type: "get",
+                    url: "{{url('Situ/') }}" + "/" + $('#buscar').val(),
+                    encode: true,
+                    data: {
+                        input: $('#buscar').val(),
 
-           $.ajax({
-               type: "get",
-               url: "{{url('Situ/') }}" +"/"+ $('#buscar').val(),
-               encode: true,
-               data: {
-                   input: $('#buscar').val(),
+                    },
+                    success: function (response) {
 
-               },
-               success: function (response) {
+                        if (response.length == 0) {
 
-                   if (response.length == 0) {
+                            $('#buscar1').hide();
 
-                       $( '#buscar1').hide();
+                        }
 
-                   }
-
-                   else {
-
-                       $('#buscar1')
-                           .append($("<option></option>")
-                               .attr("value", response)
-                               .text(response));
-                       $( '#buscar1').show();
-
-                       response.forEach(function (element) {
-                        console.log(response);
-                           // $('#buscar1')
-                           //     .append($("<option></option>")
-                           //         .attr("value", response)
-                           //         .text(response));
-                       });
-                   }
+                        else {
 
 
-               },
-               error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                   console.log(JSON.stringify(jqXHR));
-                   console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-               }
-           });
 
+
+                            {{--var html=   ' <div class="col-lg-12">'+--}}
+                            {{--'<ul class="timeline">'+--}}
+                            {{--'<li>'+--}}
+                            {{--'  <div class="timeline-panel">'+--}}
+                            {{--'    <div class="timeline-heading">'+--}}
+                            {{--'  <span style="float: left;">  <h4 class="timeline-title">{{$hecho->titulo_hecho}}</h4></span>'+--}}
+                            {{--'<span style="float: right;">  <h4 class="timeline-title">{{$alumno->first_name}}</h4></span>'+--}}
+                            {{--'<div class="clearfix"></div>  <h5 class="timeline-title">{{$hecho->getCategoria()->get()->first()->categoria}}</h5>'+--}}
+
+                            {{--'</div>'+--}}
+                            {{--'<div class="timeline-body">'+--}}
+                            {{--'  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></span>'+--}}
+                            {{--'<br>'+--}}
+                            {{--'<span class="pull-left">   {!!  str_limit($hecho->contenido,50,'...' )!!}</span>'+--}}
+                            {{--'  <div class="clearfix"></div>'+--}}
+                            {{--' <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>'+--}}
+                            {{--' </p></span>'+--}}
+                            {{--'</div>'+--}}
+                            {{--'</div>'+--}}
+                            {{--'</li>'+--}}
+
+
+                            {{--'</ul>'+--}}
+
+                            {{--'</div>'--}}
+
+                            // console.log(html);
+
+
+                            var html = [];
+                            response.forEach(function (element) {
+
+
+                                html.push(' <div class="col-lg-12">' +
+                                    '<ul class="timeline">' +
+                                    '<li>' +
+                                    '  <div class="timeline-panel">' +
+                                    '    <div class="timeline-heading">' +
+                                    '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                    '<span style="float: right;">  <h4 class="timeline-title">' + element['id'] + '</h4></span>' +
+                                    '<div class="clearfix"></div>  <h5 class="timeline-title">' + element['categoria_id'] + '</h5>' +
+
+                                    '</div>' +
+                                    '<div class="timeline-body">' +
+                                    '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>' + element['created_at'] + '</small></span>' +
+                                    '<br>' +
+
+                                    '<span class="pull-left">' + element['contenido'].substring(0, 50) + '...' + '</span>' +
+                                    '  <div class="clearfix"></div>' +
+                                    ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+                                    ' </p></span>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '</li>' +
+
+
+                                    '</ul>' +
+
+                                    '</div>');
+
+                                $("#contenedor").empty();
+
+
+                            });
+                            html.forEach(function (element) {
+                                console.log(element['id']);
+
+                                $("#contenedor").append(element);
+
+
+                            });
+                            console.log(html.length);
+
+                        }
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                        console.log(JSON.stringify(jqXHR));
+                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                    }
+                });
+            }else{
+                location.reload();
+            }
 
        }
 

@@ -113,6 +113,8 @@ class SituController extends Controller
 
                 $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso],
                     ['categoria_id', $categoria],['user_id', $usuario->id]])->get()->all();
+                $otrosHechosPublicos=$hechosPublicos;
+
             }
             $categoria = Categorias::where('id',$categoria)->get()->first();
             $categorias = Categorias::all();
@@ -227,9 +229,20 @@ class SituController extends Controller
     public function getHechos(Request $request){
 
             $usuario=Sentinel::getUser();
-
+        if (Sentinel::inRole('Inv')){
+            $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $alumno = $invitado->getAlumno()->get()->first();
+            $hechosPublicos = hechos::where([['user_id',  $alumno->id],['nivel_acceso', '>=', $usuario->nivel_acceso],
+               ])  ->where('contenido','like', '%' . $request->input . '%')->get()->all();
+        }else{
             $hechosPublicos = hechos::where('nivel_acceso', '>=', $usuario->nivel_acceso)
-            ->where('contenido','like', '%' . $request->input . '%')->get()->all();
+                ->where('contenido','like', '%' . $request->input . '%')
+                ->get()->all();
+        }
+
+
+
+
 
             return response($hechosPublicos);
     }

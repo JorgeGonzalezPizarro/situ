@@ -125,9 +125,8 @@ class AlumnoController extends Controller
         $user = Sentinel::getUser();
 
         $otros_datos = json_decode($user->otros_datos, true);
-        $curso = $user->getDatosAcademicos()->where('grado', $year)->get()->first();
+        $curso = $user->getDatosAcademicos()->where('grado', $year)->get()->all();
         $grado = $user->getFormacion()->get()->all();
-
         if (!empty($grado)) {
 
         foreach ($grado as $grad) {
@@ -153,8 +152,8 @@ class AlumnoController extends Controller
     public function actualizarMisDatosAcademicos()
     {
         $user = Sentinel::getUser();
-        $cursoAlumno = CursoAlumno::firstOrCreate(['curso' => Input::get('curso'), 'user_id' => $user->id],
-            ['curso' => Input::get('curso'), 'user_id' => Input::get('user´_id')]
+        $cursoAlumno = CursoAlumno::firstOrCreate(['grado'=>Input::get('grado'), 'user_id' => $user->id],
+            ['curso' => Input::get('curso'),'grado'=>Input::get('grado'), 'user_id' => Input::get('user´_id')]
 
 
         );
@@ -299,13 +298,14 @@ class AlumnoController extends Controller
 
         $user->first_name = Input::get('first_name');
         $user->last_name = Input::get('last_name');
+        $user->email=Input::get('email');
         $otros_datos = array('linkedin'=>Input::get('linkedin'),'facebook' => Input::get('facebook'), 'img' => Input::get('imagen'));
 
         $user->otros_datos = json_encode($otros_datos);
 
 
         $credentials = [
-            'email' => $user->email,
+            'email' =>$user->email,
             'password' => Input::get('old_password'),
         ];
 

@@ -152,7 +152,7 @@
                                     <th>Grado</th>
                                     <th>Curso</th>
                                     <th>Asignatura</th>
-                                    <th>Seleccionar</th>
+                                    {{--<th>Seleccionar</th>--}}
                                 </tr>
                                 </thead>
 
@@ -160,22 +160,29 @@
                                 <div class="form-group">
 
                                 </div>
+                                @foreach($curso as $cur)
 
-                                @if(!empty($curso->asignaturas))
+
+                                    @if(!empty($cur->asignaturas))
                                     {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
-                                    @foreach (json_decode($asignaturas,true) as $asignatura)
+                                    {{--@foreach ($cur->asignaturas as $asignatura)--}}
+                                    @foreach(json_decode(($cur->asignaturas),false) as $as)
                                         <tr>
-                                            <td>{{$curso->grado}}</td>
+                                            <td>{{$cur->grado}}</td>
 
-                                            <td>{{$curso->curso}}</td>
-
-                                            <td id="asignatura">{!!  print_r($asignatura)[0] !!}</td>
-                                            <td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                                                                     class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
+                                            <td>{{$cur->curso}}</td>
+                                            <td id="asignatura">
+                                           {!!  $as  !!}
+                                            {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
+                                                                     {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
+                                            </td>
                                         </tr>
-
                                     @endforeach
+
+                                    {{--@endforeach--}}
                                 @endif
+                                @endforeach
+
                                 @endif
                                 </tbody>
 
@@ -287,12 +294,37 @@
 
     }
 
+        var e = document.getElementById("cursoSelect");
+        var strUser = e.options[e.selectedIndex].value;
+        // var x = document.getElementById("cursoSelect").selectedIndex;
+        var curso = e.options[e.selectedIndex].value;
+
+        $.ajax({
+            type:"get",
+            url     : "{{ url('Alumno/alumnoDatos/datosAcademicos/') }}/"+curso ,
+            encode  : true,
+            data: {
+                curso: curso,
+            },
+            success: function(response){ // What to do if we succeed
+                {{--window.location.href= "{{ route('misDatosAcademicos') }}"+"/"+curso;--}}
+                console.log(response);
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+        });
+
+
+
     function getAsignaturas () {
         var e = document.getElementById("cursoSelect");
         var strUser = e.options[e.selectedIndex].value;
         // var x = document.getElementById("cursoSelect").selectedIndex;
         var curso = e.options[e.selectedIndex].value;
-        alert(curso);
+
         $.ajax({
             type:"get",
             url     : "{{ url('Alumno/alumnoDatos/datosAcademicos/') }}/"+curso ,
@@ -314,7 +346,6 @@
 
 
     }
-
 
 
 
