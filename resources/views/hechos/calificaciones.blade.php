@@ -56,10 +56,10 @@
                                             {!! Form::label('Curso', 'Curso - Asignatura') !!}<br>
 
                                             {!! Form::select('grado', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputGrado' ,'data-live-search'=>'true','value'=>$grado,'name' => 'grado']) !!}
-                                            <select  style="width:40%;"class="form-control" id="curso" name="curso" ></select>
+                                            {{--<select  style="width:40%;"class="form-control" id="curso" name="curso" ></select>--}}
 
                                             {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','name' => 'curso']) !!}
-                                            <select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>
+                                            {{--<select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>--}}
 
                                             <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
                                                         Añadir Asignaturas</a>
@@ -270,7 +270,6 @@
         }
         var sel1 = document.getElementById('inputGrado');
         var opts1 = sel1.options;
-        alert($("#inputgGrado").children('option').length);
 
         for (var i=0;i<opts1.length;i++) {
             opts1[i].value = opts1[i].text;
@@ -284,7 +283,6 @@
             opts1[i].value = opts1[i].text;
         }
         if(($("#inputgGrado").children('option').length) >0) {
-            alert("aa");
         }
 
 
@@ -304,67 +302,66 @@
 
             $('#inputGrado').attr('value', grado);
 
-            $('#asignaturas').empty();
+            $('#inputCurso').empty();
 
             $.ajax({
-                type: "get",
-                url: "{{url('hechos') }}" +"/" +categoria+"/" +grado +"/"+curso,
-                encode: true,
+                type:"get",
+                url: "{{url('get') }}" +"/",
+                dataType: 'json',
+                cache: false,
                 data: {
                     grado: grado,
-                    curso: curso,
-
                 },
-                success: function (response) {
-                    console.log(response[0]);
-
+                success: function(response){ // What to do if we succeed
                     if (response.length  == 0) {
-                        console.log(response);
                         document.getElementById('boton').disabled = true;
-                        // $( '#añadir_asignaturas').show();
-                        // $('#curso ').hide();
+                        $('#añadir_asignaturas').show();
 
                         $('#asignaturas ').hide();
                     }
-
                     else{
                         $( '#añadir_asignaturas').hide();
-                        $( '#curso').hide();
+                        $('#asignaturas ').show();
 
                         $('#boton').removeClass('btn btn-info disabled');
                         $('#boton').addClass('btn btn-success');
                         document.getElementById('boton').disabled = false;
                         document.getElementById('boton').disabled = false;
-
-
+                        console.log(( typeof  response) );
                         response.forEach(function (element) {
 
 
-                            $('#asignaturas')
+                            $('#inputCurso')
                                 .append($("<option></option>")
                                     .attr("value", element)
                                     .text(element));
+
+
                         });
                     }
 
-                    $('#asignaturas ').show();
 
+
+
+                    console.log(response);
 
                 },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
                     console.log(JSON.stringify(jqXHR));
                     console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                 }
             });
+
+
         }
 
-
-            var e = document.getElementById("inputGrado");
-        var grado = e.options[e.selectedIndex].value;
-        var grado = e.options[e.selectedIndex].value;
-
-        var e2 = document.getElementById("inputCurso");
-        var curso = e2.options[e2.selectedIndex].text;
+        //
+        //     var e = document.getElementById("inputGrado");
+        // var grado = e.options[e.selectedIndex].value;
+        // var grado = e.options[e.selectedIndex].value;
+        //
+        // var e2 = document.getElementById("inputCurso");
+        // var curso = e2.options[e2.selectedIndex].text;
 
 
 
@@ -384,19 +381,18 @@
             $.ajax({
                 type:"get",
                 url: "{{url('get') }}" +"/",
-                encode  : true,
+                dataType: 'json',
+                cache: false,
                 data: {
                     grado: grado,
                 },
                 success: function(response){ // What to do if we succeed
                     if (response.length  == 0) {
                         document.getElementById('boton').disabled = true;
-                        $( '#añadir_asignaturas').show();
+                        $('#añadir_asignaturas').show();
 
                         $('#asignaturas ').hide();
-
                     }
-
                     else{
                         $( '#añadir_asignaturas').hide();
                         $('#asignaturas ').show();
@@ -405,15 +401,17 @@
                         $('#boton').addClass('btn btn-success');
                         document.getElementById('boton').disabled = false;
                         document.getElementById('boton').disabled = false;
-
+                        console.log(( typeof  response) );
+                        response.forEach(function (element) {
 
 
                             $('#inputCurso')
                                 .append($("<option></option>")
-                                    .attr("value", response)
-                                    .text(response));
+                                    .attr("value", element)
+                                    .text(element));
 
 
+                        });
                     }
 
 
@@ -435,71 +433,71 @@
 
 
 
-        $('#inputCurso').click( function() {
+        {{--$('#inputCurso').click( function() {--}}
 
-            var e = document.getElementById("inputGrado");
-            var grado = e.options[e.selectedIndex].value;
-            var grado = e.options[e.selectedIndex].value;
-            var pathArray = window.location.pathname.split( '/,' );
-            var secondLevelLocation = pathArray[0];
-            var e2 = document.getElementById("inputCurso");
-            var curso = e2.options[e2.selectedIndex].value;
+            {{--var e = document.getElementById("inputGrado");--}}
+            {{--var grado = e.options[e.selectedIndex].value;--}}
+            {{--var grado = e.options[e.selectedIndex].value;--}}
+            {{--var pathArray = window.location.pathname.split( '/,' );--}}
+            {{--var secondLevelLocation = pathArray[0];--}}
+            {{--var e2 = document.getElementById("inputCurso");--}}
+            {{--var curso = e2.options[e2.selectedIndex].value;--}}
 
-            // var curso=(document.grado("option")[x].text);
-            $('#inputGrado').attr('value',grado);
-            $('#asignaturas').empty();
-            // $('#curso').empty();
+            {{--// var curso=(document.grado("option")[x].text);--}}
+            {{--$('#inputGrado').attr('value',grado);--}}
+            {{--$('#asignaturas').empty();--}}
+            {{--// $('#curso').empty();--}}
 
-            $.ajax({
-                type:"get",
-                url: "{{url('hechos') }}" +"/" +categoria+"/" +grado +"/"+curso,
-                encode  : true,
-                data: {
-                    grado: grado,
-                    curso: curso,
-                },
-                success: function(response){ // What to do if we succeed
-                    if (response.length  == 0) {
-                        document.getElementById('boton').disabled = true;
-                        $( '#añadir_asignaturas').show();
+            {{--$.ajax({--}}
+                {{--type:"get",--}}
+                {{--url: "{{url('hechos') }}" +"/" +categoria+"/" +grado +"/"+curso,--}}
+                {{--encode  : true,--}}
+                {{--data: {--}}
+                    {{--grado: grado,--}}
+                    {{--curso: curso,--}}
+                {{--},--}}
+                {{--success: function(response){ // What to do if we succeed--}}
+                    {{--if (response.length  == 0) {--}}
+                        {{--document.getElementById('boton').disabled = true;--}}
+                        {{--$( '#añadir_asignaturas').show();--}}
 
-                        $('#asignaturas ').hide();
+                        {{--$('#asignaturas ').hide();--}}
 
-                    }
+                    {{--}--}}
 
-                    else{
-                        $( '#añadir_asignaturas').hide();
-                        $('#asignaturas ').show();
+                    {{--else{--}}
+                        {{--$( '#añadir_asignaturas').hide();--}}
+                        {{--$('#asignaturas ').show();--}}
 
-                        $('#boton').removeClass('btn btn-info disabled');
-                        $('#boton').addClass('btn btn-success');
-                        document.getElementById('boton').disabled = false;
-                        document.getElementById('boton').disabled = false;
+                        {{--$('#boton').removeClass('btn btn-info disabled');--}}
+                        {{--$('#boton').addClass('btn btn-success');--}}
+                        {{--document.getElementById('boton').disabled = false;--}}
+                        {{--document.getElementById('boton').disabled = false;--}}
 
-                        response.forEach(function (element) {
-
-
-                            $('#asignaturas')
-                                .append($("<option></option>")
-                                    .attr("value", element)
-                                    .text(element));
-                        });
-
-                    }
+                        {{--response.forEach(function (element) {--}}
 
 
+                            {{--$('#asignaturas')--}}
+                                {{--.append($("<option></option>")--}}
+                                    {{--.attr("value", element)--}}
+                                    {{--.text(element));--}}
+                        {{--});--}}
+
+                    {{--}--}}
 
 
-        console.log(response);
 
-                },
-                error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
 
-        });
+        {{--console.log(response);--}}
+
+                {{--},--}}
+                {{--error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
+                    {{--console.log(JSON.stringify(jqXHR));--}}
+                    {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
+                {{--}--}}
+            {{--});--}}
+
+        {{--});--}}
 
 
 

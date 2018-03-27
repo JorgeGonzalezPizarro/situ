@@ -5,7 +5,7 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8" id="contenedor">
 
                 @if(!empty($alumnos))
                     @foreach($alumnos as $alumno)
@@ -47,7 +47,7 @@
                     <h5 class="card-header">Search</h5>
                     <div class="card-body">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
+                            <input type="text" id="buscar" onkeyup="buscar()" name="buscar" class="form-control" placeholder="Search for...">
                             <span class="input-group-btn">
                   <button class="btn btn-secondary" type="button">Go!</button>
                 </span>
@@ -55,39 +55,6 @@
                     </div>
                 </div>
 
-                {{--<div class="card my-4">--}}
-                    {{--<h5 class="card-header">Categories</h5>--}}
-                    {{--<div class="card-body">--}}
-                        {{--<div class="row">--}}
-                            {{--<div class="col-lg-6">--}}
-                                {{--<ul class="list-unstyled mb-0">--}}
-                                    {{--<li>--}}
-                                        {{--<a href="#">{{$hecho->id}}</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li>--}}
-                                        {{--<a href="#">HTML</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li>--}}
-                                        {{--<a href="#">Freebies</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</div>--}}
-                            {{--<div class="col-lg-4">--}}
-                                {{--<ul class="list-unstyled mb-0">--}}
-                                    {{--<li>--}}
-                                        {{--<a href="#">JavaScript</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li>--}}
-                                        {{--<a href="#">CSS</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li>--}}
-                                        {{--<a href="#">Tutorials</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
                 @endif
 
                 <div class="card my-4">
@@ -100,4 +67,102 @@
         </div>
     </div>
     <!-- /.container -->
+
 @endsection
+
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+<script>
+
+
+    function buscar() {
+
+
+        var buscar = document.getElementById("buscar");
+
+// var x = document.getElementById("cursoSelect").selectedIndex;
+        console.log($('#buscar').val());
+
+        if(0 !=($('#buscar').val().length)) {
+            $.ajax({
+                type: "get",
+                url: "{{url('Situ/') }}" + "/" + $('#buscar').val(),
+                encode: true,
+                data: {
+                    input: $('#buscar').val(),
+
+                },
+                success: function (response) {
+
+                    if (response.length == 0) {
+
+                        $('#buscar1').hide();
+
+                    }
+
+                    else {
+
+
+
+                        var html = [];
+                        response.forEach(function (element) {
+
+
+                            html.push(' <div class="col-lg-12">' +
+                                '<ul class="timeline">' +
+                                '<li>' +
+                                '  <div class="timeline-panel">' +
+                                '    <div class="timeline-heading">' +
+                                '<h4 class="timeline-title">' + element['first_name'] + '</h4>' +
+                                ' <h4 class="timeline-title">' + element['last_name'] + '</h4>' +
+
+                                '                                            <div class="clearfix"></div></div>' +
+                                '<div class="timeline-body">' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>' + element['created_at'] + '</small></span>' +
+                                '<br>' +
+
+                                '   <span class="pull-left"> ' + element['email'] + '</span>' +
+                                '  <div class="clearfix"></div>' +
+
+                                ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+                                ' </p></span>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>' +
+
+
+                                '</ul>' +
+
+                                '</div>');
+
+                            $("#contenedor").empty();
+
+                            console.log(element['last_name']);
+
+                        });
+                        html.forEach(function (element) {
+                            console.log(element['first_name']);
+
+                            $("#contenedor").append(element);
+
+
+                        });
+                        console.log(html.length);
+
+                    }
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+        }else{
+            location.reload();
+        }
+
+    }
+
+</script>

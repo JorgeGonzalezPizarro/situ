@@ -20,6 +20,7 @@ use App\Http\Controllers\HechoController;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\Rules\In;
+use PhpParser\Node\Scalar\String_;
 use Sentinel;
 use View;
 use Validator;
@@ -118,29 +119,50 @@ class AlumnoController extends Controller
 
     public function alumnoDatosAcademicos($year = null)
     {
-
-        if (empty($year)) {
-            $year = 1;
-        }
         $user = Sentinel::getUser();
 
-        $otros_datos = json_decode($user->otros_datos, true);
-        $curso = $user->getDatosAcademicos()->where('grado', $year)->get()->all();
-        $grado = $user->getFormacion()->get()->all();
-        if (!empty($grado)) {
 
-        foreach ($grado as $grad) {
-            $gradoArray[$grad['disciplina_academica']] = $grad['disciplina_academica'] . " - " . $grad['titulacion'];
-        }
+        if (empty($year)) {
+            $year = $user->getDatosAcademicos()->get()->first();
+
+            $grado = $user->getFormacion()->get()->all();
+            if(empty($grado)){
+                $grado=new Formacion();
+                $grado->disciplina_academica="";
+                $curso = $user->getDatosAcademicos()->where('grado', $grado->disciplina_academica)->get()->all();
+
+            }
+            else {
+                $curso = $user->getDatosAcademicos()->where('grado', $grado[0]->disciplina_academica)->get()->all();
+
+            }
         }
         else{
-            $gradoArray=array();
+            $year = CursoAlumno::whereNotNull('grado')->where([['user_id',$user->id],['grado',$year]])->get()->first();
+//            $year=$year->grado;
+//            $grado = $user->getFormacion()->get()->all();
+            $grado = $user->getFormacion()->get()->all();
+
+            $curso = $user->getDatosAcademicos()->where('grado', $year->grado)->get()->all();
         }
-        if (!empty($curso->asignaturas)) {
-            $asignaturas = $curso->asignaturas;
-        } else {
-            $asignaturas = array();
-        }
+            $otros_datos = json_decode($user->otros_datos, true);
+            if (!empty($grado)) {
+
+                foreach ($grado as $grad) {
+                    $gradoArray[$grad['disciplina_academica']] = $grad['disciplina_academica'] . " - " . $grad['titulacion'];
+                }
+            } else {
+                $gradoArray = array();
+            }
+
+
+            if (!empty($curso[0]->asignaturas)) {
+                foreach ($curso as $cur) {
+                    $asignaturas[$cur->asignaturas] = $cur->asignaturas;
+                }
+            }else {
+                $asignaturas = array();
+            }
         return view('Alumno.datos.alumnoDatosAcademicos')->with('user', $user)
             ->with('otros_datos', $otros_datos)
             ->with('curso', $curso)
@@ -149,7 +171,7 @@ class AlumnoController extends Controller
     }
 
 
-    public function actualizarMisDatosAcademicos()
+    public function actualizarMisDatosAcademicos1()
     {
         $user = Sentinel::getUser();
         $cursoAlumno = CursoAlumno::firstOrCreate(['grado'=>Input::get('grado'), 'user_id' => $user->id],
@@ -194,6 +216,31 @@ class AlumnoController extends Controller
         return Redirect::back();
 
     }
+
+
+    public function actualizarMisDatosAcademicos()
+    {
+        $user = Sentinel::getUser();
+
+
+        for($i=0;$i<count(Input::get('asignatura'));$i++){
+            $cursoAlumno=new CursoAlumno();
+
+            $cursoAlumno->user_id=$user->id;
+            $cursoAlumno->curso=Input::get('curso');
+            $cursoAlumno->grado=Input::get('grado');
+            $cursoAlumno->asignaturas=Input::get('asignatura')[$i];
+            $cursoAlumno->save();
+
+        }
+
+        Session::flash('msg', "cambios realizados");
+
+        return Redirect::back();
+
+    }
+
+
     public function actualizarMisDatosFormacion()
     {
         $user = Sentinel::getUser();
@@ -353,24 +400,16 @@ class AlumnoController extends Controller
 
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
           $curso = $usuario->getDatosAcademicos()->pluck('curso');
-        $grado = $usuario->getDatosAcademicos()->pluck('grado');
-        $curso1 = $usuario->getDatosAcademicos()->where('grado', $grado)->pluck('curso');
-//        return $curso1;
-        //        $curso1=CursoAlumno::where([['user_id',$usuario->id],['grado',$grado]])->get()->all();
-//  return $curso1;
+        $grado = Formacion::selectRaw('disciplina_academica')->where('user_id',$usuario->id)->get()->pluck('disciplina_academica');
 
-//        if (!empty($curso1)) {
-//
-//            foreach ($curso1 as $curs) {
-//                $cursoArray[] = $curs;
-//            }
-//        }
-//        else{
-//            $cursoArray=array();
-//        }
-//        return response($cursoArray);
+        $curso1 = $usuario->getDatosAcademicos()->where([['user_id',$usuario->id],['grado',$grado]])->get()->pluck('curso');
+        foreach ($curso1 as $c){
+            $c=$usuario->getDatosAcademicos()->where('curso',$c)->get()->first()->asignaturas;
 
-       $curso1->all();
+        }
+
+
+       $curso->all();
         $etiqueta = Etiqueta::pluck('slug')->sortByDesc('id');
 
         $categoria = Categorias::where('categoria', $categoria)->get()->first();
@@ -384,15 +423,13 @@ class AlumnoController extends Controller
         }
         if ($categoria->categoria == 'Trabajo Académico') {
             return view('hechos.trabajoAcademico')->with('user', Sentinel::getUser())
-                ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
-//            return response($categorias->id);
+                ->with('grado', $grado)->with('curso',$curso1)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
+
 
         }
         if ($categoria->categoria == 'Recuerdos') {
             return view('hechos.recuerdos')->with('user', Sentinel::getUser())
-                ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
-                ->with('otros_datos', $otros_datos);
-//            return response($categorias->id);
+                ->with('grado', $grado) ->with('curso', $curso1)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
 
         }
         if ($categoria->categoria == 'Portafolios profesional') {
@@ -406,7 +443,7 @@ class AlumnoController extends Controller
             $hechos = hechos::where('categoria_id', 3)->get();
             return view('hechos.frasesGuia')->with('user', Sentinel::getUser())
                 ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
-                ->with('otros_datos', $otros_datos)->with('hechos', $hechos);
+                ->with('grado', $grado)   ->with('otros_datos', $otros_datos)->with('hechos', $hechos);
 
         } else {
             return "aa";
@@ -433,32 +470,31 @@ class AlumnoController extends Controller
 //            $cursoArray=array();
 //        }
 //        return $cursoArray;
-        return response([json_decode($grado->asignaturas)]);
+        return response(($grado->asignaturas));
 
 
     }
-    public function getCurso(Request  $request)
+    public function getCurso(Request $request)
     {
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
 
-        $grado = $usuario->getDatosAcademicos()->where('grado', $request->grado)->get()->first();
-        //        return "aa";
-//        $curso1 = $usuario->getDatosAcademicos()->where('grado', $curso)->get()->all();
-//        $curso1=CursoAlumno::where([['user_id',$usuario->id],['grado',$grado]])->get()->all();
-//        return $curso1;
+        $grado = $usuario->getDatosAcademicos()->distinct('curso')->where('grado', $request->grado)->get()->all();
 
-//        if (!empty($curso1)) {
-//
-//            foreach ($curso1 as $curs) {
-//                $cursoArray[$curs['curso']] = $curs['curso'];
-//            }
-//        }
-//        else{
-//            $cursoArray=array();
-//        }
-//        return $cursoArray;
-        return response(($grado->curso));
 
+
+        if (!empty($grado)) {
+            for ($i = 0; $i < count($grado); $i++) {
+                $cursoArray[] = $grado[$i]->curso. "º - " . $grado[$i]->asignaturas;
+            }
+        } else {
+            $cursoArray = array();
+
+
+        }
+
+
+
+        return ($cursoArray);
 
     }
 

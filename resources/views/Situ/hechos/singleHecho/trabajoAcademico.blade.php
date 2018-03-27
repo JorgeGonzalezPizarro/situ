@@ -139,12 +139,12 @@
             </div>
 
 
-        @if(!empty($hechos))
+        @if(!empty($otrosHechosPublicos))
 <div class="row">
     <div class="col-md-12">
                 <h1 class="mt-4" style="padding-left: 15px">  Relacionado con  {{$hecho->titulo_hecho}}</h1>
         <hr>
-                @foreach($hechos as $hecho)
+                @foreach($otrosHechosPublicos as $hecho)
 
 
 

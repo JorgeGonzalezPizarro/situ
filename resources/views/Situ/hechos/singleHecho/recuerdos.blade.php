@@ -174,14 +174,7 @@
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                                     class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
                                     </li>
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
-                                    {{--</li>--}}
+
 
                                 </ul>
                             </div>

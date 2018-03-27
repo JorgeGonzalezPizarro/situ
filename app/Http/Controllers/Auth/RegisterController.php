@@ -118,6 +118,8 @@ class RegisterController extends Controller
         $cursoAlumno=new CursoAlumno();
         $cursoAlumno->user_id=$user->id;
         $cursoAlumno->curso=1;
+        $cursoAlumno->grado="";
+        $cursoAlumno->asignaturas="";
 
         $cursoAlumno->save();
 

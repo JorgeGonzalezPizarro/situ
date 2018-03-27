@@ -146,13 +146,12 @@
                             {{ Form::select('', $grado, $year,
                             ['aria-controls'=>'asignaturas','class' => 'form-control input-sm','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}
 
-                        @if(isset($curso))
+                        @if(!empty($curso[0]->grado))
                                 <thead>
                                 <tr>
                                     <th>Grado</th>
                                     <th>Curso</th>
                                     <th>Asignatura</th>
-                                    {{--<th>Seleccionar</th>--}}
                                 </tr>
                                 </thead>
 
@@ -160,30 +159,24 @@
                                 <div class="form-group">
 
                                 </div>
-                                @foreach($curso as $cur)
 
 
-                                    @if(!empty($cur->asignaturas))
-                                    {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
-                                    {{--@foreach ($cur->asignaturas as $asignatura)--}}
-                                    @foreach(json_decode(($cur->asignaturas),false) as $as)
+                                    @foreach ($curso as $cur)
                                         <tr>
-                                            <td>{{$cur->grado}}</td>
+                                            <td id="grado1">{{$cur->grado}}</td>
 
                                             <td>{{$cur->curso}}</td>
-                                            <td id="asignatura">
-                                           {!!  $as  !!}
+                                            <td>{{$cur->asignaturas}}</td>
+
+                                            {{--<td id="asignatura">--}}
                                             {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
                                                                      {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
-                                            </td>
+                                            {{--</td>--}}
                                         </tr>
+
                                     @endforeach
-
-                                    {{--@endforeach--}}
                                 @endif
-                                @endforeach
 
-                                @endif
                                 </tbody>
 
                         </table>
@@ -262,7 +255,10 @@
 
 <script>
     $(document).ready(function () {
+        $(function() {
 
+            $("#cursoSelect").val($("#grado1").text());
+        });
     });
 </script>
 <script>function responsive_filemanager_callback(field_id){
