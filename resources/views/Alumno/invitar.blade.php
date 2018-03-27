@@ -183,7 +183,6 @@ El correo electronico ya existe</p></div>') !!}
                                 <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
                                 <td>{{$invitado->numero_accesos }}</td>
 
-
                             </tr>
 
                         @endforeach
