@@ -1,63 +1,17 @@
-{{--@extends('layouts.email')--}}
+<!DOCTYPE html>
+<html lang="{{ config('app.locale') }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-{{--@section('content')--}}
-
-    {{--<div class="col-lg-10 col-lg-offset-1">--}}
-
-        {{--<h1><i class="fa fa-users"></i> Claves de Acceso</h1>--}}
-
-        {{--<div class="table-responsive">--}}
-            {{--<table class="table table-bordered table-striped">--}}
-
-                {{--<thead>--}}
-                {{--<tr>--}}
-                    {{--<th>Name</th>--}}
-                    {{--<th>Email</th>--}}
-                    {{--<th>Password </th>--}}
-                    {{--<th></th>--}}
-                {{--</tr>--}}
-                {{--</thead>--}}
-
-                {{--<tbody>--}}
-                {{--<tr>--}}
-
-
-                    {{--<td>{{ $request['first_name']}}</td>--}}
-                    {{--<td>{{ $request['email']}}</td>--}}
-                    {{--<td>{{ $request['password']}}</td>--}}
-<<<<<<< HEAD
-=======
-                    {{--<td>{!!  $request['first_name']!!}</td>--}}
-                    <td>{!! $email!!}</td>
-                    <td>{!! $encrypted!!}</td>
-
-                    {{--{{ Form::open(array('url' => 'loginInv', 'class' => 'form-style-8','files' => true)) }}--}}
-                    {{--<input type="hidden" value="{{$request['email']}}" name="email">--}}
-                    {{--<input type="hidden" value="{{$request['password']}}" name="password">--}}
-                    <a  href="{{ url('loginInv').'/'. $email ."/".$encrypted.'/'}}">Acceder </a>
-{{--                {{ Form::close() }}--}}
->>>>>>> 07f47ebd205005844f62994b2b90f2cb57485f39
-
-                {{--</tbody>--}}
-
-            {{--</table>--}}
-        {{--</div>--}}
-
-
-    {{--</div>--}}
-
-{{--@endsection--}}
+    <title>Laravel</title>
 
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
 
-<!--
-Responsive Email Template by @keenthemes
-A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
-Licensed under MIT
--->
+
 
 <style>
 
@@ -66,7 +20,9 @@ User Profile Sidebar by @keenthemes
 A component of Metronic Theme - #1 Selling Bootstrap 3 Admin Theme in Themeforest: http://j.mp/metronictheme
 Licensed under MIT
 ***/
-
+    [type=reset], [type=submit], button, html [type=button] {
+        -webkit-appearance: NONE;
+    }
     body {
         padding: 0;
         margin: 0;
@@ -110,6 +66,7 @@ Licensed under MIT
     }
 
 </style>
+</head>
 
 
 <div id="mailsub" class="notification" align="center">
@@ -127,57 +84,7 @@ Licensed under MIT
                             <!-- padding --><div style="height: 80px; line-height: 80px; font-size: 10px;"> </div>
                         </td></tr>
                     <!--header -->
-                    <tr><td align="center" bgcolor="#ffffff">
-                            <!-- padding --><div style="height: 30px; line-height: 30px; font-size: 10px;"> </div>
-                            <table width="90%" border="0" cellspacing="0" cellpadding="0">
-                                <tr><td align="left"><!--
 
-				Item --><div class="mob_center_bl" style="float: left; display: inline-block; width: 115px;">
-                                            <table class="mob_center" width="115" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                                <tr><td align="left" valign="middle">
-                                                        <!-- padding --><div style="height: 20px; line-height: 20px; font-size: 10px;"> </div>
-                                                        <table width="115" border="0" cellspacing="0" cellpadding="0" >
-                                                            <tr><td align="left" valign="top" class="mob_center">
-                                                                    <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 13px;">
-                                                                    </a>      <img src="http://artloglab.com/metromail/images/logo.gif" width="115" height="19" alt="Metronic" border="0" style="display: block;" /></font></a>
-                                                                </td></tr>
-                                                        </table>
-                                                    </td></tr>
-                                            </table></div><!-- Item END--><!--[if gte mso 10]>
-                                        </td>
-                                        <td align="right">
-                                        <![endif]--><!--
-
-				Item --><div class="mob_center_bl" style="float: right; display: inline-block; width: 88px;">
-                                            <table width="88" border="0" cellspacing="0" cellpadding="0" align="right" style="border-collapse: collapse;">
-                                                <tr><td align="right" valign="middle">
-                                                        <!-- padding --><div style="height: 20px; line-height: 20px; font-size: 10px;"> </div>
-                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" >
-                                                            <tr><td align="right">
-                                                                    <!--social -->
-                                                                    <div class="mob_center_bl" style="width: 88px;">
-                                                                        <table border="0" cellspacing="0" cellpadding="0">
-                                                                            <tr><td width="30" align="center" style="line-height: 19px;">
-                                                                                    <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                                                    </a></td><td width="39" align="center" style="line-height: 19px;">
-                                                                                    <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                                                            <img src="http://artloglab.com/metromail/images/twitter.gif" width="19" height="16" alt="Twitter" border="0" style="display: block;" /></a>
-                                                                                </td><td width="29" align="right" style="line-height: 19px;">
-                                                                                    <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                                                            <img src="http://artloglab.com/metromail/images/dribbble.gif" width="19" height="19" alt="Dribbble" border="0" style="display: block;" /></a>
-                                                                                </td></tr>
-                                                                        </table>
-                                                                    </div>
-                                                                    <!--social END-->
-                                                                </td></tr>
-                                                        </table>
-                                                    </td></tr>
-                                            </table></div><!-- Item END--></td>
-                                </tr>
-                            </table>
-                            <!-- padding --><div style="height: 50px; line-height: 50px; font-size: 10px;"> </div>
-                        </td></tr>
-                    <!--header END-->
 
                     <!--content 1 -->
                     <tr><td align="center" bgcolor="#fbfcfd">
@@ -195,19 +102,66 @@ Licensed under MIT
                                 <tr><td align="center">
                                         <div style="line-height: 24px;">
 					<span style="font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #57697e;">
-                        Has sido invitado para acceder a la trayectoria universitaria del alumno
+                        Has sido invitado para acceder a la nuestra plataforma universitaria
+                        @if(isset($alumno))
+                            del alumno {{  $alumno}}
+                        @elseif(isset($profesor)) de los alumnos registrados.
+
+                       @else
+                            para acceder utiliza el siguiente usuario y contraseña.
+                        @endif
 					</span>
                                         </div>
                                         <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
                                     </td></tr>
+                                @if(isset($password))
+                                    <div style="width: 100%;text-align:center";class="table_width_100">
+                                <div class="mob_100" style="float: left; display: inline-block; width: 100%;">
+                                             <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
+                                    <div class="mob_100" style="float: left; display: inline-block; width: 50%;">
+
+                                    <strong style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #4db3a4;">
+                                                        <a href="#1" target="_blank" style="color: #4db3a4; text-decoration: none;">Usuario </a>
+                                                    </strong>
+                                                <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
+								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
+								{{	$email}}
+								</span>
+                                    </div>
+
+                                    <div class="mob_100" style="float: left; display: inline-block; width: 50%;">
+
+                                    <strong style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #4db3a4;">
+                                                        <a href="#1" target="_blank" style="color: #4db3a4; text-decoration: none;">Contraseña </a>
+                                                    </strong>
+                                                <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
+								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
+									{{ $password }}
+								</span>
+                                    </div>
+                                    </div>
+                                </div>
                                 <tr><td align="center">
-                                        <div style="line-height: 24px;">
-                                            <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 13px;">
-                                                <font face="Arial, Helvetica, sans-seri; font-size: 13px;" size="3" color="#596167">
-                                                    <img src="http://artloglab.com/metromail/images/trial.gif" width="193" height="43" alt="30-DAYS FREE TRIAL" border="0" style="display: block;" /></font></a>
+                                        <div style="  line-height: 100px;">
+                                           <h2> <a style="" type="button" class="btn btn-outline-primary" href="{{ route('login')}}">Acceder </a></h2>
+                                            {{--<a type="button" class="btn btn-outline-primary" href="">Acceder </a>--}}
+
                                         </div>
                                         <!-- padding --><div style="height: 60px; line-height: 60px; font-size: 10px;"> </div>
                                     </td></tr>
+                                    @else
+
+                                    <tr><td align="center">
+                                            <div style="line-height: 24px;">
+                                                <!-- padding --><div style="height: 60px; line-height: 60px; font-size: 10px;"> </div>
+                                                <!-- padding --><div style="height: 60px; line-height: 60px; font-size: 10px;"> </div>
+                                                <a type="button" class="btn btn-outline-primary" href="{{ url('loginInv').'/'. $email ."/".$encrypted.'/'}}">Acceder </a>
+
+                                            </div>
+                                            <!-- padding --><div style="height: 60px; line-height: 60px; font-size: 10px;"> </div>
+                                        </td></tr>
+
+                                    @endif
                             </table>
                         </td></tr>
                     <!--content 1 END-->
@@ -277,126 +231,15 @@ Licensed under MIT
                                         <div style="height: 80px; line-height: 80px; font-size: 10px;"> </div></td></tr>
                             </table>
                         </td></tr>
-                    <!--content 2 END-->
-
-                    <!--links -->
-
-                    <!--links END-->
-
-                    <!--content 3 -->
-                    <tr><td align="center" bgcolor="#ffffff" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #eff2f4;">
-                            <table width="94%" border="0" cellspacing="0" cellpadding="0">
-                                <tr><td align="center">
-                                        <!-- padding --><div style="height: 80px; line-height: 80px; font-size: 10px;"> </div>
-
-                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                                            <tr><td align="center">
-						<span style="font-family: Arial, Helvetica, sans-serif; font-size: 26px; color: #57697e;">
-							Informacion sobre SITU
-						</span>
-                                                </td></tr>
-                                        </table>
-
-                                        <div class="mob_100" style="float: left; display: inline-block; width: 33%;">
-                                            <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                                <tr><td align="center" style="line-height: 14px; padding: 0 10px;">
-                                                        <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
-                                                        <div style="line-height: 14px;">
-                                                            <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                            </a>                                                        </div>
-                                                    </td></tr>
-                                            </table>
-                                        </div>
-                                        <div class="mob_100" style="float: left; display: inline-block; width: 33%;">
-                                            <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                                <tr><td align="center" style="line-height: 14px; padding: 0 10px;">
-                                                        <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
-                                                        <div style="line-height: 14px;">
-                                                            <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                            </a> </div>
-                                                    </td></tr>
-                                            </table>
-                                        </div>
-                                        <div class="mob_100" style="float: left; display: inline-block; width: 33%;">
-                                            <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                                <tr><td align="center" style="line-height: 14px; padding: 0 10px;">
-                                                        <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
-                                                        <div style="line-height: 14px;">
-                                                            <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-
-                                                            </a> </div>
-                                                    </td></tr>
-                                            </table>
-                                        </div>
-                                    </td></tr>
-                                <tr><td><!-- padding --><div style="height: 80px; line-height: 80px; font-size: 10px;"> </div></td></tr>
-                            </table>
-                        </td></tr>
-                    <!--content 3 END-->
-
-                    <!--brands -->
-                    <tr><td align="center" bgcolor="#ffffff" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #eff2f4;">
-                            <table width="94%" border="0" cellspacing="0" cellpadding="0">
-                                <tr><td align="center">
-
-                                        <div class="mob_100" style="float: left; display: inline-block; width: 25%;">
-                                            <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                                <tr><td align="center" style="line-height: 14px; padding: 0 24px;">
-                                                        <!-- padding --><div style="height: 30px; line-height: 30px; font-size: 10px;"> </div>
-                                                        <div style="line-height: 14px;">
-                                                            <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                            </a></div>
-                                                    </td></tr>
-                                            </table>
-                                        </div>
-
-                                        <div class="mob_100" style="float: left; display: inline-block; width: 25%;">
-                                            <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                                <tr><td align="center" style="line-height: 14px; padding: 0 24px;">
-                                                        <!-- padding --><div style="height: 30px; line-height: 30px; font-size: 10px;"> </div>
-                                                        <div style="line-height: 14px;">
-                                                            <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                            </a></div>/td></tr>
-                                            </table>
-                                        </div>
-
-                                        <div class="mob_100" style="float: left; display: inline-block; width: 25%;">
-                                            <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                                <tr><td align="center" style="line-height: 14px; padding: 0 24px;">
-                                                        <!-- padding --><div style="height: 30px; line-height: 30px; font-size: 10px;"> </div>
-                                                        <div style="line-height: 14px;">
-                                                            <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                            </a></div>
-                                                    </td></tr>
-                                            </table>
-                                        </div>
-
-                                        <div class="mob_100" style="float: left; display: inline-block; width: 25%;">
-                                            <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                                <tr><td align="center" style="line-height: 14px; padding: 0 24px;">
-                                                        <!-- padding --><div style="height: 30px; line-height: 30px; font-size: 10px;"> </div>
-                                                        <div style="line-height: 14px;">
-                                                            <a href="#" target="_blank" style="color: #596167; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
-                                                            </a> </div>
-                                                    </td></tr>
-                                            </table>
-                                        </div>
-
-                                    </td></tr>
-                                <tr><td><!-- padding --><div style="height: 28px; line-height: 28px; font-size: 10px;"> </div></td></tr>
-                            </table>
-                        </td></tr>
-                    <!--brands END-->
 
                     <!--footer -->
                     <tr><td class="iage_footer" align="center" bgcolor="#ffffff">
-                            <!-- padding --><div style="height: 80px; line-height: 80px; font-size: 10px;"> </div>
 
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr><td align="center">
 				<span style="font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #96a5b5;">
-					2018 © DESSI. Derechos Reservados.
-				</span><
+					2018 © <a href="#"> DESSI.</a> Derechos Reservados.
+				</span>
                                     </td></tr>
                             </table>
 
@@ -417,8 +260,3 @@ Licensed under MIT
 
 </div>
 
-<br>
-<br>
-    <strong>Desarrollado por <a href="#" target="_blank">DESSI</a></strong>
-<br>
-<br>

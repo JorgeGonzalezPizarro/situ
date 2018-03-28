@@ -607,7 +607,6 @@ class AlumnoController extends Controller
 
         if ($invitado) {
             $invitado->roles()->sync([$rol]);
-
             Session::flash('message', 'Registration is completed');
 
             $encrypted = encrypt($request['password']);
@@ -617,9 +616,19 @@ class AlumnoController extends Controller
 //            ];
 
 
-            $data = array( 'first_name'=>$request['first_name'],'email' => $request['email'], 'encrypted' => $encrypted,
-            );
+            if($invitado2->rol=='Invitado') {
 
+
+                $data = array('alumno'=>$invitado2->getAlumno()->get()->first()->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
+                );
+            }elseif($invitado2->rol=='Profesor') {
+                $data = array('profesor'=>$usuario->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
+                );
+            }
+               else {
+                $data = array('first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
+                );
+            }
             Mail::send('email', $data,function ($mensaje) use($data){
 
                 $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
@@ -666,6 +675,9 @@ class AlumnoController extends Controller
         $alumnoLaboral->cargo = Input::get('cargo');
 
         $alumnoLaboral->descripcion = Input::get('descripcion');
+        if(empty($alumnoLaboral->descripcion)){
+            $alumnoLaboral->descripcion="";
+        }
         $format = 'm/d/Y';
         $alumnoLaboral->fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
 

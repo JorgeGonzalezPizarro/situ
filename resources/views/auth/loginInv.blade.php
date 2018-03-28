@@ -23,7 +23,7 @@
             </div>
             <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
                 <div class="col-sm-12">
-                    {!! Form::text('password', $decrypted, ['class' => 'form-control','placeholder '=>'E-mail',"id"=>"password", " autocomplete"=>"off"]) !!}
+                    {!! Form::hidden('password', $decrypted, ['class' => 'form-control','placeholder '=>'E-mail',"id"=>"password", " autocomplete"=>"off"]) !!}
 
                     {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
                 </div>

@@ -65,7 +65,7 @@ class RegisterController extends Controller
     {
 //        $role= new Role();
 //        $roles=Role::select('Slug')->get();
-        $roles=Role::pluck('Slug','id');
+        $roles=Role::where('slug','!=','Inv')->pluck('slug','id')->get()->all();
 
 //        $roles=$role->getRoleSlug();
         return view('auth.register')->withRoles($roles);
@@ -138,21 +138,28 @@ class RegisterController extends Controller
         $rol=$rol[0];
         if($user){
             $user->roles()->sync([$rol]);
-
             Session::flash('message', 'Registration is completed');
-            //Session::flash('status', 'success');
-//            $role = Sentinel::findRoleBySlug($rol);
-//            $role->users()->attach($user);
-            $encrypted =encrypt($request['password']);
+
+            $encrypted = encrypt($request['password']);
+
+            if($user->roles()->get()->first()->name != "Alumno"){
+
+
+
 //            $data=[
 //                'request'=>$request->all(),
 //                'encrypted'=>$encrypted
 //            ];
 
 
-            $data = array( 'email' => $request['email'], 'encrypted' => $encrypted,
-                );
 
+
+                $data = array('profesor'=>$user->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
+                );
+            }else{
+                $data = array('password'=>Input::get('password'),'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
+                );
+            }
             Mail::send('email', $data,function ($mensaje) use($data){
 
                 $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
@@ -161,6 +168,7 @@ class RegisterController extends Controller
 
 
             });
+//           return redirect('/');
 //           return redirect('/');
             return redirect()->back();
         }

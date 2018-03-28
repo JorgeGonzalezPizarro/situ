@@ -57,10 +57,14 @@ class LoginController extends Controller
     }
     public function showLoginForm()
     {
+        Sentinel::logout();
+
         return view('auth.login');
     }
     public function showLoginFormInv($email=null,$encrypted=null)
     {
+        Sentinel::logout();
+
 
         try {
             $decrypted = decrypt($encrypted);

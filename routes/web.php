@@ -89,6 +89,7 @@ Route::POST('\'hechos/{categoria?}/{curso?}', 'HechoController@guardar_Hecho')->
 Route::POST('/hechos/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('fraseguia');
 Route::get('/get/', 'AlumnoController@getCurso');
 Route::get('/Situ/{buscar?}', 'SituController@getHechos');
+Route::get('/Situ/etiqueta/{buscar?}', 'SituController@getHechosEtiqueta');
 
 Route::get('layouts/email',function (){
     return view('layouts.email');

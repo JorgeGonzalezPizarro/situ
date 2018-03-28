@@ -46,7 +46,7 @@ class AdminController extends Controller
 
     public function getNuevoUsuario(){
 
-        $roles=Role::pluck('Slug','id');
+        $roles=Role::where('Slug','<>','Inv')->pluck('slug','id');
         return view('Admin/nuevoUsuario')->with('roles' , $roles);
 
 

@@ -115,8 +115,9 @@ El correo electronico ya existe</p></div>') !!}
                                             <td><strong class="">Rol:</strong></td>
                                             <td>
                                             {{--{!! Form::select($role->Slug, null, ['class' => 'form-control','placeholder '=>'Enter your  name']) !!}--}}
-                                                {!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['class' => 'form-control chosen-select']) !!}
+                                                {{--{!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['class' => 'form-control ]) !!}--}}
 
+                                                {!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['class' => 'form-control','style'=>'width:40%;','data-live-search'=>'true']) !!}
 
                                             </td>
                                         </tr>

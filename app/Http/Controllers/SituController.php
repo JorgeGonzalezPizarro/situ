@@ -53,176 +53,172 @@ class SituController extends Controller
     public function showHecho($id=null,$categoria=null,$alu=null)
     {
         /*ACCESO A LA PARTE PUBLICA*/
-        if(is_null($id) && is_null($categoria)) {
+        $etiquetasAll=Etiqueta::whereNull('user_id')->get()->all();
+        if(Sentinel::check()) {
+            if (is_null($id) && is_null($categoria)) {
 //            return "aa";
-            $usuario = Sentinel::getUser();
-//            $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
-
-            if(Sentinel::inRole('Prof')){
                 $usuario = Sentinel::getUser();
-
-                $rol=Sentinel::findRoleById(2);
-                $alumnos=$rol->users()->with('roles')->get();
-                $hechosPublicos = hechos::where('nivel_acceso', '>=', $usuario->nivel_acceso)->get()->all();
-
-            }elseif(Sentinel::inRole('Inv')) {
-
-                $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
-                $alumno=$invitado->getAlumno()->get()->first();
-                $hecho = hechos::all();
-                $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso],['user_id',$alumno->id]])->get()->all();
-
-
-            }
-            else{
-                $alumno=$usuario;
-
-                $hecho = hechos::all();
-                $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso],['user_id',$alumno->id]])->get()->all();
-
-            }
-            $categorias = Categorias::all();
-//            return "aa";
-            view()->share('categorias', $categorias);
-
-        }
-        /*ACCESO A LA PARTE DEL CURRICULUM*/
-        elseif($id==0 &&!is_null($categoria)) {
-
-            $usuario = Sentinel::getUser();
-            $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
-
-            $hecho = hechos::find($id);
-            if(Sentinel::inRole('Prof')){
-                $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
-                $alumno=Sentinel::findById($alu);
-                $invitado->alumno_id=$alu;
-                $invitado->update();
-                $alumno=$invitado->getAlumno()->get()->first();
-
-                $rol=Sentinel::findRoleById(2);
-                $alumnos=$rol->users()->with('roles')->get();
-                $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get();
-                $otrosHechosPublicos=$hechosPublicos;
-                $logAccesos= logAccesos::firstOrCreate(['invitado_id'=>$invitado->id,
-                    'alumno_id'=>$alumno->id,'hechos_id'=>null],['invitado_id'=>$invitado->id,
-                    'alumno_id'=>$alumno->id,'rol'=>$invitado->rol,'hechos_id'=>$id,'numero_accesos'=>'0']);
-                $logAccesos->numero_accesos=($logAccesos->numero_accesos)+1;
-                $logAccesos->save();
-            }else {
-
-                $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso],
-                    ['categoria_id', $categoria],['user_id', $usuario->id]])->get()->all();
-                $otrosHechosPublicos=$hechosPublicos;
-
-            }
-            $categoria = Categorias::where('id',$categoria)->get()->first();
-            $categorias = Categorias::all();
-
-            view()->share('categorias', $categorias);
-        }
-        else {
-
-            $usuario = Sentinel::getUser();
 //            $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
-            $invitado = Invitados::where('invitado_id', $usuario->id)->get()->first();
-//            $alumno = $invitado->getAlumno()->get()->first();
 
-            $hecho = hechos::find($id);
-            if (Sentinel::inRole('Prof')) {
-                $alumno = $invitado->getAlumno()->get()->first();
+                if (Sentinel::inRole('Prof')) {
+                    $usuario = Sentinel::getUser();
 
-                $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get()->all();
-                $hechosPublicos = $hechosPublicos->getEtiqueta()->with('CV');
-                $otrosHechosPublicos=$hechosPublicos;
-//                    ['categoria_id',$categoria],['id','!=',$hecho->id]])->get()->all();
-            } else {
-                if (Sentinel::inRole('Inv')){
+                    $rol = Sentinel::findRoleById(2);
+                    $alumnos = $rol->users()->with('roles')->get();
+                    $hechosPublicos = hechos::where('nivel_acceso', '>=', $usuario->nivel_acceso)->get()->all();
+
+                } elseif (Sentinel::inRole('Inv')) {
+
+                    $invitado = Invitados::where('invitado_id', $usuario->id)->get()->first();
                     $alumno = $invitado->getAlumno()->get()->first();
-                    $logAccesos= logAccesos::firstOrCreate(['invitado_id'=>$invitado->id,
-                        'alumno_id'=>$alumno->id,'hechos_id'=>$id],['invitado_id'=>$invitado->id,
-                        'alumno_id'=>$alumno->id,'rol'=>$invitado->rol,'hechos_id'=>$id,'numero_accesos'=>'0']);
-                    $logAccesos->numero_accesos=($logAccesos->numero_accesos)+1;
-                    $logAccesos->save();
-                }else{
+                    $hecho = hechos::all();
+                    $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso], ['user_id', $alumno->id]])->get()->all();
+
+
+                } else {
                     $alumno = $usuario;
 
-                }
+                    $hecho = hechos::all();
+                    $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso], ['user_id', $alumno->id]])->get()->all();
 
-                $hechosPublicos = hechos::where([['user_id',  $alumno->id],['nivel_acceso', '>=', $usuario->nivel_acceso],
-                    ['categoria_id', $categoria]])->get()->all();
-                $otrosHechosPublicos = hechos::where([['user_id',  $alumno->id],['nivel_acceso', '>=', $usuario->nivel_acceso],
-                    ['categoria_id', $categoria], ['id', '!=', $hecho->id]])->get()->all();
-                $categoria = $hecho->getCategoria()->get()->first();
-                $curso = $hecho->curso;
+                }
+                $categorias = Categorias::all();
+//            return "aa";
+                view()->share('categorias', $categorias);
+
+            } /*ACCESO A LA PARTE DEL CURRICULUM*/
+            elseif ($id == 0 && !is_null($categoria)) {
+
+                $usuario = Sentinel::getUser();
+                $alumno = Invitados::where('invitado_id', $usuario->id)->get()->first();
+
+                $hecho = hechos::find($id);
+                if (Sentinel::inRole('Prof')) {
+                    $invitado = Invitados::where('invitado_id', $usuario->id)->get()->first();
+                    $alumno = Sentinel::findById($alu);
+                    $invitado->alumno_id = $alu;
+                    $invitado->update();
+                    $alumno = $invitado->getAlumno()->get()->first();
+
+                    $rol = Sentinel::findRoleById(2);
+                    $alumnos = $rol->users()->with('roles')->get();
+                    $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get();
+                    $otrosHechosPublicos = $hechosPublicos;
+                    $logAccesos = logAccesos::firstOrCreate(['invitado_id' => $invitado->id,
+                        'alumno_id' => $alumno->id, 'hechos_id' => null], ['invitado_id' => $invitado->id,
+                        'alumno_id' => $alumno->id, 'rol' => $invitado->rol, 'hechos_id' => $id, 'numero_accesos' => '0']);
+                    $logAccesos->numero_accesos = ($logAccesos->numero_accesos) + 1;
+                    $logAccesos->save();
+                } else {
+
+                    $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso],
+                        ['categoria_id', $categoria], ['user_id', $usuario->id]])->get()->all();
+                    $otrosHechosPublicos = $hechosPublicos;
+
+                }
+                $categoria = Categorias::where('id', $categoria)->get()->first();
                 $categorias = Categorias::all();
 
                 view()->share('categorias', $categorias);
+            } else {
+
+                $usuario = Sentinel::getUser();
+//            $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
+                $invitado = Invitados::where('invitado_id', $usuario->id)->get()->first();
+//            $alumno = $invitado->getAlumno()->get()->first();
+
+                $hecho = hechos::find($id);
+                if (Sentinel::inRole('Prof')) {
+                    $alumno = $invitado->getAlumno()->get()->first();
+
+                    $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get()->all();
+                    $hechosPublicos = $hechosPublicos->getEtiqueta()->with('CV');
+                    $otrosHechosPublicos = $hechosPublicos;
+//                    ['categoria_id',$categoria],['id','!=',$hecho->id]])->get()->all();
+                } else {
+                    if (Sentinel::inRole('Inv')) {
+                        $alumno = $invitado->getAlumno()->get()->first();
+                        $logAccesos = logAccesos::firstOrCreate(['invitado_id' => $invitado->id,
+                            'alumno_id' => $alumno->id, 'hechos_id' => $id], ['invitado_id' => $invitado->id,
+                            'alumno_id' => $alumno->id, 'rol' => $invitado->rol, 'hechos_id' => $id, 'numero_accesos' => '0']);
+                        $logAccesos->numero_accesos = ($logAccesos->numero_accesos) + 1;
+                        $logAccesos->save();
+                    } else {
+                        $alumno = $usuario;
+
+                    }
+
+                    $hechosPublicos = hechos::where([['user_id', $alumno->id], ['nivel_acceso', '>=', $usuario->nivel_acceso],
+                        ['categoria_id', $categoria]])->get()->all();
+                    $otrosHechosPublicos = hechos::where([['user_id', $alumno->id], ['nivel_acceso', '>=', $usuario->nivel_acceso],
+                        ['categoria_id', $categoria], ['id', '!=', $hecho->id]])->get()->all();
+                    $categoria = $hecho->getCategoria()->get()->first();
+                    $curso = $hecho->curso;
+                    $categorias = Categorias::all();
+
+                    view()->share('categorias', $categorias);
+                }
             }
-        }
-        $otros_datos = json_decode($usuario->otros_datos, true);
-        if(isset($categoria)) {
-            if ($categoria->categoria == 'Calificaciones') {
-                return view('Situ.hechos.singleHecho.calificacion')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('user', $usuario)->with('alumno',$alumno)
-                    ->with('otrosHechos',$otrosHechosPublicos);
+            $otros_datos = json_decode($usuario->otros_datos, true);
+            if (isset($categoria)) {
+                if ($categoria->categoria == 'Calificaciones') {
+                    return view('Situ.hechos.singleHecho.calificacion')->with('hecho', $hecho)
+                        ->with('hechos', $hechosPublicos)->with('user', $usuario)->with('alumno', $alumno)
+                        ->with('otrosHechos', $otrosHechosPublicos);
 
 
+                }
+                if ($categoria->categoria == 'Trabajo Académico') {
+                    return view('Situ.hechos.singleHecho.trabajoAcademico')->with('hecho', $hecho)
+                        ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
+                        ->with('alumno', $alumno)->with('otrosHechos', $otrosHechosPublicos);
 
-            }
-            if ($categoria->categoria == 'Trabajo Académico') {
-                return view('Situ.hechos.singleHecho.trabajoAcademico')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
-                    ->with('alumno',$alumno)->with('otrosHechos',$otrosHechosPublicos);
-
-            }
-            if ($categoria->categoria == 'Recuerdos') {
-                return view('Situ.hechos.singleHecho.recuerdos')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
-                    ->with('alumno',$alumno)->with('otrosHechos',$otrosHechosPublicos);
+                }
+                if ($categoria->categoria == 'Recuerdos') {
+                    return view('Situ.hechos.singleHecho.recuerdos')->with('hecho', $hecho)
+                        ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
+                        ->with('alumno', $alumno)->with('otrosHechos', $otrosHechosPublicos);
 
 
-            }
-            if ($categoria->categoria == 'Portafolios profesional') {
+                }
+                if ($categoria->categoria == 'Portafolios profesional') {
 
-                return view('Situ.hechos.singleHecho.portafolioProfesional')->with('hecho', $hecho)
-                    ->with('hechos', $hechosPublicos)->with('user', $usuario)
-                    ->with('alumno',$alumno)->with('otrosHechos',$otrosHechosPublicos);
+                    return view('Situ.hechos.singleHecho.portafolioProfesional')->with('hecho', $hecho)
+                        ->with('hechos', $hechosPublicos)->with('user', $usuario)
+                        ->with('alumno', $alumno)->with('otrosHechos', $otrosHechosPublicos);
 
-            }
-            if ($categoria->categoria == 'Frases guía') {
-                return view('Situ.hechos.singleHecho.fraseGuia')->with('hecho', $hecho)->with('hechos', $hechosPublicos)
-                    ->with('hechos', $hechosPublicos)->with('user', $usuario)->with('alumno',$alumno)
-                    ->with('otrosHechos',$otrosHechosPublicos);
-            }
-        }
-
-        else {
-            if(Sentinel::inRole('Prof')) {
+                }
+                if ($categoria->categoria == 'Frases guía') {
+                    return view('Situ.hechos.singleHecho.fraseGuia')->with('hecho', $hecho)->with('hechos', $hechosPublicos)
+                        ->with('hechos', $hechosPublicos)->with('user', $usuario)->with('alumno', $alumno)
+                        ->with('otrosHechos', $otrosHechosPublicos);
+                }
+            } else {
+                if (Sentinel::inRole('Prof')) {
 //                return response($alumnos);
-                return view('Situ.hechos.singleHecho.prof')->with('user',$usuario)->with('alumnos',$alumnos);
-            }
-            elseif(Sentinel::inRole('Inv')) {
+                    return view('Situ.hechos.singleHecho.prof')->with('user', $usuario)->with('alumnos', $alumnos)->with('etiquetas', $etiquetasAll);
+                } elseif (Sentinel::inRole('Inv')) {
 //                return response($alumnos);
-                $logAccesos= logAccesos::firstOrCreate(['invitado_id'=>$invitado->id,
-                    'alumno_id'=>$alumno->id,'hechos_id'=>null],['invitado_id'=>$invitado->id,
-                    'alumno_id'=>$alumno->id,'rol'=>$invitado->rol,'hechos_id'=>$id,'numero_accesos'=>'1']);
-                $logAccesos->numero_accesos=($logAccesos->numero_accesos)+1;
-                $logAccesos->save();
+                    $logAccesos = logAccesos::firstOrCreate(['invitado_id' => $invitado->id,
+                        'alumno_id' => $alumno->id, 'hechos_id' => null], ['invitado_id' => $invitado->id,
+                        'alumno_id' => $alumno->id, 'rol' => $invitado->rol, 'hechos_id' => $id, 'numero_accesos' => '1']);
+                    $logAccesos->numero_accesos = ($logAccesos->numero_accesos) + 1;
+                    $logAccesos->save();
 
-                return view('Situ.hechos.singleHecho')->with('user',$usuario)->with('alumno',$alumno)
-                    ->with('hechos',$hechosPublicos);
+                    return view('Situ.hechos.singleHecho')->with('user', $usuario)->with('alumno', $alumno)
+                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll);
+                } elseif (Sentinel::inRole('Alu')) {
+                    $alumno = $usuario;
+
+                    return view('Situ.hechos.singleHecho')->with('user', $usuario)->with('alumno', $alumno)
+                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll);
+                }
+
             }
-
-            elseif(Sentinel::inRole('Alu')) {
-                $alumno=$usuario;
-
-                return view('Situ.hechos.singleHecho')->with('user',$usuario)->with('alumno',$alumno)
-                    ->with('hechos',$hechosPublicos);
-            }
-
         }
-
+        else{
+            return \redirect('login');
+        }
 
 
     }
@@ -249,7 +245,7 @@ class SituController extends Controller
 
         }else{
             $hechosPublicos = hechos::where('nivel_acceso', '>=', $usuario->nivel_acceso)
-                ->where('contenido','like', '%' . $request->input . '%')
+                ->where('contenido','like', '%' . $request->input . '%')->Orwhere('etiqueta','like', '%' . $request->input . '%')
                 ->get()->all();
         }
 
@@ -259,6 +255,7 @@ class SituController extends Controller
 
             return response($hechosPublicos);
     }
+
 
 
     public function cv()
