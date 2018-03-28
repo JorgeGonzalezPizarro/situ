@@ -88,7 +88,9 @@ Route::POST('/hechos/{categoria?}/{curso?}', 'HechoController@fraseguia')->name(
 Route::get('/get/', 'AlumnoController@getCurso');
 Route::get('/Situ/{buscar?}', 'SituController@getHechos');
 
-
+Route::get('layouts/email',function (){
+    return view('layouts.email');
+});
 /*PUBLICO*/
 //Route::get('/Situ/public','SituController@getHechosPublicos')->name('index');
 
