@@ -25,6 +25,18 @@
                     {{--<td>{{ $request['first_name']}}</td>--}}
                     {{--<td>{{ $request['email']}}</td>--}}
                     {{--<td>{{ $request['password']}}</td>--}}
+<<<<<<< HEAD
+=======
+                    {{--<td>{!!  $request['first_name']!!}</td>--}}
+                    <td>{!! $email!!}</td>
+                    <td>{!! $encrypted!!}</td>
+
+                    {{--{{ Form::open(array('url' => 'loginInv', 'class' => 'form-style-8','files' => true)) }}--}}
+                    {{--<input type="hidden" value="{{$request['email']}}" name="email">--}}
+                    {{--<input type="hidden" value="{{$request['password']}}" name="password">--}}
+                    <a  href="{{ url('loginInv').'/'. $email ."/".$encrypted.'/'}}">Acceder </a>
+{{--                {{ Form::close() }}--}}
+>>>>>>> 07f47ebd205005844f62994b2b90f2cb57485f39
 
                 {{--</tbody>--}}
 

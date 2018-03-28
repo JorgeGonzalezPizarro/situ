@@ -26,6 +26,8 @@ use View;
 use Validator;
 use Hash;
 use Session;
+use Illuminate\Support\Facades\Crypt;
+
 use App\CursoAlumno;
 use App\Categorias;
 class AlumnoController extends Controller
@@ -608,12 +610,21 @@ class AlumnoController extends Controller
 
             Session::flash('message', 'Registration is completed');
 
+            $encrypted = encrypt($request['password']);
+//            $data=[
+//                'request'=>$request->all(),
+//                'encrypted'=>$encrypted
+//            ];
 
-            Mail::send('email', ['request' => $request->all()], function ($mensaje) use ($request) {
 
-                $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "Site name");
+            $data = array( 'first_name'=>$request['first_name'],'email' => $request['email'], 'encrypted' => $encrypted,
+            );
+
+            Mail::send('email', $data,function ($mensaje) use($data){
+
+                $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
                 $mensaje->subject("Welcome to site name");
-                $mensaje->to($request['email'], $request['name']);
+                $mensaje->to($data['email'],$data['first_name']);
 
 
             });

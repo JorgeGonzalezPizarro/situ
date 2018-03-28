@@ -18,6 +18,8 @@
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('auth');
+Route::get('/loginInv/{email?}/{encrypted?}','Auth\LoginController@showLoginFormInv');
+Route::post('loginInv', 'Auth\LoginController@login');
 
 
 Route::auth();

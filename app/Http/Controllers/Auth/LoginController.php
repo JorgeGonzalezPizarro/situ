@@ -21,6 +21,8 @@ use Carbon\Carbon;
 use Mailchimp;
 use App\ZipCode;
 use App\logAccesos;
+use Crypt;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 class LoginController extends Controller
 {
@@ -57,7 +59,23 @@ class LoginController extends Controller
     {
         return view('auth.login');
     }
-    
+    public function showLoginFormInv($email=null,$encrypted=null)
+    {
+
+        try {
+            $decrypted = decrypt($encrypted);
+        } catch (DecryptException $e) {
+            $decrypted="";
+            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion'])
+                ->with('email',$email)->with('decrypted',$decrypted);
+
+        }
+
+
+        return view('auth.loginInv')->with('email',$email)
+            ->with('decrypted',$decrypted);
+//        return view('auth.login');
+    }
     protected function login(Request $request)
     {
 

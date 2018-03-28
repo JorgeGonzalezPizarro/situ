@@ -16,9 +16,10 @@ use Sentinel;
 use Session;
 use Activation;
 use Mail;
-
+use Illuminate\Support\Facades\Crypt;
 use Cartalyst\Sentinel\Users;
 use Cartalyst\Sentinel\Roles\EloquentRole;
+use Illuminate\Contracts\Encryption\DecryptException;
 class RegisterController extends Controller
 {
     /*
@@ -142,13 +143,21 @@ class RegisterController extends Controller
             //Session::flash('status', 'success');
 //            $role = Sentinel::findRoleBySlug($rol);
 //            $role->users()->attach($user);
+            $encrypted =encrypt($request['password']);
+//            $data=[
+//                'request'=>$request->all(),
+//                'encrypted'=>$encrypted
+//            ];
 
 
-            Mail::send('email',['request' => $request->all()],function ($mensaje) use($request){
+            $data = array( 'email' => $request['email'], 'encrypted' => $encrypted,
+                );
+
+            Mail::send('email', $data,function ($mensaje) use($data){
 
                 $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
                 $mensaje->subject("Welcome to site name");
-                $mensaje->to($request['email'],$request['name']);
+                $mensaje->to($data['email'],$data['first_name']);
 
 
             });
