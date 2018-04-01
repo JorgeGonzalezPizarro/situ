@@ -33,11 +33,9 @@
                                 <li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Detalles de la calificacion</h5>
                                     </li>
                                 <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                class="">Curso </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>
+                                                class="">Curso - Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>
                                 </li>
-                                <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>
-                                </li>
+
                                 <li class="list-group-item text-right"><span class="pull-left"><strong
                                                 class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>
                                 <li class="list-group-item text-right"><span class="pull-left"><strong
@@ -171,14 +169,7 @@
                                                     class=""> </strong></span>
                                         <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
                                     </p></span>  </li>
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
-                                    {{--</li>--}}
+
 
                                 </ul>
                             </div>

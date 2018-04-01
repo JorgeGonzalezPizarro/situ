@@ -18,10 +18,21 @@
                                 <li>
                                     <div class="timeline-panel">
                                         <div class="timeline-heading">
-                                            <h4 class="timeline-title">{{$alumno->first_name}}</h4>
-                                            <h5 class="timeline-title">{{$alumno->last_name}}</h5>
+                                            <span style="float: left;"> <h4 class="timeline-title">{{$alumno->first_name." "}}</h4>
+                                                <h5 class="timeline-title">{{$alumno->last_name}}</h5></span>
 
-                                        </div>
+                                        @if($user->inRole('Inv')|| $user->inRole('Prof'))   <?php $otros_datos=json_decode($alumno->otros_datos,true);?>
+
+                                            <span style="float: right;"><img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+                                            @else
+                                                <?php $otros_datos=json_decode($user->otros_datos,true);?>
+
+                                                    <span style="float: right;">   <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $user['img'] !!}" class="img-circle img-responsive"  name="imagen">
+                                                @endif
+                                                </span>
+                                                    <div class="clearfix"></div>
+
+                                            </span></div>
                                         <div class="timeline-body">
                                             <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$alumno->created_at}}</small></span>
                                             <br>
@@ -116,8 +127,9 @@
                                 '    <div class="timeline-heading">' +
                                 '<h4 class="timeline-title">' + element['first_name'] + '</h4>' +
                                 ' <h4 class="timeline-title">' + element['last_name'] + '</h4>' +
-
-                                '                                            <div class="clearfix"></div></div>' +
+                                +'<span style="float: right;">  ' +
+                                ' <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="'+element['otros_datos']+'" class="img-circle img-responsive"  name="imagen">'
+                                +' <div class="clearfix"></div></div>' +
                                 '<div class="timeline-body">' +
                                 '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>' + element['created_at'] + '</small></span>' +
                                 '<br>' +

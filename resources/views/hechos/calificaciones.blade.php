@@ -140,25 +140,6 @@
                     </li>
                     {!! Form::text('evidencia',null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
 
-                    {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
-                        {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
-                                    {{--<div class='col-md-12'>--}}
-                                        {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
-
-                                        {{--<div class="input-group">--}}
-                                            {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
-                                            {{--<div class="form-group">--}}
-                                                {{--{!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}--}}
-
-
-                                            {{--</div>--}}
-
-                                        {{--</div>--}}
-                                        {{--{!! Form::label('text', 'En curso') !!}--}}
-
-                                        {{--{{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}--}}
-
-                                    {{--</div>--}}
 
 
 

@@ -48,9 +48,11 @@ class AlumnoController extends Controller
 //        console.log($user->getHechos());
         $categorias = Categorias::all();
         $hechos = $user->getHechos()->get();
+        $frases = $user->getHechos()->where('categoria_id',3)->get();
+
 //        $etiquetas=Etiqueta::where
         view()->share('categorias', $categorias);
-        return view('Alumno.alumnoDashboard')->with('hechos', $hechos)->with('categorias', $categorias);
+        return view('Alumno.alumnoDashboard')->with('user',$user)->with('frases',$frases)->with('hechos', $hechos)->with('categorias', $categorias);
 
     }
 
@@ -144,8 +146,13 @@ class AlumnoController extends Controller
 //            $year=$year->grado;
 //            $grado = $user->getFormacion()->get()->all();
             $grado = $user->getFormacion()->get()->all();
+            if(empty($year)){
+                $curso=1;
+            }
+            else{
+                $curso = $user->getDatosAcademicos()->where('grado', $year->grado)->get()->all();
 
-            $curso = $user->getDatosAcademicos()->where('grado', $year->grado)->get()->all();
+            }
         }
             $otros_datos = json_decode($user->otros_datos, true);
             if (!empty($grado)) {
@@ -263,7 +270,13 @@ class AlumnoController extends Controller
         } else {
             $formacionAlumno->actual = "1";
         }
-        $formacionAlumno->descripcion=Input::get('descripcion');
+        if(empty(Input::get('descripcion'))){
+            $formacionAlumno->descripcion=$user->first_name. " ha añadido la formacion <br> Centro: ".$formacionAlumno->centro."
+            <br> Ubicacion: ".$formacionAlumno->ubicacion." <br> Titulacion: ". $formacionAlumno->titulacion." Disciplina académica<br>". $formacionAlumno->disciplina_academica."";
+        }else {
+            $formacionAlumno->descripcion = Input::get('descripcion');
+
+        }
         $formacionAlumno->save();
 
 
@@ -273,6 +286,8 @@ class AlumnoController extends Controller
         $hecho->titulo_hecho = 'Formacion';
         $hecho->categoria_id = 5;
         $hecho->curso = '';
+        $hecho->categoria_nombre="Formación";
+
         $hecho->contenido =  $formacionAlumno->descripcion;
         $hecho->proposito = "";
         $hecho->evidencia = "";
@@ -280,6 +295,9 @@ class AlumnoController extends Controller
         $hecho->fecha_inicio = $formacionAlumno->fecha_inicio;
         $hecho->publico = Input::get('acceso2');
         $hecho->formacion_id=$formacionAlumno->id;
+        $hecho->etiqueta="CV";
+        $dt = Carbon\Carbon::now();
+        $hecho->created_at= $dt->toDateString();
         if (Input::get('acceso2') == 'publico') {
             $hecho->nivel_acceso = "2";
 
@@ -403,9 +421,13 @@ class AlumnoController extends Controller
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
           $curso = $usuario->getDatosAcademicos()->pluck('curso');
         $grado = Formacion::selectRaw('disciplina_academica')->where('user_id',$usuario->id)->get()->pluck('disciplina_academica');
+        if(count($grado)==0){
+            $grado[]=[""=>""];
+        }
 
-        $curso1 = $usuario->getDatosAcademicos()->where([['user_id',$usuario->id],['grado',$grado]])->get()->pluck('curso');
-        foreach ($curso1 as $c){
+            $curso1 = $usuario->getDatosAcademicos()->where([['user_id', $usuario->id], ['grado', $grado]])->get()->pluck('curso');
+
+       foreach ($curso1 as $c){
             $c=$usuario->getDatosAcademicos()->where('curso',$c)->get()->first()->asignaturas;
 
         }
@@ -435,7 +457,7 @@ class AlumnoController extends Controller
 
         }
         if ($categoria->categoria == 'Portafolios profesional') {
-            return Redirect::to('Situ/public/0/5')->with('user', Sentinel::getUser())
+            return Redirect::to('Alumno/alumnoDatos/datosLaboral/')->with('user', Sentinel::getUser())
                 ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
                 ->with('otros_datos', $otros_datos);
 //            return response($categorias->id);
@@ -447,7 +469,13 @@ class AlumnoController extends Controller
                 ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
                 ->with('grado', $grado)   ->with('otros_datos', $otros_datos)->with('hechos', $hechos);
 
-        } else {
+        }
+        if ($categoria->categoria == 'Proyectos de investigación') {
+            return view('hechos.proyectosInvestigacion')->with('user', Sentinel::getUser())
+                ->with('grado', $grado)->with('curso',$curso1)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
+
+        }
+        else {
             return "aa";
         }
     }
@@ -666,6 +694,7 @@ class AlumnoController extends Controller
     public function actualizarMisDatosLaborales()
     {
 
+
         $user = Sentinel::getUser();
         $alumnoLaboral = new Laboral();
         $alumnoLaboral->user_id = $user->id;
@@ -673,10 +702,12 @@ class AlumnoController extends Controller
         $alumnoLaboral->ubicacion = Input::get('ubicacion');
         $alumnoLaboral->empresa = Input::get('empresa');
         $alumnoLaboral->cargo = Input::get('cargo');
+        if(empty(Input::get('descripcion'))){
+            $alumnoLaboral->descripcion=$user->first_name. " ha añadido la siguiente experiencia laboral <br> Sector: ".$alumnoLaboral->sector."
+            <br> Ubicacion: ".$alumnoLaboral->ubicacion." <br> Empresa: ". $alumnoLaboral->empresa." Cargo<br>". $alumnoLaboral->cargo."";
+        }else {
+            $alumnoLaboral->descripcion = Input::get('descripcion');
 
-        $alumnoLaboral->descripcion = Input::get('descripcion');
-        if(empty($alumnoLaboral->descripcion)){
-            $alumnoLaboral->descripcion="";
         }
         $format = 'm/d/Y';
         $alumnoLaboral->fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
@@ -697,10 +728,14 @@ class AlumnoController extends Controller
         $hecho->user_id = $user->id;
         $hecho->titulo_hecho = 'Trabajo';
         $hecho->categoria_id = 5;
+        $hecho->categoria_nombre="Portafolios profesional";
         $hecho->curso = '';
         $hecho->contenido = $alumnoLaboral->descripcion;
         $hecho->proposito = "";
         $hecho->evidencia = "";
+        $hecho->etiqueta="CV";
+        $dt =  Carbon\Carbon::now();
+        $hecho->created_at= $dt->toDateString();
         $hecho->hechos_relacionados = "";
         $hecho->fecha_inicio = $alumnoLaboral->fecha_inicio;
         $hecho->publico = Input::get('acceso');

@@ -35,6 +35,8 @@ class HechoController extends Controller
             else {
                 $hecho = new hechos();
                 $hecho->user_id = Sentinel::getUser()->id;
+                $categoria=Categorias::where('id',Input::get('categoria_id'))->get()->first();
+
                 if(empty(Input::get('titulo_hecho'))){
                     $categoria=Categorias::where('id',Input::get('categoria_id'))->get()->first();
                     $hecho->titulo_hecho=$categoria->categoria;
@@ -43,16 +45,19 @@ class HechoController extends Controller
                     $hecho->titulo_hecho = Input::get('titulo_hecho');
 
                 }
+                $hecho->categoria_nombre=$categoria->categoria;
                 $hecho->categoria_id = Input::get('categoria_id');
                 $hecho->curso = Input::get('curso');
                 $hecho->contenido = Input::get('contenido');
                 $hecho->proposito = Input::get('proposito');
                 $hecho->evidencia = Input::get('evidencia');
+                if(Input::get('etiqueta')) {
+                    foreach (Input::get('etiqueta') as $etiquet) {
+                        $hecho->etiqueta = $hecho->etiqueta . "," . $etiquet;
 
-                foreach (Input::get('etiqueta') as $etiquet) {
-                    $hecho->etiqueta =  $hecho->etiqueta .",". $etiquet;
-
+                    }
                 }
+
 
                 $hecho->ruta_archivo = Input::get('ruta_archivo');
 //                $hecho -> etiqueta= Input::get('etiqueta');
@@ -61,7 +66,8 @@ class HechoController extends Controller
                 $fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
                 $hecho->fecha_inicio = $fecha_inicio;
 //                $hecho->publico = Input::get('acceso');
-
+                $dt =  Carbon\Carbon::now();
+                $hecho->created_at= $dt->toDateString();
                 if(Input::get('acceso')=='publico'){
                     $hecho->nivel_acceso = "2";
                     $hecho->publico = "publico";
@@ -139,6 +145,16 @@ class HechoController extends Controller
                     $calificacion->curso=$request->curso;
 
                     $calificacion->profesor=$request->profesor;
+
+                    if(empty( Input::get('contenido'))){
+                        $hecho->contenido=Sentinel::getUser()->first_name. " ha añadido la siguiente calificación <br> Calificación: ".$calificacion->calificacion."
+            <br> Ubicacion: ".$calificacion->asignatura." <br> Grado: ". $calificacion->grado." Curso<br>". $calificacion->curso."";
+                        $hecho->update();
+                    }else {
+                        $hecho->descripcion = Input::get('descripcion');
+
+                    }
+
                     $calificacion->save();
 
                 }
@@ -175,7 +191,9 @@ class HechoController extends Controller
             $hecho = new hechos();
             $hecho->user_id = Sentinel::getUser()->id;
             $hecho->titulo_hecho ='Frase guia';
+             $categoria=Categorias::where('id',Input::get('categoria_id'))->get()->first();
             $hecho->categoria_id = Input::get('categoria_id');
+            $hecho->categoria_nombre=$categoria->categoria;
             $hecho->contenido = Input::get('contenido');
             $hecho->nivel_acceso = Input::get('nivel_acceso');
             $hecho->hechos_relacionados = Input::get('hechos_relacionados');

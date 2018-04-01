@@ -241,7 +241,7 @@ return [
         'hechos'=> \App\hechos::class,
         'Str'   => Illuminate\Support\Str::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-
+        'Carbon' => 'Carbon\Carbon',
     ],
 
 ];

@@ -475,11 +475,20 @@
                         <a href="{{ route('alumnoDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
                     </li>
 
-                    @foreach($categorias as $categoria)
+                    {{--@foreach($categorias as $categoria)--}}
                         <li class="">
-                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
+                            <a href="{!! route('calificaciones')!!}"><i class="fa fa-fw fa-dashboard"></i>Calificaciones</a>
                         </li>
-                    @endforeach
+                    <li class="">
+                        <a href="{!! url('Situ/public/0/5')!!}"><i class="fa fa-fw fa-dashboard"></i>Portfolio Profesional</a>
+                    </li>
+                    <li class="">
+                        <a href="{!! route('trabajos')!!}"><i class="fa fa-fw fa-dashboard"></i>Trabajos Academicos</a>
+                    </li>
+                    <li class="">
+                        <a href="{!! route('recuerdosAll')!!}"><i class="fa fa-fw fa-dashboard"></i>Recuerdos</a>
+                    </li>
+                    {{--@endforeach--}}
 
                 @endif
             </ul>

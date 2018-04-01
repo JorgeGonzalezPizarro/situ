@@ -11,7 +11,7 @@ class hechos extends Model
     protected static $etiquetasModel = 'App\hecho_etiqueta';
 
     protected $fillable = [ 'user_id' ,
-        'categoria_id','titulo_hecho', 'curso', 'contenido', 'proposito', 'evidencia',
+        'categoria_id','categoria_nombre','titulo_hecho', 'curso', 'contenido', 'proposito', 'evidencia',
         'nivel_acceso', 'hechos_relacionados', 'fecha_inicio','fecha_fin','proposito', 'evidencia',
         'ruta_imagen','ruta_archivo','laboral_id','formacion_id'
     ];
@@ -63,7 +63,7 @@ class hechos extends Model
 
     public function calificaciones()
     {
-        return $this->hasOne('App\Calificaciones');
+        return $this->belongsTo('App\Calificaciones','id','hechos_id');
     }
     public function withTimestamps($createdAt = null, $updatedAt = null)
     {

@@ -109,6 +109,8 @@ class SituController extends Controller
                         'alumno_id' => $alumno->id, 'rol' => $invitado->rol, 'hechos_id' => $id, 'numero_accesos' => '0']);
                     $logAccesos->numero_accesos = ($logAccesos->numero_accesos) + 1;
                     $logAccesos->save();
+                    $categorias = Categorias::all();
+
                 } else {
 
                     $hechosPublicos = hechos::where([['nivel_acceso', '>=', $usuario->nivel_acceso],
@@ -126,6 +128,7 @@ class SituController extends Controller
 //            $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
                 $invitado = Invitados::where('invitado_id', $usuario->id)->get()->first();
 //            $alumno = $invitado->getAlumno()->get()->first();
+                $categorias = Categorias::all();
 
                 $hecho = hechos::find($id);
                 if (Sentinel::inRole('Prof')) {
@@ -193,6 +196,11 @@ class SituController extends Controller
                         ->with('hechos', $hechosPublicos)->with('user', $usuario)->with('alumno', $alumno)
                         ->with('otrosHechos', $otrosHechosPublicos);
                 }
+                if ($categoria->categoria == 'Proyectos de investigación') {
+                    return view('Situ.hechos.singleHecho.proyectosInvestigacion')->with('hecho', $hecho)
+                        ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
+                        ->with('alumno', $alumno)->with('otrosHechos', $otrosHechosPublicos);
+                }
             } else {
                 if (Sentinel::inRole('Prof')) {
 //                return response($alumnos);
@@ -206,12 +214,12 @@ class SituController extends Controller
                     $logAccesos->save();
 
                     return view('Situ.hechos.singleHecho')->with('user', $usuario)->with('alumno', $alumno)
-                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll);
+                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll)->with('categorias',$categorias);
                 } elseif (Sentinel::inRole('Alu')) {
                     $alumno = $usuario;
 
                     return view('Situ.hechos.singleHecho')->with('user', $usuario)->with('alumno', $alumno)
-                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll);
+                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll)->with('categorias',$categorias);;
                 }
 
             }
@@ -227,10 +235,284 @@ class SituController extends Controller
 
             $usuario=Sentinel::getUser();
         if (Sentinel::inRole('Inv')){
+
+            $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $alumno = $invitado->getAlumno()->get()->first();
+
+            $otros_datos=json_decode($alumno->otros_datos);
+            $otros_datos=array('img'=>$otros_datos->img);
+            $first_name=($alumno->first_name);
+            $first_name=array('first_name'=>$first_name);
+            $hechosPublicos1 = hechos::whereRaw('user_id='.  $alumno->id)->whereRaw('hechos.nivel_acceso >='.$usuario->nivel_acceso)
+                ->where('contenido','like', '%' . $request->input . '%')
+                ->orderBy($request->orden)
+                ->get()->all();
+            $hechosPublicos2 = hechos::whereRaw('user_id='.  $alumno->id)->whereRaw('hechos.nivel_acceso >='.$usuario->nivel_acceso)
+                ->where('etiqueta','like', '%' . $request->input . '%')
+                ->Orwhere('categoria_id',$request->input)
+                ->orderBy($request->orden)
+                ->get()->all();
+            $hechosPublicos3 = hechos::whereRaw('user_id='.  $alumno->id)->whereRaw('hechos.nivel_acceso >='.$usuario->nivel_acceso)
+                ->where('categoria_id',$request->input)
+                ->orderBy($request->orden)
+                ->get()->all();
+
+            $hechosPublicos=array_merge($hechosPublicos1,$hechosPublicos2,$hechosPublicos3);
+
+
+        }elseif(Sentinel::inRole('Prof')){
+
+
+            $rol=Sentinel::findRoleById(2);
+            $alumnos=$rol->users()->with('roles')->where('first_name','like', '%' . $request->input . '%')->get()->all();
+
+
+            return response($alumnos);
+
+
+
+
+        }else{
+            $otros_datos=json_decode($usuario->otros_datos);
+            $otros_datos=array('img'=>$otros_datos->img);
+            $first_name=($usuario->first_name);
+            $first_name=array('first_name'=>$first_name);
+            $hechosPublicos1 = hechos::whereRaw('hechos.user_id='.$usuario->id)->whereRaw('hechos.nivel_acceso >='.$usuario->nivel_acceso)
+                ->where('contenido','like', '%' . $request->input . '%')
+                ->orderBy($request->orden)
+                ->get()->all();
+            if(count($hechosPublicos1)>0) {
+
+
+
+            }
+            $hechosPublicos2 = hechos::whereRaw('hechos.user_id='.$usuario->id)->whereRaw('hechos.nivel_acceso >='.$usuario->nivel_acceso)
+                ->where('etiqueta','like', '%' . $request->input . '%')
+                ->Orwhere('categoria_id',$request->input)
+                ->orderBy($request->orden)
+                ->get()->all();
+            if(count($hechosPublicos2)>0) {
+
+            }
+
+                $hechosPublicos3 = hechos::whereRaw('hechos.user_id='.$usuario->id)->whereRaw('hechos.nivel_acceso >='.$usuario->nivel_acceso)
+               ->where('categoria_id',$request->input)
+                ->orderBy($request->orden)
+                ->get()->all();
+            if(count($hechosPublicos3)>0) {
+
+
+            }
+            $hechosPublicos4 = hechos::whereRaw('hechos.user_id='.$usuario->id)->whereRaw('hechos.nivel_acceso >='.$usuario->nivel_acceso)
+                ->where('titulo_hecho','like', '%' . $request->input . '%')
+                ->orderBy($request->orden)
+                ->get()->all();
+            if(count($hechosPublicos4)>0) {
+
+
+            }
+            //FALTA EL ARRAY ADD
+            $hechosPublicos=array_merge($hechosPublicos1,$hechosPublicos2,$hechosPublicos3,$hechosPublicos4);
+        }
+
+
+
+
+
+            return response()->json([ array_unique($hechosPublicos),$otros_datos,$first_name]);
+    }
+    public function getCategorias(Request $request){
+
+        $usuario=Sentinel::getUser();
+
+        if (Sentinel::inRole('Inv')){
+
+            $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $alumno = $invitado->getAlumno()->get()->first();
+            $otros_datos=json_decode($alumno->otros_datos);
+            $otros_datos=array('img'=>$otros_datos->img);
+            $first_name=($alumno->first_name);
+            $first_name=array('first_name'=>$first_name);
+            $hechosPublicos = hechos::where('user_id',  $alumno->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',$request->input)->get()->all();
+        }elseif(Sentinel::inRole('Prof')){
+
+
+            $rol=Sentinel::findRoleById(2);
+            $alumnos=$rol->users()->with('roles')->where('first_name','like', '%' . $request->input . '%')->get()->all();
+
+
+            return response($alumnos);
+
+
+
+
+        }else{
+            $otros_datos=json_decode($usuario->otros_datos);
+            $otros_datos=array('img'=>$otros_datos->img);
+            $first_name=($usuario->first_name);
+            $first_name=array('first_name'=>$first_name);
+            $hechosPublicos = hechos::where('user_id',$usuario->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)
+                ->where('categoria_id',$request->input)
+                ->orderBy($request->orden)
+                ->get()->all();
+
+        }
+
+
+
+
+
+        return response()->json([ array_unique($hechosPublicos),$otros_datos,$first_name]);
+    }
+
+    public function getCalificaciones(){
+        $categorias = Categorias::all();
+
+        $usuario=Sentinel::getUser();
+        if (Sentinel::inRole('Inv')){
+            $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $alumno = $invitado->getAlumno()->get()->first();
+            $calificaciones = hechos::where('user_id',  $alumno->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',2)
+               ->get();
+            return view('Situ.hechos.singleHecho.calificaciones')->with('calificaciones',$calificaciones)->with('alumno',$alumno)->with('usuario',$usuario)
+                ->with('categorias',$categorias);
+
+
+        }
+
+
+
+
+
+
+        else{
+
+                $calificaciones = hechos::where('user_id',  $usuario->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',2)
+                ->get()->all();
+            return view('Situ.hechos.singleHecho.calificaciones')->with('calificaciones',$calificaciones)->with('user',$usuario)
+                ->with('categorias',$categorias);
+
+        }
+
+
+
+
+
+    }
+
+    public function getTrabajosAcademicos(){
+        $categorias = Categorias::all();
+
+        $usuario=Sentinel::getUser();
+        if (Sentinel::inRole('Inv')){
+            $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $alumno = $invitado->getAlumno()->get()->first();
+            $trabajos = hechos::where('user_id',  $alumno->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',1)
+                ->get()->all();
+            return view('Situ.hechos.singleHecho.trabajosAcademicos')->with('trabajos',$trabajos)->with('alumno',$alumno)->with('usuario',$usuario)
+                ->with('categorias',$categorias);
+
+
+        }
+
+
+
+
+
+
+        else{
+
+            $trabajos = hechos::where('user_id',  $usuario->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',1)
+                ->get()->all();
+            return view('Situ.hechos.singleHecho.trabajosAcademicos')->with('trabajos',$trabajos)->with('user',$usuario)
+                ->with('categorias',$categorias);
+
+        }
+
+
+
+
+
+    }
+
+    public function getRecuerdos(){
+        $categorias = Categorias::all();
+
+        $usuario=Sentinel::getUser();
+        if (Sentinel::inRole('Inv')){
+            $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $alumno = $invitado->getAlumno()->get()->first();
+            $recuerdos = hechos::where('user_id',  $alumno->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',7)
+                ->get()->all();
+            return view('Situ.hechos.singleHecho.recuerdosAll')->with('recuerdos',$recuerdos)->with('alumno',$alumno)->with('usuario',$usuario)
+                ->with('categorias',$categorias);
+
+
+        }
+
+
+
+
+
+
+        else{
+
+            $recuerdos = hechos::where('user_id',  $usuario->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',7)
+                ->get()->all();
+            return view('Situ.hechos.singleHecho.recuerdosAll')->with('recuerdos',$recuerdos)->with('user',$usuario)
+                ->with('categorias',$categorias);
+
+        }
+
+
+
+
+
+    }
+
+    public function getProyectos(){
+        $categorias = Categorias::all();
+
+        $usuario=Sentinel::getUser();
+        if (Sentinel::inRole('Inv')){
+            $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $alumno = $invitado->getAlumno()->get()->first();
+            $proyectos = hechos::where('user_id',  $alumno->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',6)
+                ->get()->all();
+            return view('Situ.hechos.singleHecho.proyectosInvestigacionAll')->with('proyectos',$proyectos)->with('alumno',$alumno)->with('usuario',$usuario)
+                ->with('categorias',$categorias);
+
+
+        }
+
+
+
+
+
+
+        else{
+
+            $proyectos = hechos::where('user_id',  $usuario->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('categoria_id',6)
+                ->get()->all();
+            return view('Situ.hechos.singleHecho.proyectosInvestigacionAll')->with('proyectos',$proyectos)->with('user',$usuario)
+                ->with('categorias',$categorias);
+
+        }
+
+
+
+
+
+    }
+
+    public function getOrden(Request $request){
+
+        $usuario=Sentinel::getUser();
+        if (Sentinel::inRole('Inv')){
             $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
             $alumno = $invitado->getAlumno()->get()->first();
             $hechosPublicos = hechos::where([['user_id',  $alumno->id],['nivel_acceso', '>=', $usuario->nivel_acceso],
-               ])  ->where('contenido','like', '%' . $request->input . '%')->get()->all();
+            ])  ->where('contenido','like', '%' . $request->input . '%')->get()->all();
         }elseif(Sentinel::inRole('Prof')){
 
 
@@ -245,7 +527,8 @@ class SituController extends Controller
 
         }else{
             $hechosPublicos = hechos::where('nivel_acceso', '>=', $usuario->nivel_acceso)
-                ->where('contenido','like', '%' . $request->input . '%')->Orwhere('etiqueta','like', '%' . $request->input . '%')
+
+                ->orderBy($request->orden)
                 ->get()->all();
         }
 
@@ -253,11 +536,8 @@ class SituController extends Controller
 
 
 
-            return response($hechosPublicos);
+        return response($hechosPublicos);
     }
-
-
-
     public function cv()
     {
         if (Sentinel::inRole('Prof') || Sentinel::inRole('Inv')) {

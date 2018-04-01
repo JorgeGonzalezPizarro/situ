@@ -153,12 +153,12 @@
             </div>
 
 
-            @if(!empty($hechos))
+            @if(!empty($otrosHechos))
                 <div class="row">
                     <div class="col-md-12">
                         <h1 class="mt-4" style="padding-left: 15px">  Relacionado con  {{$hecho->titulo_hecho}}</h1>
                         <hr>
-                        @foreach($hechos as $hecho)
+                        @foreach($otrosHechos as $hecho)
 
                             @if(!empty($hecho->ruta_imagen))
                                 <img class="img-fluid rounded" style="width: 600px; height: 300px;"src="{{$hecho->ruta_imagen}}" alt="">
@@ -174,7 +174,19 @@
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                                     class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
                                     </li>
-
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha publicación </strong></span><span><p>{{$hecho->created_at}}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha del {{$hecho->getCategoria()->get()->first()->categoria}}  </strong></span><span><p>{{$hecho->fecha_inicio}}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Contenido </strong></span><span><p>{!!  str_limit($hecho->contenido,50,'...' )!!}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class=""> </strong></span>
+                                        <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
+                                    </p></span>  </li>
 
                                 </ul>
                             </div>

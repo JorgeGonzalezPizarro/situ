@@ -248,6 +248,15 @@
                 margin-top: 0px !important;
             }
         }
+        .list-group-item {
+            position: relative;
+            display: block;
+            padding: 10px 15px;
+            margin-bottom: -1px;
+            min-height: 55px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
     </style>
     @yield('css')
 
@@ -324,7 +333,6 @@
                 <div id="adminmenuwrap" style="">
                     <ul class="nav navbar-nav navbar-left">
                         <a class="navbar-brand" href="#">
-                            <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
                         </a>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('Situ/public')}}">Plataforma de Trayectoria Universitaria</a>
@@ -480,12 +488,21 @@
                         <a href="{{ route('alumnoDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
                     </li>
 
-                    @foreach($categorias as $categoria)
-                        <li class="">
-                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
-                        </li>
-                    @endforeach
-
+                    <li class="">
+                        <a href="{!! route('calificaciones')!!}"><i class="fa fa-fw fa-dashboard"></i>Calificaciones</a>
+                    </li>
+                    <li class="">
+                        <a href="{!! url('Situ/public/0/5')!!}"><i class="fa fa-fw fa-dashboard"></i>Portfolio Profesional</a>
+                    </li>
+                    <li class="">
+                        <a href="{!! route('trabajos')!!}"><i class="fa fa-fw fa-dashboard"></i>Trabajos Academicos</a>
+                    </li>
+                    <li class="">
+                        <a href="{!! route('recuerdosAll')!!}"><i class="fa fa-fw fa-dashboard"></i>Recuerdos</a>
+                    </li>
+                    <li class="">
+                        <a href="{!! route('proyectosInvestigacionAll')!!}"><i class="fa fa-fw fa-dashboard"></i>Proyectos</a>
+                    </li>
                 @endif
             </ul>
         </div>

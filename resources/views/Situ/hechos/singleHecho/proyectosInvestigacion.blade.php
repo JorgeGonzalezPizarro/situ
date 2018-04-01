@@ -37,15 +37,15 @@
                         {{--<li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Detalles de la calificacion</h5>--}}
                         {{--</li>--}}
                         {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Curso </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>--}}
+                        {{--class="">Curso </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>--}}
                         {{--</li>--}}
                         {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
+                        {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
                         {{--</li>--}}
                         {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
+                        {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
                         {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
+                        {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
                         {{--</li>--}}
 
                     </ul>
@@ -141,63 +141,63 @@
             </div>
 
 
-        @if(!empty($otrosHechos))
-<div class="row">
-    <div class="col-md-12">
-                <h1 class="mt-4" style="padding-left: 15px">  Relacionado con  {{$hecho->titulo_hecho}}</h1>
-        <hr>
-                @foreach($otrosHechos as $hecho)
+            @if(!empty($otrosHechos))
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="mt-4" style="padding-left: 15px">  Relacionado con  {{$hecho->titulo_hecho}}</h1>
+                        <hr>
+                    @foreach($otrosHechos as $hecho)
 
 
 
 
-                <!--left col-->
-                    <div class="col-md-4">
-                        <ul class="list-group">
-                            <input hidden name="categoria_id" value="{{$categoria}}">
-                            <li class="list-group-item text-muted" contenteditable="false">Detalles</li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong
-                                            class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
-                            </li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong
-                                            class="">Fecha publicación </strong></span><span><p>{{$hecho->created_at}}</p></span>
-                            </li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong
-                                            class="">Fecha del {{$hecho->getCategoria()->get()->first()->categoria}}  </strong></span><span><p>{{$hecho->fecha_inicio}}</p></span>
-                            </li>
+                        <!--left col-->
+                            <div class="col-md-4">
+                                <ul class="list-group">
+                                    <input hidden name="categoria_id" value="{{$categoria}}">
+                                    <li class="list-group-item text-muted" contenteditable="false">Detalles</li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha publicación </strong></span><span><p>{{$hecho->created_at}}</p></span>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Fecha del {{$hecho->getCategoria()->get()->first()->categoria}}  </strong></span><span><p>{{$hecho->fecha_inicio}}</p></span>
+                                    </li>
 
-                            <li class="list-group-item text-right"><span class="pull-left"><strong
-                                            class="">Etiquetas </strong></span><span><p>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class="">Etiquetas </strong></span><span><p>
                             @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
 
-                                    <a href="#">{{$etiquetas->etiqueta_id}}</a>
-                                @endforeach
+                                                    <a href="#">{{$etiquetas->etiqueta_id}}</a>
+                                                @endforeach
                                 </p></span>
-                            </li>
-                            <li class="list-group-item text-right"><span class="pull-left"><strong
-                                            class=""> </strong></span>
-                                <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
+                                    </li>
+                                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                    class=""> </strong></span>
+                                        <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
                                     </p></span>  </li>
-                            {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                            {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
-                            {{--</li>--}}
-                            {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                            {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
-                            {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                            {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
-                            {{--</li>--}}
+                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
+                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
+                                    {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
+                                    {{--</li>--}}
 
-                        </ul>
+                                </ul>
+                            </div>
+
+
+                        @endforeach
                     </div>
+                </div>
+            @endif
 
-
-                @endforeach
-            </div>
-</div>
-        @endif
-
-    </div>
-    <!-- /.row -->
+        </div>
+        <!-- /.row -->
 
     </div>
 

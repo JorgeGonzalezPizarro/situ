@@ -56,6 +56,10 @@ Route::get('/Alumno/hecho/singleHecho/','AlumnoController@getHechoUsuario')->nam
 Route::get('Situ/public/{id?}/{categoria?}/{alu?}', 'SituController@showHecho');
 
 
+Route::get('Situ//calificaciones','SituController@getCalificaciones')->name('calificaciones');
+Route::get('Situ//trabajosAcademicos','SituController@getTrabajosAcademicos')->name('trabajos');
+Route::get('Situ//recuerdosT','SituController@getRecuerdos')->name('recuerdosAll');
+Route::get('Situ//proyectos','SituController@getProyectos')->name('proyectosInvestigacionAll');
 
 Route::get('Alumno/alumnoDatos','AlumnoController@alumnoDatos')->name('misDatos');
 Route::post('Alumno/alumnoDatos','AlumnoController@actualizarMisDatos')->name('actualizarDatos');
@@ -89,7 +93,8 @@ Route::POST('\'hechos/{categoria?}/{curso?}', 'HechoController@guardar_Hecho')->
 Route::POST('/hechos/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('fraseguia');
 Route::get('/get/', 'AlumnoController@getCurso');
 Route::get('/Situ/{buscar?}', 'SituController@getHechos');
-Route::get('/Situ/etiqueta/{buscar?}', 'SituController@getHechosEtiqueta');
+Route::get('/Situ/categorias/{id?}', 'SituController@getCategorias');
+
 
 Route::get('layouts/email',function (){
     return view('layouts.email');

@@ -9,7 +9,7 @@ class Calificaciones extends Model
     public $table = "calificaciones";
 
     protected $fillable = [
-        'calificacion' , 'profesor','asignatura'
+        'calificacion' , 'profesor','asignatura','curso'
 
     ];
     public $timestamps = false;

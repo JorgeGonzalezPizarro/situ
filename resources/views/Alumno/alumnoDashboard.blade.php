@@ -83,6 +83,47 @@
             </div>
 
         </div>
+        <div class="col-lg-6">
+
+            <!-- Title -->
+
+            <!-- Author -->
+
+
+
+            <hr>
+
+
+            <div class="panel-body">
+
+                <div class="row">
+
+                @foreach($frases as $hecho)
+
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p style="font-size: 18px;font-family: 'Harlow Solid Italic';font-style: italic">"{{$hecho->contenido}}"<span> por {{$user-> first_name}}</span></p>
+
+
+
+                                </div>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                    @endforeach
+                </div>
+            </div>
+
+
+
+        </div>
     </div>
 @endsection
 

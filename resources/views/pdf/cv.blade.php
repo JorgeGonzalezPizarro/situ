@@ -102,7 +102,6 @@
                 <tr >
                     <td><h3 >{{$labor->fecha_inicio}}</h3></td>
                     <td> <span style="font-style: italic; text-align: center;">{!! $labor->cargo." en ". $labor->empresa ."<br>" !!}
-                            @if(!empty($labor->descripcion)){!! " <span style='font-style: italic; '> ". $labor->descripcion ."</span><br>" !!}@endif
 
                                     @if(!empty($labor->ubicacion)){!! "Ubicado en ". $labor->ubicacion ."<br>" !!}@endif
                                     @if(!empty($labor->sector)){!! "Sector ". $labor->sector ."<br>" !!}@endif
