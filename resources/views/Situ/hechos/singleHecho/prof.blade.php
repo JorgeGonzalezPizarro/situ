@@ -5,9 +5,10 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-8" id="contenedor">
 
-                @if(!empty($alumnos))
+                @if(!empty($alumnos) && count($alumnos)>0)
+                <div class="col-lg-8" id="contenedor">
+
                     @foreach($alumnos as $alumno)
 
                         <div class="col-lg-12">
@@ -55,28 +56,25 @@
             <div class="col-lg-4">
 
                 <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
+                    <h5 class="card-header">Buscar Alumnos</h5>
                     <div class="card-body">
                         <div class="input-group">
-                            <input type="text" id="buscar" onkeyup="buscar()" name="buscar" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
+                            <input type="text" id="buscar" onkeyup="buscar()" name="buscar" class="form-control" placeholder="Nombre...">
                 </span>
                         </div>
                     </div>
                 </div>
 
-                @endif
 
-                <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                        You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                    </div>
-                </div>
+
             </div>
-        </div>
-    </div>
+        </div></div>
+
+
+    @else
+
+            @endif
+
     <!-- /.container -->
 
 @endsection
@@ -107,8 +105,12 @@
                 success: function (response) {
 
                     if (response.length == 0) {
+                        var html2 = '<div class="alert alert-info" role="alert">' +
+                            ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;"> ' + $('#buscar').val() + '</a>.' +
+                            ' </div>';
+                        $("#contenedor").empty();
 
-                        $('#buscar1').hide();
+                        $("#contenedor").append(html2);
 
                     }
 
@@ -119,25 +121,27 @@
                         var html = [];
                         response.forEach(function (element) {
 
+                            var otros_Datos=JSON.parse(element['otros_datos']);
 
+                            console.log(otros_Datos['img']);
                             html.push(' <div class="col-lg-12">' +
                                 '<ul class="timeline">' +
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '<h4 class="timeline-title">' + element['first_name'] + '</h4>' +
-                                ' <h4 class="timeline-title">' + element['last_name'] + '</h4>' +
-                                +'<span style="float: right;">  ' +
-                                ' <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="'+element['otros_datos']+'" class="img-circle img-responsive"  name="imagen">'
-                                +' <div class="clearfix"></div></div>' +
+                                '<span style="float:left;"><h4 class="timeline-title">' + element['first_name'] + '</h4>' +
+                                ' <h5 class="timeline-title">' + element['last_name'] + '</h5></span>' +
+                                '<span style="float: right;">  ' +
+                                ' <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="'+otros_Datos['img']+'" class="img-circle img-responsive"  name="imagen">'
+                                +'</span> <div class="clearfix"></div></div>' +
                                 '<div class="timeline-body">' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>' + element['created_at'] + '</small></span>' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> ' + element['created_at'] + '</small></span>' +
                                 '<br>' +
 
                                 '   <span class="pull-left"> ' + element['email'] + '</span>' +
                                 '  <div class="clearfix"></div>' +
 
-                                ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+                                ' <span><p><a href=" {{ url('Situ/public') }}/0/5/'+element['id']+'" class="btn btn-info" role="button">Ver</a>' +
                                 ' </p></span>' +
                                 '</div>' +
                                 '</div>' +

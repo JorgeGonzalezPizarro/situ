@@ -22,7 +22,7 @@
                     @endif </h1>
             </div>
                 <!-- Title -->
-                @if(!empty($hechos))
+                @if(!empty($hechos) && count($hechos)>0)
                         <div class="col-md-8">
                             <div class="col-md-12">
                                 <ul class="list-group">
@@ -104,6 +104,17 @@
                                                     @endforeach
                                 </p></span>
                                         </li>
+
+                            @else
+                                    <div class="col-md-10">
+                                        <hr>
+                                        <ul class="list-group">
+
+
+                                            <li class="list-group-item text-muted" style="text-align: center" contenteditable="false">No existen datos</li>
+
+
+                                        </ul></div>
                                 @endif
 
 

@@ -116,11 +116,17 @@ class AdminController extends Controller
     public function verUsuario($usuario)
     {
 
-        Sentinel::findById($usuario);
+        $user=Sentinel::findById($usuario);
         $json= Sentinel::findById($usuario);
         $otros_datos=json_decode($json->otros_datos,true);
-        return view('Admin.setUsuario')->with('admin', Sentinel::findById($usuario))
-            ->with('otros_datos', $otros_datos);
+        $hechos=$user->getHechos()->get()->all();
+        $invitados=$user->getInvitados($user->id)->all();
+        $profesores=$user->getProfesores($user->id)->all();
+        $etiquetasPublic = Etiqueta::where('user_id', null)->get()->all();
+        $etiquetas = $user->getEtiquetas()->get()->all();
+
+        return view('Admin.setUsuario')->with('user', Sentinel::findById($usuario))->with('hechos',$hechos)
+         ->with('etiquetas',$etiquetas)  ->with('etiquetasPublic',$etiquetasPublic) ->with('otros_datos', $otros_datos)->with('profesores',$profesores)->with('invitados',$invitados);
     }
     public function actualizarUsuario($email)
     {

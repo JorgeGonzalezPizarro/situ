@@ -12,7 +12,7 @@
                 </div>
             @endif
             {{ Form::open(array('url' => route('login'), 'class' => 'form-horizontal form-signin','files' => true)) }}
-            <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+            <h3 class="form-signin-heading">Bienvenido al Portal de Trayectoria Universitaria ! </h3>
             <hr class="colorgraph"><br>
             {!! csrf_field() !!}
             <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
@@ -31,8 +31,9 @@
             <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
 
             <div class="login-register">
-                <a href="{{url('register')}}">Register</a>
-                <a href="{{url('password/reset')}}">Forget Password</a>
+                <div class="clearfix"></div>
+                <br>
+                <a href="{{url('password/reset')}}">Recuperar contraseña</a>
                 @if ($errors->has('global'))
                     <span class="help-block danger">
                     <strong style="color:red" >{{ $errors->first('global') }}</strong>

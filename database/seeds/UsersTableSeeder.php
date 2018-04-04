@@ -64,23 +64,7 @@ class UsersTableSeeder extends Seeder
         $activation = Activation::complete($user, $activation->code);
         $role->users()->attach($user);
 
-        for ($i=0;$i<100;$i++){
-        $user1= Sentinel::register([
-            'email' => 'ADMIN'.$i.'@gmail.com',
-            'password'=> ('ADMIN'),
-            'first_name' =>('Antonio'),
-            'last_name'=> ('Fernandez'),
-            'permissions'=> ['Administrator'],
-            'nivel_acceso'=>('1')
 
-
-    ]);
-            $role->users()->attach($user1);
-            //Activate the user **
-            $activation = Activation::create($user1);
-            $activation = Activation::complete($user1, $activation->code);
-
-        }
 
 
 

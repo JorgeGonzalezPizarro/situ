@@ -74,13 +74,13 @@
                                         <tbody>
                                         <tr>
                                             <td><strong class="">Nombre Invitado:</strong></td>
-                                            <td>{!! Form::text('first_name', null, ['id'=>'first_name','class' => 'misDatos']) !!}
+                                            <td>{!! Form::text('first_name', null, ['id'=>'first_name','class' => 'misDatos' ,'required'=>'true']) !!}
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong class="">Apellido Invitado:</strong></td>
-                                            <td>{!! Form::text('last_name', null, ['id'=>'last_name','class' => 'misDatos']) !!}
+                                            <td>{!! Form::text('last_name', null, ['id'=>'last_name','class' => 'misDatos' ,'required'=>'true']) !!}
 
                                             </td>
                                         </tr>
@@ -88,7 +88,7 @@
                                             <div class="form-group  {{ $errors->has('email') ? 'has-error' : ''}}">
 
                                             <td><strong class="">Correo Invitado:</strong></td>
-                                            <td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos']) !!}
+                                            <td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos','required'=>'true']) !!}
 
                                             </td>
                                                 {!! $errors->first('email', '<div class="alert alert-danger"><p>
@@ -99,7 +99,7 @@ El correo electronico ya existe</p></div>') !!}
                                         <tr>
                                             <td><strong class="">Password:</strong></td>
                                             <td>
-                                                <input class="field"  name="password" id="password" type="password" >
+                                                <input class="field"  name="password" id="password" type="password" required >
 
                                             </td>
                                         </tr>

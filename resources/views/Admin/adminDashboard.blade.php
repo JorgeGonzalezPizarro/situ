@@ -15,6 +15,8 @@
                     <th>Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Rol</th>
+
                 </tr>
                 </thead>
 

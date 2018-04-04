@@ -283,7 +283,7 @@
     function addInput(){
 
             var newdiv = document.createElement('tr');
-            newdiv.innerHTML =  "<td><strong class=''>Asignatura:</strong></td> <td><br><input type='text' class='misDatos' name='asignatura[]'></td>";
+            newdiv.innerHTML =  "<td><strong class=''>Asignatura:</strong></td> <td><br><input type='text' required class='misDatos' name='asignatura[]'></td>";
             document.getElementById("tbody").appendChild(newdiv);
 
             counter++;
