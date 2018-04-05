@@ -30,23 +30,15 @@
                         {!! Form::text('slug', null, ['class' => 'form-control','placeholder '=>'Slug para la etiqueta']) !!}
                     </div>
                 </div>
-                <label for="color" class="cols-sm-2 control-label">Color</label>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        {!! Form::text('color', null, array('class' => 'form-control color', 'placeholder' => 'Color')) !!}
-                        {!! Form::text('color', null, array('class' => 'form-control color', 'placeholder' => 'Color')) !!}
-                    </div>
-                    {!! $errors->first('color', '<p class="help-block">:message</p>') !!}
-                </div>
+
             </div>
+        <label for="slug" class="cols-sm-2 control-label"></label>
 
 
-                <label for="color" class="cols-sm-2 control-label">Color</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
+                        {!! Form::submit('Confirmar', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
                     </div>
                     {!! $errors->first('color', '<p class="help-block">:message</p>') !!}
                 </div>

@@ -135,8 +135,12 @@ class SituController extends Controller
                     $alumno = $invitado->getAlumno()->get()->first();
 
                     $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get()->all();
+                    if(count($hechosPublicos)>0){
                     $hechosPublicos = $hechosPublicos->getEtiqueta()->with('CV');
+                    }
+                    $categoria=$categoria;
                     $otrosHechosPublicos = $hechosPublicos;
+
 //                    ['categoria_id',$categoria],['id','!=',$hecho->id]])->get()->all();
                 } else {
                     if (Sentinel::inRole('Inv')) {

@@ -117,9 +117,12 @@ El correo electronico ya existe</p></div>') !!}
                                             {{--{!! Form::select($role->Slug, null, ['class' => 'form-control','placeholder '=>'Enter your  name']) !!}--}}
                                                 {{--{!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['class' => 'form-control ]) !!}--}}
 
-                                                {!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['class' => 'form-control','style'=>'width:40%;','data-live-search'=>'true']) !!}
+                                                {!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['id'=>'roles', 'placeholder' => 'Please select a client' ,'class' => 'form-control','style'=>'width:40%;']) !!}
 
                                             </td>
+                                        </tr>
+                                        <tr id="divRoles1">
+
                                         </tr>
                                         <tr>
                                             @if (Session::has('error'))
@@ -167,6 +170,7 @@ El correo electronico ya existe</p></div>') !!}
                         <th>Fecha Registro</th>
                         <th>Último Login</th>
                         <th>Número de Logins </th>
+                        <th>Fecha Límite </th>
 
                     </tr>
                     </thead>
@@ -183,6 +187,8 @@ El correo electronico ya existe</p></div>') !!}
                                 <td>{{$invitado->getUsuario()->get()->first()->created_at }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
                                 <td>{{$invitado->numero_accesos }}</td>
+                                <td>{{$invitado->fecha_limite }}
+                                <td><a href="#myModal2" data-toggle="modal" id="{{$invitado->id}}" data-target="#myModal2">Cambiar me</a>
 
                             </tr>
 
@@ -223,94 +229,180 @@ El correo electronico ya existe</p></div>') !!}
         </div>
     </div>
     </div><!-- /#wrapper -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input name="fechaActualizar" id="fechaActualizar" type='text' class="form-control" />
+                            <span class="input-group-addon">
+
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                        </div>
+                        <div class='input-group date' id='datetimepicker2'>
+                            <button type="submit" id="botonActualizarFecha">Confirmar</button>
+
+                        </div>
+                    </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 @endsection
+@section('scripts')
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+    @endsection
 
 
-{{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
-
-{{--<script type="text/javascript">--}}
-{{--$(function(){--}}
-{{--$('.iframe-btn').fancybox({--}}
-{{--'width'	: 1024,--}}
-{{--'minHeight'	: 600,--}}
-{{--'type'	: 'iframe',--}}
-{{--'autoScale'   : true--}}
-{{--});--}}
-{{--});--}}
-{{--</script>--}}
 <script>
     $(document).ready(function () {
-        // //     $(function(){
-        // //         $('.iframe-btn').fancybox({
-        // //             'width'	: 1024,
-        // //             'minHeight'	: 600,
-        // //             'type'	: 'iframe',
-        // //             'autoScale'   : true
-        // //         });
-        // //     });
-        //
-        // // parent.$.fancybox.close();
-        // $('input[name=imagen]').change(function() {
-        //
-        //
-        //
-        // });
-        // document.getElementById('boton').disabled = true;
-        // $('i').on('click',function () {
-        //     $('#boton').removeClass('btn btn-info disabled');
-        //     $('#boton').addClass('btn btn-success');
-        //     document.getElementById('boton').disabled = false;
-        //
-        //
-        // })
-        //
-        // var tr = $('#clickable');
-        //
-        // $('#clickable').on('click', function () {
-        //
-        //
-        //     $('#first_name').attr('readonly', false).focus().css("background-color", "#bfe1e847");
-        // });
-        // $('#clickable1').on('click', function () {
-        //     $('#last_name').attr('readonly', false).focus().css("background-color", "#bfe1e847");
-        //     ;
-        //
-        //
-        // });
-        //
-        // $('#clickable2').on('click', function () {
-        //
-        //     $('#email').attr('readonly', false).focus().css("background-color", "#bfe1e847");
-        //     ;
-        // });
-        // $('#clickable3').on('click', function () {
-        //
-        //     $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
-        //
-        //     $('#password_confirmation').attr('readonly', false).css("background-color", "#bfe1e847");
-        //
-        // });
-        // $('#clickableFb').on('click', function () {
-        //
-        //     $('#fieldIDfacebook').attr('readonly', false).focus().css("background-color", "#bfe1e847")
-        //
-        //
-        //
-        // });
+
+        $('#roles').on('change',function () {
+
+            var e = document.getElementById("roles");
+            var strUser = e.options[e.selectedIndex].text;
+
+            if(strUser == 'Profesor' )
+            {
+
+                fecha_limite();
+
+                date();
+            }
+        })
+
+
+
+        $('#myModal2').on('shown.bs.modal',function (e) {
+          var id= e.relatedTarget.id;
+            $("#botonActualizarFecha").on('click',function () {
+            var fecha=document.getElementById("fechaActualizar");
+            var fechaActualizar=fecha.value;
+            var mensaje = confirm("¿Confirma cambiar la fecha");
+            if (mensaje) {
+
+
+                $.ajax({
+                    type: "get",
+                    url: "{{ route('actualizarFecha') }}",
+                    data: {
+                        fecha: fechaActualizar,
+                        id : id,
+                    },
+                    success: function (response) {
+                   window.location.reload();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(jqXHR);
+
+                    }
+                });
+            }
+
+
+            else {
+
+            }
+            })
+
+
+        });
+            $('#datetimepicker2').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                format: 'YYYY-MM-DD',
+                minDate: getFormattedDate(new Date())
+            });
+
+
+        });
+        function getFormattedDate(date) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear().toString().slice(2);
+            return day + '-' + month + '-' + year;
+
+
+    }
+
+
+
+
+</script>
+
+<script type="text/javascript">
+    function date() {
+        $(function () {
+            $('#datetimepicker1').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                format: 'YYYY-MM-DD',
+                minDate: getFormattedDate(new Date())
+            });
+
+
+        });
+        function getFormattedDate(date) {
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear().toString().slice(2);
+            return day + '-' + month + '-' + year;
+        } }
+
+
+</script>
+
+<script type="text/javascript">
+    function fecha_limite() {
+        $("#divRoles1").empty();
+
+
+        var html=
+
+            '             <td id="" class="form-group  "><strong>Fecha Límite</strong></td><td class="input-group date" id="datetimepicker1">'
+            +  '<span class="input-group-addon">'
+            +   '<span class="glyphicon glyphicon-calendar"></span>'
+            +    ' </span>'
+
+            +  ' <input type="text"  name="fecha_limite" required /></td>'
+
+     +   ' </td> '  ;
+
+
+        $("#divRoles1").append(html);
 
 
 
 
 
 
-
-    });
-
-
-
-
+    }
 </script>
 <script>function responsive_filemanager_callback(field_id){
         console.log(field_id);

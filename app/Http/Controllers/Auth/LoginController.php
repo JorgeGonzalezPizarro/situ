@@ -107,26 +107,39 @@ class LoginController extends Controller
 
             }
                 if (Sentinel::check() && Sentinel::inRole('Prof')) {
-                    $invitado=Invitados::where('invitado_id',Sentinel::getUser()->id)->get()->first();
-                    $invitado->numero_accesos=($invitado->numero_accesos)+1;
-                    $invitado->update();
-                    return redirect('Situ/public')->withUser($user);
+                    $usuario =Sentinel::getUser();
+                    $usuario=Invitados::where('invitado_id',$usuario->id)->get()->first();
+                    if(($usuario->fecha_limite)<(Carbon::now()) ) {
+                        return view('auth.loginInv')->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
+                    }
+                           else {
+
+                        $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
+                        $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
+                        $invitado->update();
+                        return redirect('Situ/public')->withUser($user);
+                    }
                 }
                 if (Sentinel::check() && Sentinel::inRole('Inv')) {
+                    $usuario =Sentinel::getUser();
+                    $usuario=Invitados::where('invitado_id',$usuario->id)->get()->first();
+                    if(($usuario->fecha_limite)<(Carbon::now()) ){
+                        return view('auth.loginInv')->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
+                    }else {
+                        $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
+                        $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
+                        $alumno = $invitado->getAlumno()->get()->first();
 
-                    $invitado=Invitados::where('invitado_id',Sentinel::getUser()->id)->get()->first();
-                    $invitado->numero_accesos=($invitado->numero_accesos)+1;
-                    $alumno=$invitado->getAlumno()->get()->first();
-
-                    $invitado->update();
-                    $logAccesos=new logAccesos();
-                    $logAccesos->invitado_id=$invitado->id;
-                    $logAccesos->alumno_id=$alumno->id;
-                    $logAccesos->rol=$invitado->rol;
-                    $logAccesos->hechos_id=null;
-                    $logAccesos->numero_accesos=0;
-                    $logAccesos->save();
-                    return redirect('Situ/public')->withUser($user);
+                        $invitado->update();
+                        $logAccesos = new logAccesos();
+                        $logAccesos->invitado_id = $invitado->id;
+                        $logAccesos->alumno_id = $alumno->id;
+                        $logAccesos->rol = $invitado->rol;
+                        $logAccesos->hechos_id = null;
+                        $logAccesos->numero_accesos = 0;
+                        $logAccesos->save();
+                        return redirect('Situ/public')->withUser($user);
+                    }
 
                 }
             }

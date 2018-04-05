@@ -485,21 +485,7 @@ class AlumnoController extends Controller
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
 
         $grado = $usuario->getDatosAcademicos()->where([['curso',$curso],['grado', $grado]])->get()->first();
-        //        return "aa";
-//        $curso1 = $usuario->getDatosAcademicos()->where('grado', $curso)->get()->all();
-//        $curso1=CursoAlumno::where([['user_id',$usuario->id],['grado',$grado]])->get()->all();
-//        return $curso1;
 
-//        if (!empty($curso1)) {
-//
-//            foreach ($curso1 as $curs) {
-//                $cursoArray[$curs['curso']] = $curs['curso'];
-//            }
-//        }
-//        else{
-//            $cursoArray=array();
-//        }
-//        return $cursoArray;
         return response(($grado->asignaturas));
 
 
@@ -521,8 +507,6 @@ class AlumnoController extends Controller
 
 
         }
-
-
 
         return ($cursoArray);
 
@@ -630,7 +614,7 @@ class AlumnoController extends Controller
         $invitado2->alumno_id = $usuario->id;
         $invitado2->nivel_acceso = $invitado->nivel_acceso;
        $invitado2->rol=$invitado->roles()->get()->first()->name;
-
+        $invitado2->fecha_limite=Carbon::parse(Input::get('fecha_limite'));
         $invitado2->save();
 
         if ($invitado) {
@@ -813,6 +797,17 @@ class AlumnoController extends Controller
        return response($hecho);
     }
 
+    public function actualizarFecha(Request $request)
+    {
+        $user = Sentinel::getUser();
+        $invitado = Invitados::where('id', $request->id)->first();
+//        return response($hecho->nivel_acceso);
+       $invitado->fecha_limite=Carbon::parse($request->fecha);
+
+
+        $invitado->update();
+        return response($invitado);
+    }
 
 
 

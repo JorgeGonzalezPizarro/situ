@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Invitados;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Sentinel;
@@ -33,10 +35,18 @@ class SentinelAuth
                 return redirect('Alumno\alumnoDashboard');
             }
         elseif  (Sentinel::check() && Sentinel::inRole('Inv')) {
-            return redirect('Situ\public');
+
+
+
+                return redirect('Situ\public');
+
+
         }
         elseif  (Sentinel::check() && Sentinel::inRole('Prof')) {
-            return redirect('Situ\public');
+
+                return redirect('Situ\public');
+
+
         }
                 return $next($request);
     }

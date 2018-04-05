@@ -49,6 +49,7 @@ Route::post('Admin/crearEtiqueta','AdminController@crearNuevaEtiqueta')->name('g
 /*ALUMNO*/
 Route::get('/Alumno/alumnoDashboard','AlumnoController@getDashboard')->name('alumnoDashboard');
 Route::post('/Alumno/alumnoDashboard','AlumnoController@actualizaAcceso')->name('actualizaAcceso');
+Route::get('/Alumno/invitar1/','AlumnoController@actualizarFecha')->name('actualizarFecha');
 
 Route::get('Alumno/crear', array('as' => 'crear', 'uses' => 'HechoController@crear'));
 Route::get('/Alumno/hecho/singleHecho/','AlumnoController@getHechoUsuario')->name('showHecho');

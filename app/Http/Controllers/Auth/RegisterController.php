@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Redirect;
 use Sentinel;
 use Session;
+use Carbon;
 use Activation;
 use Mail;
 use Illuminate\Support\Facades\Crypt;
@@ -98,6 +99,13 @@ class RegisterController extends Controller
 
         if($role=="2"){
           $user->nivel_acceso='1';
+            $cursoAlumno=new CursoAlumno();
+            $cursoAlumno->user_id=$user->id;
+            $cursoAlumno->curso=1;
+            $cursoAlumno->grado=null;
+            $cursoAlumno->asignaturas="";
+
+            $cursoAlumno->save();
         }
         if($role=='4'){
             $user->nivel_acceso='2';
@@ -111,18 +119,19 @@ class RegisterController extends Controller
             $invitado->nivel_acceso=3;
             $invitado->rol="Profesor";
             $invitado->numero_accesos=null;
+//            $format = 'dd/mm/YY HH:mm:ss';
+//            $invitado->fecha_limite = Carbon\Carbon::createFromFormat('d-m-Y h:i', Input::get('fecha_limite'));
+//
+            $invitado->fecha_limite=Carbon::parse(Input::get('fecha_limite'));
+//           =Input::get('fecha_limite');
+
             $invitado->save();
             $user->nivel_acceso='3';
+
         }
 
         $user->save();
-        $cursoAlumno=new CursoAlumno();
-        $cursoAlumno->user_id=$user->id;
-        $cursoAlumno->curso=1;
-        $cursoAlumno->grado=null;
-        $cursoAlumno->asignaturas="";
 
-        $cursoAlumno->save();
 
 
 
