@@ -261,7 +261,7 @@ El correo electronico ya existe</p></div>') !!}
 
         </div>
     </div>
-
+    </div>
 @endsection
 @section('scripts')
 

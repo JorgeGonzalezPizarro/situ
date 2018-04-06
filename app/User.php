@@ -98,7 +98,10 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
         return $this->hasMany('App\Etiqueta','user_id', 'id');
 
     }
+    public function invitado(){
+        return $this->hasOne('App\Invitados','invitado_id', 'id');
 
+    }
 
     //Change Password
     public function getRememberToken()

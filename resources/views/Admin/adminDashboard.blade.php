@@ -16,6 +16,7 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Rol</th>
+                    <th>Fecha Límite</th>
 
                 </tr>
                 </thead>
@@ -26,11 +27,20 @@
 
                     @foreach ($users as $user)
                         <tr id="" style="cursor: pointer">
-                            <td>{{$user->first_name}}</td>
-                            <td>{{$user->last_name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->roles()->first()->slug }}</td>
+                            <td id="user">{{$user->first_name}}</td>
+                            <td id="user">{{$user->last_name}}</td>
+                            <td id="user" >{{$user->email}}</td>
+                            <td id="user" >{{$user->roles()->first()->slug }}</td>
 
+                            @if(($user->roles()->first()->slug=='Prof')|| ($user->roles()->first()->slug=='Inv'))
+                                <td id="prof">
+                           <span  class="prof"> {{$user->invitado()->get()->first()->fecha_limite }}</span>
+
+                             <br>  <a href="#myModal2" data-toggle="modal" id="{{$user->invitado()->get()->first()->id }}" data-target="#myModal2">Cambiar Fecha </a></td>
+
+                                @else
+                                <td>  {{"Indefinido"}}</td>
+                                @endif
                         </tr>
                     @endforeach
 
@@ -41,13 +51,66 @@
 
 
     </div>
+    <div class="modal fade" id="myModal2" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <input name="fechaActualizar" id="fechaActualizar" type='text' class="form-control" />
+                            <span class="input-group-addon">
+
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                        </div>
+                        <div class='input-group date' id='datetimepicker2'>
+                            <button type="submit" id="botonActualizarFecha">Confirmar</button>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 @endsection
-
+@section('scripts')
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+@endsection
 <script>
     $(document).ready(function() {
-        var url = "/Admin";
+        var myNodelist  =   document.getElementsByClassName("prof");
 
+        var date= new Date();
+        var array = $.map(myNodelist, function(value, index) {
+            return [value];
+        });
+        var fechas;
+        array.forEach(function (element){
+                if(Date.parse(element.textContent) < date){
+                    element.style.color="red";
+                }else {
+
+                }
+
+        });
+        console.log(  array);// Finds the closest row <tr>
+    // Gets a descendent with class="nr"
+
+
+
+        var url = "/Admin";
         var tr = $('#clickable');
         var table=$('#usuarios').DataTable({
                 "scrollX": false,
@@ -72,10 +135,67 @@
 
         );
 
+        $('#myModal2').on('shown.bs.modal',function (e) {
+            var id= e.relatedTarget.id;
+            $("#botonActualizarFecha").on('click',function () {
+                var fecha=document.getElementById("fechaActualizar");
+                var fechaActualizar=fecha.value;
+                var mensaje = confirm("¿Confirma cambiar la fecha");
+                if (mensaje) {
+
+
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('actualizarFechaAdmin') }}",
+                        data: {
+                            fecha: fechaActualizar,
+                            id : id,
+                        },
+                        success: function (response) {
+                            // console.log(response);
+
+                          window.location.reload();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                            console.log(jqXHR);
+
+                        }
+                    });
+                }
+
+
+                else {
+
+                }
+            })
+
+
+        });
+        $("#datetimepicker2").datepicker({
+
+            onSelect: function(date) {
+                document.getElementById("endDate").disabled = false;
 
 
 
-        $('#clickable').on('click','tr', function () {
+            }
+
+        });
+
+
+
+    function getFormattedDate(date) {
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear().toString().slice(2);
+        return day + '-' + month + '-' + year;
+
+
+    }
+
+
+
+        $('#clickable').on('click','tr td#user', function () {
 
             var data = table
                 .rows()
@@ -112,5 +232,10 @@
 
         } );
     } );
+
+
+
+
+
 </script>
     <!-- Scripts -->

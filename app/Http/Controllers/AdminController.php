@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Etiqueta;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\User;
+use App\Invitados;
+use Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -178,6 +180,21 @@ class AdminController extends Controller
 
         return Redirect::to('Admin/adminDashboard');
     }
+
+    public function actualizarFecha(Request $request)
+    {
+        $invitado = Invitados::where('id', $request->id)->first();
+//        return response($hecho->nivel_acceso);
+        $invitado->fecha_limite=Carbon::parse($request->fecha);
+
+
+        $invitado->update();
+        return response($invitado);
+    }
+
+
+
+
 
     public function create()
     {

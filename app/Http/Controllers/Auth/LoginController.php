@@ -143,18 +143,18 @@ class LoginController extends Controller
 
                 }
             }
-            return Redirect::back()->withErrors(['global' => 'Invalid password or this user does not exist' ]);
+            return Redirect::back()->withErrors(['global' => 'Los datos de acceso no son correctos.' ]);
 
         } catch (NotActivatedException $e) {
-            return Redirect::back()->withErrors(['global' => 'This user is not activated','activate_contact'=>1]);
+            return Redirect::back()->withErrors(['global' => 'El usuario no esta activado','activate_contact'=>1]);
 
         }
         catch (ThrottlingException $e) {
             $delay = $e->getDelay();
-            return Redirect::back()->withErrors(['global' => 'You are temporary susspended' .' '. $delay .' seconds','activate_contact'=>1]);
+            return Redirect::back()->withErrors(['global' => 'Tu cuenta está desactivada ' .' '. $delay .' segundos ','activate_contact'=>1]);
         }
 
-        return Redirect::back()->withErrors(['global' => 'Login problem please contact the administrator']);
+        return Redirect::back()->withErrors(['global' => 'Error al loguear , por favor contacte con el administrador']);
 
         
     }
