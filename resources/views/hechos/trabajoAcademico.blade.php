@@ -39,7 +39,7 @@
                     <div class="panel-body">
 
 
-                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
+                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'curso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
 
                         <div class="form-inline" >
 
@@ -56,7 +56,7 @@
                             {!! Form::select('grado', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputGrado' ,'data-live-search'=>'true','value'=>$grado,'name' => 'grado']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="curso" name="curso" ></select>--}}
 
-                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','name' => 'curso']) !!}
+                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'required'=>'true','data-live-search'=>'true','name' => 'curso']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>--}}
 
                             <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>

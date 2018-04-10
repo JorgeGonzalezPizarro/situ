@@ -46,6 +46,7 @@ class AdminController extends Controller
 
 
 
+
     public function getNuevoUsuario(){
 
         $roles=Role::where('Slug','<>','Inv')->pluck('slug','id');
@@ -109,11 +110,10 @@ class AdminController extends Controller
         Session::flash('status', 'error');
         return Redirect::back();
 }
-    /**
-     * Show the form for creating a new user.
-     *
-     * @return Response
-     */
+
+
+/* Ver el usuario - invitado o profesor , @return View*/
+
 
     public function verUsuario($usuario)
     {
@@ -180,6 +180,11 @@ class AdminController extends Controller
 
         return Redirect::to('Admin/adminDashboard');
     }
+
+
+
+    /*Actualizar la fecha limite de acceso */
+
 
     public function actualizarFecha(Request $request)
     {

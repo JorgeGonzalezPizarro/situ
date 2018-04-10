@@ -15,20 +15,24 @@
 
     <div class="container target">
         <div class="row">
-            {{ Form::open(array('route' => 'actualizarDatos', 'class' => 'form-style-8','files' => true)) }}
 
 
-            <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
-                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-                    <i id=" " class="fa fa-pencil"></i></a>
-            </div>
+            {{--<div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">--}}
+                    {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
+                    {{--<i id=" " class="fa fa-pencil"></i></a>--}}
+            {{--</div>--}}
         </div>
 
 
 
 
         <div class="row">
-            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+            {{ Form::open(array('route' => 'actualizarDatos', 'class' => 'form-style-8','files' => true)) }}
+
+            <div class="col-sm-12">
+
+                <nav class="navbar navbar-light" style="margin-left: 15px; margin-right: 15px;background-color: #e3f2fd;">
+
                 <div class="collapse navbar-collapse" id="navbarColor03">
                     <ul class="nav navbar-nav ">
                         <li class="nav-item active">
@@ -48,6 +52,7 @@
 
                 </div>
             </nav>
+
             <div class="col-sm-3">
                 <!--left col-->
                 <ul class="list-group">
@@ -91,14 +96,7 @@
                 </div>
 
 
-                <div class="panel panel-default">
-                    <div class="panel-heading">Social Media</div>
-                    <div class="panel-body"><i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i>
-                        <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i
-                                class="fa fa-google-plus fa-2x"></i>
 
-                    </div>
-                </div>
             </div>
 
             <div class="col-sm-6" style="" contenteditable="false">
@@ -202,7 +200,16 @@
             <div class="col-sm-3">
                 <!--left col-->
 
+                <ul class="list-group">
+                    <li class="list-group-item " style="height: auto;">Imagen <i class="fa fa-image fa-1x"></i>
+                        <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
+                            <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" style="    width: 200px;
+    height: 200px;" class="img-circle img-responsive" name="imagen">
+                            <i id=" " class="fa fa-pencil"></i></a>
+                    </li>
 
+
+                </ul>
 
                 <ul class="list-group">
                     <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>
@@ -217,9 +224,7 @@
                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                     class="">Profesores Invitados</strong></span> {!! count($profesores) !!}
                     </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Followers</strong></span> 78
-                    </li>
+
                 </ul>
                 <ul class="list-group">
                     <li class="list-group-item text-muted"> Etiquetas <i class="fa fa-dashboard fa-1x"></i>
@@ -263,17 +268,15 @@
     </div>
 
     <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+        <div class="modal-dialog" style="background: transparent;">
 
             <!-- Modal content-->
-            <div class="modal-content">
+            <div class="modal-content" style="background: transparent;">
 
                 <div class="modal-body">
-                    <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
+                    <iframe width="550" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+
             </div>
 
         </div>

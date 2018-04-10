@@ -49,7 +49,14 @@ class HechoController extends Controller
                 $hecho->categoria_id = Input::get('categoria_id');
                 $hecho->curso = Input::get('curso');
                 $hecho->contenido = Input::get('contenido');
-                $hecho->proposito = Input::get('proposito');
+
+                if(empty( Input::get('contenido'))) {
+                $hecho->contenido=Sentinel::getUser()->first_name. " ha añadido  <br> : ".Input::get('titulo_hecho')."";
+                 
+
+                }
+
+                    $hecho->proposito = Input::get('proposito');
                 $hecho->evidencia = Input::get('evidencia');
                 if(Input::get('etiqueta')) {
                     foreach (Input::get('etiqueta') as $etiquet) {

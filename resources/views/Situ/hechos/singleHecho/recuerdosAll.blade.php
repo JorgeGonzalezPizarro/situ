@@ -9,21 +9,20 @@
 
 
             <div class="col-lg-12">
-                <h1 class="mt-4" style="padding-left: 15px"> Recuerdos de  @if(Sentinel::inRole('Inv') ||Sentinel::inRole( 'Prof')) de {{$alumno->first_name }}
-                    <?php
-                    $img=json_decode($alumno->otros_datos,true)
-                    ?>
-                    @else {{$user->first_name }}
-                        <?php
-                        $img=json_decode($user->otros_datos,true)
-                        ?>
-                        <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
-                                <img  id="myimage" title="profile image" src="{!!$img['img'] !!}" class="img-circle img-responsive" name="imagen"></a>
-                        </div>
+                <h1 class="mt-4" style="padding-left: 15px"> Recuerdos   @if(Sentinel::inRole('Inv') ||Sentinel::inRole( 'Prof')) de {{$alumno->first_name }}
+                    {{--<?php--}}
+                    {{--$img=json_decode($alumno->otros_datos,true)--}}
+                    {{--?>--}}
+                    {{--@else--}}
+                        {{--<?php--}}
+                        {{--$img=json_decode($user->otros_datos,true)--}}
+                        {{--?>--}}
+                        {{--<div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">--}}
+                                {{--<img  id="myimage" title="profile image" src="{!!$img['img'] !!}" class="img-circle img-responsive" name="imagen"></a>--}}
+                        {{--</div>--}}
                     @endif </h1>
                 <hr><hr>
-                <hr><hr>
-                <hr><hr>
+
 
             </div>
 

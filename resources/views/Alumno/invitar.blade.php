@@ -17,9 +17,9 @@
             {{ Form::open(array('route' => 'invitar', 'class' => 'form-style-8','files' => true)) }}
 
 
-            <div class="col-sm-2" style="float: right;">
-                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-            </div>
+            {{--<div class="col-sm-2" style="float: right;">--}}
+                    {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
+            {{--</div>--}}
         </div>
 
 

@@ -26,7 +26,7 @@
             </div>
             <div class="row" style="padding-top: 60px;">
 
-            <div class="col-lg-8" id="contenedor" >
+            <div class="col-lg-10" id="contenedor" >
                 <div class="dropdown" style="float: right ">
 
                 <input type="hidden" name="etiq" id="etiq" value="">
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="timeline-body">
                                             <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion {{$hecho->created_at}}</small></span>
-                                           <span class="pull-right"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha de inicio{{$hecho->fecha_inicio}}</small></span>
+                                           <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i> Fecha de inicio {{$hecho->fecha_inicio}}</span></span>
 
                                             <span class="pull-left" style=" width: -webkit-fill-available;
     word-wrap: break-word;">   {!!  str_limit($hecho->contenido,100,'...' )!!}</span>
@@ -81,31 +81,38 @@
 
         @endforeach
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-2">
 
 
 
-            <div class="card my-4">
-                <h5 class="card-header">Etiquetas</h5>
-                <div class="card-body">
+            <div class="card my-2">
+                <div class="panel panel-default" style="margin:0px">
+                    <div class="panel-body" style="padding: 10px;">
+                       Etiquetas
+                    </div>
+                </div>                <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12" style="text-align: center">
                             <ul class="list-unstyled mb-0">
                                 @foreach ($etiquetas as $etiq)
-                                <li>
-                                    <span style="    width: 100%;
-    max-width: 100px;
+                                <li style="padding: 5px">
+                                    <span style="          width: 100%;
     min-width: 100px;
-    line-height: 40px;font-size: 14px;
-    padding: 5px;" class="label label-info">   <a href="#" onclick="etiquetas(this.text)" id="etiqueta[]">{{$etiq->nombre}}</a></span>
+    line-height: 18px;
+    font-size: 18px;
+    min-height: 30px;
+    background: #5BC0DE;
+    padding: 5px;" class="badge badge-default">   <a href="#" style=" font-weight: 200;   color: #f1f1f1;" onclick="etiquetas(this.text)" id="etiqueta[]">{{$etiq->nombre}}</a></span>
                                 </li>
                                 @endforeach
-                                    <li>
-                                    <span style="    width: 100%;
-    max-width: 100px;
+                                    <li style="padding: 5px">
+                                     <span style="          width: 100%;
     min-width: 100px;
-    line-height: 40px;font-size: 14px;
-    padding: 5px;" class="label label-info">   <a href="#" onclick="etiquetas('')" id="etiqueta[]">TODAS</a></span>
+    line-height: 18px;
+    font-size: 18px;
+    min-height: 30px;
+    background: #5BC0DE;
+    padding: 5px;" class="badge badge-default"> <a href="#" style=" font-weight: 200;   color: #f1f1f1;"  onclick="etiquetas('')" id="etiqueta[]">TODAS</a></span>
                                     </li>
                             </ul>
                         </div>
@@ -113,27 +120,37 @@
                     </div>
                 </div>
             </div>
+                <div class="clearfix"></div>
+                <hr>
                 <div class="card my-4">
-                    <h5 class="card-header">Categorias</h5>
-                    <div class="card-body">
+                    <div class="panel panel-default" style="margin:0px">
+                        <div class="panel-body" style="padding: 10px;">
+                            Categorias
+                        </div>
+                    </div>
+                        <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <ul class="list-unstyled mb-0">
                                     @foreach ($categorias as $categ)
-                                        <li>
-                                    <span style="    width: 100%;
-    max-width: 100px;
+                                        <li style="padding: 5px">
+                                    <span style="          width: 100%;
     min-width: 100px;
-    line-height: 40px;font-size: 14px;
-    padding: 5px;" class="label label-info">   <a href="#" onclick="categorias(this.id)" value="{{$categ->id}}" id="{{$categ->id}}">{{$categ->categoria}}</a></span>
+    line-height: 18px;
+    font-size: 18px;
+    min-height: 30px;
+    background: #5BC0DE;
+    padding: 5px;" class="badge badge-default">   <a href="#"  style=" font-weight: 200;   color: #f1f1f1;" onclick="categorias(this.id)" value="{{$categ->id}}" id="{{$categ->id}}">{{$categ->categoria}}</a></span>
                                         </li>
                                     @endforeach
-                                    <li>
-                                    <span style="    width: 100%;
-    max-width: 100px;
+                                        <li style="padding: 5px">
+                                    <span style="          width: 100%;
     min-width: 100px;
-    line-height: 40px;font-size: 14px;
-    padding: 5px;" class="label label-info">   <a href="#" onclick="etiquetas('')" id="etiqueta[]">TODAS</a></span>
+    line-height: 18px;
+    font-size: 18px;
+    min-height: 30px;
+    background: #5BC0DE;
+    padding: 5px;" class="badge badge-default">     <a href="#"  style=" font-weight: 200;   color: #f1f1f1;"  onclick="etiquetas('')" id="etiqueta[]">TODAS</a></span>
                                     </li>
                                 </ul>
                             </div>
@@ -171,7 +188,6 @@
         } else {
             input = "";
         }
-        alert(orden);
 
         // var x = document.getElementById("cursoSelect").selectedIndex;
 
@@ -186,7 +202,7 @@
                 },
                 success: function (response) {
                     console.log(response[0].length);
-
+                    console.log();
                     if (response[0].length == 0) {
 
                         var html2 = '<div class="alert alert-info" role="alert">' +
@@ -239,19 +255,17 @@
                                 '</ul>' +
 
                                 '</div>');
-
                             $("#contenedor").empty();
 
 
                         });
                         html.forEach(function (element) {
-                            console.log(element['id']);
 
                             $("#contenedor").append(element);
 
 
                         });
-                        console.log(response[0].length);
+
 
                     }
 

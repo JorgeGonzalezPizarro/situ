@@ -86,12 +86,20 @@
 
     <style>
         body {
-            background: #f1f1f1;
+            background: #FAFAFA;
             color: #444;
             font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
             font-size: 13px;
             line-height: 1.4em;
             min-width: 600px;
+        }
+        .navbar-inverse .navbar-nav > li > a {
+            color: #ffffff;
+            font-size: 16px;
+        }
+        .navbar-inverse {
+            background-color: #003865;
+            border-color: #ffffff;
         }
         .img-circle {
             border-radius: 50%;
@@ -149,12 +157,29 @@
             display: block;
         }
         .navbar{
-            min-height: 60px;
+            /*min-height: 60px;*/
+        }
+        #nav2 li {
+            border-bottom: 1px solid white;
+        }
+        #nav2 li a{
+            padding-bottom: 20px;
+            border-bottom: 1px solid white;
         }
         .navbar-nav.navbar-center {
             position: absolute;
             left: 50%;
             transform: translatex(-50%);
+        }
+        .timeline > li > .timeline-panel {
+            width: 90%;
+            float: left;
+            border: 1px solid #999999;
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
         }
         @media (max-width: 1200px) {
             .navbar-header{
@@ -281,11 +306,11 @@
 
 
 
-                            <li class="dropdown">
+                            <li class="dropdown" style="padding: 10px;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevo <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     @foreach($categorias as $categoria)
-                                        <li class="">
+                                        <li class=""    style="padding: 10px;">
                                             <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
                                         </li>
                                     @endforeach
@@ -325,9 +350,11 @@
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                     <ul class="nav navbar-nav navbar-left">
-                        <a class="navbar-brand" href="#">
-                            <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
+                        <li class="nav-item">
+
+                        <a class="navbar-brand"  style="padding:0px;" href="#"><img height="50px" width="50px" src="http://alumni.practicasyempleoufv.es/estudiantes/img/logo.png">
                         </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('Situ\public')}}">Plataforma de Trayectoria Universitaria</a>
                         </li>
@@ -488,6 +515,9 @@
                     </li>
                     <li class="">
                         <a href="{!! route('recuerdosAll')!!}"><i class="fa fa-fw fa-dashboard"></i>Recuerdos</a>
+                    </li>
+                    <li class="">
+                        <a href="{!! route('proyectosInvestigacionAll')!!}"><i class="fa fa-fw fa-dashboard"></i>Proyectos</a>
                     </li>
                     {{--@endforeach--}}
 

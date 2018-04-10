@@ -14,7 +14,11 @@
     input[type=checkbox]{
         height: 10px !important;
     }
-
+    .panel-footer {
+        padding: 10px 15px;
+        background-color: transparent  !important;
+        border-top: 0px !important;
+    }
 </style>
 @section('content')
 
@@ -22,18 +26,21 @@
         <div class="row">
 
 
-            <div class="col-sm-2" style="float: right;">
-                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-            </div>
+            {{--<div class="col-sm-2" style="float: right;">--}}
+                    {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
+            {{--</div>--}}
         </div>
 
 
 
 
-        <div class="row">
-            {{ Form::open(array('route' => 'actualizarDatosLaboral', 'class' => 'form-style-8','files' => true,'id'=>'formulario')) }}
 
-            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="row">
+            <div class="col-sm-12">
+                {{ Form::open(array('route' => 'actualizarDatosLaboral', 'class' => 'form-style-8','files' => true,'id'=>'formulario')) }}
+
+                <nav class="navbar navbar-light" style="margin-left: 15px; margin-right: 15px;background-color: #e3f2fd;">
+
                 <div class="collapse navbar-collapse" id="navbarColor03">
                     <ul class="nav navbar-nav ">
                         <li class="nav-item active">
@@ -54,7 +61,7 @@
                 </div>
             </nav>
 
-
+            </div>
 
 
             <div class="col-sm-12" style="" contenteditable="false">
@@ -347,17 +354,6 @@
                                             {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
                                             </td>
                                         </tr>                                        {{--</tr>--}}
-                                {{--<div class='col-md-5'>--}}
-                                    {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
-
-                                    {{--<div class="input-group">--}}
-                                        {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
-                                        {{--<div class="form-group">--}}
-
-
-                                        {{--</div>--}}
-
-                                    {{--</div>--}}
 
 
 
@@ -366,7 +362,6 @@
                                     </table>
                                     <div class='col-md-5' style="    margin-top: 10px;
                                       margin-left: 240px;">
-                                        {{--<input type="button" value="Add another text input" onClick="addInput();">--}}
 
                                         {!! csrf_field() !!}
 
@@ -384,50 +379,52 @@
 
 
                 </div>
-                <div class="panel-footer">
-                    <table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">
-                        @if(isset($laboral))
-                            <thead>
-                            <tr>
-                                <th>Empresa</th>
-                                <th>Cargo</th>
-                                <th>Fecha Inicio</th>
-                                <th>Fecha Fin</th>
 
-                            </tr>
-                            </thead>
-
-                            <tbody id="clickable">
-
-                            @if(!empty($laboral))
-                                {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
-                                @foreach ($laboral as $labor)
-                                    <tr>
-                                        <td>{{$labor->empresa}}</td>
-                                        <td id="asignatura">{!!  $labor->cargo !!}</td>
-                                        <td id="fechainicio">{!!  $labor->fecha_inicio !!}</td>
-                                        @if($labor->actual=="1")
-                                        <td id="fechafin">  Actualidad </td>
-                                        @else
-                                            <td id="fechafin">{!!  $labor->fecha_fin !!}</td>
-                                        @endif
-                                            {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
-                                                                 {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
-                                    </tr>
-
-                                @endforeach
-                            @endif
-                            @endif
-                            </tbody>
-
-                    </table>
-
-
-                </div>
             </div>
+
         </div>
+        <div class="col-sm-12">
+        <div class="panel-footer">
+            <table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">
+                @if(isset($laboral))
+                    <thead>
+                    <tr>
+                        <th>Empresa</th>
+                        <th>Cargo</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody id="clickable">
+
+                    @if(!empty($laboral))
+                        {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
+                        @foreach ($laboral as $labor)
+                            <tr>
+                                <td>{{$labor->empresa}}</td>
+                                <td id="asignatura">{!!  $labor->cargo !!}</td>
+                                <td id="fechainicio">{!!  $labor->fecha_inicio !!}</td>
+                                @if($labor->actual=="1")
+                                    <td id="fechafin">  Actualidad </td>
+                                @else
+                                    <td id="fechafin">{!!  $labor->fecha_fin !!}</td>
+                                @endif
+                                {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
+                                {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
+                            </tr>
+
+                        @endforeach
+                    @endif
+                    @endif
+                    </tbody>
+
+            </table>
 
 
+        </div>
+        </div>
 
         <div class="col-sm-12" style="" contenteditable="false">
 
@@ -638,98 +635,60 @@
                 </div>
                 {{ Form::close() }}
 
-                {{--<div class="panel-footer">--}}
-                {{--<table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">--}}
-                {{--@if(isset($curso))--}}
-                {{--<thead>--}}
-                {{--<tr>--}}
-                {{--<th>Curso</th>--}}
-                {{--<th>Asignatura</th>--}}
-                {{--<th>Seleccionar</th>--}}
-                {{--</tr>--}}
-                {{--</thead>--}}
 
-                {{--<tbody id="clickable">--}}
-                {{--<div class="form-group">--}}
-                {{--{!! Form::label('text', 'Curso Académico') !!}--}}
-                {{--{{ Form::select('', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], $year,--}}
-                {{--['aria-controls'=>'asignaturas','class' => 'form-control input-sm','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}--}}
+    </div>
+            <hr>
+            <div class="col-sm-12">
 
-                {{--</div>--}}
+            <div class="panel-footer">
+                <table id="formacion"  class="mdl-data-table" cellspacing="0" width="100%">
+                    @if(isset($formacion))
+                        <thead>
+                        <tr>
+                            <th>Centro</th>
+                            <th>Ubicacion</th>
+                            <th>Titulacion- Disciplina Académica</th>
+                            <th>Descripcion</th>
 
-                {{--@if(!empty($curso->asignaturas))--}}
-                {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
-                {{--@foreach (json_decode($asignaturas,true) as $asignatura)--}}
-                {{--<tr>--}}
-                {{--<td>{{$curso->curso}}</td>--}}
-                {{--<td id="asignatura">{!!  print_r($asignatura)[0] !!}</td>--}}
-                {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
-                {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
-                {{--</tr>--}}
+                            <th>Fecha Inicio  </th>
+                            <th>Fecha Finalizacion</th>
 
-                {{--@endforeach--}}
-                {{--@endif--}}
-                {{--@endif--}}
-                {{--</tbody>--}}
+                        </tr>
+                        </thead>
 
-                {{--</table>--}}
+                        <tbody id="clickable">
 
-
-                {{--</div>--}}
-                <div class="panel-footer">
-                    <table id="formacion"  class="mdl-data-table" cellspacing="0" width="100%">
-                        @if(isset($formacion))
-                            <thead>
-                            <tr>
-                                <th>Centro</th>
-                                <th>Ubicacion</th>
-                                <th>Titulacion</th>
-                                <th>Disciplina Academica</th>
-                                <th>Descripcion</th>
-
-                                <th>Fecha Inicio  </th>
-                                <th>Fecha Finalizacion</th>
-
-                            </tr>
-                            </thead>
-
-                            <tbody id="clickable">
-
-                            @if(!empty($formacion))
-                                {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
-                                @foreach ($formacion as $form)
-                                    <tr>
-                                        <td>{{$form->centro}}</td>
-                                        <td id="asignatura">{!!  $form->ubicacion !!}</td>
-                                        <td id="fechainicio">{!!  $form->titulacion !!}</td>
-                                        <td id="disciplina">{!!  $form->disciplina_academica !!}</td>
-                                        <td id="descripcion">{!!  $form->descripcion !!}</td>
-                                        <td id="fecha_inicio">{!!  $form->fecha_inicio !!}</td>
+                        @if(!empty($formacion))
+                            {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
+                            @foreach ($formacion as $form)
+                                <tr>
+                                    <td>{{$form->centro}}</td>
+                                    <td id="asignatura">{!!  $form->ubicacion !!}</td>
+                                    <td id="fechainicio">{!!  $form->titulacion."<br> ".$form->disciplina_academica !!}</td>
+                                    <td id="descripcion">{!! str_limit( $form->descripcion , 100 )!!}</td>
+                                    <td id="fecha_inicio">{!!  $form->fecha_inicio !!}</td>
 
                                     @if($form->actual=="1")
-                                            <td id="fechafin">  Actualidad </td>
-                                        @else
-                                            <td id="fechafin">{!!  $form->fecha_fin !!}</td>
-                                        @endif
-                                        {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
-                                        {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
-                                    </tr>
+                                        <td id="fechafin">  Actualidad </td>
+                                    @else
+                                        <td id="fechafin">{!!  $form->fecha_fin !!}</td>
+                                    @endif
+                                    {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
+                                    {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
+                                </tr>
 
-                                @endforeach
-                            @endif
-                            @endif
-                            </tbody>
+                            @endforeach
+                        @endif
+                        @endif
+                        </tbody>
 
-                    </table>
+                </table>
 
 
-                </div>
             </div>
         </div>
-        <div id="push"></div>
     </div>
-
-
+    </div>
 
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">

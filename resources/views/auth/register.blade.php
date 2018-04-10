@@ -5,7 +5,7 @@
         <div class="wrapper">
             <div class="panel-heading">
                 <div class="panel-title text-center">
-                    <h1 class="title">Register</h1>
+                    <h1 class="title">Registrar</h1>
                     <hr />
                 </div>
             </div>

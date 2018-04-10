@@ -16,10 +16,11 @@
                                                                                        <?php
                                                                                        $img=json_decode($user->otros_datos,true)
                          ?>
-                       <div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
-                               <img  id="myimage" title="profile image" src="{!!$img['img'] !!}" class="img-circle img-responsive" name="imagen"></a>
-                        </div>
+                       {{--<div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">--}}
+                               {{--<img  id="myimage" title="profile image" src="{!!$img['img'] !!}" class="img-circle img-responsive" name="imagen"></a>--}}
+                        {{--</div>--}}
                     @endif </h1>
+                <hr><hr>
             </div>
                 <!-- Title -->
                 @if(!empty($hechos) && count($hechos)>0)
@@ -29,10 +30,6 @@
 
 
                         @foreach($hechos as $hecho)
-
-
-
-
 
                             <!--left col-->
                         @if(!is_null($hecho->laboral_id))
@@ -118,7 +115,6 @@
                                 @endif
 
 
-<hr>
                             @endforeach
 
                                 </ul>
@@ -126,7 +122,6 @@
 
                         </div>
             <div class="col-md-4">
-                <hr>
                 <div class="col-md-12">
                     <ul class="list-group">
 

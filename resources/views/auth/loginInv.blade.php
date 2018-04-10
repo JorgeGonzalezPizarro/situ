@@ -51,16 +51,16 @@
     <script>$(document).ready(function(){
             var value = document.getElementById('password').value;
 
-        if(value.length >0) {
-            $("form#form").submit();
-        }
-        else{
-            $("#password").on('change',function(){
-                $("form#form").submit();
-
-
-            })
-        }
+        // if(value.length >0) {
+        //     $("form#form").submit();
+        // }
+        // else{
+        //     $("#password").on('change',function(){
+        //         $("form#form").submit();
+        //
+        //
+        //     })
+        // }
         });
     </script>
 @endsection

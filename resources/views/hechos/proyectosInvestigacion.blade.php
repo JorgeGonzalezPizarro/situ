@@ -57,7 +57,7 @@
                             {!! Form::select('grado', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputGrado' ,'data-live-search'=>'true','value'=>$grado,'name' => 'grado']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="curso" name="curso" ></select>--}}
 
-                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso' ,'data-live-search'=>'true','name' => 'curso']) !!}
+                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso',"oninvalid"=>"this.setCustomValidity('Seleccione o Agregue una asignatura')",'required'=>'true' ,'data-live-search'=>'true','name' => 'curso']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>--}}
 
                             <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
@@ -267,17 +267,6 @@
             // $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
 
 
-
-
-
-
-
-
-
-
-
-
-
             $.datepicker.setDefaults($.datepicker.regional['es']);
             $(function () {
                 document.getElementById("endDate").disabled = true;
@@ -370,10 +359,10 @@
             }
             for (var i=0;i<opts1.length;i++) {
                 opts1[i].value = opts1[i].text;
-                alert(opts1[i].text);
+                // alert(opts1[i].text);
             }
             if(($("#inputgGrado").children('option').length) >0) {
-            }
+
 
 
             var categoria=document.getElementById("categoria").innerHTML;
@@ -451,7 +440,7 @@
             }
 
 
-
+            }
 
             $('#inputGrado').on('change', function() {
 

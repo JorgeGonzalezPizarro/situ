@@ -19,16 +19,19 @@
             {{--{{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}--}}
 
 
-            <div class="col-sm-2" style="float: right;">
-                    <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-            </div>
+            {{--<div class="col-sm-2" style="float: right;">--}}
+                    {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
+            {{--</div>--}}
         </div>
 
 
 
 
         <div class="row">
-            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+            <div class="col-sm-12">
+
+            <nav class="navbar navbar-light" style="margin-left: 15px; margin-right: 15px;background-color: #e3f2fd;">
+
                 <div class="collapse navbar-collapse" id="navbarColor03">
                     <ul class="nav navbar-nav ">
                         <li class="nav-item active">
@@ -45,10 +48,10 @@
                         </li>
 
                     </ul>
+                </div>
 
                 </div>
             </nav>
-
 
             {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}
 
@@ -81,7 +84,7 @@
                                             <td><strong class="">Grado:</strong></td>
                                             <td>
                                                 {{--{!! Form::text('grado', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $curso->grado ]) !!}--}}
-                                                {{ Form::select('grado', $grado, ['class' => '','id'=>'grado','value'=>$grado]) }}
+                                                {{ Form::select('grado', $grado, ['class' => 'grado','id' => 'gradoSelector' ,'value'=>$grado]) }}
 
                                                 <a id="añadir_asignaturas" href="<?php echo e(route('misDatosLaborales')); ?>"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
                                                     Añadir Formacion</a>
@@ -189,43 +192,7 @@
             </div>
 
 
-        {{--<footer id="footer">--}}
-            {{--<div class="row-fluid">--}}
-                {{--<div class="span3">--}}
-                    {{--<p>--}}
-                        {{--<a href="http://twitter.com/Bootply" rel="nofollow" title="Bootply on Twitter" target="ext">Twitter</a><br>--}}
-                        {{--<a href="https://plus.google.com/+Bootply" rel="publisher">Google+</a><br>--}}
-                        {{--<a href="http://facebook.com/Bootply" rel="nofollow" title="Bootply on Facebook" target="ext">Facebook</a><br>--}}
-                        {{--<a href="https://github.com/iatek/bootply" title="Bootply on GitHub" target="ext">GitHub</a><br>--}}
-                    {{--</p>--}}
-                {{--</div>--}}
-                {{--<div class="span3">--}}
-                    {{--<p>--}}
-                        {{--<a data-toggle="" role="button" href="">Contact Us</a><br>--}}
-                        {{--<a href="/tags">Tags</a><br>--}}
-                        {{--<a href="/bootstrap-community">Community</a><br>--}}
-                        {{--<a href="/upgrade">Upgrade</a><br>--}}
-                    {{--</p>--}}
-                {{--</div>--}}
-                {{--<div class="span3">--}}
-                    {{--<p>--}}
-                        {{--<a href="http://www.bootbundle.com" target="ext" rel="nofollow">BootBundle</a><br>--}}
-                        {{--<a href="https://bootstrapbay.com/?ref=skelly" target="_ext" rel="nofollow"--}}
-                           {{--title="Premium Bootstrap themes">Bootstrap Themes</a><br>--}}
-                        {{--<a href="http://www.bootstrapzero.com" target="_ext" rel="nofollow"--}}
-                           {{--title="Free Bootstrap templates">BootstrapZero</a><br>--}}
-                        {{--<a href="http://upgrade-bootstrap.bootply.com/">2.x Upgrade Tool</a><br>--}}
-                    {{--</p>--}}
-                {{--</div>--}}
-                {{--<div class="span3">--}}
-                    {{--<span class="pull-right">©Copyright 2013-2014 <a href="/"--}}
-                                                                     {{--title="The Bootstrap Playground">Bootply</a> | <a--}}
-                                {{--href="/about#privacy">Privacy</a></span>--}}
-                    {{--<a href="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" class="btn iframe-btn" type="button">Open Filemanager</a>--}}
 
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</footer>--}}
 
     </div>
 
@@ -259,6 +226,8 @@
 
             $("#cursoSelect").val($("#grado1").text());
         });
+
+
     });
 </script>
 <script>function responsive_filemanager_callback(field_id){
