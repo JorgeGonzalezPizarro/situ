@@ -167,7 +167,6 @@ class AdminController extends Controller
         $validation = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
 
         ]);
 
@@ -190,7 +189,7 @@ class AdminController extends Controller
     {
         $invitado = Invitados::where('id', $request->id)->first();
 //        return response($hecho->nivel_acceso);
-        $invitado->fecha_limite=Carbon::parse($request->fecha);
+        $invitado->fecha_limite=Carbon\Carbon::parse($request->fecha);
 
 
         $invitado->update();

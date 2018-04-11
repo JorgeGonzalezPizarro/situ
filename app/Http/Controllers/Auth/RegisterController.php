@@ -82,8 +82,16 @@ class RegisterController extends Controller
                 'permissions' =>  'string|min:6|confirmed',
                 'otros_datos' => 'nullable',
             ]);
+        $niceNames = array(
+            'first_name' => 'Nombre',
+            'password' => 'Contraseña',
+            'last_name' => 'Apellido',
+            'email' => 'Email',
 
-          if ($validation->fails()) {
+        );
+        $validation->setAttributeNames($niceNames);
+
+        if ($validation->fails()) {
                 return Redirect::back()->withErrors($validation)->withInput();
          }
          $otros_datos=array('linkedin'=>'','facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
@@ -147,7 +155,7 @@ class RegisterController extends Controller
         $rol=$rol[0];
         if($user){
             $user->roles()->sync([$rol]);
-            Session::flash('message', 'Registration is completed');
+            Session::flash('message', 'Registro completado');
 
             $encrypted = encrypt($request['password']);
 

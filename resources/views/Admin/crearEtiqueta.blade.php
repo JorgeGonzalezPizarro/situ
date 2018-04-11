@@ -14,6 +14,7 @@
 
             {{ Form::open(array('url' => route('guardarEtiqueta'), 'class' => 'form-horizontal form-signin','files' => true)) }}
             {!! csrf_field() !!}
+            <div class="form-group  {{ $errors->has('nombre') ? 'has-error' : ''}}">
 
                 <label for="nombre" class="cols-sm-2 control-label">Nombre Etiqueta </label>
                 <div class="cols-sm-10">
@@ -23,14 +24,19 @@
                     </div>
                     {!! $errors->first('nombre', '<p class="help-block">:message</p>') !!}
                 </div>
+            </div>
+                <div class="form-group  {{ $errors->has('slug') ? 'has-error' : ''}}">
+
                 <label for="slug" class="cols-sm-2 control-label">Slug</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
                         {!! Form::text('slug', null, ['class' => 'form-control','placeholder '=>'Slug para la etiqueta']) !!}
                     </div>
-                </div>
+                    {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
 
+                </div>
+                </div>
             </div>
         <label for="slug" class="cols-sm-2 control-label"></label>
 

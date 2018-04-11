@@ -349,13 +349,13 @@
 
 
         <!-- Top Menu Items -->
-        <div class="collapse navbar-collapse" style="  padding:15px !important;" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" style=" " id="bs-example-navbar-collapse-1">
 
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                     <ul class="nav navbar-nav navbar-left">
                         <li class="nav-item"  style="    right: 20px;">
-                            <a style=" font-size: ;   font-family: 'Playfair Display', serif;
+                            <a style="  font-family: 'Playfair Display', serif;
     font-style: italic;" class="nav-link" href="{{url('Situ/public')}}">
                                 <img style="     margin-top: -10px; width: 200px; float: left;"  id="myimagen" title="profile image" src="/imagenes/logo1.jpg" class="img-responsive" name="imagen">
                             </a>
@@ -395,7 +395,7 @@
 
                                     </li>
                                     <li class="">
-                                        <a href="{{url('Situ/public')}}"><i class="fa fa-share-square"></i>
+                                        <a href="{{url('Situ/public')}}"><img width="25"  src="/imagenes/icono situ.ico"/>
 
 
 
@@ -490,7 +490,7 @@
 
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav2">
-            <ul class="nav navbar-nav side-nav"  style="  margin-top: 40px ;">
+            <ul class="nav navbar-nav side-nav"  style="  margin-top: 20px ;">
                 @if(Sentinel::check() && Sentinel::inRole('Admin'))
                     <li class="">
                         <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>

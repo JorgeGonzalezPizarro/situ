@@ -63,14 +63,14 @@ class LoginController extends Controller
     }
     public function showLoginFormInv($email=null,$encrypted=null)
     {
-        Sentinel::logout();
+//        Sentinel::logout();
 
 
         try {
             $decrypted = decrypt($encrypted);
         } catch (DecryptException $e) {
             $decrypted="";
-            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion'])
+            return view('auth.loginInv')
                 ->with('email',$email)->with('decrypted',$decrypted);
 
         }
@@ -110,7 +110,7 @@ class LoginController extends Controller
                     $usuario =Sentinel::getUser();
                     $usuario=Invitados::where('invitado_id',$usuario->id)->get()->first();
                     if(($usuario->fecha_limite)<(Carbon::now()) ) {
-                        return view('auth.loginInv')->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
+                        return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com'])->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
                     }
                            else {
 
@@ -124,7 +124,7 @@ class LoginController extends Controller
                     $usuario =Sentinel::getUser();
                     $usuario=Invitados::where('invitado_id',$usuario->id)->get()->first();
                     if(($usuario->fecha_limite)<(Carbon::now()) ){
-                        return view('auth.loginInv')->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
+                        return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com '])->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
                     }else {
                         $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
                         $invitado->numero_accesos = ($invitado->numero_accesos) + 1;

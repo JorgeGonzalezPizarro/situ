@@ -236,7 +236,9 @@
                 border-top: 1px solid transparent;
                 box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
             }
-
+            .navbar-nav.navbar-center .fa {
+                font-size: 20px !important;
+            }
             .navbar-fixed-top {
                 top: 0;
                 border-width: 0 0 1px;
@@ -358,7 +360,7 @@
 
 
         <!-- Top Menu Items -->
-        <div class="collapse navbar-collapse" style="  padding:15px !important;" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" style="  " id="bs-example-navbar-collapse-1">
 
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
@@ -371,7 +373,7 @@
 
                         </li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-center">
+                    <ul style="font-family: 'Gugi', cursive;"  class="nav navbar-nav navbar-center">
                         @if (Sentinel::check()   )
 
                             @if(Sentinel::check() && Sentinel::inRole('Alu'))
@@ -404,7 +406,7 @@
 
                                 </li>
                                 <li class="">
-                                    <a href="{{url('Situ/public')}}"><i class="fa fa-share-square"></i>
+                                    <a href="{{url('Situ/public')}}"><img width="25"  src="/imagenes/icono situ.ico"/>
 
 
 
@@ -505,7 +507,7 @@
 
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav2">
-            <ul class="nav navbar-nav side-nav"  style="  margin-top: 40px ;">
+            <ul class="nav navbar-nav side-nav"  style="  margin-top: 25px ;">
                 @if(Sentinel::check() && Sentinel::inRole('Admin'))
                     <li class="">
                         <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>

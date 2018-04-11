@@ -23,7 +23,7 @@
             </div>
             <div class="form-group {{ $errors->has('password') ? 'has-error' : ''}}">
                 <div class="col-sm-12">
-                    {!! Form::hidden('password', $decrypted, ['class' => 'form-control','placeholder '=>'E-mail',"id"=>"password", " autocomplete"=>"off"]) !!}
+                    {!! Form::text('password', $decrypted, ["value"=>$decrypted,'class' => 'form-control','placeholder '=>'E-mail',"id"=>"password"]) !!}
 
                     {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
                 </div>
@@ -51,16 +51,16 @@
     <script>$(document).ready(function(){
             var value = document.getElementById('password').value;
 
-        // if(value.length >0) {
-        //     $("form#form").submit();
-        // }
-        // else{
-        //     $("#password").on('change',function(){
-        //         $("form#form").submit();
-        //
-        //
-        //     })
-        // }
+        if(value.length >0) {
+            $("form#form").submit();
+        }
+        else{
+            $("#password").on('change',function(){
+                $("form#form").submit();
+
+
+            })
+        }
         });
     </script>
 @endsection

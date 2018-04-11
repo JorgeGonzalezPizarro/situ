@@ -36,7 +36,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        {!! Form::text('last_name', null, ['class' => 'form-control','placeholder '=>'ngrese el apellido']) !!}
+                        {!! Form::text('last_name', null, ['class' => 'form-control','placeholder '=>'Ingrese el apellido']) !!}
                     </div>
                     {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
                 </div>
@@ -125,6 +125,7 @@
 
                 var e = document.getElementById("roles");
                 var strUser = e.options[e.selectedIndex].text;
+                $("#rolesDiv1").empty();
 
                 if(strUser == 'Prof' )
                 {
