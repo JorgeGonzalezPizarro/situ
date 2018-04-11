@@ -14,7 +14,7 @@
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     <script src="/js/jquery-3.3.1.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Gugi|Lato:100,100i,300,300i,400,400i,700,700i|Roboto:300,300i,400,400i" rel="stylesheet">
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
@@ -165,6 +165,8 @@
         #nav2 li a{
             padding-bottom: 20px;
             border-bottom: 1px solid white;
+            font-family: 'Lato', sans-serif;
+            font-style: oblique;
         }
         .navbar-nav.navbar-center {
             position: absolute;
@@ -247,7 +249,9 @@
             .navbar-nav > li {
                 float: none;
             }
-
+            hr{
+                border: transparent !important;
+            }
             .navbar-nav > li > a {
                 padding-top: 10px;
                 padding-bottom: 10px;
@@ -350,16 +354,15 @@
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                     <ul class="nav navbar-nav navbar-left">
-                        <li class="nav-item">
+                        <li class="nav-item"  style="    right: 20px;">
+                            <a style=" font-size: ;   font-family: 'Playfair Display', serif;
+    font-style: italic;" class="nav-link" href="{{url('Situ/public')}}">
+                                <img style="     margin-top: -10px; width: 200px; float: left;"  id="myimagen" title="profile image" src="/imagenes/logo1.jpg" class="img-responsive" name="imagen">
+                            </a>
 
-                        <a class="navbar-brand"  style="padding:0px;" href="#"><img height="50px" width="50px" src="http://alumni.practicasyempleoufv.es/estudiantes/img/logo.png">
-                        </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('Situ\public')}}">Plataforma de Trayectoria Universitaria</a>
                         </li>
                     </ul>
-                        <ul class="nav navbar-nav navbar-center">
+                        <ul style="    font-family: 'Gugi', cursive;" class="nav navbar-nav navbar-center">
                             @if (Sentinel::check()   )
 
                                 @if(Sentinel::check() && Sentinel::inRole('Alu'))

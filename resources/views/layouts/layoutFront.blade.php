@@ -31,7 +31,7 @@
     {{--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>--}}
     {{--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->--}}
     {{--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>--}}
-
+    <link href="https://fonts.googleapis.com/css?family=Gugi|Lato:100,100i,300,300i,400,400i,700,700i|Roboto:300,300i,400,400i" rel="stylesheet">
     {{--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.material.min.js"></script>
@@ -94,6 +94,9 @@
             line-height: 1.4em;
             min-width: 600px;
         }
+        hr{
+            border: transparent !important;
+        }
         .navbar-inverse .navbar-nav > li > a {
             color: #ffffff;
             font-size: 16px;
@@ -104,7 +107,10 @@
         #nav2 li a{
         padding-bottom: 20px;
         border-bottom: 1px solid white;
+            font-family: 'Lato', sans-serif;
+            font-style: oblique;
         }
+
         .navbar-inverse {
             background-color: #003865;
             border-color: #ffffff;
@@ -357,12 +363,12 @@
             <div id="adminMenu" role="navigation" aria-label="Menú principal">
                 <div id="adminmenuwrap" style="">
                     <ul class="nav navbar-nav navbar-left">
-                        <li class="nav-item">
 
-                        <a class="navbar-brand" style="padding: 0px;" href="#">
-                        </a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{url('Situ/public')}}">Plataforma de Trayectoria Universitaria</a>
+                        <li class="nav-item"  style="    right: 20px;">
+                            <a class="nav-link" href="{{url('Situ/public')}}">
+                                <img style="     margin-top: -10px; width: 200px; float: left;"  id="myimagen" title="profile image" src="/imagenes/logo1.jpg" class="img-responsive" name="imagen">
+                            </a>
+
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-center">
@@ -419,7 +425,7 @@
 
                             @if(Sentinel::check() &&( Sentinel::inRole('Inv')  ) )
 
-                                <div style=" text-align: center;  height: auto; margin:0 auto;">
+                                <div style=" text-align: center;  color: white; height: auto; margin:0 auto;">
                                      <h2>Bienvenido al portal  de {{$alumno->first_name}}  {{$alumno->last_name}}</h2>
                                 </div>
 
@@ -531,9 +537,7 @@
                         <a href="{!! route('proyectosInvestigacionAll')!!}"><i class="fa fa-fw fa-dashboard"></i>Proyectos</a>
                     </li>
                 @endif
-                    <li style="border: 0px !important;" class="nav-item">
-                        <a class="navbar-brand"  style=" border:0px !important;padding:0px;" href="#"><img height="140px" width="140px" src="http://alumni.practicasyempleoufv.es/estudiantes/img/logo.png">
-                        </a> </li>
+
             </ul>
         </div>
 
