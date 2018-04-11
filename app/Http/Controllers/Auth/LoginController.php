@@ -63,7 +63,7 @@ class LoginController extends Controller
     }
     public function showLoginFormInv($email=null,$encrypted=null)
     {
-//        Sentinel::logout();
+      Sentinel::logout();
 
 
         try {
@@ -109,7 +109,7 @@ class LoginController extends Controller
                 if (Sentinel::check() && Sentinel::inRole('Prof')) {
                     $usuario =Sentinel::getUser();
                     $usuario=Invitados::where('invitado_id',$usuario->id)->get()->first();
-                    if(($usuario->fecha_limite)<(Carbon::now()) ) {
+                    if(($usuario->fecha_limite)<(Carbon::now()->toDateString()) ) {
                         return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com'])->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
                     }
                            else {
@@ -123,7 +123,8 @@ class LoginController extends Controller
                 if (Sentinel::check() && Sentinel::inRole('Inv')) {
                     $usuario =Sentinel::getUser();
                     $usuario=Invitados::where('invitado_id',$usuario->id)->get()->first();
-                    if(($usuario->fecha_limite)<(Carbon::now()) ){
+                    if(($usuario->fecha_limite)<(Carbon::now()->toDateString()) ){
+
                         return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com '])->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
                     }else {
                         $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();

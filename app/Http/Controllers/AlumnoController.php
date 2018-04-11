@@ -566,7 +566,7 @@ class AlumnoController extends Controller
         $invitado2->alumno_id = $usuario->id;
         $invitado2->nivel_acceso = $invitado->nivel_acceso;
        $invitado2->rol=$invitado->roles()->get()->first()->name;
-        $invitado2->fecha_limite=Carbon::parse(Input::get('fecha_limite'));
+        $invitado2->fecha_limite=Carbon\Carbon::parse(Input::get('fecha_limite'));
         $invitado2->save();
 
         if ($invitado) {
@@ -741,7 +741,7 @@ class AlumnoController extends Controller
         $user = Sentinel::getUser();
         $invitado = Invitados::where('id', $request->id)->first();
 //        return response($hecho->nivel_acceso);
-       $invitado->fecha_limite=Carbon::parse($request->fecha);
+       $invitado->fecha_limite=Carbon\Carbon::parse($request->fecha);
 
 
         $invitado->update();
