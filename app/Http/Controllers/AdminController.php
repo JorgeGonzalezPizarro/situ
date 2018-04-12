@@ -90,8 +90,9 @@ class AdminController extends Controller
                     $user->roles()->sync([$rol]);
 
                     Session::flash('message', 'Registration is completed');
-                    Session::flash('status', 'success');
-        //            $role = Sentinel::findRoleBySlug($rol);
+                    Session::flash('status', 'success');                    Session::flash('status', 'success');
+
+                    //            $role = Sentinel::findRoleBySlug($rol);
         //            $role->users()->attach($user);
 
 
@@ -104,7 +105,7 @@ class AdminController extends Controller
 
                     });
         //           return redirect('/');
-                    return redirect()->back();
+                    return Redirect::back();
                 }
          Session::flash('message', 'There was an error with the registration' );
         Session::flash('status', 'error');

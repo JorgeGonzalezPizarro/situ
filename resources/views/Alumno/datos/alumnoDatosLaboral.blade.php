@@ -63,7 +63,7 @@
 
             </div>
 
-
+<div id="lab"></div>
             <div class="col-sm-12" style="" contenteditable="false">
 
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xs-offset-0 col-sm-offset-0 col-md-offset-0 col-lg-offset-0 toppad">
@@ -425,6 +425,7 @@
 
         </div>
         </div>
+        <div id="forma"></div>
 
         <div class="col-sm-12" style="" contenteditable="false">
 

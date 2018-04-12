@@ -186,16 +186,17 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker2'>
                             <span class="input-group-addon">
-                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosAcademicos')}}">Por favor , agregue al menos una Asignatura a su trayectoria .</a></p>
 
-                        <img width="900" src="/imagenes/capturaAcademicos.png"/>
+                        <img width="900" src="/imagenes/capturaProfesionales.png"/>
+                                <br>
+                                <hr>
+                                                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosLaborales')}}#forma">Por favor , agregue al menos una Titulacion Académica a su trayectoria .</a></p>
+
                     </span>
                         </div>
 

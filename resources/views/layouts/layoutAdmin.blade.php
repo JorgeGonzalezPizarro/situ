@@ -15,7 +15,7 @@
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     <script src="/js/jquery-3.3.1.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Gugi|Lato:100,100i,300,300i,400,400i,700,700i|Roboto:300,300i,400,400i" rel="stylesheet">
-    <!-- jQuery library -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -322,13 +322,15 @@
                             </li>
 
                             <li class="">
-                                <a href="{{route('misDatos')}}"><i class="fa fa-user"></i>
+                                <a href="{{route('misDatos')}}"><i class="far fa-smile"></i>
+
+
 
                                     Mi perfil </a>
 
                             </li>
                             <li class="">
-                                <a href="{{route('invitar')}}"><i class="fa fa-share-square"></i>
+                                <a href="{{route('invitar')}}"><i class="fas fa-user-plus"></i>
 
 
 
@@ -381,13 +383,15 @@
                                     </li>
 
                                     <li class="">
-                                        <a href="{{route('misDatos')}}"><i class="fa fa-user"></i>
+                                        <a href="{{route('misDatos')}}"><i class="far fa-smile"></i>
+
+
 
                                             Mi perfil </a>
 
                                     </li>
                                     <li class="">
-                                        <a href="{{route('invitar')}}"><i class="fa fa-share-square"></i>
+                                        <a href="{{route('invitar')}}"><i class="fas fa-user-plus"></i>
 
 
 
@@ -444,13 +448,15 @@
 
 
                                         <li class="">
-                                            <a href="{{route('misDatos')}}"><i class="fa fa-user"></i>
+                                            <a href="{{route('misDatos')}}"><i class="far fa-smile"></i>
+
+
 
                                                 Mi perfil </a>
 
                                         </li>
                                         <li class="">
-                                            <a href="{{route('invitar')}}"><i class="fa fa-share-square"></i>
+                                            <a href="{{route('invitar')}}"><i class="fas fa-user-plus"></i>
 
 
 
@@ -459,13 +465,14 @@
                                         </li>
                                     @endif
                                     <li>
-                                        <a href="{{ route('logout') }}">Log Out</a>
+                                        <a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                                            Salir</a>
 
                                     </li>
 
                                 @else
                                     <li>
-                                        <a href="{{ route('logout') }}">Some Text</a>
+                                        <a href="{{ route('logout') }}"></a>
                                     </li>
                                 @endif
                             </ul>
@@ -503,24 +510,32 @@
                     </li>
                 @elseif(Sentinel::check() && Sentinel::inRole('Alu'))
                     <li class="">
-                        <a href="{{ route('alumnoDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Inicio</a>
+                        <a href="{{ route('alumnoDashboard') }}"><i class="fas fa-home"></i> Inicio</a>
                     </li>
 
                     {{--@foreach($categorias as $categoria)--}}
                         <li class="">
-                            <a href="{!! route('calificaciones')!!}"><i class="fa fa-fw fa-dashboard"></i>Calificaciones</a>
+                            <a href="{!! route('calificaciones')!!}"><i class="fas fa-tasks"></i>Calificaciones</a>
                         </li>
                     <li class="">
-                        <a href="{!! url('Situ/public/0/5')!!}"><i class="fa fa-fw fa-dashboard"></i>Portfolio Profesional</a>
+                        <a href="{!! url('Situ/public/0/5')!!}"><i class="fas fa-briefcase"></i>
+
+                            Portfolio Profesional</a>
                     </li>
                     <li class="">
-                        <a href="{!! route('trabajos')!!}"><i class="fa fa-fw fa-dashboard"></i>Trabajos Academicos</a>
+                        <a href="{!! route('trabajos')!!}"><i class="fas fa-graduation-cap"></i>
+
+                            Trabajos Academicos</a>
                     </li>
                     <li class="">
-                        <a href="{!! route('recuerdosAll')!!}"><i class="fa fa-fw fa-dashboard"></i>Recuerdos</a>
+                        <a href="{!! route('recuerdosAll')!!}"><i class="fas fa-bookmark"></i>
+
+                            Recuerdos</a>
                     </li>
                     <li class="">
-                        <a href="{!! route('proyectosInvestigacionAll')!!}"><i class="fa fa-fw fa-dashboard"></i>Proyectos</a>
+                        <a href="{!! route('proyectosInvestigacionAll')!!}"><i class="fas fa-newspaper"></i>
+
+                            Proyectos</a>
                     </li>
                     {{--@endforeach--}}
 

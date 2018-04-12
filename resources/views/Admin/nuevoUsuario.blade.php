@@ -14,7 +14,7 @@
         @if (Session::has('message'))
             <div class="alert alert-{{(Session::get('status')=='error')?'danger':Session::get('status')}} " alert-dismissable fade in id="sessions-hide">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>{{Session::get('status')}}!</strong> {!! Session::get('message') !!}
+                    <strong> {!! Session::get('message') !!}!</strong>
                 </div>
             @endif
             {{ Form::open(array('url' => route('register'), 'class' => 'form-horizontal form-signin','files' => true)) }}
@@ -97,7 +97,7 @@
             <div id="rolesDiv1" class="form-group  ">
             </div>
             <div class="form-group  {{ $errors->has('password') ? 'has-error' : ''}} ">
-                <button class="btn btn-primary btn-lg btn-block register-button" type="submit" >Register</button>
+                <button class="btn btn-primary btn-lg btn-block register-button" type="submit" >Registrar</button>
 
             </div>
 
