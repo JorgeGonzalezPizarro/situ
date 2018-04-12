@@ -44,7 +44,7 @@
                         <div class="form-inline" >
 
                             {!! Form::label('Titulo', 'Titulo') !!}<br>
-                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('required','class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Title')) !!}
+                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('required','class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Título')) !!}
                                     </div>
 
 <br>
@@ -74,7 +74,7 @@
                         <div class='col-md-12' style="    margin-top: 30px;">
                             <div class="form-group">
                                 {!! Form::label('text', 'Detalles') !!}
-                                {!! Form::textarea('contenido', Input::old('contenido') , ['style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: 70px;']) !!}
+                                {!! Form::textarea('contenido', Input::old('contenido') , ['style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: ;']) !!}
 
 
                             </div>
@@ -106,11 +106,11 @@
                 </li>
                 <li class="list-group-item text-left">
                     <h5 class="card-header">Etiquetas</h5>
-                   {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                   {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','data-placeholder'=>"Añade una etiqueta", 'class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
                 </li>
                 <li class="list-group-item text-left">
                     <h5 class="card-header">Proposito</h5>
-                                            {!! Form::text('proposito', null, array('class' => 'form-control','required', 'placeholder' => 'proposito')) !!}
+                                            {!! Form::text('proposito', null, array('class' => 'form-control','required', 'placeholder' => 'Propósito')) !!}
                 </li>
                 <li class="list-group-item text-left">
                     <h5 class="card-header">Evidencia</h5>
@@ -124,25 +124,11 @@
                 {!! Form::text('evidencia',null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
                 {!! Form::text('ruta_archivo',null, ['id'=>'fieldID3','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
 
-                {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
-                {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
-                {{--<div class='col-md-12'>--}}
-                {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
 
-                {{--<div class="input-group">--}}
-                {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
-                {{--<div class="form-group">--}}
-                {{--{!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}--}}
+                <li class="list-group-item text-left" style="height: auto;">
 
-
-                {{--</div>--}}
-
-                {{--</div>--}}
-                {{--{!! Form::label('text', 'En curso') !!}--}}
-
-                {{--{{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}--}}
-
-                {{--</div>--}}
+               <span>     {!! Form::submit('Confirmar', array('class'=>'btn btn-info btn-lg btn-block' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</span>
+                </li>
 
 
 
@@ -150,12 +136,7 @@
         </div>
     </div>
 
-    <div class='col-md-12' style="    margin-top: 30px;text-align: center;
-                                          margin-left: 200px;">
 
-        {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
-
-    </div>
     {!! Form::close() !!}
     </div>
 
@@ -225,7 +206,7 @@
                 "emoticons template paste textcolor colorpicker textpattern"
             ],
             image_advtab: true ,
-            height : "480",
+            height : "250",
             external_filemanager_path:"/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/",
             filemanager_title:"Responsive Filemanager" ,
             external_plugins: { "filemanager" : "plugins/responsive_filemanager/filemanager/plugin.min.js"},
@@ -246,7 +227,7 @@
                     file : cmsURL,
                     title : 'Filemanager',
                     width : x * 0.8,
-                    height : y * 0.8,
+                    height : y ,
                     resizeble : 'yes',
                     close_previous : 'no'
                 });

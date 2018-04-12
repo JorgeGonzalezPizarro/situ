@@ -7,20 +7,19 @@
 
         <div class="row">
 
-                    <!-- Post Content Column -->
+            <h1 class="mt-4">{{$hecho->titulo_hecho}}</h1>
+
+            <!-- Author -->
+            <p class="lead">
+                <a href="">{{$user-> first_name. " ". $user->last_name}} </a>
+            </p>
+            <!-- Post Content Column -->
                     <div class="col-lg-8">
 
                         <!-- Title -->
-                        <h1 class="mt-4">{{$hecho->titulo_hecho}}</h1>
-
-                        <!-- Author -->
-                        <p class="lead">
-                            <a href="">{{$user-> first_name. " ". $user->last_name}} </a>
-                        </p>
 
 
 
-                        <hr>
 
 
                         @if(!empty($hecho->ruta_imagen))
@@ -58,7 +57,6 @@
 
             </div>
 
-        <hr>
             <div class="col-md-4">
                 <div class="card-body">
                             <ul class="list-group">

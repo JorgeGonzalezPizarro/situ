@@ -12,7 +12,7 @@
                     <?php
                     $img=json_decode($alumno->otros_datos,true)
                     ?>
-                                                                                       @else {{$user->first_name }}
+                                                                                       @else
                                                                                        <?php
                                                                                        $img=json_decode($user->otros_datos,true)
                          ?>
@@ -102,16 +102,7 @@
                                 </p></span>
                                         </li>
 
-                            @else
-                                    <div class="col-md-10">
-                                        <hr>
-                                        <ul class="list-group">
 
-
-                                            <li class="list-group-item text-muted" style="text-align: center" contenteditable="false">No existen datos</li>
-
-
-                                        </ul></div>
                                 @endif
 
 
@@ -139,7 +130,10 @@
                 </div>
             </div>
 
-                @else
+
+
+
+        @else
                     <div class="row">
                         <div class="col-md-12">
                             <hr>

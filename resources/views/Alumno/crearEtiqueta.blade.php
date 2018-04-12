@@ -54,7 +54,7 @@
             <div class='col-md-9' style="    margin-top: 30px;text-align: center;
                                       margin-left: 200px;">
 
-                {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' ,'requiered'=>'true', 'style="margin-right:30px"')) !!}</td>
+                {!! Form::submit('Confirmar', array('class'=>'btn btn-info ' ,'id'=>'boton' ,'requiered'=>'true', 'style="margin-right:30px"')) !!}</td>
 
             </div>
 

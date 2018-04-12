@@ -117,7 +117,7 @@ El correo electronico ya existe</p></div>') !!}
                                             {{--{!! Form::select($role->Slug, null, ['class' => 'form-control','placeholder '=>'Enter your  name']) !!}--}}
                                                 {{--{!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['class' => 'form-control ]) !!}--}}
 
-                                                {!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['id'=>'roles', 'placeholder' => 'Please select a client' ,'class' => 'form-control','style'=>'width:40%;']) !!}
+                                                {!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['id'=>'roles', 'class' => 'form-control','style'=>'width:40%;']) !!}
 
                                             </td>
                                         </tr>
@@ -142,7 +142,7 @@ El correo electronico ya existe</p></div>') !!}
                                     <div class='col-md-5' style="    margin-top: 10px;
                                       margin-left: 240px;">
 
-                                        {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
+                                        {!! Form::submit('Invitar', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
 
                                     </div>
 
@@ -275,19 +275,14 @@ El correo electronico ya existe</p></div>') !!}
 <script>
     $(document).ready(function () {
 
-        $('#roles').on('change',function () {
 
             var e = document.getElementById("roles");
             var strUser = e.options[e.selectedIndex].text;
 
-            if(strUser == 'Profesor' )
-            {
 
                 fecha_limite();
 
                 date();
-            }
-        })
 
 
 

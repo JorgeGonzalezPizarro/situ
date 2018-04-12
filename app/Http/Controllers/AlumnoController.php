@@ -214,7 +214,7 @@ class AlumnoController extends Controller
             $formacionAlumno->actual = "1";
         }
         if(empty(Input::get('descripcion'))){
-            $formacionAlumno->descripcion=$user->first_name. " ha añadido la formacion <br> Centro: ".$formacionAlumno->centro."
+            $formacionAlumno->descripcion="Centro: ".$formacionAlumno->centro."
             <br> Ubicacion: ".$formacionAlumno->ubicacion." <br> Titulacion: ". $formacionAlumno->titulacion." Disciplina académica<br>". $formacionAlumno->disciplina_academica."";
         }else {
             $formacionAlumno->descripcion = Input::get('descripcion');
@@ -592,7 +592,7 @@ class AlumnoController extends Controller
             Mail::send('email', $data,function ($mensaje) use($data){
 
                 $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
-                $mensaje->subject("Welcome to site name");
+                $mensaje->subject("Has sido invitado a SITU");
                 $mensaje->to($data['email'],$data['first_name']);
 
 
@@ -631,7 +631,7 @@ class AlumnoController extends Controller
         $alumnoLaboral->empresa = Input::get('empresa');
         $alumnoLaboral->cargo = Input::get('cargo');
         if(empty(Input::get('descripcion'))){
-            $alumnoLaboral->descripcion=$user->first_name. " ha añadido la siguiente experiencia laboral <br> Sector: ".$alumnoLaboral->sector."
+            $alumnoLaboral->descripcion="Sector: ".$alumnoLaboral->sector."
             <br> Ubicacion: ".$alumnoLaboral->ubicacion." <br> Empresa: ". $alumnoLaboral->empresa." Cargo<br>". $alumnoLaboral->cargo."";
         }else {
             $alumnoLaboral->descripcion = Input::get('descripcion');

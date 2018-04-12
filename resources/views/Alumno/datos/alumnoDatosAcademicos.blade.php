@@ -32,7 +32,7 @@
 
             <nav class="navbar navbar-light" style="margin-left: 15px; margin-right: 15px;background-color: #e3f2fd;">
 
-                <div class="collapse navbar-collapse" id="navbarColor03">
+                <div class="collapse navbar-collapse" id="navbarColor03" style="padding-left: 0px !important;">
                     <ul class="nav navbar-nav ">
                         <li class="nav-item active">
                             <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
@@ -50,7 +50,7 @@
                     </ul>
                 </div>
 
-                </div>
+            </nav></div>
             </nav>
 
             {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}
@@ -79,7 +79,7 @@
 
                                         </div>
                                         <tbody id="tbody">
-                                        <th style="border: none;"><h1>Asignaturas</h1></th>
+
                                         <tr>
                                             <td><strong class="">Grado:</strong></td>
                                             <td>
@@ -196,24 +196,34 @@
 
     </div>
 
-
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
+    <div class="modal fade" id="myModal12" role="dialog">
+        <div class="modal-dialog" style="width: 1000px ;  ">
 
             <!-- Modal content-->
             <div class="modal-content">
-
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
                 <div class="modal-body">
-                    <iframe width="700" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <span class="input-group-addon">
+                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosLaborales')}}">Por favor , agregue al menos una Titulacion Académica a su trayectoria .</a></p>
 
+                        <img width="900" src="/imagenes/capturaProfesionales.png"/>
+                    </span>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
-
 
 
 {{--<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />--}}
@@ -263,7 +273,9 @@
         var strUser = e.options[e.selectedIndex].value;
         // var x = document.getElementById("cursoSelect").selectedIndex;
         var curso = e.options[e.selectedIndex].value;
-
+        if(curso.length==0){
+            $("#myModal12").modal();
+        }
         $.ajax({
             type:"get",
             url     : "{{ url('Alumno/alumnoDatos/datosAcademicos/') }}/"+curso ,

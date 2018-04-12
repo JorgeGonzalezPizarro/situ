@@ -47,7 +47,7 @@
                         <div class="form-inline" >
 
                             {!! Form::label('Titulo', 'Titulo') !!}<br>
-                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('required','class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Title')) !!}
+                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('required','class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Título')) !!}
                         </div>
 
                         <br>
@@ -59,7 +59,7 @@
                             {!! Form::select('grado', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputGrado' ,'data-live-search'=>'true','value'=>$grado,'name' => 'grado']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="curso" name="curso" ></select>--}}
 
-                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso','required'=>'true' , ,'data-live-search'=>'true','name' => 'curso']) !!}
+                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso','required'=>'true' , 'data-live-search'=>'true','name' => 'curso']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>--}}
 
                             <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
@@ -109,7 +109,7 @@
                     </li>
                     <li class="list-group-item text-left">
                         <h5 class="card-header">Etiquetas</h5>
-                        {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                        {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','data-placeholder'=>"Añade una etiqueta",'class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
                     </li>
                     <li class="list-group-item text-left">
                         <h5 class="card-header">Proposito</h5>
@@ -148,17 +148,15 @@
                     {{--</div>--}}
 
 
+                    <li class="list-group-item text-left" style="height: auto;">
 
+                        <span>     {!! Form::submit('Confirmar', array('class'=>'btn btn-info btn-lg btn-block' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</span>
+                    </li>
                 </ul>
             </div>
         </div>
 
-        <div class='col-md-12' style="    margin-top: 30px;text-align: center;
-                                          margin-left: 200px;">
 
-            {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
-
-        </div>
         {!! Form::close() !!}
     </div>
 
@@ -234,6 +232,7 @@
                 "emoticons template paste textcolor colorpicker textpattern"
             ],
             image_advtab: true ,
+            height : "250",
 
             external_filemanager_path:"/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/",
             filemanager_title:"Responsive Filemanager" ,

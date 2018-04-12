@@ -33,7 +33,7 @@
 
                 <nav class="navbar navbar-light" style="margin-left: 15px; margin-right: 15px;background-color: #e3f2fd;">
 
-                <div class="collapse navbar-collapse" id="navbarColor03">
+                <div class="collapse navbar-collapse" id="navbarColor03" style="padding-left: 0px !important;">
                     <ul class="nav navbar-nav ">
                         <li class="nav-item active">
                             <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>

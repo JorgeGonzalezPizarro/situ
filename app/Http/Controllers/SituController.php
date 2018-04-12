@@ -56,9 +56,7 @@ class SituController extends Controller
         $etiquetasAll=Etiqueta::whereNull('user_id')->get()->all();
         if(Sentinel::check()) {
             if (is_null($id) && is_null($categoria)) {
-//            return "aa";
                 $usuario = Sentinel::getUser();
-//            $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
 
                 if (Sentinel::inRole('Prof')) {
                     $usuario = Sentinel::getUser();
@@ -83,7 +81,6 @@ class SituController extends Controller
 
                 }
                 $categorias = Categorias::all();
-//            return "aa";
                 view()->share('categorias', $categorias);
 
             } /*ACCESO A LA PARTE DEL CURRICULUM*/
@@ -94,6 +91,7 @@ class SituController extends Controller
 
                 $hecho = hechos::find($id);
                 if (Sentinel::inRole('Prof')) {
+
                     $invitado = Invitados::where('invitado_id', $usuario->id)->get()->first();
                     $alumno = Sentinel::findById($alu);
                     $invitado->alumno_id = $alu;
@@ -104,6 +102,9 @@ class SituController extends Controller
                     $alumnos = $rol->users()->with('roles')->get();
                     $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get();
                     $otrosHechosPublicos = $hechosPublicos;
+                    $hechosPublicos = hechos::where('user_id', $alumno->id)
+                        ->where('etiqueta', 'like', 'CV%')
+                        ->get()->all();
                     $logAccesos = logAccesos::firstOrCreate(['invitado_id' => $invitado->id,
                         'alumno_id' => $alumno->id, 'hechos_id' => null], ['invitado_id' => $invitado->id,
                         'alumno_id' => $alumno->id, 'rol' => $invitado->rol, 'hechos_id' => $id, 'numero_accesos' => '0']);
@@ -125,23 +126,21 @@ class SituController extends Controller
             } else {
 
                 $usuario = Sentinel::getUser();
-//            $alumno=Invitados::where('invitado_id',$usuario->id)->get()->first();
                 $invitado = Invitados::where('invitado_id', $usuario->id)->get()->first();
-//            $alumno = $invitado->getAlumno()->get()->first();
                 $categorias = Categorias::all();
 
                 $hecho = hechos::find($id);
                 if (Sentinel::inRole('Prof')) {
                     $alumno = $invitado->getAlumno()->get()->first();
-
-                    $hechosPublicos = hechos::where([['user_id', $alumno->id]])->get()->all();
+                    $hechosPublicos = hechos::where('user_id', $alumno->id)
+                        ->where('etiqueta', 'like', 'CV%')
+                        ->get()->all();
                     if(count($hechosPublicos)>0){
-                    $hechosPublicos = $hechosPublicos->getEtiqueta()->with('CV');
+//                    $hechosPublicos = $hechosPublicos->getEtiqueta()->with('CV');
                     }
                     $categoria=$categoria;
                     $otrosHechosPublicos = $hechosPublicos;
 
-//                    ['categoria_id',$categoria],['id','!=',$hecho->id]])->get()->all();
                 } else {
                     if (Sentinel::inRole('Inv')) {
                         $alumno = $invitado->getAlumno()->get()->first();

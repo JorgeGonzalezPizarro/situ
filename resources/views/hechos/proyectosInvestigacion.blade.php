@@ -40,12 +40,12 @@
 
 
                         {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
-                        <input hidden name="categoria_id" value="{{$categoria}}">
+                        <input hidden name="categoria_id" value="{{$categoria->id}}">
 
                         <div class="form-inline" >
 
                             {!! Form::label('Titulo', 'Titulo') !!}<br>
-                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('required','class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Title')) !!}
+                            {!! Form::text('titulo_hecho', Input::old('titulo_hecho'), array('required','class' => 'form-control','style'=>'width: 100%', 'placeholder' => 'Título')) !!}
                         </div>
 
                         <br>
@@ -107,7 +107,7 @@
                     </li>
                     <li class="list-group-item text-left">
                         <h5 class="card-header">Etiquetas</h5>
-                        {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                        {!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','data-placeholder'=>"Añade una etiqueta",'class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
                     </li>
                     <li class="list-group-item text-left">
                         <h5 class="card-header">Proposito</h5>
@@ -125,38 +125,18 @@
                     {!! Form::text('evidencia',null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
                     {!! Form::text('ruta_archivo',null, ['id'=>'fieldID3','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
 
-                    {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
-                    {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
-                    {{--<div class='col-md-12'>--}}
-                    {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
 
-                    {{--<div class="input-group">--}}
-                    {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
-                    {{--<div class="form-group">--}}
-                    {{--{!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}--}}
+                    <li class="list-group-item text-left" style="height: auto;">
 
-
-                    {{--</div>--}}
-
-                    {{--</div>--}}
-                    {{--{!! Form::label('text', 'En curso') !!}--}}
-
-                    {{--{{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}--}}
-
-                    {{--</div>--}}
-
+                        <span>     {!! Form::submit('Confirmar', array('class'=>'btn btn-info btn-lg btn-block' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</span>
+                    </li>
 
 
                 </ul>
             </div>
         </div>
 
-        <div class='col-md-12' style="    margin-top: 30px;text-align: center;
-                                          margin-left: 200px;">
 
-            {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
-
-        </div>
         {!! Form::close() !!}
     </div>
 
@@ -225,8 +205,9 @@
                 "insertdatetime media nonbreaking save table contextmenu directionality",
                 "emoticons template paste textcolor colorpicker textpattern"
             ],
+
             image_advtab: true ,
-            height : "480",
+            height : "250",
             external_filemanager_path:"/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/",
             filemanager_title:"Responsive Filemanager" ,
             external_plugins: { "filemanager" : "plugins/responsive_filemanager/filemanager/plugin.min.js"},

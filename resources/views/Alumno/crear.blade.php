@@ -95,7 +95,7 @@
             </div>
             <div class='col-md-5' style="margin-top: 10px;">
 
-                {!! Form::submit('Create Post', array('class'=>'btn btn-primary')) !!}
+                {!! Form::submit('Confirmar', array('class'=>'btn btn-primary')) !!}
 
                 {!! Form::close() !!}
             </div>

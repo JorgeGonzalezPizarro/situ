@@ -102,7 +102,7 @@
                                 <tr><td align="center">
                                         <div style="line-height: 24px;">
 					<span style="font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #57697e;">
-                        Has sido invitado para acceder a la nuestra plataforma universitaria
+                        Has sido invitado para acceder SITU , plataforma de TRAYECTORIA UNIVERSITARIA.
                         @if(isset($alumno))
                             del alumno {{  $alumno}}
                         @elseif(isset($profesor)) de los alumnos registrados.

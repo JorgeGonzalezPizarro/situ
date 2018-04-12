@@ -1,4 +1,9 @@
 @extends('layouts.layoutAdmin')
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>
+
 <link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
 <style>
     li{
@@ -151,7 +156,7 @@
                 <div class='col-md-12' style="    margin-top: 30px;text-align: center;
                                           margin-left: 200px;">
 
-                    {!! Form::submit('Create Post', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
+                    {!! Form::submit('Confirmar', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
 
                 </div>
 
@@ -175,12 +180,39 @@
 
         </div>
     </div>
+    <div class="modal fade" id="myModal12" role="dialog">
+        <div class="modal-dialog" style="width: 1000px ;  ">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <span class="input-group-addon">
+                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosAcademicos')}}">Por favor , agregue al menos una Asignatura a su trayectoria .</a></p>
+
+                        <img width="900" src="/imagenes/capturaAcademicos.png"/>
+                    </span>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
         </div><!-- /#wrapper -->
 
     <!--  jQuery -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
     <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
     <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
@@ -195,9 +227,7 @@
         });
     </script>
 
-        <script>
 
-        </script>
         <script>
             var editor_config = {
                 path_absolute : "{{ URL::to('/') }}/",
@@ -278,7 +308,12 @@
 
             var e2 = document.getElementById("inputCurso");
             // var x = document.getElementById("cursoSelect").selectedIndex;
-            var curso = e2.options[e2.selectedIndex].text;
+            // var curso = e2.options[e2.selectedIndex];
+            var e3 = document.getElementById("inputCurso").options.length;
+            if(e3==0){
+                $('#myModal12').modal('show');
+
+            }
 
 
             $('#inputGrado').attr('value', grado);
@@ -336,13 +371,7 @@
 
         }
 
-        //
-        //     var e = document.getElementById("inputGrado");
-        // var grado = e.options[e.selectedIndex].value;
-        // var grado = e.options[e.selectedIndex].value;
-        //
-        // var e2 = document.getElementById("inputCurso");
-        // var curso = e2.options[e2.selectedIndex].text;
+
 
 
 
@@ -371,6 +400,7 @@
                     if (response.length  == 0) {
                         document.getElementById('boton').disabled = true;
                         $('#añadir_asignaturas').show();
+                        $('#myModal12').modal('show');
 
                         $('#asignaturas ').hide();
                     }
@@ -383,6 +413,7 @@
                         document.getElementById('boton').disabled = false;
                         document.getElementById('boton').disabled = false;
                         console.log(( typeof  response) );
+
                         response.forEach(function (element) {
 
 
