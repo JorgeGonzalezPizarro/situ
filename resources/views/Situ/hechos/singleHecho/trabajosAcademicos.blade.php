@@ -10,16 +10,7 @@
 
             <div class="col-lg-12">
                 <h1 class="mt-4" style="padding-left: 15px"> Trabajos Academicos  @if(Sentinel::inRole('Inv') ||Sentinel::inRole( 'Prof')) de {{$alumno->first_name }}
-                    {{--<?php--}}
-                    {{--$img=json_decode($alumno->otros_datos,true)--}}
-                    {{--?>--}}
-                    {{--@else--}}
-                        {{--<?php--}}
-                        {{--$img=json_decode($user->otros_datos,true)--}}
-                        {{--?>--}}
-                        {{--<div class="col-sm-2" style="float: right;"> <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">--}}
-                                {{--<img  id="myimage" title="profile image" src="{!!$img['img'] !!}" class="img-circle img-responsive" name="imagen"></a>--}}
-                        {{--</div>--}}
+
                     @endif </h1>
                 <hr><hr>
 
@@ -65,14 +56,7 @@
                                                     class=""> </strong></span>
                                         <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
                                     </p></span>  </li>
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
-                                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
-                                    {{--</li>--}}
+
 
                                 </ul>
                             </div>
