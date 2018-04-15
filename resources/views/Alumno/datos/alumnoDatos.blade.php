@@ -79,18 +79,29 @@
 
                     </div>
                     <div class="panel-body">
-                        <i class="fa fa-facebook fa-2x"></i>  {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook',
-                        'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
+                        <i class="fab fa-facebook-f" style="font-size: 22px;"></i>
+
+                        {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook',
+                                              'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
                         <a href="{!! $otros_datos['facebook'] !!}" class="">
-                            <a href="#" id="clickableFb"> <i id=" " class="fa fa-pencil"></i></a>
+                            <a href="#" id="clickableFb"><i class="far fa-edit"></i>
+
+                            </a>
                         </a>
                     </div>
                     <div class="panel-body">
 
-                        <i class="fa fa-linkedin fa-2x"></i>  {!! Form::text('linkedin', null, ['id'=>'fieldIDlinkedin',
-                        'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['linkedin'] ]) !!}
+                        <i class="fab fa-linkedin " style="font-size: 22px"></i>
+
+
+                        {!! Form::text('linkedin', null, ['id'=>'fieldIDlinkedin',
+                                              'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['linkedin'] ]) !!}
                         <a href="{!! $otros_datos['linkedin'] !!}" class="">
-                            <a href="#" id="clickableIn"> <i id=" " class="fa fa-pencil"></i></a>
+                            <a href="#" id="clickableIn"> <i class="far fa-edit"></i>
+
+
+
+                                </a>
                         </a>
                     </div>
                 </div>
@@ -122,21 +133,55 @@
                                         <tr>
                                             <td><strong class="">Nombre:</strong></td>
                                             <td>{!! Form::text('first_name', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $user->first_name ]) !!}
-                                                <a href="#" id="clickable"> <i id=" " class="fa fa-pencil"></i></a>
+                                                <a href="#" id="clickable"><i class="far fa-edit"></i>
+
+                                                </a>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong class="">Apellido:</strong></td>
                                             <td>{!! Form::text('last_name', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name ]) !!}
-                                                <a href="#" id="clickable1"> <i id=" " class="fa fa-pencil"></i></a>
+                                                <a href="#" id="clickable1"> <i class="far fa-edit"></i>
+
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        <tr>
+                                            <td><strong class="">DNI:</strong></td>
+                                            <td>{!! Form::text('dni', null, ['id'=>'dni','class' => 'misDatos','readonly' => 'true']) !!}
+                                                <a href="#" id="clickable5"> <i class="far fa-edit"></i>
+
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                            <td><strong class="">Direccion:</strong></td>
+                                            <td>{!! Form::text('direccion', null, ['id'=>'direccion','class' => 'misDatos','readonly' => 'true']) !!}
+                                                <a href="#" id="clickable6"> <i class="far fa-edit"></i>
+
+                                                </a>
+
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><strong class="">Telefono:</strong></td>
+                                            <td>{!! Form::text('telefono', null, ['id'=>'telefono','class' => 'misDatos','readonly' => 'true']) !!}
+                                                <a href="#" id="clickable7"> <i class="far fa-edit"></i>
+
+                                                </a>
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong class="">Email:</strong></td>
                                             <td>{!! Form::text('email', null, ['id'=>'email','class' => 'misDatos','readonly' => 'true','value '=> $user->email ]) !!}
-                                                <a href="#" id="clickable2"> <i id=" " class="fa fa-pencil"></i></a>
+                                                <a href="#" id="clickable2"> <i class="far fa-edit"></i>
+
+                                                </a>
 
                                             </td>
                                         </tr>
@@ -145,7 +190,9 @@
                                             <td>
                                                 <input class="field" readonly name="password" id="password" type="password" >
 
-                                                <a href="#" id="clickable3"> <i id=" " class="fa fa-pencil"></i></a>
+                                                <a href="#" id="clickable3"> <i class="far fa-edit"></i>
+
+                                                </a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -159,7 +206,9 @@
                                             <td>
 
                                                 <input name="password_confirmation" class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required readonly  id="password_confirmation" type="password" value="">
-                                                <a href="#" id="clickable4"> <i id=" " class="fa fa-pencil"></i></a>
+                                                <a href="#" id="clickable4"><i class="far fa-edit"></i>
+
+                                                </a>
 
                                             </td>
                                         </tr>
@@ -205,14 +254,18 @@
                         <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
                             <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" style="    width: 200px;
     height: 200px;" class="img-circle img-responsive" name="imagen">
-                            <i id=" " class="fa fa-pencil"></i></a>
+                            <i class="far fa-edit"></i>
+
+                        </a>
                     </li>
 
 
                 </ul>
 
                 <ul class="list-group">
-                    <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>
+                    <li class="list-group-item text-muted">Actividad <i class="fas fa-info"></i>
+
+                        </i>
 
                     </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
@@ -227,7 +280,9 @@
 
                 </ul>
                 <ul class="list-group">
-                    <li class="list-group-item text-muted"> Etiquetas <i class="fa fa-dashboard fa-1x"></i>
+                    <li class="list-group-item text-muted"> Etiquetas <i class="fas fa-tag"></i>
+
+
 
                     </li>
                     @foreach($etiquetas as $etiqueta)
@@ -287,18 +342,6 @@
 @endsection
 
 
-{{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
-
-{{--<script type="text/javascript">--}}
-{{--$(function(){--}}
-{{--$('.iframe-btn').fancybox({--}}
-{{--'width'	: 1024,--}}
-{{--'minHeight'	: 600,--}}
-{{--'type'	: 'iframe',--}}
-{{--'autoScale'   : true--}}
-{{--});--}}
-{{--});--}}
-{{--</script>--}}
 <script>
     $(document).ready(function () {
         //     $(function(){
@@ -311,6 +354,8 @@
         //     });
 
         // parent.$.fancybox.close();
+        document.getElementById('boton').disabled = true;
+
         $('#myimage').on('click',function () {
 
             $('#boton').removeClass('btn btn-info disabled');
@@ -320,11 +365,11 @@
 
 
         });
-        document.getElementById('boton').disabled = true;
-        $('i').on('click',function () {
-          $('#boton').removeClass('btn btn-info disabled');
+        $('input').on('change',function () {
+            $('#boton').removeClass('btn btn-info disabled');
             $('#boton').addClass('btn btn-success');
             document.getElementById('boton').disabled = false;
+
 
 
         })
@@ -342,7 +387,22 @@
 
 
         });
+        $('#clickable5').on('click', function () {
+            $('#dni').attr('readonly', false).focus().css("background-color", "#bfe1e847");
+            ;
 
+
+        });       $('#clickable6').on('click', function () {
+            $('#direccion').attr('readonly', false).focus().css("background-color", "#bfe1e847");
+            ;
+
+
+        });       $('#clickable7').on('click', function () {
+            $('#telefono').attr('readonly', false).focus().css("background-color", "#bfe1e847");
+            ;
+
+
+        });
         $('#clickable2').on('click', function () {
 
             $('#email').attr('readonly', false).focus().css("background-color", "#bfe1e847");
@@ -369,37 +429,6 @@
 
 
         });
-
-
-    {{--var data = table--}}
-        {{--.rows()--}}
-        {{--.data();--}}
-        {{--var cData = table.cell(this).data();--}}
-        {{--var data = table.row( this ).data();--}}
-        {{--//alert( 'You clicked on '+data[2]+'\'s row' );--}}
-        {{--var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');--}}
-
-            {{--$.ajax({--}}
-                {{--type: "get",--}}
-                {{--url: "{{ route('actualizarDatos') }}",--}}
-                {{--datatype: "json",--}}
-                {{--encode: true,--}}
-                {{--data: {--}}
-                    {{--first_name: document.getElementById('first_name'),--}}
-                    {{--first_name: document.getElementById('last_name'),--}}
-                    {{--email: document.getElementById('email'),--}}
-
-                    {{--_token: CSRF_TOKEN--}}
-                {{--},--}}
-                {{--success: function (response) { // What to do if we succeed--}}
-                    {{--window.location.href= "{{ url('Alumno/hecho') }}"+"/"+response['id'] + "/singleHecho";--}}
-                    {{--console.log("aa+ " + response);--}}
-
-                {{--},--}}
-                {{--error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
-                    {{--console.log(JSON.stringify(jqXHR));--}}
-                    {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
-                {{--}--}}
 
 
 

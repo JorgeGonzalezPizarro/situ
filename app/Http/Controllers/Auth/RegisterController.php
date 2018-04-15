@@ -180,7 +180,7 @@ class RegisterController extends Controller
             Mail::send('email', $data,function ($mensaje) use($data){
 
                 $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
-                $mensaje->subject("Welcome to site name");
+                $mensaje->subject("Bienvenido a SITU");
                 $mensaje->to($data['email'],$data['first_name']);
 
 

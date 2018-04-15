@@ -18,6 +18,8 @@
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('auth');
+
+
 Route::get('/loginInv/{email?}/{encrypted?}','Auth\LoginController@showLoginFormInv');
 Route::post('loginInv', 'Auth\LoginController@login');
 
@@ -34,7 +36,7 @@ Route::get('Admin/getUsuario/', 'AdminController@getactualizarUsuario')->name('a
 
 
 
-Route::get('Admin/usuario/{usuario}', 'AdminCOntroller@verUsuario');
+Route::get('Admin/usuario/{usuario}', 'AdminController@verUsuario');
 
 
 Route::get('/Admin/nuevoUsuario', 'AdminController@getNuevoUsuario')->name('nuevoUsuario');

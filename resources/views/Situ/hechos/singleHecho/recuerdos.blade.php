@@ -114,7 +114,7 @@
                         <li class="list-group-item text-left">
                             @if($etiquetas->etiqueta_id !='0')
 
-                            <a href="#">{{$etiquetas->etiqueta_id}}</a>
+                                <a href=" {{ url('Situ/public#'.$etiquetas->etiqueta_id)}}">{{$etiquetas->etiqueta_id}}</a>
                                 @endif
                         </li>
                     @endforeach

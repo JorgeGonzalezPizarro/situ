@@ -99,7 +99,7 @@ class AdminController extends Controller
                     Mail::send('email', ['request' => $request->all()], function ($mensaje) use ($request) {
 
                         $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "Site name");
-                        $mensaje->subject("Welcome to site name");
+                        $mensaje->subject("BIenvenido a SITU");
                         $mensaje->to($request['email'], $request['name']);
 
 

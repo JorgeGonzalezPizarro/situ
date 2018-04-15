@@ -42,7 +42,7 @@
                                 @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
 
                                     <p class="list-group-item text-left">
-                                        <a href="#">{{$etiquetas->etiqueta_id}}</a>
+                                        <a href=" {{ url('Situ/public#'.$etiquetas->etiqueta_id)}}">{{$etiquetas->etiqueta_id}}</a>
                                     </p>
 
                                         </div>

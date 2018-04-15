@@ -97,7 +97,7 @@
 
                             @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
 
-                                                        <a href="#">{{$etiquetas->etiqueta_id}}</a>
+                                                        <a href=" {{ url('Situ/public#'.$etiquetas->etiqueta_id)}}">{{$etiquetas->etiqueta_id}}</a>
                                                     @endforeach
                                 </p></span>
                                         </li>

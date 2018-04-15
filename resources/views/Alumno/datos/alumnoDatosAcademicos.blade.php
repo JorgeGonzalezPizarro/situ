@@ -51,7 +51,6 @@
                 </div>
 
             </nav></div>
-            </nav>
 
             {{ Form::open(array('route' => 'actualizarDatosAcademicos', 'class' => 'form-style-8','files' => true)) }}
 

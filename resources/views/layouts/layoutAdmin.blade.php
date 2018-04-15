@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>SITU , PLATAFORMA UNIVERSITARIA</title>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
@@ -64,24 +64,8 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/chosen.css') }}" rel="stylesheet">
 
-    <!-- DataTables CSS -->
+    <link rel="shortcut icon" href="{{{ asset('imagenes/icono situ.ico') }}}">
 
-
-    <!-- Custom Fonts -->
-
-    <!-- Chosen -->
-
-    <!-- DataTables CSS -->
-
-
-
-
-    {{--<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->--}}
-    {{--<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->--}}
-    {{--<!--[if lt IE 9]>--}}
-
-
-    {{--<![endif]-->--}}
 
 
     <style>
@@ -105,7 +89,13 @@
             border-radius: 50%;
             width: 70px;
         }
-
+        .dropdown-menu > li > a:hover{
+            background: white;
+            color: black;
+        }
+        .dropdown-menu > li > a{
+            color: white;
+        }
         pre {
             border: none;
             background: #fff;
@@ -311,11 +301,20 @@
 
 
                             <li class="dropdown" style="padding: 10px;">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevo <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
+
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-plus"></i>
+                                    Nuevo <span class="caret"></span></a>
+                                <ul class="dropdown-menu" style="    padding: 5px;
+    background: #003865d6;
+    color: white;">
                                     @foreach($categorias as $categoria)
-                                        <li class=""    style="padding: 10px;">
-                                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
+                                        <li class=""    style="    background: white;
+    padding: 10px;
+    color: white;">
+                                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fas fa-plus-square"></i>
+
+                                                {{$categoria->categoria}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -372,11 +371,19 @@
 
 
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevo <span class="caret"></span></a>
-                                        <ul class="dropdown-menu">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-plus"></i>
+                                            Nuevo <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" style=" padding: 5px;
+    background: #003865d6;
+    color: white;">
                                             @foreach($categorias as $categoria)
-                                                <li class="">
-                                                    <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
+                                                <li class="" style="
+                                                    padding: 5px;
+                                                    ">
+                                                    <a style="" href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}">
+                                                        <i class="fas fa-plus-square"></i>
+                                                        {{$categoria->categoria}}</a>
                                                 </li>
                                             @endforeach
                                         </ul>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Bootstrap Example</title>
+    <title>SITU , PLATAFORMA UNIVERSITARIA</title>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
@@ -17,6 +17,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 
     <script defer src="/js/fontawesome-all.js"></script>
+    <link rel="shortcut icon" href="{{{ asset('imagenes/icono situ.ico') }}}">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -385,12 +386,20 @@
 
 
 
+
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevo <span class="caret"></span></a>
+
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">                                    <i class="fas fa-plus"></i>
+                                       Nuevo <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         @foreach($categorias as $categoria)
                                             <li class="">
-                                                <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
+                                                <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}">
+                                                    <i class="fas fa-plus-square"></i>
+
+
+
+                                                    {{$categoria->categoria}}</a>
                                             </li>
                                         @endforeach
                                     </ul>

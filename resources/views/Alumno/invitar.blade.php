@@ -14,38 +14,38 @@
 
     <div class="container target">
         <div class="row">
-            {{ Form::open(array('route' => 'invitar', 'class' => 'form-style-8','files' => true)) }}
 
 
-            {{--<div class="col-sm-2" style="float: right;">--}}
-                    {{--<img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">--}}
-            {{--</div>--}}
         </div>
 
 
 
 
         <div class="row">
-            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-                <div class="collapse navbar-collapse" id="navbarColor03">
-                    <ul class="nav navbar-nav ">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('invitar')}}">Invitados</a>
-                        </li>
+            <div class="col-sm-12">
 
-                    </ul>
+                <nav class="navbar navbar-light" style="margin-left: 15px; margin-right: 15px;background-color: #e3f2fd;">
 
-                </div>
-            </nav>
+                    <div class="collapse navbar-collapse" id="navbarColor03" style="padding-left: 0px !important;">
+                        <ul class="nav navbar-nav ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('invitar')}}">Invitados</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </nav></div>
+            {{ Form::open(array('route' => 'invitar', 'class' => 'form-style-8','files' => true)) }}
 
 
 
@@ -328,7 +328,6 @@ El correo electronico ya existe</p></div>') !!}
                     down: "fa fa-arrow-down"
                 },
                 format: 'YYYY-MM-DD',
-                minDate: getFormattedDate(new Date())
             });
 
 
@@ -358,17 +357,11 @@ El correo electronico ya existe</p></div>') !!}
                     down: "fa fa-arrow-down"
                 },
                 format: 'YYYY-MM-DD',
-                minDate: getFormattedDate(new Date())
             });
 
 
         });
-        function getFormattedDate(date) {
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear().toString().slice(2);
-            return day + '-' + month + '-' + year;
-        } }
+      }
 
 
 </script>

@@ -152,7 +152,6 @@
                     down: "fa fa-arrow-down"
                 },
                 format: 'YYYY-MM-DD',
-                minDate: getFormattedDate(new Date())
             });
 
 

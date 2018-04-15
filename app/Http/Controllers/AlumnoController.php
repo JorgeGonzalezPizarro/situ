@@ -310,7 +310,9 @@ class AlumnoController extends Controller
         $user->last_name = Input::get('last_name');
         $user->email=Input::get('email');
         $otros_datos = array('linkedin'=>Input::get('linkedin'),'facebook' => Input::get('facebook'), 'img' => Input::get('imagen'));
-
+        $user->dni=Input::get('dni');
+        $user->direccion=Input::get('direccion');
+        $user->telefono=Input::get('telefono');
         $user->otros_datos = json_encode($otros_datos);
 
 

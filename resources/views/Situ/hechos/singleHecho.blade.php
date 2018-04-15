@@ -174,7 +174,28 @@
 <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
 
 <script>
-    function orden(id) {
+
+
+
+
+    $(document).ready(function() {
+        var string = "#"
+        if((window.location.href).includes(string)) {
+            var pathArray = window.location.href.split('#');
+            var newPathname = "";
+
+            for (i = 0; i < pathArray.length; i++) {
+                // newPathname += "#";
+                // newPathname += pathArray[i];
+            }
+            if (pathArray[1].length > 0) {
+                etiquetas(pathArray[1]);
+            }
+        }
+
+    });
+
+        function orden(id) {
 
         var ordenacion = document.getElementById("orden");
 
