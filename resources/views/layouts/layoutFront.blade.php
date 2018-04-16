@@ -205,6 +205,7 @@
 
             .navbar-brand {
                 display: block;
+                float: right;
             }
 
             .navbar-left, .navbar-right {
@@ -226,16 +227,26 @@
             #myimagen {
                 display: none;
             }
+            .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
+                background: #003865;
+            }
+            #navbarColor03{
+                display: block !important;
+                padding-left: 10px;
 
+            }
             .navbar-nav.navbar-center {
                 position: relative;
-                /* transform: translatex(-50%); */
-            }
+                     }
 
             .navbar-toggle {
                 display: block;
             }
-
+            .navbar-nav.navbar-center >li {
+                padding: 0px !important;
+                margin-left: 5px !important;
+                /* transform: translatex(-50%); */
+            }
             .navbar-collapse {
                 border-top: 1px solid transparent;
                 box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -272,7 +283,7 @@
 
             .navbar-nav.navbar-center {
                 float: left !important;
-                left: 0% !important;
+                left: 10% !important;
                 transform: translatex(0%) !important;
             }
 
@@ -317,7 +328,6 @@
                 <span class="icon-bar"></span>
             </button>
             @if(Sentinel::check())
-                <a href="#" class="navbar-brand"      > <span>{{ Sentinel::getUser()->first_name }} </span></a>
                 <a href="{{route('logout')}}" class="navbar-brand"     > <span>Salir </span></a>
                 <ul class="nav navbar-nav navbar-center">
                     @if (Sentinel::check()   )
@@ -475,22 +485,7 @@
                                             @if(Sentinel::check() && Sentinel::inRole('Alu'))
 
 
-                                                <li class="">
-                                                    <a href="{{route('misDatos')}}"><i class="far fa-smile"></i>
 
-
-
-                                                        Mi perfil </a>
-
-                                                </li>
-                                                <li class="">
-                                                    <a href="{{route('invitar')}}"><i class="fa fa-user-plus"></i>
-
-
-
-                                                        Invitar  </a>
-
-                                                </li>
 
                                             @endif
                                             <li>

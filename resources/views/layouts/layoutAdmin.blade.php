@@ -207,21 +207,33 @@
             #myimagen {
                 display: none;
             }
-
+            .navbar-inverse .navbar-nav > .open > a{
+                background: #003865;
+            }
             .navbar-nav.navbar-center {
                 position: relative;
+
                 /* transform: translatex(-50%); */
             }
-
+            .navbar-nav.navbar-center >li {
+                padding: 0px !important;
+                margin-right: 5px !important;
+                /* transform: translatex(-50%); */
+            }
             .navbar-toggle {
                 display: block;
             }
-
+            .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
+                background: #003865;
+            }
             .navbar-collapse {
                 border-top: 1px solid transparent;
                 box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
             }
-
+            #navbarColor03{
+                display: block !important;
+                padding-left: 10px;
+            }
             .navbar-fixed-top {
                 top: 0;
                 border-width: 0 0 1px;
@@ -253,7 +265,7 @@
 
             .navbar-nav.navbar-center {
                 float: left !important;
-                left: 0% !important;
+                left: 10% !important;
                 transform: translatex(0%) !important;
             }
 
@@ -261,7 +273,10 @@
                 float: left;
                 display: inline;
             }
-
+            .navbar-brand {
+                display: block;
+                float: right;
+            }
             .nav.navbar-nav.side-nav{
                 margin-top: 0px !important;
             }
@@ -291,7 +306,6 @@
                 <span class="icon-bar"></span>
             </button>
                 @if(Sentinel::check())
-                    <a href="#" class="navbar-brand"      > <span>{{ Sentinel::getUser()->first_name }} </span></a>
                   <a href="{{route('logout')}}" class="navbar-brand"     > <span>Salir </span></a>
                 <ul class="nav navbar-nav navbar-center">
                     @if (Sentinel::check()   )
@@ -309,9 +323,9 @@
     background: #003865d6;
     color: white;">
                                     @foreach($categorias as $categoria)
-                                        <li class=""    style="    background: white;
+                                        <li class=""    style="
     padding: 10px;
-    color: white;">
+    ">
                                             <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fas fa-plus-square"></i>
 
                                                 {{$categoria->categoria}}</a>
@@ -454,22 +468,7 @@
                                     @if(Sentinel::check() && Sentinel::inRole('Alu'))
 
 
-                                        <li class="">
-                                            <a href="{{route('misDatos')}}"><i class="far fa-smile"></i>
 
-
-
-                                                Mi perfil </a>
-
-                                        </li>
-                                        <li class="">
-                                            <a href="{{route('invitar')}}"><i class="fas fa-user-plus"></i>
-
-
-
-                                                Invitar  </a>
-
-                                        </li>
                                     @endif
                                     <li>
                                         <a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
