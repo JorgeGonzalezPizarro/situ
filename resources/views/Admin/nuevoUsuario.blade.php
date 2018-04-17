@@ -4,6 +4,8 @@
 
 @section('content')
 <div class = "container">
+    <div class="col-lg-12">
+
     <div class="wrapper">
         <div class="panel-heading">
             <div class="panel-title text-center">
@@ -104,7 +106,7 @@
             {{ Form::close() }}
         </div>
     </div>
-
+</div>
 @endsection
 @section('scripts')
 

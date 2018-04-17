@@ -146,6 +146,9 @@
         ul.nav li.dropdown:hover ul.dropdown-menu {
             display: block;
         }
+        .mdl-data-table tbody tr:hover {
+            background-color: #00386538;
+        }
         .navbar{
             /*min-height: 60px;*/
         }
@@ -554,7 +557,7 @@
 
     <div id="page-wrapper">
 
-        <div class="container-fluid">
+        <div class="container">
 
             @if (Session::has('permission'))
                 <div class="alert alert-danger">
