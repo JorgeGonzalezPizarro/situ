@@ -61,6 +61,7 @@
 
 
                     <div class="panel panel-info">
+                        <div class="panel-heading">CURSOS Y ASIGNATURAS</div>
 
 
                         <div class="panel-body">
@@ -195,12 +196,16 @@
 
     </div>
 
-    <div class="modal fade" id="myModal12" role="dialog">
+    <div
+            {{--data-backdrop="static" data-keyboard="false" --}}
+            class="modal fade" id="myModal12" role="dialog">
         <div class="modal-dialog" style="width: 1000px ;  ">
 
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4  class="alert alert-danger" >No tiene Formación Académica en su perfil.</h4>
+
                 </div>
                 <div class="modal-body">
                     <div class="form-group">

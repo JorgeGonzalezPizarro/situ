@@ -177,7 +177,7 @@ El correo electronico ya existe</p></div>') !!}
 
                     <tbody id="clickable">
 
-                    @if(!empty($invitados))
+                    @if(!empty($invitados) && count($invitados)>0)
                         {{--{{print_r($invitados)}}--}}
                         {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
                         @foreach ($invitados as $invitado)
@@ -193,6 +193,10 @@ El correo electronico ya existe</p></div>') !!}
                             </tr>
 
                         @endforeach
+                        @else
+                        <tr>
+                            <td colspan=100% style="text-align: center; font-weight: bold;;"> Aun no tienes invitados </td>
+                        </tr>
                     @endif
                     @endif
                     </tbody>
@@ -206,12 +210,13 @@ El correo electronico ya existe</p></div>') !!}
            </span> <span><p><a target="_blank" href="{{route('logAccesos')}}"><button type="button" class="btn btn-raised btn-secondary">LOGS ACCESOS</button></a></p></span>
 
         </div>
-        <footer id="footer">
 
-        </footer>
 
     </div>
-
+    <footer id="footer">
+        <hr>
+        <br>
+    </footer>
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
 

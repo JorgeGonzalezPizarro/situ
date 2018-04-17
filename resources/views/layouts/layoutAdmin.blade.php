@@ -81,6 +81,12 @@
             color: #ffffff;
             font-size: 16px;
         }
+        h1,h2,h3,h4,h5{
+
+            border-bottom: 1px solid white;
+            font-family: 'Lato', sans-serif;
+            font-style: oblique;
+        }
         .navbar-inverse {
             background-color: #003865;
             border-color: #ffffff;
@@ -94,7 +100,7 @@
             color: black;
         }
         .dropdown-menu > li > a{
-            color: white;
+
         }
         pre {
             border: none;
@@ -155,6 +161,11 @@
         #nav2 li {
             border-bottom: 1px solid white;
         }
+        .dropdown-menu > li > a:hover {
+            background: #003865 !important;
+            color: black;
+
+        }
         #nav2 li a{
             padding-bottom: 20px;
             border-bottom: 1px solid white;
@@ -180,6 +191,11 @@
             .navbar-header{
                 display: block !important; ;
             }
+            #navbarColor03{
+                display: block !important;
+                height: auto !important;
+                padding-bottom: 0;
+                overflow: visible !important;            }
             #wrapper {
                 padding-left: 0px !important;
             }
@@ -210,38 +226,30 @@
             #myimagen {
                 display: none;
             }
-            .navbar-inverse .navbar-nav > .open > a{
-                background: #003865;
-            }
+
             .navbar-nav.navbar-center {
                 position: relative;
+                /* transform: translatex(-50%); */
+            }
 
-                /* transform: translatex(-50%); */
-            }
-            .navbar-nav.navbar-center >li {
-                padding: 0px !important;
-                margin-right: 5px !important;
-                /* transform: translatex(-50%); */
-            }
             .navbar-toggle {
                 display: block;
             }
-            .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
-                background: #003865;
-            }
+
             .navbar-collapse {
                 border-top: 1px solid transparent;
                 box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
             }
-            #navbarColor03{
-                display: block !important;
-                padding-left: 10px;
-            }
+
             .navbar-fixed-top {
                 top: 0;
                 border-width: 0 0 1px;
             }
+            .dropdown-menu > li > a:hover {
+                background: #003865 !important;
+                color: black;
 
+            }
             .navbar-collapse.collapse {
                 display: none !important;
             }
@@ -268,7 +276,7 @@
 
             .navbar-nav.navbar-center {
                 float: left !important;
-                left: 10% !important;
+                left: 0% !important;
                 transform: translatex(0%) !important;
             }
 
@@ -276,10 +284,7 @@
                 float: left;
                 display: inline;
             }
-            .navbar-brand {
-                display: block;
-                float: right;
-            }
+
             .nav.navbar-nav.side-nav{
                 margin-top: 0px !important;
             }
@@ -309,6 +314,7 @@
                 <span class="icon-bar"></span>
             </button>
                 @if(Sentinel::check())
+                    <a href="#" class="navbar-brand"      > <span>{{ Sentinel::getUser()->first_name }} </span></a>
                   <a href="{{route('logout')}}" class="navbar-brand"     > <span>Salir </span></a>
                 <ul class="nav navbar-nav navbar-center">
                     @if (Sentinel::check()   )
@@ -326,9 +332,9 @@
     background: #003865d6;
     color: white;">
                                     @foreach($categorias as $categoria)
-                                        <li class=""    style="
+                                        <li class=""    style="    background: white;
     padding: 10px;
-    ">
+    color: white;">
                                             <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fas fa-plus-square"></i>
 
                                                 {{$categoria->categoria}}</a>
@@ -337,22 +343,8 @@
                                 </ul>
                             </li>
 
-                            <li class="">
-                                <a href="{{route('misDatos')}}"><i class="far fa-smile"></i>
 
 
-
-                                    Mi perfil </a>
-
-                            </li>
-                            <li class="">
-                                <a href="{{route('invitar')}}"><i class="fas fa-user-plus"></i>
-
-
-
-                                    Invitar  </a>
-
-                            </li>
 
                         @endif
 
@@ -391,14 +383,12 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-plus"></i>
                                             Nuevo <span class="caret"></span></a>
-                                        <ul class="dropdown-menu" style=" padding: 5px;
-    background: #003865d6;
-    color: white;">
+                                        <ul  style="    background: #003865c7;
+    color: white;" class="dropdown-menu" id="menuNuevo">
                                             @foreach($categorias as $categoria)
-                                                <li class="" style="
-                                                    padding: 5px;
-                                                    ">
-                                                    <a style="" href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}">
+                                                <li class="" style="    padding: 10px;
+    color: white;">
+                                                    <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
                                                         <i class="fas fa-plus-square"></i>
                                                         {{$categoria->categoria}}</a>
                                                 </li>
@@ -464,7 +454,8 @@
                             @else
                                 <a href="{{ route('login') }}">Login</a>
                             @endif
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" style=" margin-right: 20px;
+                             background: #003865c7;">
                                 {{--@if (Sentinel::check() && (Sentinel::inRole('admin') || Sentinel::inRole('mod')) )--}}
                                 @if (Sentinel::check()   )
 
@@ -474,7 +465,7 @@
 
                                     @endif
                                     <li>
-                                        <a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                                        <a  style="  background: #003865c7 !important; ;color: white;" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                                             Salir</a>
 
                                     </li>
@@ -557,7 +548,7 @@
 
     <div id="page-wrapper">
 
-        <div class="container">
+        <div class="container-fluid">
 
             @if (Session::has('permission'))
                 <div class="alert alert-danger">

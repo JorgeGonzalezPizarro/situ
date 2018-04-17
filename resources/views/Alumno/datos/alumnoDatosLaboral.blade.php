@@ -70,6 +70,9 @@
 
 
                     <div class="panel panel-info">
+                        <div style="    color: #ffffff;
+    background-color: #003865;
+    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
 
 
                         <div class="panel-body">
@@ -338,13 +341,18 @@
                                                     {!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY' , 'style'=>'    margin-bottom: 0px !important;')) !!}
                                                 </div>
                                                 </div>
-                                                {!! Form::label('text', 'En curso') !!}
-
-                                                {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso' ,"style"=>'height:auto;'])}}
 
 
                                             </td>
                                         </tr>
+                                            <tr><td></td>
+                                            <td>  <div class="input-group">
+                                                    {!! Form::label('text', 'En curso') !!}
+
+                                                    {{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso' ,"style"=>'height:auto !important;'])}}
+                                                </div></td>
+                                        </tr>
+
                                         <tr>
                                             <td> <strong class="">Acceso </strong></td>
                                             <td>
@@ -360,14 +368,13 @@
                                         </tbody>
 
                                     </table>
-                                    <div class='col-md-5' style="    margin-top: 10px;
-                                      margin-left: 240px;">
+                                    <div class='col-md-12 center-block' style="    margin-top: 10px;
+                                      ">
 
                                         {!! csrf_field() !!}
+                                        {!! Form::submit('Actualizar', array('class'=>'btn btn-info btn-lg btn-block' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
 
                                     </div>
-                                    {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
-
 
                                 </div>
                                 {{ Form::close() }}
@@ -437,6 +444,9 @@
 
                 <div class="panel panel-info">
 
+                    <div style="    color: #ffffff;
+    background-color: #003865;
+    border-color: #bce8f1;" class="panel-heading">FORMACIÓN</div>
 
                     <div class="panel-body">
                         <div class="row">
@@ -453,7 +463,6 @@
 
                                     </div>
                                     <tbody id="tbody">
-                                    <th style="border: none;"><h1>Formacion</h1></th>
 
                                     <tr>
                                         <td><strong class="">Centro:</strong></td>
@@ -589,7 +598,7 @@
                                             </div>
                                             {!! Form::label('text', 'En curso') !!}
 
-                                            {{ Form::checkbox('en_curso2', 'En curso2 ' ,null, ['class' => 'en_curso2' ,"style"=>'height:auto;'])}}
+                                            {{ Form::checkbox('en_curso2', 'En curso2 ' ,null, ['class' => 'en_curso2' ,"style"=>'padding-left:3px;height:auto !important;'])}}
 
 
                                         </td>
@@ -618,15 +627,14 @@
                                     </tbody>
 
                                 </table>
-                                <tr>
 
-                                    <td>
-                                        <button type="submit" name="formulario2" class="btn btn-primary" id="boton2" style="margin-right:30px">Actualizar</button>
+                                <div class='col-md-12 center-block' style="    margin-top: 10px;
+                                      ">
 
-                                        {{--{!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>--}}
-                                    </td>
-                                </tr>
+                                    {!! csrf_field() !!}
+                                    <button type="submit" name="formulario2" class="btn btn-info btn-lg btn-block" id="boton2" style="">Actualizar</button>
 
+                                </div>
 
                             </div>
 

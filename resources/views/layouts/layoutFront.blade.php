@@ -16,7 +16,6 @@
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
 
-    <script defer src="/js/fontawesome-all.js"></script>
     <link rel="shortcut icon" href="{{{ asset('imagenes/icono situ.ico') }}}">
 
     <!-- jQuery library -->
@@ -98,6 +97,12 @@
             line-height: 1.4em;
             min-width: 600px;
         }
+        h1,h2,h3,h4,h5{
+
+            border-bottom: 1px solid white;
+            font-family: 'Lato', sans-serif;
+            font-style: oblique;
+        }
         hr{
             border: transparent !important;
         }
@@ -123,7 +128,11 @@
             border-radius: 50%;
             width: 70px;
         }
+        .dropdown-menu > li > a:hover {
+            background: #003865 !important;
+            color: black;
 
+        }
         pre {
             border: none;
             background: #fff;
@@ -280,7 +289,11 @@
             .collapse.in {
                 display: block !important;
             }
+            .dropdown-menu > li > a:hover {
+                background: #003865 !important;
+                color: black;
 
+            }
             .navbar-nav.navbar-center {
                 float: left !important;
                 left: 10% !important;
@@ -347,22 +360,7 @@
                                 </ul>
                             </li>
 
-                            <li class="">
-                                <a href="{{route('misDatos')}}"><i class="far fa-smile"></i>
 
-
-
-                                    Mi perfil </a>
-
-                            </li>
-                            <li class="">
-                                <a href="{{route('invitar')}}"><i class="fa fa-user-plus"></i>
-
-
-
-                                    Invitar  </a>
-
-                            </li>
                         @endif
 
 
@@ -397,14 +395,16 @@
 
 
 
-                                <li class="dropdown">
+                                <li sty class="dropdown">
 
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">                                    <i class="fas fa-plus"></i>
                                        Nuevo <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
+                                    <ul  style="    background: #003865c7;
+    color: white;" class="dropdown-menu" id="menuNuevo">
                                         @foreach($categorias as $categoria)
-                                            <li class="">
-                                                <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}">
+                                            <li class="" style="    padding: 10px;
+    color: white;">
+                                                <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
                                                     <i class="fas fa-plus-square"></i>
 
 
@@ -478,8 +478,8 @@
                                     @else
                                         <a href="{{ route('login') }}">Login</a>
                                     @endif
-                                    <ul class="dropdown-menu">
-                                        {{--@if (Sentinel::check() && (Sentinel::inRole('admin') || Sentinel::inRole('mod')) )--}}
+                                        <ul class="dropdown-menu" style=" margin-right: 20px;   background: #003865c7;
+    ">          {{--@if (Sentinel::check() && (Sentinel::inRole('admin') || Sentinel::inRole('mod')) )--}}
                                         @if (Sentinel::check()   )
 
                                             @if(Sentinel::check() && Sentinel::inRole('Alu'))
@@ -489,7 +489,7 @@
 
                                             @endif
                                             <li>
-                                                <a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+                                                <a  style="  background: #003865c7 !important; ;color: white;" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                                                     Salir</a>
 
                                             </li>

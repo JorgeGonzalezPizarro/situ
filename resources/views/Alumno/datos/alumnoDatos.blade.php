@@ -33,25 +33,25 @@
 
                 <nav class="navbar navbar-light" style="margin-left: 15px; margin-right: 15px;background-color: #e3f2fd;">
 
-                <div class="collapse navbar-collapse" id="navbarColor03" style="padding-left: 0px !important;">
-                    <ul class="nav navbar-nav ">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('invitar')}}">Invitados</a>
-                        </li>
+                    <div class="collapse navbar-collapse" id="navbarColor03" style="padding-left: 0px !important;">
+                        <ul class="nav navbar-nav ">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{route('misDatos')}}">Personales <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('misDatosAcademicos')}}">Académicos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('misDatosLaborales')}}">Profesionales</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('invitar')}}">Invitados</a>
+                            </li>
 
-                    </ul>
+                        </ul>
 
-                </div>
-            </nav>
+                    </div>
+                </nav>
 
             <div class="col-sm-3">
                 <!--left col-->

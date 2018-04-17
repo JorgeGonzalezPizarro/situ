@@ -57,7 +57,7 @@
                                                     <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive"  name="imagen">
                                                     @endif<h4 style="text-align: center" class="timeline-title">{{$alumno->first_name}}</h4>
                                             </span>
-                                            <div class="clearfix"></div>  <h5 class="timeline-title">{{$hecho->getCategoria()->get()->first()->categoria}}</h5>
+                                            <div class="clearfix"></div>  <h5 class="timeline-title"><a href="#" id="{{$hecho->getCategoria()->get()->first()->id}}"onclick="categorias(this.id)"> {{$hecho->getCategoria()->get()->first()->categoria}}</a></h5>
 
                                         </div>
                                         <div class="timeline-body">

@@ -4,8 +4,6 @@
 
 @section('content')
 <div class = "container">
-    <div class="col-lg-12">
-
     <div class="wrapper">
         <div class="panel-heading">
             <div class="panel-title text-center">
@@ -106,7 +104,7 @@
             {{ Form::close() }}
         </div>
     </div>
-</div>
+
 @endsection
 @section('scripts')
 
@@ -180,7 +178,8 @@
 
             +  '   <input type="text" class="form-control" name="fecha_limite" required />'
 
-            +   '</div>';
+            +
+            '</div>';
 
 
         $("#rolesDiv1").append(html);

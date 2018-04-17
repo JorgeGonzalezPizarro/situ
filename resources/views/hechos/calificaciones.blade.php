@@ -180,22 +180,23 @@
 
         </div>
     </div>
-    <div class="modal fade" id="myModal12" role="dialog">
+    <div  data-backdrop="static" data-keyboard="false" class="modal fade" id="myModal12" role="dialog">
         <div class="modal-dialog" style="width: 1000px ;  ">
 
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4  class="alert alert-danger" >No tiene calificaciones en su perfil.</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker2'>
                             <span class="input-group-addon">
 
-                        <img width="900" src="/imagenes/capturaProfesionales.png"/>
+                        <img width="900" src="/imagenes/capturaAcademicos.png"/>
                                 <br>
                                 <hr>
-                                                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosLaborales')}}#forma">Por favor , agregue al menos una Titulacion Académica a su trayectoria .</a></p>
+                                                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosAcademicos')}}#forma">Por favor , agregue al menos una Titulacion Académica a su trayectoria .</a></p>
 
                     </span>
                         </div>
@@ -312,7 +313,8 @@
             // var curso = e2.options[e2.selectedIndex];
             var e3 = document.getElementById("inputCurso").options.length;
             if(e3==0){
-                $('#myModal12').modal('show');
+                $('#myModal12').modal('show', { backdrop: 'static',
+                    keyboard: false});
 
             }
 
