@@ -21,32 +21,30 @@
 
 
                 <hr>
+                    @if(!empty($hecho->ruta_imagen))
+                    <div class="col-lg-12">
 
-
-                @if(!empty($hecho->ruta_imagen))
                     <img class="img-fluid rounded" style="width: 600px; height: 300px;"src="{{$hecho->ruta_imagen}}" alt="">
-                @endif
+                    @endif
 
-                @if(!empty($hecho->ruta_archivo))
-                    <iframe src={{$hecho->ruta_archivo}} width="100%" height="800px"></iframe>
-                @endif
+                    @if(!empty($hecho->ruta_archivo))
+                        @if(\File::extension($hecho->ruta_archivo)=='docx' || \File::extension($hecho->ruta_archivo) == 'doc' )
+
+                            <label class="btn btn-secondary active" style="width: 100%">
+                                <a href="{!! $hecho->ruta_archivo!!}"><input  class="form-control" value="{!! $hecho->ruta_archivo !!}"> Descargar archivo </a>
+                            </label>
+                        @else
+                            <iframe src={{$hecho->ruta_archivo}} width="100%" height="800px"></iframe>
+                            {{--<a href="http://docs.google.com/viewer?url={{$hecho->ruta_archivo}}">aaaa</a>--}}
+                            <iframe src="http://docs.google.com/gview?url={{$hecho->ruta_archivo}}" frameborder="0" allowfullscreen></iframe>
+                        @endif
+                    </div>
+
+                    @endif
                 <div class="col-sm-12">
                     <!--left col-->
                     <ul class="list-group">
 
-                        {{--<li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Detalles de la calificacion</h5>--}}
-                        {{--</li>--}}
-                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                        {{--class="">Curso </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>--}}
-                        {{--</li>--}}
-                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                        {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
-                        {{--</li>--}}
-                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                        {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
-                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                        {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
-                        {{--</li>--}}
 
                     </ul>
 
@@ -54,7 +52,7 @@
                         <div class="panel-heading">Otros detalles
 
                         </div>
-                        <div class="panel-body"><span><p id="descripcion">{!!  str_limit($hecho->contenido,50,'...' )!!}</p></span>
+                        <div class="panel-body"><span><p>{!! $hecho->contenido !!}</p></span>
                         </div>
 
                     </div>
@@ -64,6 +62,9 @@
 
 
             </div>
+
+            <hr>
+            <hr>
 
             <hr>
             <div class="col-md-4">
@@ -77,7 +78,6 @@
                                         class="">Creado </strong></span><span><p>{{$hecho->created_at}}</p></span></li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong
                                         class="">Curso - Asignatura </strong></span><span><p>{{$hecho->curso}}</p></span></li>
-                        {{--Fecha del hecho {{$hecho->fecha_inicio}}</input>--}}
                     </ul>
                 </div>
             </div>
@@ -92,7 +92,6 @@
                 </div>
             </div>
             <hr>
-            <!-- Search Widget -->
 
             <div class="col-md-4">
                 <ul class="list-group">

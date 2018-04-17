@@ -123,7 +123,7 @@
     <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
     <script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>
     <script src="/js/tinymce/js/tinymce/langs/es.js"></script>
-
+    <script src="/js/datepickerSpanish.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <script>
 
@@ -137,7 +137,7 @@
 
 
 
-            $.datepicker.regional['es'] = {
+            $. datepicker.regional['es'] = {
                 closeText: 'Cerrar',
                 prevText: '< Ant',
                 nextText: 'Sig >',

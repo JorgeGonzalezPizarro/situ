@@ -177,7 +177,7 @@ El correo electronico ya existe</p></div>') !!}
 
                     <tbody id="clickable">
 
-                    @if(!empty($invitados) && count($invitados)>0)
+                    @if( count($invitados)>0)
                         {{--{{print_r($invitados)}}--}}
                         {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
                         @foreach ($invitados as $invitado)

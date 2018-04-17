@@ -94,8 +94,8 @@ class SituController extends Controller
 
                     $invitado = Invitados::where('invitado_id', $usuario->id)->get()->first();
                     $alumno = Sentinel::findById($alu);
-                    $invitado->alumno_id = $alu;
-                    $invitado->update();
+//                    $invitado->alumno_id = $alu;
+//                    $invitado->update();
                     $alumno = $invitado->getAlumno()->get()->first();
 
                     $rol = Sentinel::findRoleById(2);

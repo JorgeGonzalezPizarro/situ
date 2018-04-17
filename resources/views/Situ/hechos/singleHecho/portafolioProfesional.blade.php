@@ -119,7 +119,7 @@
                         <li class="list-group-item text-muted" contenteditable="false">Otros datos</li>
 
                         <li class="list-group-item text-right"><span class="pull-left">
-                                        <i class="fa fa-linkedin fa-2x"></i></span>
+                                      <i class="fab fa-linkedin-in" style="font-size: 22px;"></i></span>
 
                             <span><p>   <a href="http://{!!  $img['linkedin']!!}"> Perfil en Linkedin</a></p></span></li>
 
