@@ -501,13 +501,19 @@
             <ul class="nav navbar-nav side-nav"  style="  margin-top: 20px ;">
                 @if(Sentinel::check() && Sentinel::inRole('Admin'))
                     <li class="">
-                        <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>
+                        <a href="{{ url('Admin/adminDashboard') }}"><i class="fas fa-home"></i>
+
+                            Panel de control</a>
                     </li>
                     <li class="">
-                        <a href="{{ route('nuevoUsuario') }}"><i class="fa fa-fw fa-dashboard"></i> Crear Usuario</a>
+                        <a href="{{ route('nuevoUsuario') }}"><i class="fas fa-user-plus"></i>
+
+                            Crear Usuario</a>
                     </li>
                     <li class="">
-                        <a href={{ route('crearEtiqueta') }}><i class="fa fa-fw fa-dashboard"></i> CrearEtiqueta</a>
+                        <a href={{ route('crearEtiqueta') }}><i class="fas fa-tags"></i>
+
+                            CrearEtiqueta</a>
                     </li>
                 @elseif(Sentinel::check() && Sentinel::inRole('Alu'))
                     <li class="">

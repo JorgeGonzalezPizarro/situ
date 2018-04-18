@@ -187,8 +187,9 @@ El correo electronico ya existe</p></div>') !!}
                                 <td>{{$invitado->getUsuario()->get()->first()->created_at }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
                                 <td>{{$invitado->numero_accesos }}</td>
-                                <td>{{$invitado->fecha_limite }}
-                                <td><a href="#myModal2" data-toggle="modal" id="{{$invitado->id}}" data-target="#myModal2">Cambiar me</a>
+                                <td id="prof">
+                                    <span  class="prof">{{$invitado->fecha_limite }}</span>
+                                <br><a href="#myModal2" data-toggle="modal" id="{{$invitado->id}}" data-target="#myModal2">Cambiar Fecha </a></td>
 
                             </tr>
 
@@ -280,7 +281,22 @@ El correo electronico ya existe</p></div>') !!}
 <script>
     $(document).ready(function () {
 
+        var myNodelist  =   document.getElementsByClassName("prof");
 
+        var date1= new Date();
+        var array = $.map(myNodelist, function(value, index) {
+            return [value];
+        });
+        var fechas;
+        array.forEach(function (element){
+            if(Date.parse(element.textContent) < date1){
+                element.style.color="red";
+            }else {
+                element.style.color="green";
+
+            }
+
+        });
             var e = document.getElementById("roles");
             var strUser = e.options[e.selectedIndex].text;
 

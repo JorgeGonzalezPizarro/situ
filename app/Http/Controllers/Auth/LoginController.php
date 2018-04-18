@@ -96,59 +96,105 @@ class LoginController extends Controller
                 return Redirect::back()->withErrors($validation)->withInput();
             }
             $remember = (Input::get('remember') == 'on') ? true : false;
-            if ($user = Sentinel::authenticate($request->all(), $remember)) {
+            $usuarios=User::where('email',$request['email'])->get()->all();
+            if ($usuarios>1){
+
+                foreach ($usuarios as $user){
+                   $user= Sentinel::authenticate($request->all());
+
+                    if (Sentinel::check() && Sentinel::inRole('Prof')) {
+                        $usuario = Sentinel::getUser();
+                        $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
+                        if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
+                            Sentinel::logout();
+                            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com'])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
+                        } else {
+
+                            $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
+                            $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
+                            $invitado->update();
+                            return redirect('Situ/public')->withUser($user);
+                        }
+                    }
+                    if (Sentinel::check() && Sentinel::inRole('Inv')) {
+                        $usuario = Sentinel::getUser();
+                        $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
+
+                        if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
+
+                            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com '])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
+                        } else {
+                            $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
+                            $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
+                            $alumno = $invitado->getAlumno()->get()->first();
+
+                            $invitado->update();
+                            $logAccesos = new logAccesos();
+                            $logAccesos->invitado_id = $invitado->id;
+                            $logAccesos->alumno_id = $alumno->id;
+                            $logAccesos->rol = $invitado->rol;
+                            $logAccesos->hechos_id = null;
+                            $logAccesos->numero_accesos = 0;
+                            $logAccesos->save();
+                            return redirect('Situ/public')->withUser($user);
+                        }
+
+                    }                }
+            }
+            else {
+                if ($user = Sentinel::authenticate($request->all(), $remember)) {
 
 
-                if (Sentinel::check() && Sentinel::inRole('Admin')) {
-                  return redirect('Admin/adminDashboard')->withUser($user);;
+                    if (Sentinel::check() && Sentinel::inRole('Admin')) {
+                        return redirect('Admin/adminDashboard')->withUser($user);;
+                    }
+                    if ((Sentinel::check() && Sentinel::inRole('Alu'))) {
+                        return redirect('Alumno/alumnoDashboard')->withUser($user);
+
+                    }
+                    if (Sentinel::check() && Sentinel::inRole('Prof')) {
+                        $usuario = Sentinel::getUser();
+                        $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
+                        if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
+                            Sentinel::logout();
+                            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com'])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
+                        } else {
+
+                            $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
+                            $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
+                            $invitado->update();
+                            return redirect('Situ/public')->withUser($user);
+                        }
+                    }
+                    if (Sentinel::check() && Sentinel::inRole('Inv')) {
+                        $usuario = Sentinel::getUser();
+                        $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
+
+                        if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
+
+                            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com '])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
+                        } else {
+                            $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
+                            $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
+                            $alumno = $invitado->getAlumno()->get()->first();
+
+                            $invitado->update();
+                            $logAccesos = new logAccesos();
+                            $logAccesos->invitado_id = $invitado->id;
+                            $logAccesos->alumno_id = $alumno->id;
+                            $logAccesos->rol = $invitado->rol;
+                            $logAccesos->hechos_id = null;
+                            $logAccesos->numero_accesos = 0;
+                            $logAccesos->save();
+                            return redirect('Situ/public')->withUser($user);
+                        }
+
+                    }
                 }
-                 if ((Sentinel::check() && Sentinel::inRole('Alu'))) {
-                     return redirect('Alumno/alumnoDashboard')->withUser($user);
+                return Redirect::back()->withErrors(['global' => 'Los datos de acceso no son correctos.']);
 
             }
-                if (Sentinel::check() && Sentinel::inRole('Prof')) {
-                    $usuario =Sentinel::getUser();
-                    $usuario=Invitados::where('invitado_id',$usuario->id)->get()->first();
-                    if(($usuario->fecha_limite)<(Carbon::now()->toDateString()) ) {
-                        Sentinel::logout();
-
-                        return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com'])->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
-                    }
-                           else {
-
-                        $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
-                        $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
-                        $invitado->update();
-                        return redirect('Situ/public')->withUser($user);
-                    }
-                }
-                if (Sentinel::check() && Sentinel::inRole('Inv')) {
-                    $usuario =Sentinel::getUser();
-                    $usuario=Invitados::where('invitado_id',$usuario->id)->get()->first();
-                    if(($usuario->fecha_limite)<(Carbon::now()->toDateString()) ){
-
-                        return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com '])->with('email', $usuario->getUsuario()->get()->first()->email) ->with('decrypted',"");
-                    }else {
-                        $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
-                        $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
-                        $alumno = $invitado->getAlumno()->get()->first();
-
-                        $invitado->update();
-                        $logAccesos = new logAccesos();
-                        $logAccesos->invitado_id = $invitado->id;
-                        $logAccesos->alumno_id = $alumno->id;
-                        $logAccesos->rol = $invitado->rol;
-                        $logAccesos->hechos_id = null;
-                        $logAccesos->numero_accesos = 0;
-                        $logAccesos->save();
-                        return redirect('Situ/public')->withUser($user);
-                    }
-
-                }
-            }
-            return Redirect::back()->withErrors(['global' => 'Los datos de acceso no son correctos.' ]);
-
-        } catch (NotActivatedException $e) {
+        }catch (NotActivatedException $e) {
             return Redirect::back()->withErrors(['global' => 'El usuario no esta activado','activate_contact'=>1]);
 
         }

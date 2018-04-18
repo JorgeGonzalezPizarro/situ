@@ -94,7 +94,7 @@
                 </div>
             </div>
 
-            <div id="rolesDiv1" class="form-group  ">
+            <div id="rolesDiv1" class="form-group">
             </div>
             <div class="form-group  {{ $errors->has('password') ? 'has-error' : ''}} ">
                 <button class="btn btn-primary btn-lg btn-block register-button" type="submit" >Registrar</button>
@@ -108,11 +108,11 @@
 @endsection
 @section('scripts')
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-<script>      $(function() {
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
+    <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+    <script>      $(function() {
         $('.chosen-select').chosen();
         $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
     });
@@ -132,7 +132,31 @@
 
                     fecha_limite();
 
-                    date();
+                    // date();
+
+                    // document.getElementById("datetimepicker1").disabled = true;
+
+                    $("#datetimepicker1").datepicker();
+                    $.datepicker.regional['es'] = {
+                        closeText: 'Cerrar',
+                        prevText: '<Ant',
+                        nextText: 'Sig>',
+                        currentText: 'Hoy',
+                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                        dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+                        dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+                        weekHeader: 'Sm',
+                        dateFormat: 'dd/mm/yy',
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        yearSuffix: ''
+                    };
+
+                    $.datepicker.setDefaults($.datepicker.regional['es']);
+
                 }
             })
 
@@ -141,6 +165,16 @@
     });
 
 </script>
+
+
+    <script>
+
+
+           </script>
+
+
+
+
 <script type="text/javascript">
     function date() {
         $(function () {
@@ -167,20 +201,19 @@
 
 </script>
 
-<script type="text/javascript">
+<script >
     function fecha_limite() {
 
 
-        var html=             '            <label for="name" class="cols-sm-2 control-label">Fecha Limite </label>\n <div class="cols-sm-10"> '  +
-            ' <div class="input-group date" id="datetimepicker1">'
-            +  '<span class="input-group-addon">'
-            +   '<span class="glyphicon glyphicon-calendar"></span>'
-            +    ' </span>'
+        var html=             '  <label for="name" class="cols-sm-2 control-label">Fecha Limite </label>'
+            +  ' <div class="cols-sm-10"> '
 
-            +  '   <input type="text" class="form-control" name="fecha_limite" required />'
+        +'<div class="input-group">'
+          +'  <span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>'
+           + '  <input  id="datetimepicker1" type="text" class="form-control" name="fecha_limite" required />'
 
-            +
-            '</div>';
+            +'    </div>'
+            +'   </div>';
 
 
         $("#rolesDiv1").append(html);

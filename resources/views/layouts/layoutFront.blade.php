@@ -97,12 +97,7 @@
             line-height: 1.4em;
             min-width: 600px;
         }
-        h1,h2,h3,h4,h5{
-
-            border-bottom: 1px solid white;
-            font-family: 'Lato', sans-serif;
-            font-style: oblique;
-        }
+        h
         hr{
             border: transparent !important;
         }
@@ -460,8 +455,8 @@
                                @elseif(Sentinel::check() &&( Sentinel::inRole('Prof')  ) )
 
                                 <div style=" height: auto; margin:0 auto;">
-                                     <h2>Bienvenido a Situ </h2>
-                                </div>
+                                    <h3 style="text-align: center; color:white;" class="form-signin-heading"> ¡ Bienvenido al Portal de Trayectoria Universitaria ! </h3>
+                                    <hr class="colorgraph"><br>                                </div>
                             @endif
                         </li></ul>
                             <ul class="nav navbar-nav navbar-right">
@@ -522,13 +517,19 @@
             <ul class="nav navbar-nav side-nav"  style="  margin-top: 25px ;">
                 @if(Sentinel::check() && Sentinel::inRole('Admin'))
                     <li class="">
-                        <a href="{{ url('Admin/adminDashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Panel de control</a>
+                        <a href="{{ url('Admin/adminDashboard') }}"><i class="fas fa-home"></i>
+
+                            Panel de control</a>
                     </li>
                     <li class="">
-                        <a href="{{ route('nuevoUsuario') }}"><i class="fa fa-fw fa-dashboard"></i> Crear Usuario</a>
+                        <a href="{{ route('nuevoUsuario') }}"><i class="fas fa-user-plus"></i>
+
+                            Crear Usuario</a>
                     </li>
                     <li class="">
-                        <a href={{ route('crearEtiqueta') }}><i class="fa fa-fw fa-dashboard"></i> CrearEtiqueta</a>
+                        <a href={{ route('crearEtiqueta') }}><i class="fas fa-tags"></i>
+
+                            CrearEtiqueta</a>
                     </li>
                 @elseif(Sentinel::check() && Sentinel::inRole('Alu'))
                     <li class="">

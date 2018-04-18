@@ -108,7 +108,7 @@ class MigrationCartalystSentinel extends Migration
             $table->timestamps();
             $table->string('nivel_acceso')->nullable();
             $table->engine = 'InnoDB';
-            $table->unique('email');
+//            $table->unique('email');
             $table->string('dni')->nullable();
             $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();

@@ -4,18 +4,21 @@
 @stop
 @section('content')
     <div class = "container">
-        <div class="wrapper">
             @if (Session::has('message'))
                 <div class="alert alert-{{(Session::get('status')=='error')?'danger':Session::get('status')}} " alert-dismissable fade in id="sessions-hide">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>{{Session::get('status')}}!</strong> {!! Session::get('message') !!}
                 </div>
             @endif
+                <div class="container">
             {{ Form::open(array('url' => route('login'), 'class' => 'form-horizontal form-signin','files' => true)) }}
-            <p style="text-align: center"><img src="/imagenes/logo2.jpg" class="img-circle"/> </p>
+                    <div class="form-group">
+
+                    <p style="text-align: center"><img src="/imagenes/logo2.jpg" class="img-circle"/> </p>
                 <h3 style="text-align: center;" class="form-signin-heading"> ¡ Bienvenido al Portal de Trayectoria Universitaria ! </h3>
             <hr class="colorgraph"><br>
             {!! csrf_field() !!}
+                    </div>
             <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                 <div class="col-sm-12">
                     {!! Form::text('email', null, ['class' => 'form-control','placeholder '=>'E-mail']) !!}
@@ -31,17 +34,9 @@
 
             <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
 
-            <div class="login-register">
-                <div class="clearfix"></div>
-                <br>
-                <a href="{{url('password/reset')}}">Recuperar contraseña</a>
-                @if ($errors->has('global'))
-                    <span class="help-block danger">
-                    <strong style="color:red" >{{ $errors->first('global') }}</strong>
-                </span>
-                @endif
-            </div>
+
             </form>
+            </div>
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="min-width: 320px;"><tr><td align="center">
 
 

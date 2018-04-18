@@ -518,7 +518,7 @@ class AlumnoController extends Controller
         $validation = Validator::make($request->all(), [
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
 
         ]);
 
@@ -577,25 +577,33 @@ class AlumnoController extends Controller
 
             $encrypted = encrypt($request['password']);
 
-
             if($invitado2->rol=='Invitado') {
 
 
                 $data = array('alumno'=>$invitado2->getAlumno()->get()->first()->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
+
                 );
+                $url= url("loginInv/". $request['email'] ."/".$encrypted."/") ;
+
             }elseif($invitado2->rol=='Profesor') {
                 $data = array('profesor'=>$usuario->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
                 );
+                $url= url("loginInv/". $request['email'] ."/".$encrypted."/") ;
+
             }
                else {
                 $data = array('first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
                 );
-            }
-            Mail::send('email', $data,function ($mensaje) use($data){
+                   $url= url("login") ;
+
+               }
+            Mail::send('email', $data,function ($mensaje) use($data,$url,$request,$encrypted){
 
                 $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
                 $mensaje->subject("Has sido invitado a SITU");
                 $mensaje->to($data['email'],$data['first_name']);
+                $mensaje->attach($url,  [ 'as' => 'loginInv/'. $request['email'].'/'.$encrypted.'/',
+                    'mime' => 'text/html']);
 
 
             });

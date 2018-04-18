@@ -87,7 +87,7 @@ class CreateHechos extends Migration
             $table->string('nivel_acceso');
             $table->string('rol');
             $table->integer('numero_accesos')->nullable();
-            $table->timestamp('fecha_limite')->nullable();
+            $table->date('fecha_limite')->nullable();
             $table->timestamps();
 
 

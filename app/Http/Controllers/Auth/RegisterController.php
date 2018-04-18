@@ -127,10 +127,12 @@ class RegisterController extends Controller
             $invitado->nivel_acceso=3;
             $invitado->rol="Profesor";
             $invitado->numero_accesos=null;
+            $format = 'd/m/Y';
+
 //            $format = 'dd/mm/YY HH:mm:ss';
-//            $invitado->fecha_limite = Carbon\Carbon::createFromFormat('d-m-Y h:i', Input::get('fecha_limite'));
+                $invitado->fecha_limite = Carbon\Carbon::createFromFormat($format, Input::get('fecha_limite'));
 //
-            $invitado->fecha_limite=Carbon::parse(Input::get('fecha_limite'));
+//            $invitado->fecha_limite=Carbon::parse(Input::get('fecha_limite'));
 //           =Input::get('fecha_limite');
 
             $invitado->save();

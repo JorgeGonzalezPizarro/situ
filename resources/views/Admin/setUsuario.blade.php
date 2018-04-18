@@ -5,7 +5,7 @@
 
     <div class="container target">
         <div class="row">
-            <div class="col-sm-10">
+            <div class="col-md-10">
                 <h1 class="">{{ $user->first_name  }}                <img style=" width: 50px;height: 50px; float: right;"  id="myimagen" src="{!! $otros_datos['img']!!}">
                 </h1>
 
@@ -16,10 +16,13 @@
 
 
         <br>
-            <div class="col-sm-3">
-                <!--left col-->
+            <div class="col-md-5">
+                <div style="    color: #ffffff;
+    background-color: #003865;
+    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
                 <ul class="list-group">
-                    <li class="list-group-item text-muted" contenteditable="false">Perfil</li>
+
+
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>
                     <li class="list-group-item text-right" style="min-height: 60px;"><span class="pull-left"><strong class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span></li>
                 </ul>
@@ -29,61 +32,41 @@
 
             </div>
             <!--/col-3-->
-            <div class="  col-md-6">
-
-            <div class="panel panel-info">
-
-                <div class="panel-body">
-
-
-
-                            <table class="table table-user-information">
-                                <div class="input-append">
-                                    {{--<input id="fieldID4" type="text" name="imagen" style="display: none;">--}}
-
-                                </div>
-                                <tbody>
-                                <tr>
-                                    <td><strong class="">Nombre:</strong></td>
-                                    <td>{!!  $user->first_name  !!}
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong class="">Apellido:</strong></td>
-                                    <td>{!!  $user->last_name  !!}
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong class="">Email:</strong></td>
-                                    <td> {!! $user->email !!}
-
-                                    </td>
-                                </tr>
-                                    <tr>
-                                    <td><strong class="">Rol:</strong></td>
-
-                                    <td>{{ $user->roles()->first()->slug }}
-                                    </td>
-                                </tr>
-
-
-                                </tbody>
-
-                            </table>
+            <div class="  col-md-5">
+                <div style="    color: #ffffff;
+    background-color: #003865;
+    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
+                <ul class="list-group">
 
 
 
-                        </div>
-                </div>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Nombre:</strong></span>
+                        {!!  $user->first_name  !!}
+                    </li>
+
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Apellido:</strong></span>
+                       {!!  $user->last_name  !!}
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Email:</strong></span>
+                        {!! $user->email !!}
+                    </li>
+
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Rol:</strong></span>
+
+                        {{ $user->roles()->first()->slug }}
+                    </li>
+                </ul>
+
+</div>
             </div>
 
 
-        <div class="col-md-3">
+        <div class="col-md-5">
             <!--left col-->
 
-
+            <div style="    color: #ffffff;
+    background-color: #003865;
+    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
 
             <ul class="list-group">
                 <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>
@@ -100,6 +83,11 @@
                 </li>
 
             </ul>
+        </div>
+            <div class="col-md-5">
+                <div style="    color: #ffffff;
+    background-color: #003865;
+    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
             <ul class="list-group">
                 <li class="list-group-item text-muted"> Etiquetas <i class="fa fa-dashboard fa-1x"></i>
 
@@ -120,12 +108,11 @@
             </ul>
 
         </div>
-        <div id="push"></div>
-        </div>
+
+
+            </div>
 
     </div>
-
-
 
 
         {{--<script src="/plugins/bootstrap-pager.js"></script>--}}
