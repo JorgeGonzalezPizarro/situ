@@ -63,22 +63,30 @@ class LoginController extends Controller
     }
     public function showLoginFormInv($email=null,$encrypted=null)
     {
-      Sentinel::logout();
+        Sentinel::logout();
 
+        if (count(User::where('email', $email)->get()->all()) > 1) {
 
-        try {
-            $decrypted = decrypt($encrypted);
-        } catch (DecryptException $e) {
-            $decrypted="";
+            $encrypted = User::where('email', $email)->get()->first()->password;
+            $decrypted =$encrypted;
+
             return view('auth.loginInv')
-                ->with('email',$email)->with('decrypted',$decrypted);
+                ->with('email', $email)->with('decrypted', $decrypted);
+        } else {
+            try {
+                $decrypted = decrypt($encrypted);
+                return "aa";
+            } catch (DecryptException $e) {
+                $decrypted = "";
+                return view('auth.loginInv')
+                    ->with('email', $email)->with('decrypted', $decrypted);
 
+            }
+
+
+            return view('auth.loginInv')->with('email', $email)
+                ->with('decrypted', $decrypted);
         }
-
-
-        return view('auth.loginInv')->with('email',$email)
-            ->with('decrypted',$decrypted);
-//        return view('auth.login');
     }
     protected function login(Request $request)
     {
