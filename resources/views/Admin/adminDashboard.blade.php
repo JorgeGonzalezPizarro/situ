@@ -34,7 +34,10 @@
 
                             @if(($user->roles()->first()->slug=='Prof')|| ($user->roles()->first()->slug=='Inv'))
                                 <td id="prof">
-                           <span  class="prof"> {{$user->invitado()->get()->first()->fecha_limite }}</span>
+                           <span id="{{ $user->invitado()->get()->first()->fecha_limite}}" class="prof">{{
+
+                            \Carbon\Carbon::parse($user->invitado()->get()->first()->fecha_limite)->format('d/m/Y')
+                            }}</span>
 
                              <br>  <a href="#myModal2" data-toggle="modal" id="{{$user->invitado()->get()->first()->id }}" data-target="#myModal2">Cambiar Fecha </a></td>
 
@@ -96,11 +99,15 @@
         var array = $.map(myNodelist, function(value, index) {
             return [value];
         });
+
+
         var fechas;
         array.forEach(function (element){
-                if(Date.parse(element.textContent) < date){
+                if((element.id ) <  new Date().toISOString().slice(0,10)){
                     element.style.color="red";
                 }else {
+                    element.style.color="green";
+
 
                 }
 

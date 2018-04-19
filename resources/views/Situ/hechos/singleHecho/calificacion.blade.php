@@ -29,7 +29,9 @@
                             <!--left col-->
                             <ul class="list-group">
 
-                                <li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Detalles de la calificacion</h5>
+                                <li style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Detalles de la calificacion</h5>
                                     </li>
                                 <li class="list-group-item text-right"><span class="pull-left"><strong
                                                 class="">Curso - Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>
@@ -42,7 +44,7 @@
                                 </li>
 
                             </ul>
-                            <div class="panel panel-default">
+                            <div class="panel panel-info">
                                 <div class="panel-heading">Otros detalles
 
                                 </div>
@@ -86,7 +88,9 @@
             <div class="col-md-4">
                 <ul class="list-group">
 
-                <li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Etiquetas</h5>
+                <li style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Etiquetas</h5>
                 </li>
                                     <!-- Categories Widget -->
                 @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
@@ -140,7 +144,9 @@
                             <div class="col-md-4">
                                 <ul class="list-group">
 
-                                    <li class="list-group-item text-muted" contenteditable="false">Detalles</li>
+                                    <li style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;" class="list-group-item text-muted" contenteditable="false">Detalles</li>
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                                     class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
                                     </li>

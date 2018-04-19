@@ -43,7 +43,9 @@
                                     @endif
                                     <ul class="list-group">
 
-                                        <li class="list-group-item text-muted" contenteditable="false">Detalles</li>
+                                        <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;" contenteditable="false">Detalles</li>
                                         <li class="list-group-item text-right"><span class="pull-left"><strong
                                                         class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
                                         </li>
@@ -83,8 +85,9 @@
                         <ul class="list-group">
 
 
-                            <li class="list-group-item text-muted" style="text-align: center" contenteditable="false">No existen datos</li>
-
+                            <li class="list-group-item text-muted"style=" text-align: center ;color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"  contenteditable="false">No existen datos</li>
 
                         </ul></div></div></div>
         @endif

@@ -56,7 +56,9 @@
             <div class="col-sm-3">
                 <!--left col-->
                 <ul class="list-group">
-                    <li class="list-group-item text-muted" contenteditable="false">Perfil</li>
+                    <li class="list-group-item text-muted" style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"contenteditable="false">Perfil</li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                     class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
@@ -65,7 +67,7 @@
                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                     class="">Rol </strong></span> {{ $user->roles()->first()->name }}</li>
                 </ul>
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">Curso / Carrera
 
                     </div>
@@ -74,7 +76,7 @@
 
                     </div>
                 </div>
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>
 
                     </div>
@@ -250,7 +252,11 @@
                 <!--left col-->
 
                 <ul class="list-group">
-                    <li class="list-group-item " style="height: auto;">Imagen <i class="fa fa-image fa-1x"></i>
+                    <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;">Imagen  <i class="fa fa-image fa-1x"></i>
+
+                    <li class="list-group-item " style="height: auto;">
                         <a data-toggle="modal" href="" data-target="#myModal" class="iframe-btn" type="button">
                             <img  id="myimage" title="profile image" src="{!! $otros_datos['img'] !!}" style="    width: 200px;
     height: 200px;" class="img-circle img-responsive" name="imagen">
@@ -263,7 +269,9 @@
                 </ul>
 
                 <ul class="list-group">
-                    <li class="list-group-item text-muted">Actividad <i class="fas fa-info"></i>
+                    <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;">Actividad <i class="fas fa-info"></i>
 
                         </i>
 
@@ -280,7 +288,9 @@
 
                 </ul>
                 <ul class="list-group">
-                    <li class="list-group-item text-muted"> Etiquetas <i class="fas fa-tag"></i>
+                    <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"> Etiquetas <i class="fas fa-tag"></i>
 
 
 

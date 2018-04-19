@@ -83,7 +83,7 @@
             </div>
 
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-8">
 
             <!-- Title -->
 
@@ -97,8 +97,14 @@
             <div class="panel-body">
 
                 <div class="row">
+                    <ul class="list-group">
 
-                @foreach($frases as $hecho)
+
+                        <li class="list-group-item text-muted"style=" text-align: center ;color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;     font-size: 18px;"  contenteditable="false">Mis frases</li>
+
+                    </ul>                @foreach($frases as $hecho)
 
                     <ul class="timeline">
                         <li>
@@ -124,7 +130,60 @@
 
 
         </div>
+
+
+        <div class="col-lg-4">
+
+            <!-- Title -->
+
+            <!-- Author -->
+
+
+
+            <hr>
+
+
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="card my-4">
+                        <div class="panel panel-info" style="color: white;
+    background: #003865;
+    margin: 0px;
+    text-align: center;margin:0px padding-left: 0;
+    margin-bottom: 20px;">
+                            <div class="panel-body" style="padding: 10px;">
+                                INVITADOS
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <ul class="list-unstyled mb-0">
+                                        @foreach($invitados as $invitado)
+                                            <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                            class="">Invitado</strong></span>
+                                                <a id="popoverOption" class="btn" href="{{route('invitar')."#table"}}" data-content="Ver detalles" rel="popover" data-placement="left" data-original-title="{{$invitado->getUsuario()->get()->first()->first_name ." " .$invitado->getUsuario()->get()->first()->last_name}}">
+                                                    {{$invitado->getUsuario()->get()->first()->first_name ." " .$invitado->getUsuario()->get()->first()->last_name}}</a>
+                                            </li>
+
+
+                            @endforeach
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
     </div>
+        </div>
+    </div>
+
 @endsection
 
 <script>
@@ -132,7 +191,8 @@
     $(document).ready(function () {
 
 
-
+        $('#popoverData').popover();
+        $('#popoverOption').popover({ trigger: "hover" });
 
 
         var url = "/Alumno";

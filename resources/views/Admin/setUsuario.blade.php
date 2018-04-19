@@ -69,7 +69,11 @@
     border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
 
             <ul class="list-group">
-                <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>
+                <li class="list-group-item text-muted" style="
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+">Actividad <i class="fa fa-dashboard fa-1x"></i>
 
                 </li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong

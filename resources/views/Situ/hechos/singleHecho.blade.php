@@ -3,11 +3,14 @@
 
 @section('content')
     <!-- Page Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8" style="    text-align: center;" id="">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="col-lg-10" style="    text-align: center;" id="">
+
+                <div class="form-group">
 
             <div class="form-inline">
+
                 <label for="orden">Ordenar Por :</label>
                 <select onchange="orden(this.id)"  class="form-control"  id="orden">
                     <option value="fecha_inicio"><a onclick="orden(this.id)"   >Fecha Inicio</a></option>
@@ -16,12 +19,11 @@
 
                 </select>
                     <label style="padding-left: 20px;" for="orden">Buscar por :</label>
-                        <div class="input-group">
                             <input type="text" id="buscar" onkeyup="buscar()" name="buscar" value=""class="form-control" placeholder="Buscar por...">
                             </select>
                             <span class="input-group-btn">
                 </span>
-                    </div>
+                </div>
                 </div>
             </div>
             <div class="row" style="padding-top: 60px;">
@@ -46,7 +48,7 @@
                                         <div class="timeline-heading">
 
 
-                                            <span style="float: left;">  <h4 class="timeline-title">{{$hecho->titulo_hecho}}</h4></span>
+                                            <span style="float: left;">  <h3 class="timeline-title">{{$hecho->titulo_hecho}}</h3></span>
                                             <span style="float: right;">
                                                 @if($user->inRole('Inv')|| $user->inRole('Prof'))   <?php $otros_datos=json_decode($alumno->otros_datos,true);?>
 
@@ -86,9 +88,12 @@
 
 
             <div class="card my-2">
-                <div class="panel panel-default" style="margin:0px">
+                <div class="panel panel-info" style="color: white;
+    background: #003865;
+    margin: 0px;
+    text-align: center;margin:0px">
                     <div class="panel-body" style="padding: 10px;">
-                       Etiquetas
+                       ETIQUETAS
                     </div>
                 </div>                <div class="card-body">
                     <div class="row">
@@ -123,9 +128,12 @@
                 <div class="clearfix"></div>
                 <hr>
                 <div class="card my-4">
-                    <div class="panel panel-default" style="margin:0px">
+                    <div class="panel panel-info" style="color: white;
+    background: #003865;
+    margin: 0px;
+    text-align: center;margin:0px">
                         <div class="panel-body" style="padding: 10px;">
-                            Categorias
+                            CATEGORÍAS
                         </div>
                     </div>
                         <div class="card-body">

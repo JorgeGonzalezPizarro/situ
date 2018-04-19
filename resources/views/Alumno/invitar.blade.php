@@ -158,7 +158,7 @@ El correo electronico ya existe</p></div>') !!}
             </div>
 
 
-            <div id="push"></div>
+            <div id="table"></div>
         </div>
         <div class="col-md-10">
             <table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">
@@ -188,7 +188,7 @@ El correo electronico ya existe</p></div>') !!}
                                 <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
                                 <td>{{$invitado->numero_accesos }}</td>
                                 <td id="prof">
-                                    <span  class="prof">{{$invitado->fecha_limite }}</span>
+                                    <span id="{{$invitado->fecha_limite }}"  class="prof">{{  \Carbon\Carbon::parse($invitado->fecha_limite)->format('d/m/Y') }}</span>
                                 <br><a href="#myModal2" data-toggle="modal" id="{{$invitado->id}}" data-target="#myModal2">Cambiar Fecha </a></td>
 
                             </tr>
@@ -348,7 +348,8 @@ El correo electronico ya existe</p></div>') !!}
                     up: "fa fa-arrow-up",
                     down: "fa fa-arrow-down"
                 },
-                format: 'YYYY-MM-DD',
+
+                format: 'DD-MM-YYYY',
             });
 
 

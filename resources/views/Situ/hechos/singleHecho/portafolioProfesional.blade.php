@@ -33,7 +33,9 @@
 
                             <!--left col-->
                         @if(!is_null($hecho->laboral_id))
-                                    <li class="list-group-item text-muted"><h2 class="">Experiencia Profesional </h2>
+                                    <li class="list-group-item text-muted" style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"><h2 class="">Experiencia Profesional </h2>
                                     </li>
 
                                         <li class="list-group-item text-right"><span class="pull-left"><strong
@@ -62,7 +64,9 @@
                                         </li>
                                     @endif
                                 @elseif(!is_null($hecho->formacion_id))
-                                    <li class="list-group-item text-muted"><h2 class="">Formacion Academica </h2>
+                                    <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"><h2 class="">Formacion Academica </h2>
                                     </li>
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                                     class="">Centro </strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->centro  }}</p></span>
@@ -116,7 +120,9 @@
                 <div class="col-md-12">
                     <ul class="list-group">
 
-                        <li class="list-group-item text-muted" contenteditable="false">Otros datos</li>
+                        <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;" contenteditable="false">Otros datos</li>
 
                         <li class="list-group-item text-right"><span class="pull-left">
                                       <i class="fab fa-linkedin-in" style="font-size: 22px;"></i></span>

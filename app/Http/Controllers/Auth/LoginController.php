@@ -75,7 +75,6 @@ class LoginController extends Controller
         } else {
             try {
                 $decrypted = decrypt($encrypted);
-                return "aa";
             } catch (DecryptException $e) {
                 $decrypted = "";
                 return view('auth.loginInv')

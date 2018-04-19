@@ -91,7 +91,10 @@ Route::get('Alumno/invitar/log', 'AlumnoController@logAccesos')->name('logAcceso
 
 Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos');
 Route::get('hechos/{categoria?}','AlumnoController@showFormHecho')->name('hechos');
-
+Route::get('accesoDirecto/{email}/{encrypted}',function ($email,$encrypted)
+{
+    return view('accesoDirecto')->with('email',$email)->with('encrypted',$encrypted);
+});
 Route::get('hechos/{categoria?}/{grado?}/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 Route::POST('\'hechos/{categoria?}/{curso?}', 'HechoController@guardar_Hecho')->name('guardarHecho');
 Route::POST('/hechos/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('fraseguia');
