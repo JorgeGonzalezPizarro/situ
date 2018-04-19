@@ -289,10 +289,11 @@ El correo electronico ya existe</p></div>') !!}
         });
         var fechas;
         array.forEach(function (element){
-            if(Date.parse(element.textContent) < date1){
+            if((element.id ) <  new Date().toISOString().slice(0,10)){
                 element.style.color="red";
             }else {
                 element.style.color="green";
+
 
             }
 

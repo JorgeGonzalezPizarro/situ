@@ -126,7 +126,7 @@ class RegisterController extends Controller
             $invitado->alumno_id=null;
             $invitado->nivel_acceso=3;
             $invitado->rol="Profesor";
-            $invitado->numero_accesos=null;
+            $invitado->numero_accesos=0;
             $format = 'd/m/Y';
 
 //            $format = 'dd/mm/YY HH:mm:ss';

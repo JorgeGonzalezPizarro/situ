@@ -62,15 +62,25 @@
                                             <div class="clearfix"></div>  <h5 class="timeline-title"><a href="#" id="{{$hecho->getCategoria()->get()->first()->id}}"onclick="categorias(this.id)"> {{$hecho->getCategoria()->get()->first()->categoria}}</a></h5>
 
                                         </div>
+                                        <div class="col-md-8">
                                         <div class="timeline-body">
                                             <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion {{$hecho->created_at}}</small></span>
-                                           <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i> Fecha de inicio {{$hecho->fecha_inicio}}</span></span>
 
                                             <span class="pull-left" style=" width: -webkit-fill-available;
     word-wrap: break-word;">   {!!  str_limit($hecho->contenido,100,'...' )!!}</span>
                                             <div class="clearfix"></div>
                                             <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
                                     </p></span>
+                                        </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i> Fecha de inicio {{$hecho->fecha_inicio}}</span></span><br>
+                                            @if(!empty($hecho->curso))
+                                                <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-graduation-cap"></i> Curso <a  onclick="getCursos(this.text)" href="#"> {{substr($hecho->curso,0,3)}}</a></span></span><br>
+                                                <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">{{substr($hecho->curso,5,10)}}</a></span></span><br>
+
+
+                                            @endif
                                         </div>
                                     </div>
                                 </li>
@@ -630,4 +640,214 @@ function etiquetas(id){
             }
        }
 
+    function getCursos(id){
+
+
+        var ordenacion = document.getElementById("orden");
+
+        var orden=ordenacion.options[ordenacion.selectedIndex].value;
+
+
+        // var x = document.getElementById("cursoSelect").selectedIndex;
+        console.log(id);
+
+        if(0 !=(id.length)) {
+            $.ajax({
+                type: "get",
+                url: "{{url('/cursos') }}" + "/" +id,
+                encode: true,
+                data: {
+                    input: id,
+                    orden: orden,
+                },
+                success: function (response) {
+                    console.log(response[0].length);
+
+                    if (response[0].length == 0) {
+
+                        var html2= '<div class="alert alert-info" role="alert">'+
+                            ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +id+'</a>.'+
+                            ' </div>';
+                        $("#contenedor").empty();
+
+                        $("#contenedor").append(html2);
+
+                    }
+
+
+                    else {
+
+
+                        var html = [];
+                        response[0].forEach(function (element) {
+
+
+                            html.push(' <div class="col-lg-12">' +
+                                '<ul class="timeline">' +
+                                '<li>' +
+                                '  <div class="timeline-panel">' +
+                                '    <div class="timeline-heading">' +
+                                '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '<div class="clearfix"></div>  <h5 class="timeline-title">' + element['categoria_nombre'] + '</h5>' +
+                                '<span style="float: right;">' +
+
+                                '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
+                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4>\n' +
+                                '                                            </span>' +
+                                '</div>' +
+                                '<div class="timeline-body">' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                                '<br>' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha inicio' + element['fecha_inicio'] + '</small></span>' +
+
+                                '<span class="pull-left"style=" width: -webkit-fill-available;\n' +
+                                '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+                                '  <div class="clearfix"></div>' +
+                                ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+                                ' </p></span>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>' +
+
+
+                                '</ul>' +
+
+                                '</div>');
+
+                            $("#contenedor").empty();
+
+
+                        });
+
+                        html.forEach(function (element) {
+                            console.log(element['id']);
+
+                            $("#contenedor").append(element);
+
+
+                        });
+                        var input = document.getElementById("buscar");
+                        input_value =  input.getAttribute("value");
+                        input_value = "";
+                        $('#buscar').val("");
+
+                    }
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+        }else{
+            location.reload();
+        }
+
+    }
+    function getAsignaturas(id){
+
+
+        var ordenacion = document.getElementById("orden");
+
+        var orden=ordenacion.options[ordenacion.selectedIndex].value;
+
+
+        // var x = document.getElementById("cursoSelect").selectedIndex;
+        console.log(id);
+
+        if(0 !=(id.length)) {
+            $.ajax({
+                type: "get",
+                url: "{{url('/cursos') }}" + "/" +id,
+                encode: true,
+                data: {
+                    input: id,
+                    orden: orden,
+                },
+                success: function (response) {
+                    console.log(response[0].length);
+
+                    if (response[0].length == 0) {
+
+                        var html2= '<div class="alert alert-info" role="alert">'+
+                            ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +id+'</a>.'+
+                            ' </div>';
+                        $("#contenedor").empty();
+
+                        $("#contenedor").append(html2);
+
+                    }
+
+
+                    else {
+
+
+                        var html = [];
+                        response[0].forEach(function (element) {
+
+
+                            html.push(' <div class="col-lg-12">' +
+                                '<ul class="timeline">' +
+                                '<li>' +
+                                '  <div class="timeline-panel">' +
+                                '    <div class="timeline-heading">' +
+                                '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '<div class="clearfix"></div>  <h5 class="timeline-title">' + element['categoria_nombre'] + '</h5>' +
+                                '<span style="float: right;">' +
+
+                                '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
+                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4>\n' +
+                                '                                            </span>' +
+                                '</div>' +
+                                '<div class="timeline-body">' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                                '<br>' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha inicio' + element['fecha_inicio'] + '</small></span>' +
+
+                                '<span class="pull-left"style=" width: -webkit-fill-available;\n' +
+                                '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+                                '  <div class="clearfix"></div>' +
+                                ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+                                ' </p></span>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>' +
+
+
+                                '</ul>' +
+
+                                '</div>');
+
+                            $("#contenedor").empty();
+
+
+                        });
+
+                        html.forEach(function (element) {
+                            console.log(element['id']);
+
+                            $("#contenedor").append(element);
+
+
+                        });
+                        var input = document.getElementById("buscar");
+                        input_value =  input.getAttribute("value");
+                        input_value = "";
+                        $('#buscar').val("");
+
+                    }
+
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+        }else{
+            location.reload();
+        }
+
+    }
     </script>

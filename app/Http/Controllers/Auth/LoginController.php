@@ -68,11 +68,8 @@ class LoginController extends Controller
 
             try {
                 $decrypted = decrypt($encrypted);
-<<<<<<< HEAD
                 return view('auth.loginInv')->with('email', $email)
                     ->with('decrypted', $decrypted);
-=======
->>>>>>> bc225302d39b8cd161c1cdf1c59002d4e7f87575
             } catch (DecryptException $e) {
                 $decrypted = "";
                 return view('auth.loginInv')
@@ -133,13 +130,13 @@ class LoginController extends Controller
                           $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
                           $alumno = $invitado->getAlumno()->get()->first();
                           $invitado->update();
-                          $logAccesos = new logAccesos();
-                          $logAccesos->invitado_id = $invitado->id;
-                          $logAccesos->alumno_id = $alumno->id;
-                          $logAccesos->rol = $invitado->rol;
-                          $logAccesos->hechos_id = null;
-                          $logAccesos->numero_accesos = 0;
-                          $logAccesos->save();
+//                          $logAccesos = Log
+//                          $logAccesos->invitado_id = $invitado->id;
+//                          $logAccesos->alumno_id = $alumno->id;
+//                          $logAccesos->rol = $invitado->rol;
+//                          $logAccesos->hechos_id = null;
+//                          $logAccesos->numero_accesos = 0;
+//                          $logAccesos->save();
 
                           return redirect('Situ/public')->withUser($user);
 
@@ -191,13 +188,13 @@ class LoginController extends Controller
                             $alumno = $invitado->getAlumno()->get()->first();
 
                             $invitado->update();
-                            $logAccesos = new logAccesos();
-                            $logAccesos->invitado_id = $invitado->id;
-                            $logAccesos->alumno_id = $alumno->id;
-                            $logAccesos->rol = $invitado->rol;
-                            $logAccesos->hechos_id = null;
-                            $logAccesos->numero_accesos = 0;
-                            $logAccesos->save();
+//                            $logAccesos = new logAccesos();
+//                            $logAccesos->invitado_id = $invitado->id;
+//                            $logAccesos->alumno_id = $alumno->id;
+//                            $logAccesos->rol = $invitado->rol;
+//                            $logAccesos->hechos_id = null;
+//                            $logAccesos->numero_accesos = 0;
+//                            $logAccesos->save();
                             return redirect('Situ/public')->withUser($user);
                         }
 
@@ -224,8 +221,15 @@ class LoginController extends Controller
 
     protected function logout()
     {
-        Sentinel::logout();
-        return redirect('/login');
+
+        if(Sentinel::check() && (Sentinel::inRole('Prof')|| Sentinel::inRole('Inv'))){
+            Sentinel::logout();
+            return redirect('/loginInv');
+            }else{
+            Sentinel::logout();
+            return redirect('/login');
+        }
+
     }
     protected function activate($id){
         $user = Sentinel::findById($id);

@@ -569,6 +569,8 @@ class AlumnoController extends Controller
         $invitado2->alumno_id = $usuario->id;
         $invitado2->nivel_acceso = $invitado->nivel_acceso;
        $invitado2->rol=$invitado->roles()->get()->first()->name;
+        $invitado2->numero_accesos=0;
+
         $invitado2->fecha_limite=Carbon\Carbon::parse(Input::get('fecha_limite'));
         $invitado2->save();
 

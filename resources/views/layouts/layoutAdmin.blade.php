@@ -84,7 +84,7 @@
         }
         h1,h2,h3,h4,h5{
 
-            border-bottom: 1px solid white;
+            /*border-bottom: 1px solid white;*/
             font-family: 'Lato', sans-serif;
             font-style: oblique;
         }
@@ -196,6 +196,19 @@
         .timeline > li > .timeline-panel:before {
             display: none !important;
         }
+        .navbar-toggle {
+            position: relative;
+            float: right;
+            padding: 9px 10px;
+            margin-top: 8px;
+            margin-right: 15px;
+            color: white;
+            margin-bottom: 8px;
+            background-color: #003865;
+            background-image: none;
+            border: 1px solid #5bc0de;
+            border-color: #fff;
+        }
         @media (max-width: 1200px) {
             .navbar-header{
                 display: block !important; ;
@@ -297,6 +310,22 @@
             .nav.navbar-nav.side-nav{
                 margin-top: 0px !important;
             }
+            .navbar-toggle {
+                position: relative;
+                float: right;
+                padding: 9px 10px;
+                margin-top: 8px;
+                margin-right: 15px;
+                color: white;
+                margin-bottom: 8px;
+                background-color: #003865;
+                background-image: none;
+                border-color: #fff;
+
+            }
+            .navbar-inverse .navbar-toggle {
+                border-color: white;
+            }
         }
     </style>
     @yield('css')
@@ -315,43 +344,36 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav2">
 
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-                @if(Sentinel::check())
-                    <a href="#" class="navbar-brand"      > <span>{{ Sentinel::getUser()->first_name }} </span></a>
-                  <a href="{{route('logout')}}" class="navbar-brand"     > <span>Salir </span></a>
-                <ul class="nav navbar-nav navbar-center">
+            @if(Sentinel::check() && Sentinel::inRole('Alu'))
+                <a href="{{route('misDatos')}}"  class="navbar-brand"><i class="far fa-smile"></i>
+
+
+
+                    Mi perfil </a>
+                <a href="{{url('Situ/public')}}" class="navbar-brand" style="display: inline;"><img width="25"  style="display: inline;" src="/imagenes/icono situ.ico"/>
+
+
+
+                    Mi SITU  </a>
+                <a href="{{route('invitar')}}" class="navbar-brand"><i class="fas fa-user-plus"></i>
+
+
+
+                    Invitar  </a>
+                <a href="{{route('logout')}}" class="navbar-brand"  style="    float: right;"   > <span>Salir </span></a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav3">
+                    Nuevo
+
+                </button>
                     @if (Sentinel::check()   )
 
                         @if(Sentinel::check() && Sentinel::inRole('Alu'))
 
 
-
-                            <li class="dropdown" style="padding: 10px;">
-
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-plus"></i>
-                                    Nuevo <span class="caret"></span></a>
-                                <ul class="dropdown-menu" style="    padding: 5px;
-    background: #003865d6;
-    color: white;">
-                                    @foreach($categorias as $categoria)
-                                        <li class=""    style="    background: white;
-    padding: 10px;
-    color: white;">
-                                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fas fa-plus-square"></i>
-
-                                                {{$categoria->categoria}}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav2">
+                                Hechos
+                                </button>
 
 
 
@@ -361,11 +383,22 @@
 
                     @endif
 
-                </ul>
                 @endif
 
         </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav3">
+            <ul class="nav navbar-nav side-nav"  style="  margin-top: 20px ;">
 
+                        @foreach($categorias as $categoria)
+                            <li class="" style="    padding: 10px;
+    color: white;">
+                                <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
+                                    <i class="fas fa-plus-square"></i>
+                                    {{$categoria->categoria}}</a>
+                            </li>
+                        @endforeach
+            </ul>
+        </div>
 
         <!-- Top Menu Items -->
         <div class="collapse navbar-collapse" style=" " id="bs-example-navbar-collapse-1">

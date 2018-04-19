@@ -58,6 +58,8 @@ Route::get('Alumno/crear', array('as' => 'crear', 'uses' => 'HechoController@cre
 Route::get('/Alumno/hecho/singleHecho/','AlumnoController@getHechoUsuario')->name('showHecho');
 
 Route::get('Situ/public/{id?}/{categoria?}/{alu?}', 'SituController@showHecho');
+Route::get('cursos/{id}', 'SituController@getCursosSitu');
+Route::get('asignaturas/{id}', 'SituController@getAsignaturasSitu');
 
 
 Route::get('Situ//calificaciones','SituController@getCalificaciones')->name('calificaciones');

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Example 2</title>
+    <title>LOG ACCESOS {{$usuario->first_name ." ".$usuario->last_name}}</title>
 {!! Html::style('asset/css/bootstrap.css') !!}
 <!-- jQuery library -->
 {!! Html::style('asset/css/bootstrap-min.css') !!}

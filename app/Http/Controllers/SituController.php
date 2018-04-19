@@ -508,6 +508,93 @@ class SituController extends Controller
 
 
     }
+    public function getCursosSitu(Request $request){
+
+            $usuario=Sentinel::getUser();
+
+            if (Sentinel::inRole('Inv')){
+
+                $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+                $alumno = $invitado->getAlumno()->get()->first();
+                $otros_datos=json_decode($alumno->otros_datos);
+                $otros_datos=array('img'=>$otros_datos->img);
+                $first_name=($alumno->first_name);
+                $first_name=array('first_name'=>$first_name);
+                $hechosPublicos = hechos::where('user_id',  $alumno->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)->where('curso','like', '%' . $request->input . '%')->get()->all();
+            }
+
+
+
+
+            else{
+                $otros_datos=json_decode($usuario->otros_datos);
+                $otros_datos=array('img'=>$otros_datos->img);
+                $first_name=($usuario->first_name);
+                $first_name=array('first_name'=>$first_name);
+                $hechosPublicos = hechos::where('user_id',$usuario->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)
+                    ->where('curso','like', '%' . $request->input . '%')
+                    ->orderBy($request->orden)
+                    ->get()->all();
+
+            }
+
+
+
+
+
+            return response()->json([ array_unique($hechosPublicos),$otros_datos,$first_name]);
+        }
+
+
+    public function getAsignaturasSitu(Request $request){
+
+        $usuario=Sentinel::getUser();
+
+        if (Sentinel::inRole('Inv')){
+
+            $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
+            $alumno = $invitado->getAlumno()->get()->first();
+            $otros_datos=json_decode($alumno->otros_datos);
+            $otros_datos=array('img'=>$otros_datos->img);
+            $first_name=($alumno->first_name);
+            $first_name=array('first_name'=>$first_name);
+            $hechosPublicos = hechos::where('user_id',  $alumno->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)
+                ->where(\DB::raw('substr(curso, 5, 10)'),'like', '%' . $request->input . '%')->get()->all();
+        }
+
+
+
+
+        else{
+            $otros_datos=json_decode($usuario->otros_datos);
+            $otros_datos=array('img'=>$otros_datos->img);
+            $first_name=($usuario->first_name);
+            $first_name=array('first_name'=>$first_name);
+            $hechosPublicos = hechos::where('user_id',$usuario->id)->where('nivel_acceso', '>=', $usuario->nivel_acceso)
+                ->where(\DB::raw('substr(curso, 5, 10)'),'like', '%' . $request->input . '%')
+                ->orderBy($request->orden)
+                ->get()->all();
+
+        }
+
+
+
+
+
+        return response()->json([ array_unique($hechosPublicos),$otros_datos,$first_name]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public function getOrden(Request $request){
 

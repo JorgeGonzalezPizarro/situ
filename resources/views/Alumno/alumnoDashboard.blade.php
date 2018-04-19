@@ -82,7 +82,6 @@
                 </table>
             </div>
 
-        </div>
         <div class="col-lg-8">
 
             <!-- Title -->
@@ -177,6 +176,7 @@
             </div>
 
 
+                </div>
 
         </div>
 

@@ -15,7 +15,9 @@
             <p style="text-align: center"><img src="/imagenes/logo2.jpg" class="img-circle"/> </p>
             <h3 style="text-align: center;" class="form-signin-heading"> ¡ Bienvenido al Portal de Trayectoria Universitaria ! </h3>
             <hr class="colorgraph"><br>
-            {!! csrf_field() !!}
+                @if(!empty($decrypted))
+
+                {!! csrf_field() !!}
             <div class="form-group {{ $errors->has('email') ? 'has-error' : ''}}">
                 <div class="col-sm-12">
                     {!! Form::text('email', $email, ['class' => 'form-control','placeholder '=>'E-mail',"value"=>$email , " autocomplete"=>"off"]) !!}
@@ -42,6 +44,15 @@
                     @endif
                 </div>
                 </form>
+
+            @else
+                <div class="row">
+                <div class="alert alert-warning" alert-dismissable fade in id="sessions-hide">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Desconectado ! </strong>Para volver a entrar en la plataforma utilice la invitación.
+                </div>
+                </div>
+                @endif
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="min-width: 320px;"><tr><td align="center">
 
 

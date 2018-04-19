@@ -99,7 +99,7 @@
         }
         h1,h2,h3,h4,h5{
 
-            border-bottom: 1px solid white;
+            /*border-bottom: 1px solid white;*/
             font-family: 'Lato', sans-serif;
             font-style: oblique;
         }
@@ -211,19 +211,21 @@
             display: none !important;
         }
         @media (max-width: 1200px) {
-            .navbar-header{
-                display: block !important; ;
+            .navbar-header {
+                display: block !important;;
             }
+
             #wrapper {
                 padding-left: 0px !important;
             }
+
             .navbar-header {
                 float: none;
             }
 
             .navbar-brand {
                 display: block;
-                float: right;
+                float: left;
             }
 
             .navbar-left, .navbar-right {
@@ -245,33 +247,40 @@
             #myimagen {
                 display: none;
             }
-            .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover{
+
+            .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
                 background: #003865;
             }
-            #navbarColor03{
+
+            #navbarColor03 {
                 display: block !important;
                 padding-left: 10px;
 
             }
+
             .navbar-nav.navbar-center {
                 position: relative;
-                     }
+            }
 
             .navbar-toggle {
                 display: block;
             }
-            .navbar-nav.navbar-center >li {
+
+            .navbar-nav.navbar-center > li {
                 padding: 0px !important;
                 margin-left: 5px !important;
                 /* transform: translatex(-50%); */
             }
+
             .navbar-collapse {
                 border-top: 1px solid transparent;
                 box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
             }
+
             .navbar-nav.navbar-center .fa {
                 font-size: 20px !important;
             }
+
             .navbar-fixed-top {
                 top: 0;
                 border-width: 0 0 1px;
@@ -298,11 +307,13 @@
             .collapse.in {
                 display: block !important;
             }
+
             .dropdown-menu > li > a:hover {
                 background: #003865 !important;
                 color: black;
 
             }
+
             .navbar-nav.navbar-center {
                 float: left !important;
                 left: 10% !important;
@@ -314,9 +325,26 @@
                 display: inline;
             }
 
-            .nav.navbar-nav.side-nav{
+            .nav.navbar-nav.side-nav {
                 margin-top: 0px !important;
             }
+
+            .navbar-toggle {
+                position: relative;
+                float: right;
+                padding: 9px 10px;
+                margin-top: 8px;
+                margin-right: 15px;
+                color: white;
+                margin-bottom: 8px;
+                background-color: #003865;
+                background-image: none;
+                border-color: white;
+            }.navbar-inverse .navbar-toggle{
+                             border-color: white;
+
+                         }
+
         }
         .list-group-item {
             position: relative;
@@ -327,6 +355,7 @@
             background-color: #fff;
             border: 1px solid #ddd;
         }
+
     </style>
     @yield('css')
 
@@ -342,64 +371,44 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
 
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav2">
 
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            @if(Sentinel::check())
-                <a href="{{route('logout')}}" class="navbar-brand"     > <span>Salir </span></a>
-                <ul class="nav navbar-nav navbar-center">
-                    @if (Sentinel::check()   )
-
-                        @if(Sentinel::check() && Sentinel::inRole('Alu'))
+            @if(Sentinel::check() && Sentinel::inRole('Alu'))
+                <a href="{{route('misDatos')}}"  class="navbar-brand"><i class="far fa-smile"></i>
 
 
 
-                            <li class="dropdown" style="padding: 10px;">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Nuevo <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    @foreach($categorias as $categoria)
-                                        <li class=""    style="padding: 10px;">
-                                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}"><i class="fa fa-fw fa-dashboard"></i>{{$categoria->categoria}}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </li>
+                    Mi perfil </a>
+                    <a href="{{ route('alumnoDashboard') }}"  class="navbar-brand" style="display: inline;"><i class="fas fa-home"></i>
 
-                            <li class="">
-                                <a href="{{route('misDatos')}}"><i class="far fa-smile"></i>
+
+                        Panel de Control  </a>
+                <a href="{{route('invitar')}}" class="navbar-brand"><i class="fas fa-user-plus"></i>
 
 
 
-                                    Mi perfil </a>
+                    Invitar  </a>
+                <a href="{{route('logout')}}" class="navbar-brand"  style="    float: right;"   > <span>Salir </span></a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav3">
+                    Nuevo
 
-                            </li>
-                            <li class="">
-                                <a href="{{route('invitar')}}"><i class="fa fa-user-plus"></i>
+                </button>
+                @if (Sentinel::check()   )
 
-
-
-                                    Invitar  </a>
-
-                            </li>
-                            <li class="">
-                                <a href="{{url('Situ/public')}}"><img width="25"  src="/imagenes/icono situ.ico"/>
+                    @if(Sentinel::check() && Sentinel::inRole('Alu'))
 
 
-
-                                    Mi SITU  </a>
-
-                            </li>
-                        @endif
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav2">
+                            Hechos
+                        </button>
 
 
 
                     @endif
 
-                </ul>
+
+
+                @endif
+
             @endif
 
         </div>
@@ -548,7 +557,21 @@
 
             </div>
         </div>
+        @if(Sentinel::check() && Sentinel::inRole('Alu'))
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav3">
+            <ul class="nav navbar-nav side-nav"  style="  margin-top: 20px ;">
 
+                @foreach($categorias as $categoria)
+                    <li class="" style="    padding: 10px;
+    color: white;">
+                        <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
+                            <i class="fas fa-plus-square"></i>
+                            {{$categoria->categoria}}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav2">
             <ul class="nav navbar-nav side-nav"  style="  margin-top: 25px ;">
