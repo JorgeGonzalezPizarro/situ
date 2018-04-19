@@ -72,8 +72,8 @@
 
 <div id="mailsub" class="notification" align="center">
 
-        <input type="text" id="encrypted" value="{{$encrypted}}"/>
-        <input type="text" id="email" value="{{$email}}"/>
+        <input type="hidden" id="encrypted" value="{{$encrypted}}"/>
+        <input type="hidden" id="email" value="{{$email}}"/>
 
 
 </div>
