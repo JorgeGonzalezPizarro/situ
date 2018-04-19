@@ -71,7 +71,7 @@
 
     <style>
         body {
-            background: #FAFAFA;
+            background: white ;
             color: #444;
             font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
             font-size: 13px;
@@ -159,6 +159,7 @@
         .navbar{
             /*min-height: 60px;*/
         }
+
         #nav2 li {
             border-bottom: 1px solid white;
         }
@@ -179,14 +180,21 @@
             transform: translatex(-50%);
         }
         .timeline > li > .timeline-panel {
-            width: 90%;
+            width: 100%;
             float: left;
-            border: 1px solid #999999;
-            border-radius: 10px;
+            border: 1px solid #00386557;
+            border-radius: 6px;
             padding: 20px;
             position: relative;
             -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 4px 11px rgba(0, 56, 101, 0.44);
+            background: #5bc0de0a;
+        }
+        .timeline > li > .timeline-panel:after {
+            display: none !important;
+        }
+        .timeline > li > .timeline-panel:before {
+            display: none !important;
         }
         @media (max-width: 1200px) {
             .navbar-header{

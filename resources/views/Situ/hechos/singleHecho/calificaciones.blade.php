@@ -83,7 +83,9 @@
                         <ul class="list-group">
 
 
-                            <li class="list-group-item text-muted" style="text-align: center" contenteditable="false">No existen datos</li>
+                            <li class="list-group-item text-muted" style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"style="text-align: center" contenteditable="false">No existen datos</li>
 
 
                         </ul></div></div></div>

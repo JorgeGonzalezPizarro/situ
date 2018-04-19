@@ -48,9 +48,10 @@ class AlumnoController extends Controller
         $categorias = Categorias::all();
         $hechos = $user->getHechos()->get();
         $frases = $user->getHechos()->where('categoria_id',3)->get();
-
+        $invitados=$user->getInvitados($user->id);
         view()->share('categorias', $categorias);
-        return view('Alumno.alumnoDashboard')->with('user',$user)->with('frases',$frases)->with('hechos', $hechos)->with('categorias', $categorias);
+        return view('Alumno.alumnoDashboard')
+        ->with('invitados',$invitados)->with('user',$user)->with('frases',$frases)->with('hechos', $hechos)->with('categorias', $categorias);
 
     }
 
@@ -583,31 +584,52 @@ class AlumnoController extends Controller
                 $data = array('alumno'=>$invitado2->getAlumno()->get()->first()->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
 
                 );
-                $url= url("loginInv/". $request['email'] ."/".$encrypted."/") ;
+                $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
 
+                Mail::send('email', $data,function ($mensaje) use($data,$link,$invitado2,$request,$encrypted){
+
+                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                    $mensaje->subject("Has sido invitado a SITU");
+                    $mensaje->to($data['email'],$data['first_name']);
+                    $mensaje->attach($link,['as' => 'SITU_'.$invitado2->getAlumno()->get()->first()->first_name.'.html',
+                        'mime' => 'text/html']);
+
+
+
+                });
             }elseif($invitado2->rol=='Profesor') {
                 $data = array('profesor'=>$usuario->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
                 );
-                $url= url("loginInv/". $request['email'] ."/".$encrypted."/") ;
+                $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
 
+                Mail::send('email', $data,function ($mensaje) use($data,$link,$request,$encrypted){
+
+                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                    $mensaje->subject("Has sido invitado a SITU");
+                    $mensaje->to($data['email'],$data['first_name']);
+                    $mensaje->attach($link, ['as' => 'SITU'.'.html',
+                        'mime' => 'text/html']);
+
+
+
+                });
             }
                else {
                 $data = array('first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
                 );
                    $url= url("login") ;
 
+                   Mail::send('email', $data,function ($mensaje) use($data,$url,$request,$encrypted){
+
+                       $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                       $mensaje->subject("Has sido invitado a SITU");
+                       $mensaje->to($data['email'],$data['first_name']);
+
+
+                   });
+
                }
-            Mail::send('email', $data,function ($mensaje) use($data,$url,$request,$encrypted){
 
-                $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
-                $mensaje->subject("Has sido invitado a SITU");
-                $mensaje->to($data['email'],$data['first_name']);
-                $mensaje->attach($url,  [ 'as' => 'loginInv/'. $request['email'].'/'.$encrypted.'/',
-                    'mime' => 'text/html']);
-
-
-            });
-            return redirect()->back();
         }
 
         return Redirect::back();

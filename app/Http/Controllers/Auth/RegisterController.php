@@ -172,21 +172,34 @@ class RegisterController extends Controller
 
 
 
+//                return view('accesoDirecto')->with('encrypted',$encrypted)->with('email',$request['email']);
 
-                $data = array('profesor'=>$user->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
-                );
+                $data = array('profesor'=>$user->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted);
+//                $link= url('loginInv'."/". $request['email'] ."/".$encrypted);
+                $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
+                Mail::send('email', $data,function ($mensaje) use($data,$request,$encrypted,$link){
+
+                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                    $mensaje->subject("Bienvenido a SITU");
+                    $mensaje->to($data['email'],$data['first_name']);
+                    $mensaje->attach($link,['as' => 'SITU'.'.html',
+                        'mime' => 'text/html']);
+
+                });
             }else{
-                $data = array('password'=>Input::get('password'),'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted,
-                );
+                $data = array('password'=>Input::get('password'),'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted);
+
+                $link=  ("http://situ.ufv:8080");
+                Mail::send('email', $data,function ($mensaje) use($data,$request,$encrypted,$link){
+
+                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                    $mensaje->subject("Bienvenido a SITU");
+                    $mensaje->to($data['email'],$data['first_name']);
+
+                });
+
             }
-            Mail::send('email', $data,function ($mensaje) use($data){
 
-                $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
-                $mensaje->subject("Bienvenido a SITU");
-                $mensaje->to($data['email'],$data['first_name']);
-
-
-            });
 //           return redirect('/');
 //           return redirect('/');
             return redirect()->back();

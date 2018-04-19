@@ -67,6 +67,7 @@
                 <thead>
                 <tr>
                     <th>Invitado</th>
+                    <th>Contacto</th>
                     <th>Rol</th>
                     <th>Acceso a </th>
                     <th>Numero de accesos</th>
@@ -82,6 +83,7 @@
                         <tr>
                             <td style="text-align: center;"> <span style=" font-style: italic">{{($acceso->getInvitados()->get()->first())->getUsuario()->get()->first()->first_name ." ".
                              ($acceso->getInvitados()->get()->first())->getUsuario()->get()->first()->last_name}}</span></td>
+                            <td style="text-align: center;"> <span style=" font-style: italic">{{($acceso->getInvitados()->get()->first())->getUsuario()->get()->first()->email ." "}}</span></td>
                             <td> <span style="margin-left:30px; font-style: italic">{{$acceso->getInvitados()->get()->first()->rol}}</span></td>
                             @if(!empty($acceso->hechos_id))
                                <td style="text-align: center;" > <a    style=" font-style: italic" href="{{ url('Situ/public') }}/{{($acceso->getHechos()->get()->first())->id}}/{{($acceso->getHechos()->get()->first())->getCategoria()->get()->first()->id}}" target="_blank" >Ver</a></td>

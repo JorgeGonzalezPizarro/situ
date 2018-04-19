@@ -68,8 +68,11 @@ class LoginController extends Controller
 
             try {
                 $decrypted = decrypt($encrypted);
+<<<<<<< HEAD
                 return view('auth.loginInv')->with('email', $email)
                     ->with('decrypted', $decrypted);
+=======
+>>>>>>> bc225302d39b8cd161c1cdf1c59002d4e7f87575
             } catch (DecryptException $e) {
                 $decrypted = "";
                 return view('auth.loginInv')

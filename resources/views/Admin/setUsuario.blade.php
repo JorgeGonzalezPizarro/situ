@@ -73,6 +73,14 @@
     border-color: #bce8f1;" class="panel-heading">ACTIVIDAD <i class="fas fa-info"></i></div>
 
             <ul class="list-group">
+<<<<<<< HEAD
+=======
+                <li class="list-group-item text-muted" style="
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+">Actividad <i class="fa fa-dashboard fa-1x"></i>
+>>>>>>> bc225302d39b8cd161c1cdf1c59002d4e7f87575
 
                 </li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong
