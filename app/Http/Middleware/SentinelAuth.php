@@ -37,7 +37,6 @@ class SentinelAuth
         elseif  (Sentinel::check() && Sentinel::inRole('Inv')) {
 
 
-
                 return redirect('Situ\public');
 
 
@@ -48,7 +47,8 @@ class SentinelAuth
 
 
         }
-                return $next($request);
+
+        return $next($request);
     }
 }
 

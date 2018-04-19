@@ -122,10 +122,13 @@
                                       <i class="fab fa-linkedin-in" style="font-size: 22px;"></i></span>
 
                             <span><p>   <a href="http://{!!  $img['linkedin']!!}"> Perfil en Linkedin</a></p></span></li>
-
+                        @if(Sentinel::inRole('Inv') ||Sentinel::inRole( 'Prof'))
+                            <li class="list-group-item text-right"><span class="pull-left">  <strong>Generar CV</strong>
+                                    </span> <span><p><a target="_blank" href="{{url('Situ/public/0/5/'.$alumno->id.'/cv')}}"><button type="button" class="btn btn-raised btn-secondary">CV</button></a></p></span></li>
+                        @else
                         <li class="list-group-item text-right"><span class="pull-left">  <strong>Generar CV</strong>
                                     </span> <span><p><a target="_blank" href="{{url('Situ/public/0/5/0/cv')}}"><button type="button" class="btn btn-raised btn-secondary">CV</button></a></p></span></li>
-
+                        @endif
                     </ul>
                 </div>
             </div>

@@ -96,7 +96,7 @@ class SituController extends Controller
                     $alumno = Sentinel::findById($alu);
 //                    $invitado->alumno_id = $alu;
 //                    $invitado->update();
-                    $alumno = $invitado->getAlumno()->get()->first();
+                    $alumno = User::where('id',$alu)->get()->first();
 
                     $rol = Sentinel::findRoleById(2);
                     $alumnos = $rol->users()->with('roles')->get();
@@ -228,6 +228,7 @@ class SituController extends Controller
             }
         }
         else{
+
             return \redirect('login');
         }
 
@@ -541,12 +542,12 @@ class SituController extends Controller
 
         return response($hechosPublicos);
     }
-    public function cv()
+    public function cv($id=null,$categoria=null,$alu=null)
     {
         if (Sentinel::inRole('Prof') || Sentinel::inRole('Inv')) {
             $usuario = Sentinel::getUser();
             $invitado=Invitados::where('invitado_id',$usuario->id)->get()->first();
-            $alumnoCv=$invitado->getAlumno()->get()->first();
+            $alumnoCv=User::where('id',$alu)->get()->first();
 //        $alumno = Invitados::where('invitado_id', $usuario->id)->get()->first();
             $hecho = hechos::all();
             $formacion=Formacion::where([['user_id',$alumnoCv->id]])->get()->all();

@@ -19,7 +19,9 @@
             <div class="col-md-5">
                 <div style="    color: #ffffff;
     background-color: #003865;
-    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
+    border-color: #bce8f1;" class="panel-heading">REGISTRO Y ACCESO <i class="fas fa-sign-in-alt"></i>
+
+                </div>
                 <ul class="list-group">
 
 
@@ -35,7 +37,9 @@
             <div class="  col-md-5">
                 <div style="    color: #ffffff;
     background-color: #003865;
-    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
+    border-color: #bce8f1;" class="panel-heading">PERIL <i class="fas fa-user"></i>
+
+                </div>
                 <ul class="list-group">
 
 
@@ -66,10 +70,9 @@
 
             <div style="    color: #ffffff;
     background-color: #003865;
-    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
+    border-color: #bce8f1;" class="panel-heading">ACTIVIDAD <i class="fas fa-info"></i></div>
 
             <ul class="list-group">
-                <li class="list-group-item text-muted">Actividad <i class="fa fa-dashboard fa-1x"></i>
 
                 </li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong
@@ -87,9 +90,8 @@
             <div class="col-md-5">
                 <div style="    color: #ffffff;
     background-color: #003865;
-    border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
+    border-color: #bce8f1;" class="panel-heading">ETIQUETAS <i class="fas fa-tag"></i></div>
             <ul class="list-group">
-                <li class="list-group-item text-muted"> Etiquetas <i class="fa fa-dashboard fa-1x"></i>
 
                 </li>
                 @foreach($etiquetas as $etiqueta)
