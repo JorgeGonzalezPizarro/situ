@@ -41,7 +41,26 @@
                     {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+        <label for="name" class="cols-sm-2 control-label">Rol</label>
 
+        <div id="rolesDiv" class="form-group  {{ $errors->has('first_name') ? 'has-error' : ''}}">
+            <div class="cols-sm-10">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+
+                    {!! Form::select('roles[]', $roles ,$roles,['id'=>'roles','class' => 'form-control','data-live-search'=>'true']) !!}
+                    {{--{!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ) !!}--}}
+
+
+
+                </div>
+                {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
+
+            </div>
+        </div>
+
+        <div id="rolesDiv1" class="form-group">
+        </div>
             <div class="form-group  {{ $errors->has('email') ? 'has-error' : ''}}">
                 <label for="email" class="cols-sm-2 control-label">Email</label>
                 <div class="cols-sm-10">
@@ -52,8 +71,9 @@
                     {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
+        <div id="rolesDiv2" class="">
 
-            <div class="form-group  {{ $errors->has('password') ? 'has-error' : ''}}">
+            <div class="form-group  {{ $errors->has('password') ? 'has-error' : ''}}" id="passwordProf">
                 <label for="password" class="cols-sm-2 control-label">Contraseña</label>
                 <div class="cols-sm-10">
                     <div class="input-group">
@@ -76,26 +96,7 @@
                     {!! $errors->first('password_confirmation', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-            <label for="name" class="cols-sm-2 control-label">Rol</label>
-
-            <div id="rolesDiv" class="form-group  {{ $errors->has('first_name') ? 'has-error' : ''}}">
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-
-                        {!! Form::select('roles[]', $roles ,$roles,['id'=>'roles','class' => 'form-control','data-live-search'=>'true']) !!}
-                        {{--{!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ) !!}--}}
-
-
-
-                    </div>
-                    {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
-
-                </div>
-            </div>
-
-            <div id="rolesDiv1" class="form-group">
-            </div>
+        </div>
             <div class="form-group  {{ $errors->has('password') ? 'has-error' : ''}} ">
                 <button class="btn btn-primary btn-lg btn-block register-button" type="submit" >Registrar</button>
 
@@ -129,6 +130,7 @@
 
                 if(strUser == 'Prof' )
                 {
+                    $("#rolesDiv2").hide();
 
                     fecha_limite();
 
@@ -156,6 +158,10 @@
                     };
 
                     $.datepicker.setDefaults($.datepicker.regional['es']);
+
+                }
+                else{
+                    $("#rolesDiv2").show();
 
                 }
             })

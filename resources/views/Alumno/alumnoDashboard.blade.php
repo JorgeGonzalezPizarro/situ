@@ -155,6 +155,7 @@
                                 INVITADOS
                             </div>
                         </div>
+                        @if(count($invitados)>0)
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
@@ -173,6 +174,24 @@
 
                     </div>
                 </div>
+                            @else
+                            <ul class="timeline">
+                                <li>
+                                        <div class="timeline-heading">
+                                            <p><small class="text-muted"> </small></p>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <div class="alert alert-warning"><a href="{{route('invitar')}}" >Aun no tienes invitados ! Comienza a invitar para dar a conocer tu perfil </a>
+                                                </div>
+
+
+
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        @endif
             </div>
 
 

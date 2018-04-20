@@ -405,7 +405,21 @@
 
                     @endif
 
+                        @if(Sentinel::check() && Sentinel::inRole('Alu'))
+                            <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav3">
+                                <ul class="nav navbar-nav side-nav"  style="  margin-top: 20px ;">
 
+                                    @foreach($categorias as $categoria)
+                                        <li class="" style="
+    color: white;">
+                                            <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
+                                                <i class="fas fa-plus-square"></i>
+                                                {{$categoria->categoria}}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
                 @endif
 
@@ -443,7 +457,7 @@
                                     <ul  style="    background: #003865c7;
     color: white;" class="dropdown-menu" id="menuNuevo">
                                         @foreach($categorias as $categoria)
-                                            <li class="" style="    padding: 10px;
+                                            <li class="" style="
     color: white;">
                                                 <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
                                                     <i class="fas fa-plus-square"></i>
@@ -480,6 +494,15 @@
                                         Mi SITU  </a>
 
                                 </li>
+                                <li class="">
+
+                                    <a style="padding: 10px;" target="_blank" href="{{url('Situ/public/0/5/'.Sentinel::getUser()->id.'/cv')}}"><button type="button" class="btn btn-raised btn-secondary">CV</button></a>
+                                </li>
+                                <li class="">
+
+                                <a style="padding: 10px;" target="_blank" href="{{route('logAccesos')}}"><button type="button" class="btn btn-raised btn-secondary">LOGS ACCESOS</button></a>
+                                </li>
+
                             @endif
 
 
@@ -557,21 +580,7 @@
 
             </div>
         </div>
-        @if(Sentinel::check() && Sentinel::inRole('Alu'))
-        <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav3">
-            <ul class="nav navbar-nav side-nav"  style="  margin-top: 20px ;">
 
-                @foreach($categorias as $categoria)
-                    <li class="" style="    padding: 10px;
-    color: white;">
-                        <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
-                            <i class="fas fa-plus-square"></i>
-                            {{$categoria->categoria}}</a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav2">
             <ul class="nav navbar-nav side-nav"  style="  margin-top: 25px ;">

@@ -58,7 +58,7 @@
                 <ul class="list-group">
                     <li class="list-group-item text-muted" style="color: #31708f;
     background-color: #d9edf7;
-    border-color: #bce8f1;"contenteditable="false">Perfil</li>
+    border-color: #bce8f1;"contenteditable="false">Log</li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                     class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
@@ -118,7 +118,8 @@
 
 
                     <div class="panel panel-info">
-
+                        <div class="panel-heading">Mi Perfil <i class="fa fa-user fa" aria-hidden="true"></i>
+                        </div>
                         <div class="panel-body">
                             <div class="row">
 
@@ -153,7 +154,7 @@
                                         <tr>
                                         <tr>
                                             <td><strong class="">DNI:</strong></td>
-                                            <td>{!! Form::text('dni', null, ['id'=>'dni','class' => 'misDatos','readonly' => 'true']) !!}
+                                            <td>{!! Form::text('dni', null, ['id'=>'dni','class' => 'misDatos','readonly' => 'true','value '=> $user->dni]) !!}
                                                 <a href="#" id="clickable5"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -161,7 +162,7 @@
                                             </td>
                                         </tr>
                                             <td><strong class="">Direccion:</strong></td>
-                                            <td>{!! Form::text('direccion', null, ['id'=>'direccion','class' => 'misDatos','readonly' => 'true']) !!}
+                                            <td>{!! Form::text('direccion', null, ['id'=>'direccion','class' => 'misDatos','readonly' => 'true','value '=> $user->direccion]) !!}
                                                 <a href="#" id="clickable6"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -171,7 +172,7 @@
 
                                         <tr>
                                             <td><strong class="">Telefono:</strong></td>
-                                            <td>{!! Form::text('telefono', null, ['id'=>'telefono','class' => 'misDatos','readonly' => 'true']) !!}
+                                            <td>{!! Form::text('telefono', null, ['id'=>'telefono','class' => 'misDatos','readonly' => 'true','value '=> $user->telefono]) !!}
                                                 <a href="#" id="clickable7"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -234,16 +235,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="panel-footer">
-                            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
-                            <span class="pull-right">
-                            <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button"
-                               class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
-                        </span>
-                        </div>
+
 
                     </div>
 
@@ -310,20 +302,12 @@
                        Añadir Etiqueta <i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
 
                     </a>
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Likes</strong></span> 13--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Posts</strong></span> 37--}}
-                    {{--</li>--}}
-                    {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                    {{--class="">Followers</strong></span> 78--}}
-                    {{--</li>--}}
+
                 </ul>
 
             </div>
 
-            <div id="push"></div>
+
         </div>
         <footer id="footer">
 

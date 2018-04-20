@@ -509,6 +509,15 @@ class AlumnoController extends Controller
 
     }
 
+
+    function autogenerar_password( $length = 8 ) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+        $password = substr( str_shuffle( $chars ), 0, $length );
+        return $password;
+    }
+
+
+
     /*Invitacion a Profesores e Invitados por parte del alumno
     Cada Invitado-Profesor tiene un Rol y un Nivel de acceso
 
@@ -527,19 +536,16 @@ class AlumnoController extends Controller
             return Redirect::back()->withErrors($validation)->withInput();
         }
         $usuario = Sentinel::findById(Sentinel::getUser()->id);
-        $credentials = [
-            'email' => Input::get('email'),
-            'password' => Input::get('password'),
-        ];
+
+        $request['password']=$this->autogenerar_password();
         $rol = $request['roles'];
         $role = $rol[0];
-        $invitado = Sentinel::register($request->all());
+        $invitado = Sentinel::register( $request->all());
         $invitado->roles()->sync([$role]);
         $invitado->permissions = [(Sentinel::findRoleById($role)->name)];
 //        $invitado->img = "/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
         $otros_datos=array('linkedin'=>'','facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png',);
         $invitado->otros_datos=json_encode($otros_datos);
-
         //INVITADO . A LOS HECHOS QUE QUIERA EL USUARIO
         if ($role == '4') {
             $invitado->nivel_acceso = '2';

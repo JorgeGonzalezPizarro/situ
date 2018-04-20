@@ -180,6 +180,7 @@ class LoginController extends Controller
                         $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
 
                         if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
+                            Sentinel::logout();
 
                             return view('auth.loginInv')->withErrors(['global' => 'Error al logear invitado, contactar con administracion : Admin@admin.com '])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
                         } else {

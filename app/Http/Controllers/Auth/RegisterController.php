@@ -61,7 +61,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return User
      */
-    
+    function autogenerar_password( $length = 8 ) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+        $password = substr( str_shuffle( $chars ), 0, $length );
+        return $password;
+    }
+
     public function showRegistrationForm()
     {
 //        $role= new Role();
@@ -78,7 +83,7 @@ class RegisterController extends Controller
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
                 'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6|confirmed',
+                'password' => 'string|min:6',
                 'permissions' =>  'string|min:6|confirmed',
                 'otros_datos' => 'nullable',
             ]);
@@ -97,13 +102,16 @@ class RegisterController extends Controller
          $otros_datos=array('linkedin'=>'','facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
         $rol=$request['roles'];
         $role=$rol[0];
-//        return response($role);
+        if($rol=='Prof'){
+            $request['password']=$this->autogenerar_password();
+        }
+        else{
+
+        }
         $user = Sentinel::register($request->all());
         $user->roles()->sync([$role]);
-//       $user->img="/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png";
         $user->permissions = [(Sentinel::findRoleById($role)->name)];
         $user->otros_datos=json_encode($otros_datos);
-//        $user->nivel_acceso='1';
 
         if($role=="2"){
           $user->nivel_acceso='1';
@@ -129,11 +137,8 @@ class RegisterController extends Controller
             $invitado->numero_accesos=0;
             $format = 'd/m/Y';
 
-//            $format = 'dd/mm/YY HH:mm:ss';
                 $invitado->fecha_limite = Carbon\Carbon::createFromFormat($format, Input::get('fecha_limite'));
-//
-//            $invitado->fecha_limite=Carbon::parse(Input::get('fecha_limite'));
-//           =Input::get('fecha_limite');
+
 
             $invitado->save();
             $user->nivel_acceso='3';
@@ -142,16 +147,8 @@ class RegisterController extends Controller
 
         $user->save();
 
-
-
-
-//        $user ->otros_datos['img' => '\js\tinymce\plugins\responsive_filemanager\source\user_default.png']);
-//        $user->otros_datos->img = 'some_other_value';
-
-        //Activate the user **
          $activation = Activation::create($user);
          $activation = Activation::complete($user, $activation->code);
-        //End activation
         $request['name'];
         $rol=$request['roles'];
         $rol=$rol[0];
@@ -164,18 +161,7 @@ class RegisterController extends Controller
             if($user->roles()->get()->first()->name != "Alumno"){
 
 
-
-//            $data=[
-//                'request'=>$request->all(),
-//                'encrypted'=>$encrypted
-//            ];
-
-
-
-//                return view('accesoDirecto')->with('encrypted',$encrypted)->with('email',$request['email']);
-
                 $data = array('profesor'=>$user->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted);
-//                $link= url('loginInv'."/". $request['email'] ."/".$encrypted);
                 $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
                 Mail::send('email', $data,function ($mensaje) use($data,$request,$encrypted,$link){
 

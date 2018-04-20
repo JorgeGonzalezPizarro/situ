@@ -71,8 +71,8 @@
 
 
                     <div class="panel panel-info">
-                        <div style="    color: #ffffff;
-    background-color: #003865;
+                        <div style="
+
     border-color: #bce8f1;" class="panel-heading">EXPERIENCIA PROFESIONAL</div>
 
 
@@ -445,8 +445,7 @@
 
                 <div class="panel panel-info">
 
-                    <div style="    color: #ffffff;
-    background-color: #003865;
+                    <div style="
     border-color: #bce8f1;" class="panel-heading">FORMACIÓN</div>
 
                     <div class="panel-body">

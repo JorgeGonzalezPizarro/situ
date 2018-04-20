@@ -35,15 +35,26 @@ class SentinelAuth
                 return redirect('Alumno\alumnoDashboard');
             }
         elseif  (Sentinel::check() && Sentinel::inRole('Inv')) {
+                if(Sentinel::getUser()->invitado()->get()->first()->fecha_limite < (Carbon::now()->toDateString())){
+                    Sentinel::logout();
+                    return redirect('Situ\loginInv');
+                }else{
+                    return redirect('Situ\public');
 
+                }
 
-                return redirect('Situ\public');
 
 
         }
         elseif  (Sentinel::check() && Sentinel::inRole('Prof')) {
 
+            if(Sentinel::getUser()->invitado()->get()->first()->fecha_limite < (Carbon::now()->toDateString())){
+                Sentinel::logout();
+                return redirect('Situ\loginInv');
+            }else{
                 return redirect('Situ\public');
+
+            }
 
 
         }

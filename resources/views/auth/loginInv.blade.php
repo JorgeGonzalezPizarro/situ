@@ -47,9 +47,9 @@
 
             @else
                 <div class="row">
-                <div class="alert alert-warning" alert-dismissable fade in id="sessions-hide">
+                    <div class="alert alert-warning " alert-dismissable fade in id="sessions-hide">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>Desconectado ! </strong>Para volver a entrar en la plataforma utilice la invitación.
+                    <strong style="font-weight: 700 !important;    color: #013660;">Has abandonado la plataforma o has alcanzado tu tiempo límite de uso ! </strong>Para volver a entrar en la plataforma utilice la invitación.
                 </div>
                 </div>
                 @endif

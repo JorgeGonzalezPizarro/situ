@@ -374,7 +374,20 @@
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav2">
                                 Hechos
                                 </button>
+                        <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav3">
 
+                            <ul class="nav navbar-nav side-nav"  style="  margin-top: 20px ;">
+
+                                @foreach($categorias as $categoria)
+                                    <li class="" style="    padding: 10px;
+    color: white;">
+                                        <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
+                                            <i class="fas fa-plus-square"></i>
+                                            {{$categoria->categoria}}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
 
 
                         @endif
@@ -386,19 +399,7 @@
                 @endif
 
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav3">
-            <ul class="nav navbar-nav side-nav"  style="  margin-top: 20px ;">
 
-                        @foreach($categorias as $categoria)
-                            <li class="" style="    padding: 10px;
-    color: white;">
-                                <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
-                                    <i class="fas fa-plus-square"></i>
-                                    {{$categoria->categoria}}</a>
-                            </li>
-                        @endforeach
-            </ul>
-        </div>
 
         <!-- Top Menu Items -->
         <div class="collapse navbar-collapse" style=" " id="bs-example-navbar-collapse-1">
@@ -461,6 +462,14 @@
 
                                             Mi SITU  </a>
 
+                                    </li>
+                                    <li class="">
+
+                                        <a style="padding: 10px;" target="_blank" href="{{url('Situ/public/0/5/'.Sentinel::getUser()->id.'/cv')}}"><button type="button" class="btn btn-raised btn-secondary">CV</button></a>
+                                    </li>
+                                    <li class="">
+
+                                        <a style="padding: 10px;" target="_blank" href="{{route('logAccesos')}}"><button type="button" class="btn btn-raised btn-secondary">LOGS ACCESOS</button></a>
                                     </li>
                                 @endif
 

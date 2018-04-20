@@ -87,7 +87,8 @@ Otra manera de ver tu carrera academico-profesional.
                                                     <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
                                                     <div style="line-height: 21px;">
 								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
-Comparte tus experiencias , cursos, asignaturas, grados, masters, ...								</span>
+Comparte tus experiencias , cursos, asignaturas, grados, masters...
+                                </span>
                                                     </div>
                                                 </td></tr>
                                         </table>

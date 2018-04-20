@@ -57,7 +57,9 @@
 
                     <div class="panel panel-info">
 
+                        <div class="panel-heading">Formulario de Invitación
 
+                        </div>
                         <div class="panel-body">
                             <div class="row">
 
@@ -96,28 +98,27 @@ El correo electronico ya existe</p></div>') !!}
 
                                             </div>
                                         </tr>
-                                        <tr>
-                                            <td><strong class="">Password:</strong></td>
-                                            <td>
-                                                <input class="field"  name="password" id="password" type="password" required >
+                                        {{--<tr>--}}
+                                            {{--<td><strong class="">Password:</strong></td>--}}
+                                            {{--<td>--}}
+                                                {{--<input class="field"  name="password" id="password" type="password" required >--}}
 
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                        <td><strong class=""> </strong></td>
-                                        <td>
+                                            {{--</td>--}}
+                                        {{--</tr>--}}
+                                        {{--<tr>--}}
+                                        {{--<td><strong class=""> </strong></td>--}}
+                                        {{--<td>--}}
 
-                                            <input name="password_confirmation" class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required   id="password_confirmation" type="password" value="">
+                                            {{--<input name="password_confirmation" class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required   id="password_confirmation" type="password" value="">--}}
 
-                                        </td>
-                                        </tr>
+                                        {{--</td>--}}
+                                        {{--</tr>--}}
                                         <tr>
-                                            <td><strong class="">Rol:</strong></td>
                                             <td>
                                             {{--{!! Form::select($role->Slug, null, ['class' => 'form-control','placeholder '=>'Enter your  name']) !!}--}}
                                                 {{--{!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['class' => 'form-control ]) !!}--}}
 
-                                                {!! Form::select('roles[]', ['3'=>'Profesor','4'=>'Invitado'] ,$roles, ['id'=>'roles', 'class' => 'form-control','style'=>'width:40%;']) !!}
+                                                {!! Form::select('roles[]', ['4'=>'Invitado'] ,$roles, ['id'=>'roles', 'class' => 'form-control','style'=>'display:none;']) !!}
 
                                             </td>
                                         </tr>
@@ -208,7 +209,8 @@ El correo electronico ya existe</p></div>') !!}
         </div>
         <div class="col-md-2">
            <span class="pull-left">  <strong></strong>
-           </span> <span><p><a target="_blank" href="{{route('logAccesos')}}"><button type="button" class="btn btn-raised btn-secondary">LOGS ACCESOS</button></a></p></span>
+           </span> <span><p>                    <a target="_blank" href="{{route('logAccesos')}}"><button type="button" class="btn btn-raised btn-secondary">LOGS ACCESOS</button></a></p></span>
+
 
         </div>
 

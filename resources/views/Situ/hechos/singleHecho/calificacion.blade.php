@@ -6,21 +6,17 @@
     <div class="container">
 
         <div class="row">
-
+<div class="col-lg-12">
+    <div class="col-sm-12">
             <h1 class="mt-4">{{$hecho->titulo_hecho}}</h1>
 
             <!-- Author -->
             <p class="lead">
                 <a href="">{{$user-> first_name. " ". $user->last_name}} </a>
             </p>
-            <!-- Post Content Column -->
+</div>
+</div>
                     <div class="col-lg-8">
-
-                        <!-- Title -->
-
-
-
-
 
                         @if(!empty($hecho->ruta_imagen))
                         <img class="img-fluid rounded" style="width: 600px; height: 300px;"src="{{$hecho->ruta_imagen}}" alt="">
@@ -58,34 +54,43 @@
 
 
             </div>
-
             <div class="col-md-4">
+
+            <div class="col-md-12">
                 <div class="card-body">
                             <ul class="list-group">
-
+                                <li style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Fechas y Estado</h5>
+                                </li>
 
                                 <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                class="">Fecha  </strong></span><span><p> {{$hecho->fecha_inicio}}</p></span></li>
+                                                class="">Fecha del hecho  </strong></span><span><p> {{$hecho->fecha_inicio}}</p></span></li>
                                 <li class="list-group-item text-right"><span class="pull-left"><strong
                                                 class="">Creado </strong></span><span><p>{{$hecho->created_at}}</p></span></li>
+                                <li class="list-group-item text-right"><span class="pull-left"><strong
+                                                class="">Estado </strong></span><span><p>{{$hecho->publico}}</p></span></li>
                             {{--Fecha del hecho {{$hecho->fecha_inicio}}</input>--}}
                             </ul>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="card-body">
                     <ul class="list-group">
 
-
+                        <li style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Propósito</h5>
+                        </li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong
-                                        class="">Proposito  </strong></span><span><p> {{$hecho->proposito}}</p></span></li>
+                                        class=""> {{$hecho->proposito}} </strong></span><span><p> </p></span></li>
                     </ul>
                 </div>
             </div>
                 <hr>
                 <!-- Search Widget -->
 
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <ul class="list-group">
 
                 <li style="color: #31708f;
@@ -104,7 +109,7 @@
 
                 </div>
                 <!-- Side Widget -->
-                    <div class="col-md-4">
+                    <div class="col-md-12">
                 <ul class="list-group">
 
 
@@ -125,7 +130,7 @@
             </div>
 
             </div>
-
+        </div>
             @if(!empty($otrosHechos))
                 <!-- Post Content Column -->
                     <div class="row">

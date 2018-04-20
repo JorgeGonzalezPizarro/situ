@@ -184,8 +184,8 @@ Licensed under MIT
                                                         <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
                                                         <div style="line-height: 21px;">
 								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
-									Lorem ipsum dolor sit amet consectetuer sed et diam noumy elit dolore
-								</span>
+Otra manera de ver tu carrera academico-profesional.
+                                </span>
                                                         </div>
                                                     </td></tr>
                                             </table>
@@ -201,9 +201,9 @@ Licensed under MIT
                                                         </div>
                                                         <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
                                                         <div style="line-height: 21px;">
-								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
-									Lorem ipsum dolor sit amet consectetuer sed et diam noumy elit dolore
-								</span>
+	<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
+Comparte tus experiencias , cursos, asignaturas, grados, masters...
+                                </span>
                                                         </div>
                                                     </td></tr>
                                             </table>
@@ -220,8 +220,7 @@ Licensed under MIT
                                                         <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
                                                         <div style="line-height: 21px;">
 								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
-									Lorem ipsum dolor sit amet consectetuer sed et diam noumy elit dolore
-								</span>
+Date a conocer y haz crecer tu perfil.								</span>
                                                         </div>
                                                     </td></tr>
                                             </table>

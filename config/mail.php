@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'jorge.j.gonzalez.93@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Jorge'),
+        'address' => env('MAIL_FROM_ADDRESS', 'situ.adm.1@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Admin'),
     ],
 
     /*
@@ -129,10 +129,10 @@ return [
     'driver' => env('MAIL_DRIVER', 'smtp'),
     'host' => env('MAIL_HOST', 'smtp.gmail.com'),
     'port' => env('MAIL_PORT', 587),
-    'from' => ['address' => 'jorge.j.gonzalez.93@gmail.com', 'name' => 'Jorge Gonzalez'],
+    'from' => ['address' => 'situ.adm.1@gmail.com', 'name' => 'Administracion Situ'],
     'encryption' => env('MAIL_ENCRYPTION', 'tls'),
-    'username' => 'jorge.j.gonzalez.93@gmail.com',
-    'password' => 'jorgejink',
+    'username' => 'situ.adm.1@gmail.com',
+    'password' => 'ADMINSITU',
     'sendmail' => '/usr/sbin/sendmail -bs',
     'pretend' => false,
 
