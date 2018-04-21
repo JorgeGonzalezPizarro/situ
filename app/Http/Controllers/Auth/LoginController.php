@@ -7,7 +7,7 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-
+use App\Http\Controllers\SentinelController;
 use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
 use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
 use Sentinel;
@@ -84,7 +84,6 @@ class LoginController extends Controller
     protected function login(Request $request)
     {
 
-
         try {
 
             // Validation
@@ -99,7 +98,7 @@ class LoginController extends Controller
             $remember = (Input::get('remember') == 'on') ? true : false;
             $usuarios=User::where('email',$request['email'])->get()->all();
             if (count($usuarios)>1) {
-              if($user=Sentinel::authenticate($request->all(), $remember)) {
+              if($user=(new SentinelController())->authenticate($request->all(), $remember)) {
 
                   if (Sentinel::check() && Sentinel::inRole('Prof')) {
 
