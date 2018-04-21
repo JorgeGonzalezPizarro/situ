@@ -78,7 +78,11 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+<<<<<<< HEAD
                         {!! Form::password('password', ['class' => 'form-control','rel'=>'gp' ,'data-size'=>'10' ,'data-character-set'=>'a-z,A-Z,0-9,#' ,'id'=>'password1','placeholder '=>'Ingrese la contraseña']) !!}
+=======
+                        {!! Form::password('password', ['class' => 'form-control','rel'=>'gp' ,'data-size'=>'10' ,'data-character-set'=>'a-z,A-Z,0-9,#', 'id'=>'password1','placeholder '=>'Ingrese la contraseña']) !!}
+>>>>>>> fbb1718ff987a738b9559d3665482b00bad8815e
 
                     </div>
                     {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
@@ -90,7 +94,11 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+<<<<<<< HEAD
                         {!! Form::password('password_confirmation', ['class' => 'form-control','rel'=>'gp' ,'data-size'=>'10' ,'id'=>'password2','data-character-set'=>'a-z,A-Z,0-9,#' ,'placeholder '=>'Confirmar contraseña']) !!}
+=======
+                        {!! Form::password('password_confirmation', ['id'=>'password2','class' => 'form-control','rel'=>'gp' ,'data-size'=>'10' ,'data-character-set'=>'a-z,A-Z,0-9,#' ,'placeholder '=>'Confirmar contraseña']) !!}
+>>>>>>> fbb1718ff987a738b9559d3665482b00bad8815e
 
                     </div>
                     {!! $errors->first('password_confirmation', '<p class="help-block">:message</p>') !!}

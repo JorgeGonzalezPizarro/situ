@@ -27,7 +27,11 @@ use App\CursoAlumno;
 use App\Categorias;
 class SituController extends Controller
 {
-
+    public function __construct()
+    {
+        //$this->middleware('auth')->except('orders');
+        $this->middleware('Invitado');
+    }
         public function getIndex(){
 
             $user=Sentinel::getUser();

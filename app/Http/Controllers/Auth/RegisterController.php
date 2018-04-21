@@ -82,8 +82,10 @@ class RegisterController extends Controller
         $validation = Validator::make($request->all(), [
                 'first_name' => 'required|string|max:255',
                 'last_name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'string|min:6',
+                'email' => 'required|string|email|max:255',
+//            'email' => 'required|string|email|max:255|unique:users',
+
+            'password' => 'string|min:6',
                 'permissions' =>  'string|min:6|confirmed',
                 'otros_datos' => 'nullable',
             ]);
@@ -102,8 +104,10 @@ class RegisterController extends Controller
          $otros_datos=array('linkedin'=>'','facebook'=>'','img'=>'/js/tinymce/js/tinymce/plugins/responsive_filemanager/source/user_default.png');
         $rol=$request['roles'];
         $role=$rol[0];
-        if($rol=='Prof'){
-            $request['password']=$this->autogenerar_password();
+        if($role==3){
+            $request->merge(['password' => $this->autogenerar_password()]);
+
+            $request['password_confirmation']=$request['password'];
         }
         else{
 
@@ -188,6 +192,7 @@ class RegisterController extends Controller
 
 //           return redirect('/');
 //           return redirect('/');
+            return $request;
             return redirect()->back();
         }
         // Session::flash('message', 'There was an error with the registration' );
