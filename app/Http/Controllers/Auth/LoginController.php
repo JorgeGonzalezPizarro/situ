@@ -99,6 +99,7 @@ class LoginController extends Controller
             $remember = (Input::get('remember') == 'on') ? true : false;
             $usuarios=User::where('email',$request['email'])->get()->all();
             if (count($usuarios)>1) {
+//                return Sentinel::authenticate($request->all(), $remember);
               if($user=Sentinel::authenticate($request->all(), $remember)) {
 
                   if (Sentinel::check() && Sentinel::inRole('Prof')) {
