@@ -28,7 +28,7 @@
 
 
 
-            {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true)) }}
+            {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true,'onsubmit'=>'vincularAsign();')) }}
 
             <div class="col-sm-12" style="" contenteditable="false">
 
@@ -39,8 +39,7 @@
                     <div class="panel-body">
 
 
-                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
-                        <input hidden name="categoria_id" value="{{$categoria->id}}">
+                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso1']) !!}
 
                         <div class="form-inline" >
 
@@ -50,14 +49,21 @@
 
                         <br>
                         <hr>
-                        <div class="form-inline" style="">
+                        <div class="form-inline" >
+                            <div class="alert alert-info">
+
+                            <input type="checkbox" id="vincular"  class="form-control" name="vincular" value="vincular">  Te gustaría vincular a alguna asignatura ?<br>
+                        </div>
+                        </div>
+
+                        <div class="form-inline" id="asigAlumno"style="">
 
                             {!! Form::label('Curso', 'Curso - Asignatura') !!}<br>
 
                             {!! Form::select('grado', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputGrado' ,'data-live-search'=>'true','value'=>$grado,'name' => 'grado']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="curso" name="curso" ></select>--}}
 
-                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso',"oninvalid"=>"this.setCustomValidity('Seleccione o Agregue una asignatura')",'required'=>'true' ,'data-live-search'=>'true','name' => 'curso']) !!}
+                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso','required'=>'true' ,'data-live-search'=>'true','name' => 'curso']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>--}}
 
                             <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
@@ -167,7 +173,36 @@
 
         </div>
     </div>
+    <div  data-backdrop="static" data-keyboard="false" class="modal fade" id="myModal12" role="dialog">
+        <div class="modal-dialog" style="width: 1000px ;  ">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4  class="alert alert-danger" >Perfil académico sin completar.</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <span class="input-group-addon">
+
+                        <img width="900" src="/imagenes/capturaProfesionales.png"/>
+                                <br>
+                                <hr>
+                                                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosAcademicos')}}#forma">Por favor , agregue al menos una Titulacion Académica y Curso  a su trayectoria .</a></p>
+
+                    </span>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     </div><!-- /#wrapper -->
 
 
@@ -177,7 +212,7 @@
 
     <!--  jQuery -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
     <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
     <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
@@ -194,7 +229,17 @@
     </script>
 
     <script>
+        function vincularAsign() {
+            if (document.getElementById('vincular').checked) {
+                $('#asigAlumno').show();
 
+            } else {
+                document.getElementById("inputGrado").value = "";
+                document.getElementById("inputCurso").value = "";
+                alert("aa");
+                $('#asigAlumno').hide();
+            }
+        }
     </script>
     <script>
         var editor_config = {
@@ -243,6 +288,18 @@
     <script>
 
         $(document).ready(function () {
+            $('#asigAlumno').hide();
+
+            $("#vincular").on('change',function(){
+                if (document.getElementById('vincular').checked)
+                {
+                    $('#asigAlumno').show();
+                } else {
+                    $('#inputGrado').attr('value', null);
+                    $('#inputCurso').attr('value', null);
+                    $('#asigAlumno').hide();
+                }
+            });
 
 
 
@@ -280,54 +337,6 @@
             });
 
 
-
-        });
-
-
-
-
-    </script>
-    <script>function responsive_filemanager_callback(field_id){
-            console.log(field_id);
-
-            var url=jQuery('#'+field_id).val();
-            // $('#myModal').modal('hide');
-            console.log(url);
-
-            if(field_id=='fieldID3'){
-                $('#mipdf').attr('value', url);
-
-            }
-            else {
-                $('#myimage').attr('src', url);
-            }
-        }
-
-
-
-    </script>
-    <script>
-        $('.en_curso').change(function(ev) {
-            if ( $(this).is(':checked') ) {
-                document.getElementById("endDate").disabled = true;
-            }
-            else {
-
-                $("#endDate").datepicker({
-                    inline : false
-
-                })
-                $( "#endDate" ).datepicker("refresh");
-
-                document.getElementById("endDate").disabled = false;
-            }
-
-        });
-    </script>
-    <script>
-
-        $(document).ready(function () {
-
             var sel = document.getElementById('etiquetas');
             var opts = sel.options;
             for (var i=0;i<opts.length;i++) {
@@ -343,86 +352,84 @@
                 opts1[i].value = opts1[i].text;
                 // alert(opts1[i].text);
             }
-            if(($("#inputgGrado").children('option').length) >0) {
+            var e3 = document.getElementById("inputCurso").options.length;
+            if(e3==0){
+                $('#myModal12').modal('show', { backdrop: 'static',
+                    keyboard: false});
 
+            }
 
-
-            var categoria=document.getElementById("categoria").innerHTML;
             if( $('#inputGrado').has('option').length > 0 ) {
 
-                var e = document.getElementById("inputGrado");
-                var grado = e.options[e.selectedIndex].value;
-                var grado = e.options[e.selectedIndex].value;
 
+                var categoria=document.getElementById("categoria").innerHTML;
 
+                    var e = document.getElementById("inputGrado");
+                    var grado = e.options[e.selectedIndex].value;
+                    var grado = e.options[e.selectedIndex].value;
+                    var e2 = document.getElementById("inputCurso");
+                    var e3 = document.getElementById("inputCurso").options.length;
+                    if(e3==0){
+                        $('#myModal12').modal('show', { backdrop: 'static',
+                            keyboard: false});
 
-                var e2 = document.getElementById("inputCurso");
-                // var x = document.getElementById("cursoSelect").selectedIndex;
-                var curso = e2.options[e2.selectedIndex].text;
-
-
-                $('#inputGrado').attr('value', grado);
-
-                $('#inputCurso').empty();
-
-                $.ajax({
-                    type:"get",
-                    url: "{{url('get') }}" +"/",
-                    dataType: 'json',
-                    cache: false,
-                    data: {
-                        grado: grado,
-                    },
-                    success: function(response){ // What to do if we succeed
-                        if (response.length  == 0) {
-                            document.getElementById('boton').disabled = true;
-                            $('#añadir_asignaturas').show();
-
-                            $('#asignaturas ').hide();
-                        }
-                        else{
-                            $( '#añadir_asignaturas').hide();
-                            $('#asignaturas ').show();
-
-                            $('#boton').removeClass('btn btn-info disabled');
-                            $('#boton').addClass('btn btn-success');
-                            document.getElementById('boton').disabled = false;
-                            document.getElementById('boton').disabled = false;
-                            console.log(( typeof  response) );
-                            response.forEach(function (element) {
-
-
-                                $('#inputCurso')
-                                    .append($("<option></option>")
-                                        .attr("value", element)
-                                        .text(element));
-
-
-                            });
-                        }
-
-
-
-
-                        console.log(response);
-
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-                        console.log(JSON.stringify(jqXHR));
-                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
                     }
-                });
-
-                var sel1 = document.getElementById('inputCurso');
-                var opts1 = sel1.options;
 
 
+                    $('#inputGrado').attr('value', grado);
+
+                    $('#inputCurso').empty();
+
+                    $.ajax({
+                        type:"get",
+                        url: "{{url('get') }}" +"/",
+                        dataType: 'json',
+                        cache: false,
+                        data: {
+                            grado: grado,
+                        },
+                        success: function(response){ // What to do if we succeed
+                            if (response.length  == 0) {
+                                document.getElementById('boton').disabled = true;
+                                $('#añadir_asignaturas').show();
+
+                                $('#asignaturas ').hide();
+                            }
+                            else{
+                                $( '#añadir_asignaturas').hide();
+                                $('#asignaturas ').show();
+
+                                $('#boton').removeClass('btn btn-info disabled');
+                                $('#boton').addClass('btn btn-success');
+                                document.getElementById('boton').disabled = false;
+                                document.getElementById('boton').disabled = false;
+                                console.log(( typeof  response) );
+                                response.forEach(function (element) {
 
 
-            }
+                                    $('#inputCurso')
+                                        .append($("<option></option>")
+                                            .attr("value", element)
+                                            .text(element));
 
 
-            }
+                                });
+                            }
+
+
+
+
+                            console.log(response);
+
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                            console.log(JSON.stringify(jqXHR));
+                            console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                        }
+                    });
+
+
+                }
 
             $('#inputGrado').on('change', function() {
 
@@ -466,7 +473,7 @@
 
                                 $('#inputCurso')
                                     .append($("<option></option>")
-                                        .attr("value", element[0])
+                                        .attr("value", element)
                                         .text(element));
 
 
@@ -528,6 +535,53 @@
 
 
         });
+
+
+
+
+
+    </script>
+    <script>function responsive_filemanager_callback(field_id){
+            console.log(field_id);
+
+            var url=jQuery('#'+field_id).val();
+            // $('#myModal').modal('hide');
+            console.log(url);
+
+            if(field_id=='fieldID3'){
+                $('#mipdf').attr('value', url);
+
+            }
+            else {
+                $('#myimage').attr('src', url);
+            }
+        }
+
+
+
+    </script>
+    <script>
+        $('.en_curso').change(function(ev) {
+            if ( $(this).is(':checked') ) {
+                document.getElementById("endDate").disabled = true;
+            }
+            else {
+
+                $("#endDate").datepicker({
+                    inline : false
+
+                })
+                $( "#endDate" ).datepicker("refresh");
+
+                document.getElementById("endDate").disabled = false;
+            }
+
+        });
+    </script>
+    <script>
+
+
+
 
 
 

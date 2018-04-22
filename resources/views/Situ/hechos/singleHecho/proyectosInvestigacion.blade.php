@@ -145,7 +145,6 @@
                         <!--left col-->
                             <div class="col-md-4">
                                 <ul class="list-group">
-                                    <input hidden name="categoria_id" value="{{$categoria}}">
                                     <li class="list-group-item text-muted"style="color: #31708f;
     background-color: #d9edf7;
     border-color: #bce8f1;" contenteditable="false">Detalles</li>

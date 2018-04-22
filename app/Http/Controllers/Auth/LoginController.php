@@ -86,6 +86,7 @@ class LoginController extends Controller
 
         try {
 
+
             // Validation
             $validation = Validator::make($request->all(), [
                 'email' => 'required|email',
@@ -98,42 +99,39 @@ class LoginController extends Controller
             $remember = (Input::get('remember') == 'on') ? true : false;
             $usuarios=User::where('email',$request['email'])->get()->all();
             if (count($usuarios)>1) {
-<<<<<<< HEAD
-              if($user=(new SentinelController())->authenticate($request->all(), $remember)) {
-=======
-//                return Sentinel::authenticate($request->all(), $remember);
-              if($user=Sentinel::authenticate($request->all(), $remember)) {
->>>>>>> fbb1718ff987a738b9559d3665482b00bad8815e
+            if($user=Sentinel::authenticate($request->all(), $remember)) {
+//             return Sentinel::authenticate($request->all(), $remember);
+                if ($user = Sentinel::authenticate($request->all(), $remember)) {
 
-                  if (Sentinel::check() && Sentinel::inRole('Prof')) {
+                    if (Sentinel::check() && Sentinel::inRole('Prof')) {
 
-                      $usuario = Sentinel::getUser();
-                      $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
-                      if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
-                          Sentinel::logout();
-                          return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com'])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
-                      } else {
+                        $usuario = Sentinel::getUser();
+                        $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
+                        if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
+                            Sentinel::logout();
+                            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com'])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
+                        } else {
 
-                          $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
-                          $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
-                          $invitado->update();
+                            $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
+                            $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
+                            $invitado->update();
 
-                          return redirect('Situ/public')->withUser($user);
-                      }
+                            return redirect('Situ/public')->withUser($user);
+                        }
 
-                  }
-                  if (Sentinel::check() && Sentinel::inRole('Inv')) {
-                      $usuario = Sentinel::getUser();
-                      $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
+                    }
+                    if (Sentinel::check() && Sentinel::inRole('Inv')) {
+                        $usuario = Sentinel::getUser();
+                        $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
 
-                      if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
+                        if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
 
-                          return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion 111: Admin@admin.com '])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
-                      } else {
-                          $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
-                          $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
-                          $alumno = $invitado->getAlumno()->get()->first();
-                          $invitado->update();
+                            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion 111: Admin@admin.com '])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
+                        } else {
+                            $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
+                            $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
+                            $alumno = $invitado->getAlumno()->get()->first();
+                            $invitado->update();
 //                          $logAccesos = Log
 //                          $logAccesos->invitado_id = $invitado->id;
 //                          $logAccesos->alumno_id = $alumno->id;
@@ -142,15 +140,16 @@ class LoginController extends Controller
 //                          $logAccesos->numero_accesos = 0;
 //                          $logAccesos->save();
 
-                          return redirect('Situ/public')->withUser($user);
+                            return redirect('Situ/public')->withUser($user);
 
 //                            return redirect('Situ/public')->withUser($user);
-                      }
+                        }
 
-                  }
-              }else{
-                  return "asf";
-              }
+                    }
+                } else {
+//                  return "asf";
+                }
+            }
 
 
             }

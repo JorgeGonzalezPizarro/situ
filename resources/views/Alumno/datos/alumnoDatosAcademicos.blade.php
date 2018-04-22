@@ -212,7 +212,7 @@
                         <div class='input-group date' id='datetimepicker2'>
                             <span class="input-group-addon">
 
-                        <img width="900" src="/imagenes/capturaProfesionales.png"/>
+                        <img width="900" src="/imagenes/capturaAcademicos.png"/>
                                 <br>
                                 <hr>
                                                                 <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosLaborales')}}#forma">Por favor , agregue al menos una Titulacion Académica a su trayectoria .</a></p>
