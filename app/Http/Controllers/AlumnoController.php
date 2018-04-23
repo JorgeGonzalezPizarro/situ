@@ -768,7 +768,6 @@ class AlumnoController extends Controller
 
             $hecho->nivel_acceso = "2";
             $hecho->publico = "publico";
-//            return response("bb");
 
         }
 
@@ -780,11 +779,33 @@ class AlumnoController extends Controller
     {
         $user = Sentinel::getUser();
         $invitado = Invitados::where('id', $request->id)->first();
+       $user= User::where('id', $invitado->invitado_id)->get()->first();
 //        return response($hecho->nivel_acceso);
        $invitado->fecha_limite=Carbon\Carbon::parse($request->fecha);
+       $password=$this->autogenerar_password();
+      $encrypted = encrypt($password);
 
 
+        $user->password = Hash::make($password);
+        $user->update();
         $invitado->update();
+
+        $data = array('alumno'=>$invitado->getAlumno()->get()->first()->first_name,'invitado'=>$invitado,'first_name' => $invitado->getUsuario()->get()->first()->first_name, 'email' => $invitado->getUsuario()->get()->first()->email, 'encrypted' => $encrypted,
+//
+        );
+       $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
+
+        Mail::send('emailFecha', $data,function ($mensaje) use($data,$link,$invitado,$request,$encrypted){
+
+            $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+            $mensaje->subject("Has sido invitado a SITU");
+            $mensaje->to($data['email'],$data['first_name']);
+//           $mensaje->attach($link,['as' => 'SITU_'.$invitado->getAlumno()->get()->first()->first_name.'.html',
+//                'mime' => 'text/html']);
+
+
+
+        });
         return response($invitado);
     }
 }

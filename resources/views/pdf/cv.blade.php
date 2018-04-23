@@ -34,7 +34,7 @@
     <div id="details" class="dataTables_wrapper">
         <div id="invoice">
             <h1 style="text-align: center;font-size: 42px">Curriculum Vitae </h1>
-            <div class="date">A fecha de    {{ "    " .Carbon\Carbon::today()->toDateString()}}</div>
+            <div class="date" style="font-style: italic;">A fecha de    {{ "    " .Carbon\Carbon::today()->toDateString()}}</div>
 
         </div>
     </div>
@@ -49,20 +49,31 @@
         <td><span ><strong>Apellido</strong></span></td>
            <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->last_name}}</span></td>
     </tr>
-
+    @if(!empty($alumnoCv->dni))
     <tr >
-        <td><span ><strong>Ciudad</strong></span></td>
-         <td>   <span style="margin-left:30px; font-style: italic">{{$alumnoCv->first_name}}</span></td>
+        <td><span ><strong>DNI</strong></span></td>
+         <td>   <span style="margin-left:30px; font-style: italic">{{$alumnoCv->dni}}</span></td>
     </tr>
+    @endif
+    @if(!empty($alumnoCv->direccion))
+
+        <tr >
+        <td><span ><strong>Direccion</strong></span></td>
+        <td>   <span style="margin-left:30px; font-style: italic">{{$alumnoCv->direccion}}</span></td>
+    </tr>
+    @endif
+
     <tr >
         <td><span ><strong>Email</strong></span></td>
             <td><span style="margin-left:30px; font-style: italic">{{$alumnoCv->email}}</span></td>
     </tr>
-    <tr >
-        <td><span ><strong>Telefono</strong></span></td>
-           <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->first_name}}</span></td>
-    </tr>
+    @if(!empty($alumnoCv->telefono))
 
+        <tr >
+        <td><span ><strong>Telefono</strong></span></td>
+           <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->telefono}}</span></td>
+    </tr>
+@endif
         {{--<td class="p"><span >Apellido </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></td>--}}
         {{--<li class="p"><span >Fecha Nacimiento </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
         {{--<li class="p"><span >Email </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}

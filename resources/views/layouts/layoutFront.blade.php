@@ -628,6 +628,11 @@
 
                             Proyectos</a>
                     </li>
+                    <li class="">
+                        <a href="{!! route('hechos', ['categoria'=>"Frases Guia"])!!}">
+                            <i class="fas fa-quote-left"></i>
+                            Mis Frases</a>
+                    </li>
                 @endif
 
             </ul>

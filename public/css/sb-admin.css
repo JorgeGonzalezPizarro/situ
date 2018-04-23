@@ -308,7 +308,11 @@ b, strong {
 .text-center {
     text-align: center;
 }
-
+blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    font-size: 17.5px;
+}
 .quote-card {
     background: #fff;
     color: #222222;
@@ -318,6 +322,7 @@ b, strong {
     box-shadow: 0 2px 4px rgba(34, 34, 34, 0.12);
     position: relative;
     overflow: hidden;
+    border-left: 5px solid #003865cc !important;
     min-height: 120px;
 }
 .quote-card p {
@@ -340,7 +345,7 @@ b, strong {
     top: 10px;
     left: 10px;
     font-size: 5em;
-    color: rgba(238, 238, 238, 0.8);
+    color: rgba(0, 56, 101, 0.81);
     font-weight: normal;
 }
 .quote-card:after {
@@ -351,7 +356,7 @@ b, strong {
     line-height: 100px;
     right: -32px;
     font-size: 25em;
-    color: rgba(238, 238, 238, 0.8);
+    color: rgba(0, 56, 101, 0.81);
     font-weight: normal;
 }
 @media (max-width: 640px) {

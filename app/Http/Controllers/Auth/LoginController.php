@@ -99,8 +99,7 @@ class LoginController extends Controller
             $remember = (Input::get('remember') == 'on') ? true : false;
             $usuarios=User::where('email',$request['email'])->get()->all();
             if (count($usuarios)>1) {
-<<<<<<< HEAD
-//              if($user=(new SentinelController())->authenticate($request->all(), $remember)) {
+                if($user=Sentinel::authenticate($request->all(), $remember)) {
 ////                return Sentinel::authenticate($request->all(), $remember);
 //           $a=array();
 //            foreach ($usuarios as $usuario){
@@ -111,7 +110,7 @@ class LoginController extends Controller
 //                }
 //            }
 //            return $a;
-              if($user=Sentinel::authenticate($request->all(), $remember)) {
+//              if($user=Sentinel::authenticate($request->all(), $remember)) {
 
                   if (Sentinel::check() && Sentinel::inRole('Prof')) {
 
@@ -142,23 +141,7 @@ class LoginController extends Controller
                           $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
                           $alumno = $invitado->getAlumno()->get()->first();
                           $invitado->update();
-=======
-            if($user=Sentinel::authenticate($request->all(), $remember)) {
-//             return Sentinel::authenticate($request->all(), $remember);
-                if ($user = Sentinel::authenticate($request->all(), $remember)) {
 
-                    if (Sentinel::check() && Sentinel::inRole('Prof')) {
-
-                        $usuario = Sentinel::getUser();
-                        $usuario = Invitados::where('invitado_id', $usuario->id)->get()->first();
-                        if (($usuario->fecha_limite) < (Carbon::now()->toDateString())) {
-                            Sentinel::logout();
-                            return view('auth.loginInv')->withErrors(['global' => 'Error al logear , contactar con administracion : Admin@admin.com'])->with('email', $usuario->getUsuario()->get()->first()->email)->with('decrypted', "");
-                        } else {
-
-                            $invitado = Invitados::where('invitado_id', Sentinel::getUser()->id)->get()->first();
-                            $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
-                            $invitado->update();
 
                             return redirect('Situ/public')->withUser($user);
                         }
@@ -176,7 +159,6 @@ class LoginController extends Controller
                             $invitado->numero_accesos = ($invitado->numero_accesos) + 1;
                             $alumno = $invitado->getAlumno()->get()->first();
                             $invitado->update();
->>>>>>> 55838f397988dacf6de50eff954b607dc912bd9a
 //                          $logAccesos = Log
 //                          $logAccesos->invitado_id = $invitado->id;
 //                          $logAccesos->alumno_id = $alumno->id;
@@ -194,7 +176,7 @@ class LoginController extends Controller
                 } else {
 //                  return "asf";
                 }
-            }
+
 
 
             }

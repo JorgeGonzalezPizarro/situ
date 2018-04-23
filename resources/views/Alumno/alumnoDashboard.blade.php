@@ -103,26 +103,46 @@
     background-color: #d9edf7;
     border-color: #bce8f1;     font-size: 18px;"  contenteditable="false">Mis frases</li>
 
-                    </ul>                @foreach($frases as $hecho)
+                    </ul>
+                    @if(count($frases)>0)
+
+                    @foreach($frases as $hecho)
 
                     <ul class="timeline">
                         <li>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
-                                </div>
-                                <div class="timeline-body">
-                                    <p style="font-size: 18px;font-family: 'Harlow Solid Italic';font-style: italic">"{{$hecho->contenido}}"<span> por {{$user-> first_name}}</span></p>
+                                <blockquote class="quote-card">
+                                    <p style="font-size: 22px;
+    font-family: 'Harlow Solid Italic';
+    font-style: italic;
+    margin-top: 20px;
+    margin-left: 20px;">"{{$hecho->contenido}}"<span> por {{$user-> first_name}}</span></p>
 
+                                    </p>
+                                    <small><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small>
 
-
-                                </div>
-                            </div>
+                                    </blockquote>
                         </li>
 
 
                     </ul>
                     @endforeach
+                    @else
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-heading">
+                                    <p><small class="text-muted"> </small></p>
+                                </div>
+                                <div class="timeline-body">
+                                    <div class="alert alert-warning"><a href="{{ route('hechos', ['categoria'=>"Frases Guia"])}}" >Comienza añadiendo tus frases preferidas a la plataforma !</a>
+                                    </div>
+
+
+                                </div>
+                            </li>
+
+
+                        </ul>
+                    @endif
                 </div>
             </div>
 
@@ -149,7 +169,7 @@
                         <div class="panel panel-info" style="color: white;
     background: #003865;
     margin: 0px;
-    text-align: center;margin:0px padding-left: 0;
+    text-align: center;margin:0px; padding-left: 0;
     margin-bottom: 20px;">
                             <div class="panel-body" style="padding: 10px;">
                                 INVITADOS

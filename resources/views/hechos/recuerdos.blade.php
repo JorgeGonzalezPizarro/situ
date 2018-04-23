@@ -31,7 +31,7 @@
 
 
 
-            {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true)) }}
+            {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true ,'onsubmit'=>'vincularAsign();')) }}
 
             <div class="col-sm-12" style="" contenteditable="false">
 
@@ -42,7 +42,7 @@
                     <div class="panel-body">
 
 
-                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'curso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
+                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'curso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso1']) !!}
 
                         <div class="form-inline" >
 
@@ -52,14 +52,21 @@
 
                         <br>
                         <hr>
-                        <div class="form-inline" style="">
+
+                        <div class="form-inline" >
+                            <div class="alert alert-info">
+
+                                <input type="checkbox" id="vincular"  class="form-control" name="vincular" value="vincular">  Te gustaría vincular a alguna asignatura ?<br>
+                            </div>
+                        </div>
+                        <div class="form-inline" id="asigAlumno"style="">
 
                             {!! Form::label('Curso', 'Curso - Asignatura') !!}<br>
 
                             {!! Form::select('grado', $grado, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputGrado' ,'data-live-search'=>'true','value'=>$grado,'name' => 'grado']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="curso" name="curso" ></select>--}}
 
-                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso','required'=>'true' , 'data-live-search'=>'true','name' => 'curso']) !!}
+                            {!! Form::select('curso', $curso, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'inputCurso','required'=>'true' ,'data-live-search'=>'true','name' => 'curso']) !!}
                             {{--<select  style="width:40%;"class="form-control" id="asignaturas" name="asignatura"></select>--}}
 
                             <a id="añadir_asignaturas" href="{{route('misDatosAcademicos')}}"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
@@ -127,25 +134,7 @@
                     {!! Form::text('evidencia',null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
                     {!! Form::text('ruta_archivo',null, ['id'=>'fieldID3','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
 
-                    {{--{{ Form::checkbox('publico', null,null, ['checked'=>'true',--}}
-                    {{--'data-toggle'=>'toggle','data-onstyle'=>'success','data-offstyle'=>'danger','id'=>'publico','data-on'=>'Público','data-off'=>'Privado'])}}--}}
-                    {{--<div class='col-md-12'>--}}
-                    {{--<label for="Fecha de  Finalizacion" class="cols-sm-2 control-label">Fecha de Finalizacion</label>--}}
 
-                    {{--<div class="input-group">--}}
-                    {{--<span class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>--}}
-                    {{--<div class="form-group">--}}
-                    {{--{!! Form::text('endDate', null, array('class' => 'form-control', 'id'=>'endDate', 'placeholder' => 'dd-mm-YY')) !!}--}}
-
-
-                    {{--</div>--}}
-
-                    {{--</div>--}}
-                    {{--{!! Form::label('text', 'En curso') !!}--}}
-
-                    {{--{{ Form::checkbox('en_curso', 'En curso ' ,null, ['class' => 'en_curso'])}}--}}
-
-                    {{--</div>--}}
 
 
                     <li class="list-group-item text-left" style="height: auto;">
@@ -221,7 +210,18 @@
 
 
     </script>
+    <script>
+        function vincularAsign() {
+            if (document.getElementById('vincular').checked) {
+                $('#asigAlumno').show();
 
+            } else {
+                document.getElementById("inputGrado").value = "";
+                document.getElementById("inputCurso").value = "";
+                $('#asigAlumno').hide();
+            }
+        }
+    </script>
     <script>
         var editor_config = {
             path_absolute : "{{ URL::to('/') }}/",
@@ -267,6 +267,18 @@
 
     <script>
         $(document).ready(function () {
+            $('#asigAlumno').hide();
+
+            $("#vincular").on('change',function(){
+                if (document.getElementById('vincular').checked)
+                {
+                    $('#asigAlumno').show();
+                } else {
+                    $('#inputGrado').attr('value', null);
+                    $('#inputCurso').attr('value', null);
+                    $('#asigAlumno').hide();
+                }
+            });
 
             var sel = document.getElementById('etiquetas');
             var opts = sel.options;
@@ -338,7 +350,7 @@
 
                                 $('#inputCurso')
                                     .append($("<option></option>")
-                                        .attr("value", element[0])
+                                        .attr("value", element)
                                         .text(element));
 
 
@@ -405,7 +417,7 @@
 
                                 $('#inputCurso')
                                     .append($("<option></option>")
-                                        .attr("value", element[0])
+                                        .attr("value", element)
                                         .text(element));
 
 

@@ -8,7 +8,8 @@
         <div class="row">
 
             <!-- Post Content Column -->
-            <div class="col-lg-8">
+            <div class="col-sm-12">
+
 
                 <!-- Title -->
                 <h1 class="mt-4">{{$hecho->titulo_hecho}}</h1>
@@ -20,43 +21,66 @@
 
 
 
-                <hr>
+            </div>
 
+            <div class="col-lg-8">
 
                 @if(!empty($hecho->ruta_imagen))
-                    <img class="img-fluid rounded" style="width: 600px; height: 300px;"src="{{$hecho->ruta_imagen}}" alt="">
+                    <div class="col-lg-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">Documentos <i class="fas fa-file"></i>
+
+                                <img class="img-fluid rounded" style="width: 600px; height: 300px;"src="{{$hecho->ruta_imagen}}" alt="">
+
+                            </div>
+                        </div>
+                    </div>
                 @endif
 
-                @if(!empty($hecho->ruta_archivo))
-                    <iframe src={{$hecho->ruta_archivo}} width="100%" height="800px"></iframe>
-                @endif
-                <div class="col-sm-12">
-                    <!--left col-->
-                    <ul class="list-group">
+                    @if(!empty($hecho->ruta_archivo))
 
-                        {{--<li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Detalles de la calificacion</h5>--}}
-                        {{--</li>--}}
-                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Curso </strong></span><span><p>{{ $hecho->calificaciones()->get()->first()->curso  }}</p></span>--}}
-                        {{--</li>--}}
-                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
-                        {{--</li>--}}
-                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
-                        {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                        {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
-                        {{--</li>--}}
+                        @if(\File::extension($hecho->ruta_archivo)=='docx' || \File::extension($hecho->ruta_archivo) == 'doc' )
+                            <div class="panel panel-info">
+                                <div class="panel-heading">Documentos <i class="fas fa-file"></i>
 
-                    </ul>
+                                    <label class="btn btn-secondary active" style="width: 100%">
+                                        <a href="{!! $hecho->ruta_archivo!!}"><input  class="form-control" value="{!! $hecho->ruta_archivo !!}"> Descargar archivo </a>
+                                    </label>
+                                </div>
+                            </div>
+                        @else
+                            <div class="panel panel-info">
+                                <div class="panel-heading">Documentos <i class="fas fa-file"></i></div>
+                                <div class="panel-body">
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Otros detalles
+                                    <iframe src={{$hecho->ruta_archivo}} width="100%" height="800px"></iframe>
+                                    {{--<a href="http://docs.google.com/viewer?url={{$hecho->ruta_archivo}}">aaaa</a>--}}
+                                    <iframe src="http://docs.google.com/gview?url={{$hecho->ruta_archivo}}" frameborder="0" allowfullscreen></iframe>
+                                </div></div>
+                        @endif
+                    @else
 
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">Documentos <i class="fas fa-file"></i>
+
+                            </div>
+                            <div class="panel-body"><span>
+                                    <div class="alert alert-info"><p style="text-align: center;">No existe ningun documento vinculado</p></div></span>
+                            </div>
                         </div>
-                        <div class="panel-body"><span><p id="descripcion">{!!  str_limit($hecho->contenido,50,'...' )!!}</p></span>
-                        </div>
 
+
+            @endif
+
+            <!--left col-->
+
+
+                <div class="panel panel-info">
+                    <div class="panel-heading">Otros detalles
+
+                    </div>
+                    <div class="panel-body"><span><p>{!! $hecho->contenido !!}</p></span>
                     </div>
 
                 </div>
@@ -65,10 +89,16 @@
 
             </div>
 
-            <hr>
-            <div class="col-md-4">
+        <div class="col-lg-4">
+
+            <div class="col-md-12">
                 <div class="card-body">
                     <ul class="list-group">
+
+                        <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;" contenteditable="false">                <h5 class="card-header">Datos</h5>
+                        </li>
 
 
                         <li class="list-group-item text-right"><span class="pull-left"><strong
@@ -76,28 +106,33 @@
                         <li class="list-group-item text-right"><span class="pull-left"><strong
                                         class="">Creado </strong></span><span><p>{{$hecho->created_at}}</p></span></li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong
-                                        class="">Curso - Asignatura </strong></span><span><p>{{$hecho->curso}}</p></span></li>
+                                        class="">Curso - Asignatura </strong></span><span><p>@if(!empty($hecho->curso)){{$hecho->curso}}@else {{"No vinculado"}}@endif</p></span></li>
                         {{--Fecha del hecho {{$hecho->fecha_inicio}}</input>--}}
                     </ul>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <div class="card-body">
-                    <ul class="list-group">
 
+                <ul class="list-group">
 
+                    <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;" contenteditable="false">                <h5 class="card-header">Propósito</h5>
+                    </li>
                         <li class="list-group-item text-right"><span class="pull-left"><strong
-                                        class="">Proposito  </strong></span><span><p> {{$hecho->proposito}}</p></span></li>
+                                        class=""> <p> {{$hecho->proposito}}</p> </strong></span></li>
                     </ul>
                 </div>
             </div>
-            <hr>
             <!-- Search Widget -->
 
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <ul class="list-group">
 
-                    <li class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Etiquetas</h5>
+                    <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;" contenteditable="false">                <h5 class="card-header">Etiquetas</h5>
                     </li>
                     <!-- Categories Widget -->
                     @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
@@ -110,13 +145,12 @@
                 </ul>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <ul class="list-group">
 
-
-                    <li class="list-group-item text-left">
-
-                        <h5 class="card-header">Evidencia</h5>
+                    <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;" contenteditable="false">                <h5 class="card-header">Evidencia</h5>
                     </li>
                     <li class="list-group-item text-left" style="height: auto !important;">
                         <p>
@@ -129,7 +163,8 @@
                 </ul>
 
             </div>
-
+        </div>
+    </div>
 
         @if(!empty($otrosHechos))
 <div class="row">
@@ -144,7 +179,6 @@
                 <!--left col-->
                     <div class="col-md-4">
                         <ul class="list-group">
-                            <input hidden name="categoria_id" value="{{$categoria}}">
                             <li class="list-group-item text-muted" contenteditable="false">Detalles</li>
                             <li class="list-group-item text-right"><span class="pull-left"><strong
                                             class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
@@ -168,14 +202,6 @@
                                             class=""> </strong></span>
                                 <span><p><a href=" {{ url('Situ/public') }}/{{$hecho->id}}/{{$hecho->getCategoria()->get()->first()->id}}" class="btn btn-info" role="button">Ver</a>
                                     </p></span>  </li>
-                            {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                            {{--class="">Asignatura </strong></span><span><p>{{ $hecho->calificaciones()->first()->asignatura  }}</p></span>--}}
-                            {{--</li>--}}
-                            {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                            {{--class="">Calificacion  </strong></span>{{ $hecho->calificaciones()->get()->first()->calificacion }} </li>--}}
-                            {{--<li class="list-group-item text-right"><span class="pull-left"><strong--}}
-                                            {{--class="">Profesor </strong></span><span><p>{{ $hecho->calificaciones()->first()->profesor  }}</p></span>--}}
-                            {{--</li>--}}
 
                         </ul>
                     </div>

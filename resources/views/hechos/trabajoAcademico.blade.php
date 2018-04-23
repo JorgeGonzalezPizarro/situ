@@ -28,7 +28,7 @@
 
 
 
-            {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true)) }}
+            {{ Form::open(array('route' => 'guardarHecho', 'class' => 'form-style-8','files' => true,'onsubmit'=>'vincularAsign();')) }}
 
             <div class="col-sm-12" style="" contenteditable="false">
 
@@ -39,7 +39,7 @@
                     <div class="panel-body">
 
 
-                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'curso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso']) !!}
+                        {!! Form::hidden('categoria_id',$categoria->id, NULL, ['class' => 'form-control','style'=>'width:40%;','id'=>'curso' ,'data-live-search'=>'true','value'=>$curso,'name' => 'curso1']) !!}
 
                         <div class="form-inline" >
 
@@ -48,8 +48,13 @@
                                     </div>
 
 <br>
-                    <hr>
-                        <div class="form-inline" style="">
+                        <div class="form-inline" >
+                            <div class="alert alert-info">
+
+                                <input type="checkbox" id="vincular"  class="form-control" name="vincular" value="vincular">  Te gustaría vincular a alguna asignatura ?<br>
+                            </div>
+                        </div>
+                        <div class="form-inline"  id="asigAlumno" style="">
 
                             {!! Form::label('Curso', 'Curso - Asignatura') !!}<br>
 
@@ -193,7 +198,16 @@
     </script>
 
     <script>
+        function vincularAsign() {
+            if (document.getElementById('vincular').checked) {
+                $('#asigAlumno').show();
 
+            } else {
+                document.getElementById("inputGrado").value = "";
+                document.getElementById("inputCurso").value = "";
+                $('#asigAlumno').hide();
+            }
+        }
     </script>
     <script>
         var editor_config = {
@@ -241,7 +255,18 @@
     <script>
 
         $(document).ready(function () {
+            $('#asigAlumno').hide();
 
+            $("#vincular").on('change',function(){
+                if (document.getElementById('vincular').checked)
+                {
+                    $('#asigAlumno').show();
+                } else {
+                    $('#inputGrado').attr('value', null);
+                    $('#inputCurso').attr('value', null);
+                    $('#asigAlumno').hide();
+                }
+            });
             var sel = document.getElementById('etiquetas');
             var opts = sel.options;
             for (var i=0;i<opts.length;i++) {
@@ -412,13 +437,14 @@
                             $('#boton').addClass('btn btn-success');
                             document.getElementById('boton').disabled = false;
                             document.getElementById('boton').disabled = false;
+
                             console.log(( typeof  response) );
                             response.forEach(function (element) {
 
 
                                 $('#inputCurso')
                                     .append($("<option></option>")
-                                        .attr("value", element[0])
+                                        .attr("value", element)
                                         .text(element));
 
 
@@ -485,7 +511,7 @@
 
                                 $('#inputCurso')
                                     .append($("<option></option>")
-                                        .attr("value", element[0])
+                                        .attr("value", element)
                                         .text(element));
 
 

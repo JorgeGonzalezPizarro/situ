@@ -167,7 +167,7 @@ El correo electronico ya existe</p></div>') !!}
                     <thead>
                     <tr>
                         <th>Invitado</th>
-                        <th>Rol</th>
+                        <th>Email</th>
                         <th>Fecha Registro</th>
                         <th>Último Login</th>
                         <th>Número de Logins </th>
@@ -184,7 +184,7 @@ El correo electronico ya existe</p></div>') !!}
                         @foreach ($invitados as $invitado)
                             <tr>
                                 <td>{{$invitado->getUsuario()->get()->first()->first_name }}</td>
-                                <td>{{$invitado->rol }}</td>
+                                <td>{{$invitado->getUsuario()->get()->first()->email }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->created_at }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
                                 <td>{{$invitado->numero_accesos }}</td>

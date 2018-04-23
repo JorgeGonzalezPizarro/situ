@@ -58,8 +58,8 @@
                                     <td id="click">{{$calif->calificaciones()->get()->first()->calificacion}}</td>
                                     <td id="click">{{$calif->calificaciones()->get()->first()->curso}}</td>
                                     <td id="click">{{$calif->calificaciones()->get()->first()->profesor}}</td>
-                                    <td id="click">{{$calif->fecha_inicio}}</td>
-                                    <td id="click">{{$calif->created_at}}</td>
+                                    <td id="click"><?php setlocale(LC_TIME, 'Spanish') ?>{{Carbon::parse($calif->fecha_inicio)->formatLocalized('%d-%m-%Y')}}</td>
+                                    <td id="click"><?php setlocale(LC_TIME, 'Spanish') ?>{{Carbon::parse($calif->created_at)->formatLocalized('%d-%m-%Y')}}</td>
 
                                 </tr>
                             @endforeach

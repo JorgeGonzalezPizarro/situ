@@ -17,6 +17,8 @@ use View;
 use Response;
 use Validator;
 use Json;
+use Hash;
+use Mail;
 class AdminController extends Controller
 {
     public function __construct()
@@ -184,17 +186,54 @@ class AdminController extends Controller
 
 
     /*Actualizar la fecha limite de acceso */
+    function autogenerar_password( $length = 8 ) {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+        $password = substr( str_shuffle( $chars ), 0, $length );
+        return $password;
+    }
 
 
     public function actualizarFecha(Request $request)
     {
+//        $invitado = Invitados::where('id', $request->id)->first();
+////        return response($hecho->nivel_acceso);
+//        $invitado->fecha_limite=Carbon\Carbon::parse($request->fecha);
+//
+//
+//        $invitado->update();
+//        return response($invitado);
+
+
+        $user = Sentinel::getUser();
         $invitado = Invitados::where('id', $request->id)->first();
+        $user= User::where('id', $invitado->invitado_id)->get()->first();
 //        return response($hecho->nivel_acceso);
         $invitado->fecha_limite=Carbon\Carbon::parse($request->fecha);
+        $password=$this->autogenerar_password();
+        $encrypted = encrypt($password);
 
 
+        $user->password = Hash::make($password);
+        $user->update();
         $invitado->update();
-        return response($invitado);
+
+        $data = array('alumno'=>$invitado->getAlumno()->get()->first()->first_name,'invitado'=>$invitado,'first_name' => $invitado->getUsuario()->get()->first()->first_name, 'email' => $invitado->getUsuario()->get()->first()->email, 'encrypted' => $encrypted,
+//
+        );
+        $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
+
+        Mail::send('emailFecha', $data,function ($mensaje) use($data,$link,$invitado,$request,$encrypted){
+
+            $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+            $mensaje->subject("Has sido invitado a SITU");
+            $mensaje->to($data['email'],$data['first_name']);
+//           $mensaje->attach($link,['as' => 'SITU_'.$invitado->getAlumno()->get()->first()->first_name.'.html',
+//                'mime' => 'text/html']);
+
+
+
+        });
+
     }
 
 

@@ -52,7 +52,7 @@
                             </div>
                         </nav>
 
-
+                    @if(count($hechos)>0)
                         <div class="panel-body">
 
                             <div class="row">
@@ -60,15 +60,13 @@
                                 @foreach($hechos as $hecho)
                                 <ul class="timeline">
                                     <li>
-                                        <div class="timeline-panel">
-                                            <div class="timeline-heading">
-                                                <h4 class="timeline-title">{{$hecho->titulo_hecho}}</h4>
-                                                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
-                                            </div>
-                                            <div class="timeline-body">
-                                                <p>{{$hecho->contenido}}</p>
-                                            </div>
-                                        </div>
+                                        <blockquote class="quote-card">
+                                            <p>{{$hecho->contenido}}</p>
+                                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
+
+
+                                        </blockquote>
+
                                     </li>
 
 
@@ -76,7 +74,20 @@
                                 @endforeach
                                 </div>
                             </div>
+                    @else
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                    <div class="alert alert-warning"><a href="{{ route('hechos', ['categoria'=>"Frases Guia"])}}" >Comienza añadiendo tus frases preferidas a la plataforma !</a>
+                                </div>
+                                    </div>
+                                </div>
+                            </li>
 
+
+                        </ul>
+                    @endif
 
                     </div>
                 </div>

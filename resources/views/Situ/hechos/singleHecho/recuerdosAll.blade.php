@@ -49,11 +49,12 @@
                                         <li class="list-group-item text-right"><span class="pull-left"><strong
                                                         class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
                                         </li>
+
                                         <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                        class="">Fecha publicación </strong></span><span><p>{{$hecho->created_at}}</p></span>
+                                                        class="">Fecha publicación </strong></span><span><p><?php setlocale(LC_TIME, 'Spanish') ?>{{ $hecho->created_at->formatLocalized('%d-%m-%Y')}}</p></span>
                                         </li>
                                         <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                        class="">Fecha del {{$hecho->getCategoria()->get()->first()->categoria}}  </strong></span><span><p>{{$hecho->fecha_inicio}}</p></span>
+                                                        class="">Fecha del {{$hecho->getCategoria()->get()->first()->categoria}}  </strong></span><span><p> {!! Carbon\Carbon::parse($hecho->fecha_inicio)->format('d-m-Y ')   !!}</p></span>
                                         </li>
 
                                         <li class="list-group-item text-right"><span class="pull-left"><strong
