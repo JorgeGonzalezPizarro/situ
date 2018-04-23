@@ -306,12 +306,7 @@
             var e = document.getElementById("inputGrado");
             var grado = e.options[e.selectedIndex].value;
             var grado = e.options[e.selectedIndex].value;
-
-
-
             var e2 = document.getElementById("inputCurso");
-            // var x = document.getElementById("cursoSelect").selectedIndex;
-            // var curso = e2.options[e2.selectedIndex];
             var e3 = document.getElementById("inputCurso").options.length;
             if(e3==0){
                 $('#myModal12').modal('show', { backdrop: 'static',
@@ -449,71 +444,7 @@
 
 
 
-        {{--$('#inputCurso').click( function() {--}}
 
-            {{--var e = document.getElementById("inputGrado");--}}
-            {{--var grado = e.options[e.selectedIndex].value;--}}
-            {{--var grado = e.options[e.selectedIndex].value;--}}
-            {{--var pathArray = window.location.pathname.split( '/,' );--}}
-            {{--var secondLevelLocation = pathArray[0];--}}
-            {{--var e2 = document.getElementById("inputCurso");--}}
-            {{--var curso = e2.options[e2.selectedIndex].value;--}}
-
-            {{--// var curso=(document.grado("option")[x].text);--}}
-            {{--$('#inputGrado').attr('value',grado);--}}
-            {{--$('#asignaturas').empty();--}}
-            {{--// $('#curso').empty();--}}
-
-            {{--$.ajax({--}}
-                {{--type:"get",--}}
-                {{--url: "{{url('hechos') }}" +"/" +categoria+"/" +grado +"/"+curso,--}}
-                {{--encode  : true,--}}
-                {{--data: {--}}
-                    {{--grado: grado,--}}
-                    {{--curso: curso,--}}
-                {{--},--}}
-                {{--success: function(response){ // What to do if we succeed--}}
-                    {{--if (response.length  == 0) {--}}
-                        {{--document.getElementById('boton').disabled = true;--}}
-                        {{--$( '#añadir_asignaturas').show();--}}
-
-                        {{--$('#asignaturas ').hide();--}}
-
-                    {{--}--}}
-
-                    {{--else{--}}
-                        {{--$( '#añadir_asignaturas').hide();--}}
-                        {{--$('#asignaturas ').show();--}}
-
-                        {{--$('#boton').removeClass('btn btn-info disabled');--}}
-                        {{--$('#boton').addClass('btn btn-success');--}}
-                        {{--document.getElementById('boton').disabled = false;--}}
-                        {{--document.getElementById('boton').disabled = false;--}}
-
-                        {{--response.forEach(function (element) {--}}
-
-
-                            {{--$('#asignaturas')--}}
-                                {{--.append($("<option></option>")--}}
-                                    {{--.attr("value", element)--}}
-                                    {{--.text(element));--}}
-                        {{--});--}}
-
-                    {{--}--}}
-
-
-
-
-        {{--console.log(response);--}}
-
-                {{--},--}}
-                {{--error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
-                    {{--console.log(JSON.stringify(jqXHR));--}}
-                    {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
-                {{--}--}}
-            {{--});--}}
-
-        {{--});--}}
 
 
 
@@ -525,17 +456,7 @@
             $("#startDate").datepicker({
 
                     onSelect: function(date) {
-                        // document.getElementById("endDate").disabled = false;
-                        //
-                        // $("#endDate" ).datepicker("destroy");
-                        //
-                        // $("#endDate").datepicker({
-                        //     minDate: date,
-                        //     inline : false
-                        //
-                        // })
-                        // $( "#endDate" ).datepicker("refresh");
-                        // $("#endDate").datepicker('setDate', null);
+
 
                     },
 
