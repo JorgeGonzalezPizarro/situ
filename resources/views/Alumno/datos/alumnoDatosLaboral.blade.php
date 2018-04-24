@@ -2,8 +2,8 @@
 <script src="/js/jquery-3.3.1.min.js"></script>
 <script src="/js/datepickerSpanish.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>--}}
 <style>
     input[type=text]{
         border: 0 !important;
@@ -717,9 +717,9 @@
     </div>
     </div><!-- /#wrapper -->
 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="/css/situCss/jquery-ui.css" />
     {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
-    <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="/js/situJs/jquery-ui.js"></script>
     {{--<script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>--}}
     {{--<script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>--}}
     {{--<script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>--}}
