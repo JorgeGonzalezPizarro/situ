@@ -1,5 +1,4 @@
 @extends('layouts.layoutAdmin')
-<script src="/js/jquery-3.3.1.min.js"></script>
 
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>--}}
@@ -270,14 +269,22 @@ El correo electronico ya existe</p></div>') !!}
         </div>
     </div>
     </div>
-@endsection
-@section('scripts')
+    {{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
 
+    <script src="/js/jsquery.2.1.3.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/boot-datetimepicker.js"></script>
+    {{--<script src="/js/twitterbootstrap.js"></script>--}}
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--}}
+
+<<<<<<< HEAD
     <script src="/js/situJs/jquery.js"></script>
     {{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>--}}
     {{--<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>--}}
     <script src="/js/situJs/bootstrap-datetimepicker.min.js"></script>
     @endsection
+=======
+>>>>>>> 996c153bb2b5a37d7be751512b8edaa8e3b93bcb
 
 
 <script>
@@ -431,3 +438,4 @@ El correo electronico ya existe</p></div>') !!}
 
 
 </script>
+@endsection

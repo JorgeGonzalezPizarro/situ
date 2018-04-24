@@ -211,24 +211,29 @@
         </div>
     </div>
         </div><!-- /#wrapper -->
+    <link href="{{ asset('css/chosen.css') }}" rel="stylesheet">
+    <link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery1.10.1.css') }}" rel="stylesheet">
+
+    <script src="/js/chosen.jquery.js"></script>
 
     <!--  jQuery -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    {{--<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />--}}
     {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
-    <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="/js/jqueryui.1.10.1.js"></script>
     <script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
     <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
     <script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>
     <script src="/js/tinymce/js/tinymce/langs/es.js"></script>
-    <script src="/js/datepickerSpanish.js"></script>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>--}}
+    <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet">
 
-    <script>      $(function() {
-            $('.chosen-select').chosen();
-            $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
-        });
-    </script>
+    {{--<script>      $(function() {--}}
+            {{--$('.chosen-select').chosen();--}}
+            {{--$('.chosen-select-deselect').chosen({ allow_single_deselect: true });--}}
+        {{--});--}}
+    {{--</script>--}}
 
 
         <script>
@@ -449,7 +454,7 @@
 
 
 
-        $.datepicker.setDefaults($.datepicker.regional['es']);
+        // $.datepicker.setDefaults($.datepicker.regional['es']);
         $(function () {
             // document.getElementById("endDate").disabled = true;
 
