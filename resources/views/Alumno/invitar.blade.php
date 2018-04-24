@@ -1,8 +1,7 @@
 @extends('layouts.layoutAdmin')
-<script src="/js/jquery-3.3.1.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>--}}
 <style>
     input {
         border: 0 !important;
@@ -270,14 +269,14 @@ El correo electronico ya existe</p></div>') !!}
         </div>
     </div>
     </div>
-@endsection
-@section('scripts')
+    {{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
-    @endsection
+    <script src="/js/jsquery.2.1.3.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/boot-datetimepicker.js"></script>
+    {{--<script src="/js/twitterbootstrap.js"></script>--}}
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--}}
+
 
 
 <script>
@@ -431,3 +430,4 @@ El correo electronico ya existe</p></div>') !!}
 
 
 </script>
+@endsection

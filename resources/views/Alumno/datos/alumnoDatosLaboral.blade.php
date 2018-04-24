@@ -1,9 +1,8 @@
 @extends('layouts.layoutAdmin')
-<script src="/js/jquery-3.3.1.min.js"></script>
-<script src="/js/datepickerSpanish.js"></script>
+{{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>--}}
 <style>
     input[type=text]{
         border: 0 !important;
@@ -95,7 +94,7 @@
                                         <tr>
                                             <td><strong class="">Sector-Actividad</strong></td>
                                             <td>
-                                                <select form="formulario" class="selectpicker dropup" id="sector" data-live-search="true" data-dropupAuto="true" name="sector" title = " Seleccione " data-noneSelectedText="">
+                                                <select form="formulario"  class="form-control " id="sector" data-live-search="true" data-dropupAuto="true" name="sector" title = " Seleccione " data-noneSelectedText="">
                                                     <option value="-1"></option>
                                                     <option value="11">Actividades financieras, banca y seguros</option>
                                                     <option value="22">Agencia de publicidad</option>
@@ -287,7 +286,7 @@
                                         <tr>
                                             <td><strong class="">Ubicacion</strong></td>
                                             <td>
-                                                <select form="formulario" class="selectpicker dropup" name="ubicacion" required id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
+                                                <select form="formulario"  class="form-control " name="ubicacion" required id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
 
                                                 </select>
                                             </td>
@@ -474,7 +473,7 @@
                                     <tr>
                                         <td><strong class="">Disciplina Academica</strong></td>
                                         <td>
-                                            <select form="formulario2" class="selectpicker dropup" name="disciplina_academica" id="disciplina_academica" data-live-search="true" data-dropupAuto="false" title = " Seleccione " data-noneSelectedText="">
+                                            <select form="formulario2" class="form-control " name="disciplina_academica" id="disciplina_academica"  title = " Seleccione ">
                                                 <option value="1" >Administración y Dirección de Empresas</option>
                                                 <option value="27" >Arquitectura</option>
                                                 <option value="23" >Bellas Artes</option>
@@ -703,32 +702,35 @@
         <div class="modal-dialog">
             <iframe width="550" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
 
-            <!-- Modal content-->
-            {{--<div class="modal-content">--}}
-                {{--<iframe width="550" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>--}}
 
-                {{--<div class="modal-body">--}}
-                    {{--<iframe width="550" height="400" src="/js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>--}}
-                {{--</div>--}}
-
-            {{--</div>--}}
 
         </div>
     </div>
     </div><!-- /#wrapper -->
 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    {{--<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />--}}
     {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
-    <script src="https://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    <script src="/js/jqueryui.1.10.1.js"></script>
     {{--<script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>--}}
     {{--<script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>--}}
     {{--<script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>--}}
     {{--<script src="/js/tinymce/js/tinymce/langs/es.js"></script>--}}
 
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>--}}
+    {{--<script src="/js/datepickerSpanish.js"></script>--}}
+
+    <script>
+
+        // $j is now an alias to the jQuery function; creating the new alias is optional.
 
 
-@endsection
+
+
+        // The $ variable now has the prototype meaning, which is a shortcut for
+        // document.getElementById(). mainDiv below is a DOM element, not a jQuery object.
+
+
+    </script>
 <script>      $(function() {
         $('.chosen-select').chosen();
         $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
@@ -737,9 +739,10 @@
 <script>
 
     $(document).ready(function () {
-        $.datepicker.setDefaults($.datepicker.regional['es']);
+        // $.datepicker.setDefaults($.datepicker.regional['es']);
         $(function () {
             document.getElementById("endDate").disabled = true;
+            jQuery.noConflict();
 
             $("#startDate").datepicker({
 
@@ -1102,3 +1105,4 @@
 
 </script>
 
+@endsection

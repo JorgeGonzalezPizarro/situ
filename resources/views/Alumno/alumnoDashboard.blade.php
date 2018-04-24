@@ -1,5 +1,5 @@
 @extends('layouts.layoutAdmin')
-<script src="/js/jquery-3.3.1.min.js"></script>
+{{--<script src="/js/datepickerSpanish.js"></script>--}}
 
 @section('content')
 
@@ -223,12 +223,12 @@
         </div>
     </div>
 
-@endsection
 
 <script>
 
     $(document).ready(function () {
 
+        var $j = jQuery.noConflict();
 
         $('#popoverData').popover();
         $('#popoverOption').popover({ trigger: "hover" });
@@ -371,4 +371,5 @@
 
 
 </script>
+@endsection
 

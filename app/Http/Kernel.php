@@ -59,6 +59,7 @@ class Kernel extends HttpKernel
         'Admin' => \App\Http\Middleware\Admin::class,
         'Alumno' => \App\Http\Middleware\Alumno::class,
         'Invitado' => \App\Http\Middleware\Invitado::class,
+        'headers' => \App\Http\Middleware\Headers::class,
 
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'permission' => \App\Http\Middleware\PermissionMiddleware::class,

@@ -12,17 +12,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
-    <script src="/js/moment.js"></script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Gugi|Lato:100,100i,300,300i,400,400i,700,700i|Roboto:300,300i,400,400i" rel="stylesheet">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <!-- Latest compiled JavaScript -->
+    {{--<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>--}}
+
+    {{--<link rel="shortcut icon" href="{{{ asset('imagenes/icono situ.ico') }}}">--}}
+
+    {{--<!-- jQuery library -->--}}
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
+    {{--<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">--}}
+    {{--<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>--}}
+    {{--<!-- Latest compiled JavaScript -->--}}
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+    {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
     {{--<script src="{{ asset('/js/jquery-3.3.1.min.js') }}"></script>--}}
     {{--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>--}}
@@ -31,31 +32,97 @@
     {{--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>--}}
     {{--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->--}}
     {{--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>--}}
-
+    {{--<link href="https://fonts.googleapis.com/css?family=Gugi|Lato:100,100i,300,300i,400,400i,700,700i|Roboto:300,300i,400,400i" rel="stylesheet">--}}
     {{--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.material.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" rel="stylesheet" >
+    {{--<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>--}}
+    {{--<script src="https://cdn.datatables.net/1.10.16/js/dataTables.material.min.js"></script>--}}
+    {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>--}}
+    {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" rel="stylesheet" >--}}
     {{--<link href="https://cdn.datatables.net/1.10.16/css/dataTables.material.min.css" rel="stylesheet" >--}}
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+    {{--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.css">--}}
     {{--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.css">--}}
     {{--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css">--}}
 
     {{--<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">--}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">--}}
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<!-- Latest compiled and minified JavaScript -->
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>--}}
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>--}}
 
-    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
+    <script src="/js/ui/jquery2.js" ></script>
     <!-- Custom CSS -->
+
+    <!-- Custom Fonts -->
+    <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+    {{--<!-- Chosen -->--}}
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chosen.css') }}" rel="stylesheet">
+
+    {{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
+    {{--<script src="/js/3.3.1_jquery.min.js"></script>--}}
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.material.min.js"></script>
+    <link href="{{ asset('css/material.min.css') }}" rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/2bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/3.3.0.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/chosen.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/colorpicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dataTables.responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fonts.googleapis.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/simplemde.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    {{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
+
+    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+
+
+    <script src="/js/chosen.jquery.js"></script>
+
+
+    <script src="/js/3.3.0.js.bootstrap.min.js"></script>
+
+    <script src="/js/colorpicker.js"></script>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/eye.js"></script>
+
+    <script src="/js/3.3.7_js_bootstrap.min.js"></script>
+    <script src="/js/bootstrap-colorpicker.js"></script>
+    <script src="/js/bootstrap-select.min.js"></script>
+    <script src="/js/bootstrap-toggle.min.js"></script>
+
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script src="/js/respond.js"></script>
+    <script src="/js/simplemde.min.js"></script>
+    <script src="/js/use.fontawesome.com.releases.v5.0.10.js.all.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/moment.js"></script>
+    {{--<!-- Chosen -->--}}
+
+    <!-- DataTables CSS -->
+
+
+    <script src="/js/respond.js"></script>
+    <script src="/js/respond.js"></script>
+    <script src="/js/respond.js"></script>
+
+
+
 
     <!-- Custom Fonts -->
     <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -381,7 +448,7 @@
                                 @foreach($categorias as $categoria)
                                     <li class="" style="    padding: 10px;
     color: white;">
-                                        <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
+                                        <a href="{{route('hechos', ['categoria'=>$categoria->categoria]) }}" style="    color: white;">
                                             <i class="fas fa-plus-square"></i>
                                             {{$categoria->categoria}}</a>
                                     </li>
@@ -431,7 +498,7 @@
                                             @foreach($categorias as $categoria)
                                                 <li class="" style="    padding: 10px;
     color: white;">
-                                                    <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
+                                                    <a href="{{ route('hechos', ['categoria'=>$categoria->categoria])}}" style="    color: white;">
                                                         <i class="fas fa-plus-square"></i>
                                                         {{$categoria->categoria}}</a>
                                                 </li>
@@ -572,30 +639,30 @@
 
                     {{--@foreach($categorias as $categoria)--}}
                         <li class="">
-                            <a href="{!! route('calificaciones')!!}"><i class="fas fa-tasks"></i>Calificaciones</a>
+                            <a href="{{ route('calificaciones')}}"><i class="fas fa-tasks"></i>Calificaciones</a>
                         </li>
                     <li class="">
-                        <a href="{!! url('Situ/public/0/5')!!}"><i class="fas fa-briefcase"></i>
+                        <a href="{{ url('Situ/public/0/5')}}"><i class="fas fa-briefcase"></i>
 
                             Portfolio Profesional</a>
                     </li>
                     <li class="">
-                        <a href="{!! route('trabajos')!!}"><i class="fas fa-graduation-cap"></i>
+                        <a href="{{ route('trabajos')}}"><i class="fas fa-graduation-cap"></i>
 
                             Trabajos Academicos</a>
                     </li>
                     <li class="">
-                        <a href="{!! route('recuerdosAll')!!}"><i class="fas fa-bookmark"></i>
+                        <a href="{{route('recuerdosAll')}}"><i class="fas fa-bookmark"></i>
 
                             Recuerdos</a>
                     </li>
                     <li class="">
-                        <a href="{!! route('proyectosInvestigacionAll')!!}"><i class="fas fa-newspaper"></i>
+                        <a href="{{ route('proyectosInvestigacionAll')}}"><i class="fas fa-newspaper"></i>
 
                             Proyectos</a>
                     </li>
                     <li class="">
-                        <a href="{!! route('hechos', ['categoria'=>"Frases Guia"])!!}"><i class="fas fa-quote-left"></i>
+                        <a href="{{ route('hechos', ['categoria'=>"Frases Guia"])}}"><i class="fas fa-quote-left"></i>
 
 
 
@@ -625,7 +692,7 @@
 
     </div><!-- /#page-wrapper -->
 
-
+</div>
 
     <!-- Bootstrap Core JavaScript -->
 
@@ -633,7 +700,7 @@
 
 
     <!-- DataTables JavaScript -->
-</div>{{--<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>--}}
+{{--<script src="{{ asset('dataTables/js/jquery.dataTables.min.js') }}"></script>--}}
 {{--<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.10/js/jquery.dataTables.min.js"></script>-->--}}
 {{--<script src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>--}}
 {{--<script src="{{ asset('dataTables/js/dataTables.bootstrap.min.js') }}"></script>--}}
@@ -648,5 +715,7 @@
         $('.chosen-select').chosen({max_selected_options: 3});
         $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
     });
+
 </script>
+
 </html>
