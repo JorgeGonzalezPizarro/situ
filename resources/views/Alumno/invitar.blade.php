@@ -1,5 +1,4 @@
 @extends('layouts.layoutAdmin')
-<script src="/js/jquery-3.3.1.min.js"></script>
 
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>--}}
@@ -245,8 +244,19 @@ El correo electronico ya existe</p></div>') !!}
         </div>
     </div>
     </div>
+<<<<<<< HEAD
 @section('scripts')
+=======
+    {{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
 
+    <script src="/js/jsquery.2.1.3.js"></script>
+    <script src="/js/moment.js"></script>
+    <script src="/js/boot-datetimepicker.js"></script>
+    {{--<script src="/js/twitterbootstrap.js"></script>--}}
+    {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>--}}
+>>>>>>> a08a04face57c33b75a50414a43cbbf5c388d81a
+
+<<<<<<< HEAD
     <script src="/js/situJs/jquery.js"></script>
     <script src="/js/situJs/moment.min.js"></script>
 
@@ -254,7 +264,13 @@ El correo electronico ya existe</p></div>') !!}
 
     {{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>--}}
     <script src="/js/situJs/bootstrap-datetimepicker.min.js"></script>
+<<<<<<< HEAD
 
+=======
+    @endsection
+=======
+>>>>>>> 996c153bb2b5a37d7be751512b8edaa8e3b93bcb
+>>>>>>> a08a04face57c33b75a50414a43cbbf5c388d81a
 
 
 <script>
@@ -393,5 +409,13 @@ El correo electronico ya existe</p></div>') !!}
     }
 </script>
 
+<<<<<<< HEAD
 @endsection
+=======
+    }
+
+
+
+</script>
+>>>>>>> a08a04face57c33b75a50414a43cbbf5c388d81a
 @endsection

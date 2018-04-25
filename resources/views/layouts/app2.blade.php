@@ -34,8 +34,8 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    {{--<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">--}}
+    {{--<script src="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>--}}
     <script src="{{ asset('bootstrap-js/bootstrap.bundle.js') }}" ></script>
     <script src="{{ asset('bootstrap-js/bootstrap.js') }}" ></script>
 

@@ -1,5 +1,5 @@
 @extends('layouts.layoutAdmin')
-<script src="/js/jquery-3.3.1.min.js"></script>
+{{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
 
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>--}}
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.js"></script>--}}
@@ -144,10 +144,10 @@
 
                     </div>
                     <div class="panel-footer">
-                        <table id="asignaturas"  class="mdl-data-table" cellspacing="0" width="100%">
+                        <table id="laboral"  class="mdl-data-table" cellspacing="0" width="100%">
                             {!! Form::label('text', 'Curso Académico') !!}
                             {{ Form::select('', $grado, $year,
-                            ['aria-controls'=>'asignaturas','class' => 'form-control input-sm','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}
+                            ['aria-controls'=>'laboral','class' => 'form-control input-sm','onChange'=>'getAsignaturas()' ,'id'=>'cursoSelect']) }}
 
                         @if(!empty($curso[0]->grado))
                                 <thead>
@@ -232,16 +232,8 @@
 
 
 
-<script>
-    $(document).ready(function () {
-        $(function() {
-
-            $("#cursoSelect").val($("#grado1").text());
-        });
 
 
-    });
-</script>
 <script>function responsive_filemanager_callback(field_id){
         console.log(field_id);
 
@@ -333,6 +325,12 @@
 <script>
 
     $(document).ready(function() {
+        $(function() {
+
+            $("#cursoSelect").val($("#grado1").text());
+        });
+
+
         document.getElementById('boton').disabled = true;
         $('i').on('click',function () {
             $('#boton').removeClass('btn btn-info disabled');
@@ -374,7 +372,7 @@
             $('#password_confirmation').attr('readonly', false).css("background-color", "#bfe1e847");
 
         });
-        var table=$('#asignaturas').DataTable({
+        var table=$('#laboral').DataTable({
             "scrollX": false,
             "bPaginate": false,
             "bLengthChange": false,
@@ -406,9 +404,9 @@
 
         var x = document.getElementById("cursoSelect").selectedIndex;
         var curso=(document.getElementsByTagName("option")[x].value);
-        $('#asignaturas').on('click', 'td a ', function (e) {
+        $('#laboral').on('click', 'td a ', function (e) {
             e.preventDefault();
-            var table = $('#asignaturas').DataTable();
+            var table = $('#laboral').DataTable();
 
             var data = table.row($(this).closest('tr')).data()
             var x = document.getElementById("cursoSelect").selectedIndex;
