@@ -190,7 +190,7 @@ El correo electronico ya existe</p></div>') !!}
                                 <td>{{$invitado->numero_accesos }}</td>
                                 <td id="prof">
                                     <span id="{{$invitado->fecha_limite }}"  class="prof">{{  \Carbon\Carbon::parse($invitado->fecha_limite)->format('d/m/Y') }}</span>
-                                <br><a href="#myModal2" data-toggle="modal" id="{{$invitado->id}}" data-target="#myModal2">Cambiar Fecha </a></td>
+                                <br><a href="#myModal2" data-toggle="modal" id="{{$invitado->id}}" data-target="#myModal12">Cambiar Fecha </a></td>
 
                             </tr>
 
@@ -216,37 +216,16 @@ El correo electronico ya existe</p></div>') !!}
 
 
     </div>
-    <footer id="footer">
-        <hr>
-        <br>
-    </footer>
-    <div class="modal fade" id="myModal" role="dialog">
-        <div class="modal-dialog">
 
-            <!-- Modal content-->
-            <div class="modal-content">
 
-                <div class="modal-body">
-                    <iframe width="700" height="400" src="../js/tinymce/js/tinymce/plugins/responsive_filemanager/filemanager/dialog.php?type=2&field_id=fieldID4'&fldr=" frameborder="0" style="overflow: scroll; overflow-x: hidden; overflow-y: scroll; "></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
     </div><!-- /#wrapper -->
     <!-- Modal -->
-    <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal fade" id="myModal12" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                </div>
+
                 <div class="modal-body">
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker2'>
@@ -256,33 +235,69 @@ El correo electronico ya existe</p></div>') !!}
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
                         </div>
-                        <div class='input-group date' id='datetimepicker2'>
                             <button type="submit" id="botonActualizarFecha">Confirmar</button>
 
-                        </div>
                     </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+
             </div>
 
         </div>
     </div>
     </div>
-@endsection
 @section('scripts')
 
     <script src="/js/situJs/jquery.js"></script>
+    <script src="/js/situJs/moment.min.js"></script>
+
+    <script src="/js/situJs/_bootstrap.js"></script>
+
     {{--<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.2/moment.min.js"></script>--}}
-    {{--<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>--}}
     <script src="/js/situJs/bootstrap-datetimepicker.min.js"></script>
-    @endsection
+
 
 
 <script>
     $(document).ready(function () {
 
+
+
+
+    $('#myModal12').on('shown.bs.modal', function (e) {
+        var id= e.relatedTarget.id;
+            $("#botonActualizarFecha").on('click',function () {
+                var fecha=document.getElementById("fechaActualizar");
+                var fechaActualizar=fecha.value;
+                var mensaje = confirm("¿Confirma cambiar la fecha");
+                console.log("aa");
+                if (mensaje) {
+
+
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('actualizarFecha') }}",
+                        data: {
+                            fecha: fechaActualizar,
+                            id : id,
+                        },
+                        success: function (response) {
+                            window.location.reload();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                            console.log(jqXHR);
+
+                        }
+                    });
+                }
+
+
+                else {
+                    alert("a");
+                }
+            })
+
+
+        });
         var myNodelist  =   document.getElementsByClassName("prof");
 
         var date1= new Date();
@@ -310,40 +325,6 @@ El correo electronico ya existe</p></div>') !!}
 
 
 
-        $('#myModal2').on('shown.bs.modal',function (e) {
-          var id= e.relatedTarget.id;
-            $("#botonActualizarFecha").on('click',function () {
-            var fecha=document.getElementById("fechaActualizar");
-            var fechaActualizar=fecha.value;
-            var mensaje = confirm("¿Confirma cambiar la fecha");
-            if (mensaje) {
-
-
-                $.ajax({
-                    type: "get",
-                    url: "{{ route('actualizarFecha') }}",
-                    data: {
-                        fecha: fechaActualizar,
-                        id : id,
-                    },
-                    success: function (response) {
-                   window.location.reload();
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(jqXHR);
-
-                    }
-                });
-            }
-
-
-            else {
-
-            }
-            })
-
-
-        });
             $('#datetimepicker2').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
@@ -357,14 +338,8 @@ El correo electronico ya existe</p></div>') !!}
 
 
         });
-        function getFormattedDate(date) {
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear().toString().slice(2);
-            return day + '-' + month + '-' + year;
 
 
-    }
 
 
 
@@ -417,17 +392,6 @@ El correo electronico ya existe</p></div>') !!}
 
     }
 </script>
-<script>function responsive_filemanager_callback(field_id){
-        console.log(field_id);
 
-        var url=jQuery('#'+field_id).val();
-        // $('#myModal').modal('hide');
-
-
-        $('#myimage').attr('src', url);
-
-    }
-
-
-
-</script>
+@endsection
+@endsection

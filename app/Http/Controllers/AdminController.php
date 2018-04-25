@@ -216,10 +216,14 @@ class AdminController extends Controller
         $user->password = Hash::make($password);
         $user->update();
         $invitado->update();
-
+        if($invitado->rol=='Invitado')
         $data = array('alumno'=>$invitado->getAlumno()->get()->first()->first_name,'invitado'=>$invitado,'first_name' => $invitado->getUsuario()->get()->first()->first_name, 'email' => $invitado->getUsuario()->get()->first()->email, 'encrypted' => $encrypted,
 //
         );
+        elseif($invitado->rol=='Profesor') {
+            $data = array('profesor'=>$invitado,'invitado'=>$invitado,'first_name' => $invitado->getUsuario()->get()->first()->first_name, 'email' =>$invitado->getUsuario()->get()->first()->email, 'encrypted' => $encrypted,);
+
+        }
         $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
 
         Mail::send('emailFecha', $data,function ($mensaje) use($data,$link,$invitado,$request,$encrypted){

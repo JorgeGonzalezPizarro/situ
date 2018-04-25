@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Formacion;
+use File;
+use Storage;
 use App\Invitados;
+use Response;
 use App\Laboral;
 use App\logAccesos;
 use DB;
@@ -593,6 +596,16 @@ class AlumnoController extends Controller
 
                 );
                 $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
+                $headers = array(
+                    'Content-Type: text/txt',
+                );
+               $fs= File::put($invitado2->getAlumno()->get()->first()->first_name.'_accesoSItu.txt',url('loginInv'.'/'.$invitado2->getUsuario()->get()->first()->email.'/'.$encrypted));
+                $file= public_path(). "/".$invitado2->getAlumno()->get()->first()->first_name.'_accesoSItu.txt';
+
+                $headers = array(
+                    'Content-Type: application/pdf',
+                );
+
 
                 Mail::send('email', $data,function ($mensaje) use($data,$link,$invitado2,$request,$encrypted){
 
@@ -640,7 +653,8 @@ class AlumnoController extends Controller
 
         }
 
-        return Redirect::back();
+        return Response::download($file, 'filename.txt', $headers);
+//        return Redirect::back();
     }
 
     public function alumnoDatosLaborales($year = null)

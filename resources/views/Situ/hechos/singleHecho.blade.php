@@ -27,11 +27,11 @@
                 </div>
             </div>
             <div class="row" style="padding-top: 60px;">
+                <input type="hidden" name="etiq" id="etiq" value="">
 
             <div class="col-lg-10" id="contenedor" >
                 <div class="dropdown" style="float: right ">
 
-                <input type="hidden" name="etiq" id="etiq" value="">
                 </div>
             <div class="col-lg-12">
             </div> <div class="clearfix"></div>
@@ -59,11 +59,16 @@
                                                     <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive"  name="imagen">
                                                     @endif<h4 style="text-align: center" class="timeline-title">{{$alumno->first_name}}</h4>
                                             </span>
-                                            <div class="clearfix"></div>  <h5 class="timeline-title"><a href="#" id="{{$hecho->getCategoria()->get()->first()->id}}"onclick="categorias(this.id)"> {{$hecho->getCategoria()->get()->first()->categoria}}</a></h5>
-
+                                            <div class="clearfix"></div>
                                         </div>
                                         <div class="col-md-8">
+                                            <div class="timeline-panel">
+                                                <div class="timeline-heading">
+                                                    <h4 class="timeline-title"><a href="#" id="{{$hecho->getCategoria()->get()->first()->id}}"onclick="categorias(this.id)"> {{$hecho->getCategoria()->get()->first()->categoria}}</a></h4>
+                                                </div>
+
                                         <div class="timeline-body">
+
                                             <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion {{$hecho->created_at}}</small></span>
 
                                             <span class="pull-left" style=" width: -webkit-fill-available;
@@ -73,12 +78,25 @@
                                     </p></span>
                                         </div>
                                         </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i> Fecha de inicio {{$hecho->fecha_inicio}}</span></span><br>
                                             @if(!empty($hecho->curso))
                                                 <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-graduation-cap"></i> Curso <a  onclick="getCursos(this.text)" href="#"> {{substr($hecho->curso,0,3)}}</a></span></span><br>
                                                 <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">{{substr($hecho->curso,5,10)}}</a></span></span><br>
 
+
+                                            @endif
+                                            @if(!empty($hecho->etiqueta))
+                                                    <span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>
+                                                           <span style="          width: 100%;
+    min-width: 100px;
+    line-height: 18px;
+    font-size: 18px;
+    min-height: 30px;
+    background: transparent;
+        border: 1px solid #5bc0de;
+    padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#"> {{str_replace(',',"",$hecho->etiqueta)}}</a></span></span></span>
 
                                             @endif
                                         </div>
@@ -237,7 +255,7 @@
                 encode: true,
                 data: {
                     orden: orden,
-                    input: input,
+                    input: $('#etiq').val(),
                 },
                 success: function (response) {
                     console.log(response[0].length);
@@ -260,40 +278,52 @@
                         response[0].forEach(function (element) {
 
 
-                            html.push(' <div class="col-lg-12">' +
-                                '<ul class="timeline">' +
+                            html.push('<div class="col-lg-12">'
+                                +'<ul class="timeline">' +
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '<span style="float: right;">' +
+                                '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '<span style="float: right;">'+
 
                                 '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                '</span>' +
-                                '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
-                                '<div class="clearfix"></div>  <h5 class="timeline-title">' + element['categoria_nombre'] + '</h5>' +
-                                '<input type="hidden" name="etiq" id="etiq" value=' + input + '>' +
+                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+                                '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+                                '<h4 class="timeline-title"><a href="#" id=" ' + element['categoria_id']+ '" onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+                                '</div><input type="hidden" name="etiq" id="etiq" value=' + input + '>' +
 
-                                '</div>' +
-                                '<div class="timeline-body">' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
-                                '<br>' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha inicio' + element['fecha_inicio'] + '</small></span>' +
+                            '</div>' +
+                            '<div class="timeline-body">' +
+                            '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                            '<br>' +
 
-                                '  <div class="clearfix"></div>' +
+                            '  <div class="clearfix"></div>' +
 
-                                '<span class="pull-left"style=" width: -webkit-fill-available;\n' +
-                                '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
-                                '  <div class="clearfix"></div>' +
-                                ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
-                                ' </p></span>' +
-                                '</div>' +
-                                '</div>' +
-                                '</li>' +
+                            '<span class="pull-left"style=" width: -webkit-fill-available;' +
+                            '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+                            '  <div class="clearfix"></div>' +
+                            ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+                            ' </p></span>' +
+                            '</div>' +
+                            '</div>'
+                            +'<div class="col-md-4">'
+                           + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+                                + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+
+                            +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+                                 (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
-                                '</ul>' +
 
-                                '</div>');
+                            +'</div>'
+
+                            +'</div>'
+                            +'</li>' +
+
+
+                            '</ul>' +
+
+                            '</div>');
                             $("#contenedor").empty();
 
 
@@ -367,38 +397,52 @@ function etiquetas(id){
                     response[0].forEach(function (element) {
 
 
-                        html.push(' <div class="col-lg-12">' +
-                            '<ul class="timeline">' +
+                        html.push('<div class="col-lg-12">'
+                            +'<ul class="timeline">' +
                             '<li>' +
                             '  <div class="timeline-panel">' +
                             '    <div class="timeline-heading">' +
-                            '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
-                            '<div class="clearfix"></div>  <h5 class="timeline-title">' + element['categoria_nombre'] + '</h5>' +
-                            '<span style="float: right;">' +
+                            '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                            '<span style="float: right;">'+
 
                             '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                            '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4>\n' +
-                            '                                            </span>' +
+                            '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+                            '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+                            '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id']+ '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+                            '</div><input type="hidden" name="etiq" id="etiq" value=' + id + '>' +
+
                             '</div>' +
                             '<div class="timeline-body">' +
                             '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
                             '<br>' +
-                            '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha inicio' + element['fecha_inicio'] + '</small></span>' +
 
-                            '<span class="pull-left"style=" width: -webkit-fill-available;\n' +
+                            '  <div class="clearfix"></div>' +
+
+                            '<span class="pull-left"style=" width: -webkit-fill-available;' +
                             '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
                             '  <div class="clearfix"></div>' +
                             ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
                             ' </p></span>' +
                             '</div>' +
-                            '</div>' +
-                            '</li>' +
+                            '</div>'
+                            +'<div class="col-md-4">'
+                            + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+                            + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+
+                            +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+                            (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+
+
+
+                            +'</div>'
+
+                            +'</div>'
+                            +'</li>' +
 
 
                             '</ul>' +
 
                             '</div>');
-
                         $("#contenedor").empty();
 
 
@@ -415,6 +459,7 @@ function etiquetas(id){
                     input_value =  input.getAttribute("value");
                     input_value = "";
                     $('#buscar').val("");
+                    $('#etiq').val(id);
 
                 }
 
@@ -473,31 +518,47 @@ function etiquetas(id){
                         response[0].forEach(function (element) {
 
 
-                            html.push(' <div class="col-lg-12">' +
-                                '<ul class="timeline">' +
+                            html.push('<div class="col-lg-12">'
+                                +'<ul class="timeline">' +
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
-                                '<span style="float: right;">  <h4 class="timeline-title">' + element['categoria_nombre'] + '</h4></span>' +
-                                '<span style="float: right;">' +
+                                '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '<span style="float: right;">'+
 
                                 '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4>\n' +
-                                '                                            </span>' +                           '</div>' +
+                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+                                '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+                                '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '" onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+                                '</div><input type="hidden" name="etiq" id="etiq" value=' + input + '>' +
+
+                                '</div>' +
                                 '<div class="timeline-body">' +
                                 '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
                                 '<br>' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha inicio' + element['fecha_inicio'] + '</small></span>' +
 
-                                '<span class="pull-left"style=" width: -webkit-fill-available;\n' +
+                                '  <div class="clearfix"></div>' +
+
+                                '<span class="pull-left"style=" width: -webkit-fill-available;' +
                                 '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
                                 '  <div class="clearfix"></div>' +
                                 ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
                                 ' </p></span>' +
                                 '</div>' +
-                                '</div>' +
-                                '</li>' +
+                                '</div>'
+                                +'<div class="col-md-4">'
+                                + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+                                + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+
+                                +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+                                (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+
+
+
+                                +'</div>'
+
+                                +'</div>'
+                                +'</li>' +
 
 
                                 '</ul>' +
@@ -510,9 +571,9 @@ function etiquetas(id){
                         });
 
                         var input = document.getElementById("buscar");
-                        input_value =  input.getAttribute("value");
-                        input_value = "";
-                        $('#buscar').val("");
+
+                        $('#etiq').val(id);
+
                         console.log(response[0].length);
                         html.forEach(function (element) {
                             console.log(element['id']);
@@ -581,32 +642,56 @@ function etiquetas(id){
                             response[0].forEach(function (element) {
 
 
-                                html.push(' <div class="col-lg-12">' +
-                                    '<ul class="timeline">' +
+
+
+
+
+
+
+
+
+
+                                html.push('<div class="col-lg-12">'
+                                    +'<ul class="timeline">' +
                                     '<li>' +
                                     '  <div class="timeline-panel">' +
                                     '    <div class="timeline-heading">' +
-                                    '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
-                                    '<div class="clearfix"></div>  <h5 class="timeline-title">' + element['categoria_nombre'] + '</h5>' +
-                                    '<span style="float: right;">' +
+                                    '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                    '<span style="float: right;">'+
 
                                     '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                    '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4>\n' +
-                                    '                                            </span>' +
+                                    '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+                                    '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+                                    '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+                                    '</div>'+
+
                                     '</div>' +
                                     '<div class="timeline-body">' +
                                     '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
                                     '<br>' +
-                                    '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha inicio' + element['fecha_inicio'] + '</small></span>' +
 
-                                    '<span class="pull-left"style=" width: -webkit-fill-available;\n' +
+                                    '  <div class="clearfix"></div>' +
+
+                                    '<span class="pull-left"style=" width: -webkit-fill-available;' +
                                     '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
                                     '  <div class="clearfix"></div>' +
                                     ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
                                     ' </p></span>' +
                                     '</div>' +
-                                    '</div>' +
-                                    '</li>' +
+                                    '</div>'
+                                    +'<div class="col-md-4">'
+                                    + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+                                    + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+
+                                    +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+                                    (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+
+
+
+                                    +'</div>'
+
+                                    +'</div>'
+                                    +'</li>' +
 
 
                                     '</ul>' +
@@ -624,6 +709,8 @@ function etiquetas(id){
 
 
                             });
+                            $('#etiq').val(id);
+
                             console.log(response[0].length);
 
                         }
@@ -682,38 +769,52 @@ function etiquetas(id){
                         response[0].forEach(function (element) {
 
 
-                            html.push(' <div class="col-lg-12">' +
-                                '<ul class="timeline">' +
+                            html.push('<div class="col-lg-12">'
+                                +'<ul class="timeline">' +
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
-                                '<div class="clearfix"></div>  <h5 class="timeline-title">' + element['categoria_nombre'] + '</h5>' +
-                                '<span style="float: right;">' +
+                                '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '<span style="float: right;">'+
 
                                 '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4>\n' +
-                                '                                            </span>' +
+                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+                                '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+                                '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+                                '</div>'+
+
                                 '</div>' +
                                 '<div class="timeline-body">' +
                                 '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
                                 '<br>' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha inicio' + element['fecha_inicio'] + '</small></span>' +
 
-                                '<span class="pull-left"style=" width: -webkit-fill-available;\n' +
+                                '  <div class="clearfix"></div>' +
+
+                                '<span class="pull-left"style=" width: -webkit-fill-available;' +
                                 '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
                                 '  <div class="clearfix"></div>' +
                                 ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
                                 ' </p></span>' +
                                 '</div>' +
-                                '</div>' +
-                                '</li>' +
+                                '</div>'
+                                +'<div class="col-md-4">'
+                                + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+                                + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+
+                                +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+                                (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+
+
+
+                                +'</div>'
+
+                                +'</div>'
+                                +'</li>' +
 
 
                                 '</ul>' +
 
                                 '</div>');
-
                             $("#contenedor").empty();
 
 
@@ -729,7 +830,7 @@ function etiquetas(id){
                         var input = document.getElementById("buscar");
                         input_value =  input.getAttribute("value");
                         input_value = "";
-                        $('#buscar').val("");
+                        $('#etiq').val(id);
 
                     }
 
@@ -787,32 +888,47 @@ function etiquetas(id){
                         response[0].forEach(function (element) {
 
 
-                            html.push(' <div class="col-lg-12">' +
-                                '<ul class="timeline">' +
+                            html.push('<div class="col-lg-12">'
+                                +'<ul class="timeline">' +
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '  <span style="float: left;">  <h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
-                                '<div class="clearfix"></div>  <h5 class="timeline-title">' + element['categoria_nombre'] + '</h5>' +
-                                '<span style="float: right;">' +
+                                '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '<span style="float: right;">'+
 
                                 '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4>\n' +
-                                '                                            </span>' +
+                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+                                '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+                                '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+                                '</div>' +
+
                                 '</div>' +
                                 '<div class="timeline-body">' +
                                 '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
                                 '<br>' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha inicio' + element['fecha_inicio'] + '</small></span>' +
 
-                                '<span class="pull-left"style=" width: -webkit-fill-available;\n' +
+                                '  <div class="clearfix"></div>' +
+
+                                '<span class="pull-left"style=" width: -webkit-fill-available;' +
                                 '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
                                 '  <div class="clearfix"></div>' +
                                 ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
                                 ' </p></span>' +
                                 '</div>' +
-                                '</div>' +
-                                '</li>' +
+                                '</div>'
+                                +'<div class="col-md-4">'
+                                + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+                                + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+
+                                +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+                                (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+
+
+
+                                +'</div>'
+
+                                +'</div>'
+                                +'</li>' +
 
 
                                 '</ul>' +
@@ -834,7 +950,7 @@ function etiquetas(id){
                         var input = document.getElementById("buscar");
                         input_value =  input.getAttribute("value");
                         input_value = "";
-                        $('#buscar').val("");
+                        $('#etiq').val(id);
 
                     }
 

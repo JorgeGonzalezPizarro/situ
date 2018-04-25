@@ -102,8 +102,8 @@
                 @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
 
                                         <li class="list-group-item text-left">
-                                                    <a href=" {{ url('Situ/public#'.$etiquetas->etiqueta_id)}}">{{$etiquetas->etiqueta_id}}</a>
-                                       </li>
+                                            <a href=" {{ url('Situ/public#'.$etiquetas->etiqueta_id)}}">{{$etiquetas->etiqueta_id}}</a>
+                                        </li>
                                     @endforeach
 
                                 </ul>
