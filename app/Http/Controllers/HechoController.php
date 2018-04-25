@@ -51,7 +51,7 @@ class HechoController extends Controller
                 $hecho->contenido = Input::get('contenido');
 
                 if(empty( Input::get('contenido'))) {
-                $hecho->contenido=Sentinel::getUser()->first_name. " ha añadido  <br> : ".Input::get('titulo_hecho')."";
+                $hecho->contenido=" ";
                  
 
                 }
@@ -154,8 +154,8 @@ class HechoController extends Controller
                     $calificacion->profesor=$request->profesor;
 
                     if(empty( Input::get('contenido'))){
-                        $hecho->contenido=Sentinel::getUser()->first_name. " ha añadido la siguiente calificación <br> Calificación: ".$calificacion->calificacion."
-            <br> Ubicacion: ".$calificacion->asignatura." <br> Grado: ". $calificacion->grado." Curso<br>". $calificacion->curso."";
+                        $hecho->contenido=" Calificación: ".$calificacion->calificacion."
+            <br> Asignatura: ".$calificacion->asignatura." <br> Grado: ". $calificacion->grado." Curso<br>". $calificacion->curso."";
                         $hecho->update();
                     }else {
                         $hecho->descripcion = Input::get('descripcion');

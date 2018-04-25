@@ -228,7 +228,7 @@
 
     $(document).ready(function () {
 
-        var $j = jQuery.noConflict();
+        // var $j = jQuery.noConflict();
 
         $('#popoverData').popover();
         $('#popoverOption').popover({ trigger: "hover" });

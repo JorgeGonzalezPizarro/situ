@@ -12,9 +12,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
-<<<<<<< HEAD
-    <script src="/js/moment.js"></script>
-    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/situJs/jquery.js"></script>
+
+    <script src="/js/situJs/moment.min.js"></script>
+
+    <script src="/js/situJs/_jquery-ui.js"></script>
 
 
 
@@ -29,7 +31,6 @@
 
 
 
-=======
     {{--<script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>--}}
 
     {{--<link rel="shortcut icon" href="{{{ asset('imagenes/icono situ.ico') }}}">--}}
@@ -40,7 +41,6 @@
     {{--<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>--}}
     {{--<!-- Latest compiled JavaScript -->--}}
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
->>>>>>> 996c153bb2b5a37d7be751512b8edaa8e3b93bcb
     {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
@@ -51,7 +51,6 @@
     {{--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>--}}
     {{--<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>-->--}}
     {{--<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>--}}
-<<<<<<< HEAD
     <script src="/js/situJs/jquery.dataTables.min.js"></script>
 
     {{--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
@@ -61,11 +60,9 @@
     <link href="/css/situCss/material.min.css" rel="stylesheet">
     <link href="/css/situCss/jquery.dataTables.css" rel="stylesheet">
 
-=======
     {{--<link href="https://fonts.googleapis.com/css?family=Gugi|Lato:100,100i,300,300i,400,400i,700,700i|Roboto:300,300i,400,400i" rel="stylesheet">--}}
     {{--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
     {{--<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>--}}
->>>>>>> 996c153bb2b5a37d7be751512b8edaa8e3b93bcb
     {{--<script src="https://cdn.datatables.net/1.10.16/js/dataTables.material.min.js"></script>--}}
     {{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>--}}
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css" rel="stylesheet" >--}}
@@ -78,14 +75,11 @@
     {{--<link href="//cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet">--}}
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">--}}
 
-<<<<<<< HEAD
     <!-- Latest compiled and minified JavaScript -->
     <script src="/js/situJs/bootstrap-select.min.js"></script>
     <link href="/css/situCss/bootstrap-datepicker3.css" rel="stylesheet">
 
-=======
 <!-- Latest compiled and minified JavaScript -->
->>>>>>> 996c153bb2b5a37d7be751512b8edaa8e3b93bcb
     {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>--}}
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>--}}
 
@@ -95,8 +89,7 @@
 
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
-    <script src="/js/ui/jquery2.js" ></script>
-    <!-- Custom CSS -->
+     <!-- Custom CSS -->
 
     <!-- Custom Fonts -->
     <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -107,58 +100,24 @@
 
     {{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
     {{--<script src="/js/3.3.1_jquery.min.js"></script>--}}
-    <script src="/js/jquery.dataTables.min.js"></script>
-    <script src="/js/dataTables.material.min.js"></script>
+
     <link href="{{ asset('css/material.min.css') }}" rel="stylesheet">
 
 
     <!-- Custom Fonts -->
-    <link href="{{ asset('chosen/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/2bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/3.3.0.bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-select.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-toggle.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/chosen.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/colorpicker.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dataTables.responsive.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/fonts.googleapis.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/simplemde.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.dataTables.min.css') }}" rel="stylesheet">
+
     {{--<script src="/js/jquery-3.3.1.min.js"></script>--}}
 
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
 
 
-    <script src="/js/chosen.jquery.js"></script>
 
 
-    <script src="/js/3.3.0.js.bootstrap.min.js"></script>
 
-    <script src="/js/colorpicker.js"></script>
-    <script src="/js/html5shiv.js"></script>
-    <script src="/js/eye.js"></script>
-
-    <script src="/js/3.3.7_js_bootstrap.min.js"></script>
-    <script src="/js/bootstrap-colorpicker.js"></script>
-    <script src="/js/bootstrap-select.min.js"></script>
-    <script src="/js/bootstrap-toggle.min.js"></script>
-
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script src="/js/respond.js"></script>
-    <script src="/js/simplemde.min.js"></script>
-    <script src="/js/use.fontawesome.com.releases.v5.0.10.js.all.js"></script>
-    <script src="/js/utils.js"></script>
-    <script src="/js/moment.js"></script>
     {{--<!-- Chosen -->--}}
 
     <!-- DataTables CSS -->
 
-
-    <script src="/js/respond.js"></script>
-    <script src="/js/respond.js"></script>
-    <script src="/js/respond.js"></script>
 
 
 
@@ -379,7 +338,7 @@
 
             }
             .navbar-collapse.collapse {
-                display: none !important;
+                /*display: none !important;*/
             }
 
             .navbar-nav {
@@ -597,6 +556,7 @@
                             </ul>
                         </div>
                     @endif
+
                     <ul class="nav navbar-nav navbar-right">
 
                         <li class="dropdown">
@@ -605,7 +565,7 @@
                                 <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
                                 <div class="avatar" style="    width: 250px; float: left; margin-right: 5px;">
                                     <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
-                                    <a href="#" class="dropdown-toggle" style="    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
+                                    <a href="#" class="dropdown-toggle" style="color:white;    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
 
                                 </div>
                             @else

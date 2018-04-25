@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Etiqueta;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use App\User;
+use File;
 use App\Invitados;
 use Carbon;
 use Illuminate\Http\Request;
@@ -225,7 +226,12 @@ class AdminController extends Controller
 
         }
         $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
+        $fs= File::put($invitado->getAlumno()->get()->first()->first_name.'_accesoSItu.txt',url('loginInv'.'/'.$invitado->getUsuario()->get()->first()->email.'/'.$encrypted));
+        $file= public_path(). "/".$invitado->getAlumno()->get()->first()->first_name.'_accesoSItu.txt';
 
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
         Mail::send('emailFecha', $data,function ($mensaje) use($data,$link,$invitado,$request,$encrypted){
 
             $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
@@ -237,6 +243,8 @@ class AdminController extends Controller
 
 
         });
+        return Response::download($file, 'Acceso_SITU.txt', $headers);
+
 
     }
 

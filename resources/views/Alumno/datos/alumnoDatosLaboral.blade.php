@@ -708,15 +708,12 @@
     </div>
     </div><!-- /#wrapper -->
 
-<<<<<<< HEAD
     <link rel="stylesheet" href="/css/situCss/jquery-ui.css" />
     {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
     <script src="/js/situJs/jquery-ui.js"></script>
-=======
     {{--<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />--}}
     {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
-    <script src="/js/jqueryui.1.10.1.js"></script>
->>>>>>> 996c153bb2b5a37d7be751512b8edaa8e3b93bcb
+    {{--<script src="/js/jqueryui.1.10.1.js"></script>--}}
     {{--<script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>--}}
     {{--<script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>--}}
     {{--<script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>--}}
@@ -748,7 +745,7 @@
         // $.datepicker.setDefaults($.datepicker.regional['es']);
         $(function () {
             document.getElementById("endDate").disabled = true;
-            jQuery.noConflict();
+            // jQuery.noConflict();
 
             $("#startDate").datepicker({
 
@@ -1100,13 +1097,7 @@
 
     </script>
 <script>
-    $(document).ready(function() {
 
-
-
-
-
-    });
 
 
 </script>

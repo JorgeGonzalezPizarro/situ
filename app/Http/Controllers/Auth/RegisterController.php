@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\CursoAlumno;
 use App\Invitados;
 use App\Role;
+use File;
+use Response;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
@@ -163,20 +165,45 @@ class RegisterController extends Controller
             $encrypted = encrypt($request['password']);
 
             if($user->roles()->get()->first()->name != "Alumno"){
+                $fs= File::put($user->first_name.'_accesoSItu.txt',url('loginInv'.'/'.$user->email.'/'.$encrypted));
+                $file= public_path(). "/".$user->first_name.'_accesoSItu.txt';
 
+                $headers = array(
+                    'Content-Type: application/pdf',
+                    'location' =>  route('nuevoUsuario')
+
+                );
 
                 $data = array('profesor'=>$user->first_name,'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted);
                 $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
-                Mail::send('email', $data,function ($mensaje) use($data,$request,$encrypted,$link){
+                $f = fsockopen('smtp.gmail.com', 587) ;
 
-                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
-                    $mensaje->subject("Bienvenido a SITU");
-                    $mensaje->to($data['email'],$data['first_name']);
-                    $mensaje->attach($link,['as' => 'SITU'.'.html',
-                        'mime' => 'text/html']);
+                if($f==true) {
+                  Mail::send('email', $data, function ($mensaje) use ($data, $request, $encrypted, $link) {
 
-                });
+                      $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "Site name");
+                      $mensaje->subject("Bienvenido a SITU");
+                      $mensaje->to($data['email'], $data['first_name']);
+                      $mensaje->attach($link, ['as' => 'SITU' . '.html',
+                          'mime' => 'text/html']);
+
+                  });
+              }else{
+                  return "aa";
+
+              }
+                return Response::download($file, 'Acceso_SITU.txt', $headers);
+
             }else{
+                $fs= File::put($user->first_name.'_accesoSItu.txt',url('login'.'/'.$user->email.'/'.$request['password']));
+                $file= public_path(). "/".$user->first_name.'_accesoSItu.txt';
+
+                $headers = array(
+                    'Content-Type: application/pdf',
+                    'location' =>  route('nuevoUsuario')
+
+                );
+
                 $data = array('password'=>Input::get('password'),'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted);
 
                 $link=  ("http://situ.ufv:8080");
@@ -187,16 +214,14 @@ class RegisterController extends Controller
                     $mensaje->to($data['email'],$data['first_name']);
 
                 });
+                return Response::download($file, 'Acceso_SITU.txt', $headers);
 
             }
 
-//           return redirect('/');
-//           return redirect('/');
-//            return $request;
+
             return redirect()->back();
         }
-        // Session::flash('message', 'There was an error with the registration' );
-         //Session::flash('status', 'error');
+
          return Redirect::back();
     }
 

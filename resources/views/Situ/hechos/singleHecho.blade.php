@@ -69,7 +69,7 @@
 
                                         <div class="timeline-body">
 
-                                            <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion {{$hecho->created_at}}</small></span>
+                                            <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion {{$hecho->created_at}}</small></span>
 
                                             <span class="pull-left" style=" width: -webkit-fill-available;
     word-wrap: break-word;">   {!!  str_limit($hecho->contenido,100,'...' )!!}</span>
@@ -283,7 +283,7 @@
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
                                 '<span style="float: right;">'+
 
                                 '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
@@ -294,7 +294,7 @@
 
                             '</div>' +
                             '<div class="timeline-body">' +
-                            '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                            '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
                             '<br>' +
 
                             '  <div class="clearfix"></div>' +
@@ -308,10 +308,10 @@
                             '</div>'
                             +'<div class="col-md-4">'
                            + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+                                + (element['curso'] !=(null || "") ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
                             +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                 (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+                                 (element['etiqueta'] !=(null || "") ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
 
@@ -402,7 +402,7 @@ function etiquetas(id){
                             '<li>' +
                             '  <div class="timeline-panel">' +
                             '    <div class="timeline-heading">' +
-                            '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                            '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
                             '<span style="float: right;">'+
 
                             '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
@@ -413,7 +413,7 @@ function etiquetas(id){
 
                             '</div>' +
                             '<div class="timeline-body">' +
-                            '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                            '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
                             '<br>' +
 
                             '  <div class="clearfix"></div>' +
@@ -427,10 +427,10 @@ function etiquetas(id){
                             '</div>'
                             +'<div class="col-md-4">'
                             + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                            + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+                            + (element['curso'] !=(null || "") ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
                             +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                            (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+                            (element['etiqueta'] !=(null || "") ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
 
@@ -523,7 +523,8 @@ function etiquetas(id){
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+
                                 '<span style="float: right;">'+
 
                                 '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
@@ -534,7 +535,7 @@ function etiquetas(id){
 
                                 '</div>' +
                                 '<div class="timeline-body">' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
                                 '<br>' +
 
                                 '  <div class="clearfix"></div>' +
@@ -548,10 +549,10 @@ function etiquetas(id){
                                 '</div>'
                                 +'<div class="col-md-4">'
                                 + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+                                + (element['curso'] !=(null || "") ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
                                 +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+                                (element['etiqueta'] !=(null || "") ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
 
@@ -656,7 +657,8 @@ function etiquetas(id){
                                     '<li>' +
                                     '  <div class="timeline-panel">' +
                                     '    <div class="timeline-heading">' +
-                                    '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                    '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+
                                     '<span style="float: right;">'+
 
                                     '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
@@ -667,7 +669,7 @@ function etiquetas(id){
 
                                     '</div>' +
                                     '<div class="timeline-body">' +
-                                    '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                                    '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
                                     '<br>' +
 
                                     '  <div class="clearfix"></div>' +
@@ -681,10 +683,10 @@ function etiquetas(id){
                                     '</div>'
                                     +'<div class="col-md-4">'
                                     + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                    + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+                                    + (element['curso'] !=(null || "") ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
                                     +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                    (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+                                    (element['etiqueta'] !=(null || "") ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
 
@@ -774,7 +776,8 @@ function etiquetas(id){
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+
                                 '<span style="float: right;">'+
 
                                 '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
@@ -785,7 +788,7 @@ function etiquetas(id){
 
                                 '</div>' +
                                 '<div class="timeline-body">' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
                                 '<br>' +
 
                                 '  <div class="clearfix"></div>' +
@@ -799,10 +802,10 @@ function etiquetas(id){
                                 '</div>'
                                 +'<div class="col-md-4">'
                                 + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+                                + (element['curso'] !=(null || "") ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
                                 +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+                                (element['etiqueta'] !=(null || "") ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
 
@@ -893,7 +896,8 @@ function etiquetas(id){
                                 '<li>' +
                                 '  <div class="timeline-panel">' +
                                 '    <div class="timeline-heading">' +
-                                '  <span style="float: left;"><h4 class="timeline-title">' + element['titulo_hecho'] + '</h4></span>' +
+                                '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+
                                 '<span style="float: right;">'+
 
                                 '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
@@ -904,7 +908,7 @@ function etiquetas(id){
 
                                 '</div>' +
                                 '<div class="timeline-body">' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i>Fecha creacion' + element['created_at'] + '</small></span>' +
+                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
                                 '<br>' +
 
                                 '  <div class="clearfix"></div>' +
@@ -918,10 +922,10 @@ function etiquetas(id){
                                 '</div>'
                                 +'<div class="col-md-4">'
                                 + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                + (element['curso'] !==null ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+                                + (element['curso'] !=(null || "") ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
                                 +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                (element['etiqueta'] !==null ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+                                (element['etiqueta'] !=(null || "") ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
 

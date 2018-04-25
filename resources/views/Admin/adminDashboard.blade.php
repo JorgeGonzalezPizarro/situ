@@ -161,8 +161,17 @@
                         success: function (response) {
                             // console.log(response);
 
-                          window.location.reload();
-                        },
+                            var element = document.createElement('a');
+                            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response));
+                            element.setAttribute('download', 'Fecha_actualizada_invitado.txt');
+
+                            element.style.display = 'none';
+                            document.body.appendChild(element);
+
+                            element.click();
+
+                            document.body.removeChild(element);
+                            window.location.reload();                        },
                         error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
                             console.log(jqXHR);
 

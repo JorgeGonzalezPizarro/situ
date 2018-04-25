@@ -218,25 +218,19 @@
     <script src="/js/chosen.jquery.js"></script>
 
     <!--  jQuery -->
-<<<<<<< HEAD
     <link rel="stylesheet" href="/css/situCss/jquery-ui.css" />
     <script src="/js/situJs/_jquery-ui.js"></script>
-=======
     {{--<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />--}}
     {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
-    <script src="/js/jqueryui.1.10.1.js"></script>
->>>>>>> a08a04face57c33b75a50414a43cbbf5c388d81a
+    {{--<script src="/js/jqueryui.1.10.1.js"></script>--}}
     <script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
     <script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>
     <script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>
     <script src="/js/tinymce/js/tinymce/langs/es.js"></script>
 
-<<<<<<< HEAD
     <link rel="stylesheet" href="/css/situCss/bootstrap-datepicker3.css" />
-=======
     {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>--}}
     <link href="{{ asset('css/bootstrap-datepicker3.css') }}" rel="stylesheet">
->>>>>>> a08a04face57c33b75a50414a43cbbf5c388d81a
 
     {{--<script>      $(function() {--}}
             {{--$('.chosen-select').chosen();--}}
@@ -523,16 +517,8 @@
 
         });
     </script>
-    <script>
-
-        $(document).ready(function() {
 
 
-
-
-        });
-
-    </script>
 
     <script>function responsive_filemanager_callback(field_id){
             console.log(field_id);

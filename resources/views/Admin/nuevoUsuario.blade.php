@@ -17,7 +17,7 @@
                     <strong> {!! Session::get('message') !!}!</strong>
                 </div>
             @endif
-            {{ Form::open(array('url' => route('register'), 'class' => 'form-horizontal form-signin','files' => true)) }}
+            {{ Form::open(array('url' => route('register'), 'class' => 'form-horizontal form-signin','onsubmit'=>'reloadpage();','files' => true)) }}
             {!! csrf_field() !!}
 
             <div class="form-group  {{ $errors->has('first_name') ? 'has-error' : ''}}">
@@ -210,6 +210,9 @@
 </script>
 
 <script >
+    function reloadpage() {
+        location.reload();
+    }
     function fecha_limite() {
 
 

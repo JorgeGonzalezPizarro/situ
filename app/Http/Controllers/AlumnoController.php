@@ -233,7 +233,7 @@ class AlumnoController extends Controller
         $hecho->titulo_hecho = 'Formacion';
         $hecho->categoria_id = 5;
         $hecho->curso = '';
-        $hecho->categoria_nombre="Formación";
+        $hecho->categoria_nombre="Portafolios profesional";
 
         $hecho->contenido =  $formacionAlumno->descripcion;
         $hecho->proposito = "";
@@ -596,9 +596,7 @@ class AlumnoController extends Controller
 
                 );
                 $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
-                $headers = array(
-                    'Content-Type: text/txt',
-                );
+
                $fs= File::put($invitado2->getAlumno()->get()->first()->first_name.'_accesoSItu.txt',url('loginInv'.'/'.$invitado2->getUsuario()->get()->first()->email.'/'.$encrypted));
                 $file= public_path(). "/".$invitado2->getAlumno()->get()->first()->first_name.'_accesoSItu.txt';
 
@@ -808,7 +806,12 @@ class AlumnoController extends Controller
 //
         );
        $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
+        $fs= File::put($invitado->getAlumno()->get()->first()->first_name.'_accesoSItu.txt',url('loginInv'.'/'.$invitado->getUsuario()->get()->first()->email.'/'.$encrypted));
+        $file= public_path(). "/".$invitado->getAlumno()->get()->first()->first_name.'_accesoSItu.txt';
 
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
         Mail::send('emailFecha', $data,function ($mensaje) use($data,$link,$invitado,$request,$encrypted){
 
             $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
@@ -820,6 +823,6 @@ class AlumnoController extends Controller
 
 
         });
-        return response($invitado);
+        return Response::download($file, 'filename.txt', $headers);
     }
 }
