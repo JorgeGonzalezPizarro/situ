@@ -66,15 +66,23 @@
                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                     class="">Rol </strong></span> {{ $user->roles()->first()->name }}</li>
                 </ul>
-                <div class="panel panel-info">
-                    <div class="panel-heading">Curso / Carrera
+                <ul class="list-group">
+                    <li class="list-group-item text-muted"style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;">Actividad <i class="fas fa-info"></i>
 
-                    </div>
-                    <div class="panel-body"><i style="color:green"
-                                               class="fa fa-check-square"></i>{{ $user->first_name  }}.
+                        </i>
 
-                    </div>
-                </div>
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                    class="">Hechos</strong></span> {!! count($hechos) !!}
+                    </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong
+                                    class="">Invitados</strong></span> {!! count($invitados) !!}
+                    </li>
+
+
+                </ul>
                 <div class="panel panel-info">
                     <div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>
 
@@ -259,25 +267,7 @@
 
                 </ul>
 
-                <ul class="list-group">
-                    <li class="list-group-item text-muted"style="color: #31708f;
-    background-color: #d9edf7;
-    border-color: #bce8f1;">Actividad <i class="fas fa-info"></i>
 
-                        </i>
-
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Hechos</strong></span> {!! count($hechos) !!}
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Invitados</strong></span> {!! count($invitados) !!}
-                    </li>
-                    <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Profesores Invitados</strong></span> {!! count($profesores) !!}
-                    </li>
-
-                </ul>
                 <ul class="list-group">
                     <li class="list-group-item text-muted"style="color: #31708f;
     background-color: #d9edf7;
@@ -297,10 +287,9 @@
                                         class="">{!!$etiquetaPubli->slug!!}</strong></span>
                         </li>
                     @endforeach
-                    <a  id="mas"  value="" href="{!! route('crearEtiquetaAlumno') !!}" >
-                       Añadir Etiqueta <i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
+                    <li class="list-group-item text-left"><span class=""><a  id="mas"  value="" href="{!! route('crearEtiquetaAlumno') !!}" >
+                                Añadir Etiqueta <i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i></a></span></li>
 
-                    </a>
 
                 </ul>
 

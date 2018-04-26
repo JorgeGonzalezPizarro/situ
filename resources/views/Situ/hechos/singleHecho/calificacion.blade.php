@@ -12,7 +12,7 @@
 
             <!-- Author -->
             <p class="lead">
-                <a href="">{{$user-> first_name. " ". $user->last_name}} </a>
+                <a href="{{url('Situ/public')}}">{{$user-> first_name. " ". $user->last_name}} </a>
             </p>
 </div>
 </div>
@@ -114,9 +114,9 @@
                 <ul class="list-group">
 
 
-                    <li class="list-group-item text-left">
-
-                        <h5 class="card-header">Evidencia</h5>
+                    <li style="color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;"class="list-group-item text-muted" contenteditable="false">                <h5 class="card-header">Evidencia</h5>
                     </li>
                     <li class="list-group-item text-left" style="height: auto !important;">
                         <p>

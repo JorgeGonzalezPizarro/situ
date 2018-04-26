@@ -417,7 +417,7 @@ class AlumnoController extends Controller
 
         }
         if ($categoria->categoria == 'Frases guía') {
-            $hechos = hechos::where('categoria_id', 3)->get();
+            $hechos = hechos::where('categoria_id', 3)->where('user_id',$usuario->id)->get();
             return view('hechos.frasesGuia')->with('user', Sentinel::getUser())
                 ->with('curso', $curso)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
                 ->with('grado', $grado)   ->with('otros_datos', $otros_datos)->with('hechos', $hechos);
@@ -428,8 +428,16 @@ class AlumnoController extends Controller
                 ->with('grado', $grado)->with('curso',$curso1)->with('categoria', $categoria)->with('etiqueta', $etiqueta);
 
         }
+        if ($categoria->categoria == 'Reflexiones') {
+            $reflexiones = hechos::where('categoria_id', 4)->where('user_id',$usuario->id)->get()->all();
+            $hechos=hechos::where('user_id',$usuario->id)->get()->all();
+//            $hechos_relacionados=hechos::where('user_id',$usuario->id)->where('hechos_relacionados',$hechos->hechos_relacionados)
+            return view('hechos.reflexiones')->with('user', Sentinel::getUser())
+                ->with('grado', $grado)->with('curso',$curso1)->with('categoria', $categoria)->with('etiqueta', $etiqueta)
+                ->with('hechos',$hechos)->with('reflexiones',$reflexiones);
+        }
         else {
-            return "aa";
+            return Redirect::back();
         }
     }
 

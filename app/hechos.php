@@ -13,7 +13,7 @@ class hechos extends Model
     protected $fillable = [ 'user_id' ,
         'categoria_id','categoria_nombre','titulo_hecho', 'curso', 'contenido', 'proposito', 'evidencia',
         'nivel_acceso', 'hechos_relacionados', 'fecha_inicio','fecha_fin','proposito', 'evidencia',
-        'ruta_imagen','ruta_archivo','laboral_id','formacion_id'
+        'ruta_imagen','ruta_archivo','laboral_id','formacion_id','hechos_relacionados_cat'
     ];
     public $timestamps = true;
 

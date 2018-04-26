@@ -231,7 +231,48 @@ class HechoController extends Controller
 
         }
 
+    public function reflexion(Request $request){
 
+
+
+
+        $hecho = new hechos();
+        $hecho->user_id = Sentinel::getUser()->id;
+        $hecho->titulo_hecho ='Reflexion';
+//        $categoria=Categorias::where('id',Input::get('categoria_id'))->get()->first();
+        $hecho->categoria_id = 4;
+        $hecho->categoria_nombre='Reflexiones';
+        $hecho->contenido = Input::get('contenido');
+        $hecho->nivel_acceso = Input::get('nivel_acceso');
+        $hecho->hechos_relacionados = $request->hecho;
+        $hecho->hechos_relacionados_cat = $request->categoria_id;
+
+        $format = 'd/m/Y';
+        $dt = new DateTime();
+        $fecha_inicio =$dt->format('Y-m-d H:i:s');
+        $hecho->fecha_inicio = $fecha_inicio;
+        /*CALIFICACIONES*/
+        if($request->acceso){
+            $hecho->nivel_acceso = "2";
+            $hecho->publico = "publico";
+
+        }else{
+
+            $hecho->nivel_acceso = "1";
+            $hecho->publico = "privado";
+
+        }
+        $hecho->save();
+
+
+
+
+
+        Session::flash('message', 'Hecho creado');
+
+        return Redirect::back();
+
+    }
 
 
     public function crear(Request $request){

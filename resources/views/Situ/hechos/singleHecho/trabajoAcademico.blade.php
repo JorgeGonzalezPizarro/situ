@@ -16,7 +16,7 @@
 
                 <!-- Author -->
                 <p class="lead">
-                    <a href="">{{$user-> first_name. " ". $user->last_name}} </a>
+                    <a href="{{url('Situ/public')}}">{{$user-> first_name. " ". $user->last_name}} </a>
                 </p>
 
 

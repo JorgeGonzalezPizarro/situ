@@ -27,6 +27,8 @@ class CreateHechos extends Migration
             $table->string('etiqueta')->nullable();
             $table->string('nivel_acceso')->default('1')->nullable();
             $table->string('hechos_relacionados')->nullable();
+            $table->string('hechos_relacionados_cat')->nullable();
+
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
             $table->string('ruta_imagen')->nullable();

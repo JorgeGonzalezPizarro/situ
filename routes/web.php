@@ -99,7 +99,9 @@ Route::get('accesoDirecto/{email}/{encrypted}',function ($email,$encrypted)
 });
 Route::get('hechos/{categoria?}/{grado?}/{curso?}','AlumnoController@getAsignaturas')->name('getAsignaturas');
 Route::POST('\'hechos/{categoria?}/{curso?}', 'HechoController@guardar_Hecho')->name('guardarHecho');
-Route::POST('/hechos/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('fraseguia');
+Route::POST('/fraseGuia/{categoria?}/{curso?}', 'HechoController@fraseguia')->name('fraseguia');
+Route::POST('/hechos/{categoria?}/{curso?}', 'HechoController@reflexion')->name('reflexion');
+
 Route::get('/get/', 'AlumnoController@getCurso');
 Route::get('/Situ/{buscar?}', 'SituController@getHechos');
 Route::get('/Situ/categorias/{id?}', 'SituController@getCategorias');
