@@ -208,6 +208,11 @@ class SituController extends Controller
                         ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
                         ->with('alumno', $alumno)->with('otrosHechos', $otrosHechosPublicos);
                 }
+                if ($categoria->categoria == 'Reflexiones') {
+                    return view('Situ.hechos.singleHecho.reflexiones')->with('hecho', $hecho)
+                        ->with('hechos', $hechosPublicos)->with('hechos', $hechosPublicos)->with('user', $usuario)
+                        ->with('alumno', $alumno)->with('otrosHechos', $otrosHechosPublicos);
+                }
             } else {
                 if (Sentinel::inRole('Prof')) {
 //                return response($alumnos);

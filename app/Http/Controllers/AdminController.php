@@ -101,7 +101,7 @@ class AdminController extends Controller
 
                     Mail::send('email', ['request' => $request->all()], function ($mensaje) use ($request) {
 
-                        $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "Site name");
+                        $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "SITU");
                         $mensaje->subject("BIenvenido a SITU");
                         $mensaje->to($request['email'], $request['name']);
 
@@ -226,15 +226,15 @@ class AdminController extends Controller
 
         }
         $link=  url('accesoDirecto/'.$request["email"].'/'.$encrypted.'/');
-        $fs= File::put($invitado->getAlumno()->get()->first()->first_name.'_accesoSItu.txt',url('loginInv'.'/'.$invitado->getUsuario()->get()->first()->email.'/'.$encrypted));
-        $file= public_path(). "/".$invitado->getAlumno()->get()->first()->first_name.'_accesoSItu.txt';
+        $fs= File::put($invitado->getUsuario()->get()->first()->first_name.'_accesoSItu.txt',url('loginInv'.'/'.$invitado->getUsuario()->get()->first()->email.'/'.$encrypted));
+        $file= public_path(). "/".$invitado->getUsuario()->get()->first()->first_name.'_accesoSItu.txt';
 
         $headers = array(
             'Content-Type: application/pdf',
         );
         Mail::send('emailFecha', $data,function ($mensaje) use($data,$link,$invitado,$request,$encrypted){
 
-            $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+            $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"SITU");
             $mensaje->subject("Has sido invitado a SITU");
             $mensaje->to($data['email'],$data['first_name']);
 //           $mensaje->attach($link,['as' => 'SITU_'.$invitado->getAlumno()->get()->first()->first_name.'.html',

@@ -230,7 +230,8 @@ class LoginController extends Controller
                         }
 
                     }
-                }else {
+                }
+                else {
                     return Redirect::back()->withErrors(['global' => 'Los datos de acceso no son correctos.']);
                 }
             }

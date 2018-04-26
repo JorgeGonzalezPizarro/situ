@@ -615,7 +615,7 @@ class AlumnoController extends Controller
 
                 Mail::send('email', $data,function ($mensaje) use($data,$link,$invitado2,$request,$encrypted){
 
-                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"SITU");
                     $mensaje->subject("Has sido invitado a SITU");
                     $mensaje->to($data['email'],$data['first_name']);
                     $mensaje->attach($link,['as' => 'SITU_'.$invitado2->getAlumno()->get()->first()->first_name.'.html',
@@ -631,7 +631,7 @@ class AlumnoController extends Controller
 
                 Mail::send('email', $data,function ($mensaje) use($data,$link,$request,$encrypted){
 
-                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"SITU");
                     $mensaje->subject("Has sido invitado a SITU");
                     $mensaje->to($data['email'],$data['first_name']);
                     $mensaje->attach($link, ['as' => 'SITU'.'.html',
@@ -648,7 +648,7 @@ class AlumnoController extends Controller
 
                    Mail::send('email', $data,function ($mensaje) use($data,$url,$request,$encrypted){
 
-                       $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                       $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"SITU");
                        $mensaje->subject("Has sido invitado a SITU");
                        $mensaje->to($data['email'],$data['first_name']);
 
@@ -822,7 +822,7 @@ class AlumnoController extends Controller
         );
         Mail::send('emailFecha', $data,function ($mensaje) use($data,$link,$invitado,$request,$encrypted){
 
-            $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+            $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"SITU");
             $mensaje->subject("Has sido invitado a SITU");
             $mensaje->to($data['email'],$data['first_name']);
 //           $mensaje->attach($link,['as' => 'SITU_'.$invitado->getAlumno()->get()->first()->first_name.'.html',

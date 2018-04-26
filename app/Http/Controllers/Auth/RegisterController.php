@@ -181,7 +181,7 @@ class RegisterController extends Controller
                 if($f==true) {
                   Mail::send('email', $data, function ($mensaje) use ($data, $request, $encrypted, $link) {
 
-                      $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "Site name");
+                      $mensaje->from('jorge.j.gonzalez.93@gmail.com  ', "SITU");
                       $mensaje->subject("Bienvenido a SITU");
                       $mensaje->to($data['email'], $data['first_name']);
                       $mensaje->attach($link, ['as' => 'SITU' . '.html',
@@ -206,10 +206,10 @@ class RegisterController extends Controller
 
                 $data = array('password'=>Input::get('password'),'first_name' => $request['first_name'], 'email' => $request['email'], 'encrypted' => $encrypted);
 
-                $link=  ("http://situ.ufv:8080");
+                $link=  public_path();
                 Mail::send('email', $data,function ($mensaje) use($data,$request,$encrypted,$link){
 
-                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"Site name");
+                    $mensaje->from('jorge.j.gonzalez.93@gmail.com  ',"SITU");
                     $mensaje->subject("Bienvenido a SITU");
                     $mensaje->to($data['email'],$data['first_name']);
 

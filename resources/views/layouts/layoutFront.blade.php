@@ -177,6 +177,15 @@
 
 
     <style>
+       footer {
+            position: fixed;
+            /*left: 0;*/
+            bottom: 0;
+           width: 100%;
+            /*width: 100%;*/
+            /*color: white;*/
+            /*text-align: center;*/
+        }
         body {
             background:white;
             color: #444;
@@ -745,7 +754,8 @@
             @yield('content')
 
         </div><!-- /.container-fluid -->
-        <!--Footer-->
+        <div class="push"></div>
+
         <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
 
             <!--Footer Links-->
@@ -827,7 +837,7 @@ Date a conocer y haz crecer tu perfil.								</span>
                             <div style="height: 80px; line-height: 80px; font-size: 10px;"> </div></td></tr>
                     </table>
 
-                    </div>
+                </div>
                 <div class="clearfix"></div>
 
                 <!--/.Third column-->
@@ -835,8 +845,8 @@ Date a conocer y haz crecer tu perfil.								</span>
                 <hr>
                 <div class="col-md-3"></div>
 
-                    <!--Fourth column-->
-                    <div class="col-md-8">
+                <!--Fourth column-->
+                <div class="col-md-8">
 
                     <div class="col-md-9">
                         <p style="text-align: center"><img src="/imagenes/logo2.jpg" class="img-circle"/> </p>
@@ -851,33 +861,32 @@ Date a conocer y haz crecer tu perfil.								</span>
 
                 <div class="col-md-3"></div>
 
-                    <!--Grid column-->
-                    <div class="col-md-8">
+                <!--Grid column-->
+                <div class="col-md-8">
 
-                        <div class="col-md-9">
+                    <div class="col-md-9">
                         <p class="text-center text-md-left grey-text">
-					2018 © <a href="#"> DESSI.</a> Derechos Reservados.
-                           </p>
-                        </div>
-
+                            2018 © <a href="#"> DESSI.</a> Derechos Reservados.
+                        </p>
                     </div>
-                    <!--Grid column-->
-
-                    <!--Grid column-->
-
-                    <!--Grid column-->
 
                 </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+
+                <!--Grid column-->
 
             </div>
+
 
         </footer>
     </div><!-- /#page-wrapper -->
 
+        </div>
 
 
 
-</div>
 </div>
 </body>
 {{--<script src="http://harvesthq.github.io/chosen/chosen.jquery.js"></script>--}}

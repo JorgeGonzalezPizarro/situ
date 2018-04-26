@@ -758,7 +758,7 @@ function etiquetas(id){
 
 
                             });
-                            $('#etiq').val(id);
+                            // $('#etiq').val(id);
 
                             console.log(response[0].length);
 

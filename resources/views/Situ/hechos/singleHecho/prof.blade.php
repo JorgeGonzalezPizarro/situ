@@ -5,9 +5,25 @@
     <!-- Page Content -->
     <div class="container">
         <div class="row">
+            <div class="col-lg-12" style="    text-align: center;" id="">
 
+                <div class="form-group">
+                    <div class="form-inline">
+
+                        <label for="orden">        <h5 class="card-header">Buscar Alumnos</h5></label>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input type="text" id="buscar" onkeyup="buscar()" name="buscar" class="form-control" placeholder="Nombre...">
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+
+            </div>
                 @if(!empty($alumnos) && count($alumnos)>0)
-                <div class="col-lg-8" id="contenedor">
+                <div class="col-lg-12" id="contenedor">
 
                     @foreach($alumnos as $alumno)
 
@@ -53,21 +69,7 @@
 
                     @endforeach
             </div>
-            <div class="col-lg-4">
 
-                <div class="card my-4">
-                    <h5 class="card-header">Buscar Alumnos</h5>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" id="buscar" onkeyup="buscar()" name="buscar" class="form-control" placeholder="Nombre...">
-                </span>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </div>
         </div></div>
 
 

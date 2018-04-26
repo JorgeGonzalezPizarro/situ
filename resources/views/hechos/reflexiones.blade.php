@@ -45,12 +45,13 @@
                         </div>
                         <div class="form-inline" >
                             <div class="alert alert-info">¿ Te gustaría vincular tu reflexión a algun hecho ?<br><br>
-                                <input type="radio"  name="hecho_relacionado" id="vincular" value="vincular" checked> <span id="vinculado" style="    font-size: 20px;
-    font-family: serif;
-    font-stretch: semi-condensed;"> Vincular </span><br><br>
-                                <input type="radio"  name="hecho_relacionado" value="Personal"><span id="vinculado" style="    font-size: 20px;
+                                <input type="radio"  name="hecho_relacionado" value="Personal" checked><span id="vinculado" style="    font-size: 20px;
     font-family: serif;
     font-stretch: semi-condensed;"> Reflexión Personal </span><br>
+                                <br><br>
+                                <input type="radio"  name="hecho_relacionado" id="vincular" value="vincular" > <span id="vinculado" style="    font-size: 20px;
+    font-family: serif;
+    font-stretch: semi-condensed;"> Vincular </span><br><br>
                             </div>
                         </div>
                         <div id="seleccionarHecho">
@@ -171,7 +172,19 @@
 
 
     <script>
+        $(document).ready(function () {
+            var selectedValue = $("input[name='hecho_relacionado']:checked").val();
+            console.log(selectedValue);
+            if(selectedValue=='vincular') {
+                $('#seleccionarHecho').show();
+                $('#selectorHecho').focus();
 
+
+            }else{
+                $('#seleccionarHecho').hide();
+
+            }
+        });
         $("input[type='radio']").on('change', function () {
             var selectedValue = $("input[name='hecho_relacionado']:checked").val();
                 console.log(selectedValue);

@@ -4,10 +4,11 @@
 @stop
 @section('content')
     <div class = "container">
-            @if (Session::has('message'))
-                <div class="alert alert-{{(Session::get('status')=='error')?'danger':Session::get('status')}} " alert-dismissable fade in id="sessions-hide">
+
+            @if($errors->any())
+            <div class="alert alert-danger" alert-dismissable fade in id="sessions-hide">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>{{Session::get('status')}}!</strong> {!! Session::get('message') !!}
+                    <strong>{{Session::get('status')}}!</strong> {{$errors->first()}}
                 </div>
             @endif
                 <div class="container">

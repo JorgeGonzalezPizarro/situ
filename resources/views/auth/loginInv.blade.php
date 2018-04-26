@@ -36,7 +36,6 @@
                 <div class="login-register">
                     <div class="clearfix"></div>
                     <br>
-                    <a href="{{url('password/reset')}}">Recuperar contraseña</a>
                     @if ($errors->has('global'))
                         <span class="help-block danger">
                     <strong style="color:red" >{{ $errors->first('global') }}</strong>
