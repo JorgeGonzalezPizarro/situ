@@ -21,7 +21,7 @@
                         <span class="input-group-addon"><i class="fas fa-tags"></i>
 
 </span>
-                        {!! Form::text('nombre', null, ['class' => 'form-control','placeholder '=>'Nombre de la etiqueta']) !!}
+                        {!! Form::text('nombre', null, ['class' => 'form-control','required','placeholder '=>'Nombre de la etiqueta']) !!}
                     </div>
                     {!! $errors->first('nombre', '<p class="help-block">:message</p>') !!}
                 </div>
@@ -34,7 +34,7 @@
                         <span class="input-group-addon"><i class="fas fa-tags"></i>
 
 </span>
-                        {!! Form::text('slug', null, ['class' => 'form-control','placeholder '=>'Slug para la etiqueta']) !!}
+                        {!! Form::text('slug', null, ['class' => 'form-control','placeholder '=>'Slug para la etiqueta','required']) !!}
                     </div>
                     {!! $errors->first('slug', '<p class="help-block">:message</p>') !!}
 

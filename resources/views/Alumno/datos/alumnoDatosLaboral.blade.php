@@ -94,7 +94,7 @@
                                         <tr>
                                             <td><strong class="">Sector-Actividad</strong></td>
                                             <td>
-                                                <select form="formulario"  class="form-control " id="sector" data-live-search="true" data-dropupAuto="true" name="sector" title = " Seleccione " data-noneSelectedText="">
+                                                <select form="formulario"  class="form-control "  required id="sector" data-live-search="true" data-dropupAuto="true" name="sector" title = " Seleccione " data-noneSelectedText="">
                                                     <option value="-1"></option>
                                                     <option value="11">Actividades financieras, banca y seguros</option>
                                                     <option value="22">Agencia de publicidad</option>
@@ -286,7 +286,7 @@
                                         <tr>
                                             <td><strong class="">Ubicacion</strong></td>
                                             <td>
-                                                <select form="formulario"  class="form-control " name="ubicacion" required id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
+                                                <select form="formulario"  class="form-control " required name="ubicacion" required id="ubicacion" data-live-search="true" data-dropupAuto="true" title = " Seleccione " data-noneSelectedText="">
 
                                                 </select>
                                             </td>
@@ -306,7 +306,7 @@
                                         </tr>
                                         <tr>
                                             <td><strong class="">Descripción</strong></td>
-                                            <td><textarea name="descripcion" class="form-control" rows="4" cols="50" placeholder="Añade algun detalle..."></textarea>
+                                            <td><textarea name="descripcion" class="form-control" required rows="4" cols="50" placeholder="Añade algun detalle..."></textarea>
                                             </td>
                                         </tr>
                                         <tr>
@@ -324,7 +324,7 @@
                                          <td>  <div class="input-group">
                                                 <span   class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
                                                 <div class="form-group">
-                                                    {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY','style'=>'    margin-bottom: 0px !important;')) !!}
+                                                    {!! Form::text('startDate',null, array('class' => 'form-control', 'id'=>'startDate', 'placeholder' => 'dd-mm-YY','style'=>'    margin-bottom: 0px !important;'),'required') !!}
                                                 </div>
 
 
@@ -465,7 +465,7 @@
 
                                     <tr>
                                         <td><strong class="">Centro:</strong></td>
-                                        <td>{!! Form::text('centro', null, ['id'=>'first_name','class' => 'misDatos']) !!}
+                                        <td>{!! Form::text('centro', null, ['id'=>'first_name','class' => 'misDatos','required']) !!}
 
 
                                         </td>
@@ -473,7 +473,7 @@
                                     <tr>
                                         <td><strong class="">Disciplina Academica</strong></td>
                                         <td>
-                                            <select form="formulario2" class="form-control " name="disciplina_academica" id="disciplina_academica"  title = " Seleccione ">
+                                            <select form="formulario2" class="form-control " required name="disciplina_academica" id="disciplina_academica"  title = " Seleccione ">
                                                 <option value="1" >Administración y Dirección de Empresas</option>
                                                 <option value="27" >Arquitectura</option>
                                                 <option value="23" >Bellas Artes</option>
@@ -554,7 +554,7 @@
                                     </tr>
                                     <tr>
                                         <td><strong class="">Titulacion</strong></td>
-                                        <td>{!! Form::text('titulacion', null, ['id'=>'first_name','class' => 'misDatos','placeholder'=>'Ej. : Grado...']) !!}
+                                        <td>{!! Form::text('titulacion', null, ['id'=>'first_name','class' => 'misDatos','placeholder'=>'Ej. : Grado...','required']) !!}
                                         </td>
                                     </tr>
                                     <tr>
@@ -568,7 +568,7 @@
 
                                     <tr>
                                         <td><strong class="">Descripcion:</strong></td>
-                                        <td>{!! Form::textarea('descripcion', null, ['id'=>'first_name','class' => 'misDatos']) !!}
+                                        <td>{!! Form::textarea('descripcion', null, ['id'=>'first_name','class' => 'misDatos','required']) !!}
 
 
                                         </td>
@@ -578,7 +578,7 @@
                                         <td>  <div class="input-group">
                                                 <span   class="input-group-addon"><i class="fa fa-calendar " aria-hidden="true"></i></span>
                                                 <div class="form-group">
-                                                    {!! Form::text('startDate2',null, array('class' => 'form-control', 'id'=>'startDate2', 'placeholder' => 'dd-mm-YY','style'=>'    margin-bottom: 0px !important;')) !!}
+                                                    {!! Form::text('startDate2',null, array('class' => 'form-control', 'id'=>'startDate2', 'placeholder' => 'dd-mm-YY','style'=>'    margin-bottom: 0px !important;','required')) !!}
                                                 </div>
 
 
@@ -667,7 +667,7 @@
                         <tbody id="clickable">
 
                         @if(!empty($formacion))
-                            {{--{!!  $asignaturas=array(json_decode($asignaturas,true)) !!}--}}
+
                             @foreach ($formacion as $form)
                                 <tr>
                                     <td>{{$form->centro}}</td>
@@ -681,8 +681,7 @@
                                     @else
                                         <td id="fechafin">{!!  $form->fecha_fin !!}</td>
                                     @endif
-                                    {{--<td id="seleccionar"> <a data-original-title="Remove this user" data-toggle="tooltip" type="button"--}}
-                                    {{--class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>--}}
+
                                 </tr>
 
                             @endforeach
@@ -711,29 +710,8 @@
     <link rel="stylesheet" href="/css/situCss/jquery-ui.css" />
     {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
     <script src="/js/situJs/jquery-ui.js"></script>
-    {{--<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />--}}
-    {{--<script src="https://code.jquery.com/jquery-1.9.1.js"></script>--}}
-    {{--<script src="/js/jqueryui.1.10.1.js"></script>--}}
-    {{--<script src="/js/tinymce/js/tinymce/jquery.tinymce.min.js"></script>--}}
-    {{--<script src="/js/tinymce/js/tinymce/tinymce.min.js"></script>--}}
-    {{--<script src="/js/tinymce/js/tinymce/init-tinymce.js"></script>--}}
-    {{--<script src="/js/tinymce/js/tinymce/langs/es.js"></script>--}}
-
-    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>--}}
-    {{--<script src="/js/datepickerSpanish.js"></script>--}}
-
-    <script>
-
-        // $j is now an alias to the jQuery function; creating the new alias is optional.
 
 
-
-
-        // The $ variable now has the prototype meaning, which is a shortcut for
-        // document.getElementById(). mainDiv below is a DOM element, not a jQuery object.
-
-
-    </script>
 <script>      $(function() {
         $('.chosen-select').chosen();
         $('.chosen-select-deselect').chosen({ allow_single_deselect: true });
@@ -993,7 +971,7 @@
         for (var i=0;i<opts.length;i++) {
             opts[i].value = opts[i].text;
         }
-            // $('#password').attr('readonly', false).focus().css("background-color", "#bfe1e847").val('');
+
             $('.en_curso').change(function(ev) {
                 if ( $(this).is(':checked') ) {
                     document.getElementById("endDate").disabled = true;
@@ -1096,10 +1074,6 @@
     });
 
     </script>
-<script>
 
-
-
-</script>
 
 @endsection

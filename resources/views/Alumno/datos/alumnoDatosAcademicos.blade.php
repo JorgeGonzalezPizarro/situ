@@ -75,7 +75,7 @@
                                         <div class="input-append">
 
                                             {{--<input id="fieldID4" type="text" name="imagen" style="display: none;">--}}
-                                            {!! Form::text('imagen', null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ]) !!}
+                                            {!! Form::text('imagen', null, ['id'=>'fieldID4','class' => 'misDatos','readonly' => 'true','style'=>'display:none;' ,'required']) !!}
 
                                         </div>
                                         <tbody id="tbody">
@@ -84,7 +84,7 @@
                                             <td><strong class="">Grado:</strong></td>
                                             <td>
                                                 {{--{!! Form::text('grado', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $curso->grado ]) !!}--}}
-                                                {{ Form::select('grado', $grado, ['class' => 'grado','id' => 'gradoSelector' ,'value'=>$grado]) }}
+                                                {{ Form::select('grado', $grado, ['class' => 'grado','id' => 'gradoSelector' ,'value'=>$grado,'required']) }}
 
                                                 <a id="añadir_asignaturas" href="<?php echo e(route('misDatosLaborales')); ?>"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
                                                     Añadir Formacion</a>
@@ -93,14 +93,14 @@
                                         <tr>
                                             <td><strong class="">Curso:</strong></td>
                                             <td>
-                                                {{ Form::select('curso', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], ['class' => 'misDatos','id'=>'curso']) }}
+                                                {{ Form::select('curso', ['1'=>'1º','2'=>'2º','3'=>'3º','4'=>'4º','5'=>'OTROS'], ['class' => 'misDatos','id'=>'curso','required']) }}
 
 
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><strong class="">Agregar Asignatura:</strong></td>
-                                            <td>{!! Form::text('asignatura[]',"", ['id'=>'asignatura','class' => 'misDatos','required'=>'true' ]) !!}
+                                            <td>{!! Form::text('asignatura[]',"", ['id'=>'asignatura','class' => 'misDatos','required'=>'true' ,'required']) !!}
 
 
 

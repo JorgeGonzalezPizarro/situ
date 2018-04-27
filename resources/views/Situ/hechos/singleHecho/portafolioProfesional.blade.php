@@ -5,6 +5,7 @@
     <!-- Page Content -->
     <div class="container">
 
+        <div class="row">
 
             <!-- Post Content Column -->
             <div class="col-lg-12">
@@ -157,7 +158,7 @@
                 @endif
 
         <!-- /.row -->
-
+        </div>
     </div>
 
     <!-- /.container -->

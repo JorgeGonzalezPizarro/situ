@@ -38,7 +38,8 @@
 
             </form>
             </div>
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="min-width: 320px;"><tr><td align="center">
+                <div class="container" style="bottom:0px;">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style=" bottom: 0px;min-width: 320px;"><tr><td align="center">
 
 
                             <!--[if gte mso 10]>
@@ -148,7 +149,7 @@ Date a conocer y haz crecer tu perfil.								</span>
 				</span>
                         </td></tr>
                 </table>
-
+                </div>
         </div>
     </div>
 @endsection

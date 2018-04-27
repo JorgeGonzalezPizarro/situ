@@ -19,17 +19,25 @@ class Invitado
     public function handle($request, Closure $next)
     {
         /*Chequeo si es Admin*/
-        $user=Sentinel::getUser();
-        $inviado=$user->invitado()->get()->first();
+        $user = Sentinel::getUser();
+        if ($user->roles()->first()->slug == 'Inv') {
+            $inviado = $user->invitado()->get()->first();
 
-        if (Sentinel::check() && ( Sentinel::inRole('Inv') || Sentinel::inRole('Prof')) && $inviado->fecha_limite < (Carbon::now()->toDateString())) {
-            return redirect('/loginInv');
+            if (Sentinel::check() && (Sentinel::inRole('Inv') || Sentinel::inRole('Prof')) && $inviado->fecha_limite < (Carbon::now()->toDateString())) {
+                return redirect('/loginInv');
 
+            } else {
+                return $next($request);
+
+
+            }
         }
+
         else{
-            return $next($request);
+
+                return $next($request);
 
 
+            }
         }
     }
-}

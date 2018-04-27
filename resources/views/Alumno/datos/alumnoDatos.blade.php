@@ -91,7 +91,7 @@
                         <i class="fab fa-facebook-f" style="font-size: 22px;"></i>
 
                         {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook',
-                                              'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ]) !!}
+                                              'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['facebook'] ,'required']) !!}
                         <a href="{!! $otros_datos['facebook'] !!}" class="">
                             <a href="#" id="clickableFb"><i class="far fa-edit"></i>
 
@@ -104,7 +104,7 @@
 
 
                         {!! Form::text('linkedin', null, ['id'=>'fieldIDlinkedin',
-                                              'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['linkedin'] ]) !!}
+                                              'class' => 'misDatos','readonly' => 'true','value '=> $otros_datos['linkedin'],'required' ]) !!}
                         <a href="{!! $otros_datos['linkedin'] !!}" class="">
                             <a href="#" id="clickableIn"> <i class="far fa-edit"></i>
 
@@ -142,7 +142,7 @@
                                         <tbody>
                                         <tr>
                                             <td><strong class="">Nombre:</strong></td>
-                                            <td>{!! Form::text('first_name', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $user->first_name ]) !!}
+                                            <td>{!! Form::text('first_name', null, ['id'=>'first_name','class' => 'misDatos','readonly' => 'true','value '=> $user->first_name ,'required']) !!}
                                                 <a href="#" id="clickable"><i class="far fa-edit"></i>
 
                                                 </a>
@@ -151,7 +151,7 @@
                                         </tr>
                                         <tr>
                                             <td><strong class="">Apellido:</strong></td>
-                                            <td>{!! Form::text('last_name', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name ]) !!}
+                                            <td>{!! Form::text('last_name', null, ['id'=>'last_name','class' => 'misDatos','readonly' => 'true','value '=> $user->last_name,'required' ]) !!}
                                                 <a href="#" id="clickable1"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -161,7 +161,7 @@
                                         <tr>
                                         <tr>
                                             <td><strong class="">DNI:</strong></td>
-                                            <td>{!! Form::text('dni', null, ['id'=>'dni','class' => 'misDatos','readonly' => 'true','value '=> $user->dni]) !!}
+                                            <td>{!! Form::text('dni', null, ['id'=>'dni','class' => 'misDatos','readonly' => 'true','value '=> $user->dni,'required']) !!}
                                                 <a href="#" id="clickable5"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -169,7 +169,7 @@
                                             </td>
                                         </tr>
                                             <td><strong class="">Direccion:</strong></td>
-                                            <td>{!! Form::text('direccion', null, ['id'=>'direccion','class' => 'misDatos','readonly' => 'true','value '=> $user->direccion]) !!}
+                                            <td>{!! Form::text('direccion', null, ['id'=>'direccion','class' => 'misDatos','readonly' => 'true','value '=> $user->direccion,'required']) !!}
                                                 <a href="#" id="clickable6"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -179,7 +179,7 @@
 
                                         <tr>
                                             <td><strong class="">Telefono:</strong></td>
-                                            <td>{!! Form::text('telefono', null, ['id'=>'telefono','class' => 'misDatos','readonly' => 'true','value '=> $user->telefono]) !!}
+                                            <td>{!! Form::text('telefono', null, ['id'=>'telefono','class' => 'misDatos','readonly' => 'true','value '=> $user->telefono,'required']) !!}
                                                 <a href="#" id="clickable7"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -198,7 +198,7 @@
                                         <tr>
                                             <td><strong class="">Contraseña:</strong></td>
                                             <td>
-                                                <input class="field" readonly name="password" id="password" type="password" >
+                                                <input class="field" readonly name="password" id="password" type="password" required >
 
                                                 <a href="#" id="clickable3"> <i class="far fa-edit"></i>
 
@@ -215,7 +215,7 @@
                                             <td><strong class=""> </strong></td>
                                             <td>
 
-                                                <input name="password_confirmation" class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required readonly  id="password_confirmation" type="password" value="">
+                                                <input name="password_confirmation" required class="field" data-match="#new_password" data-match-error="Las contraseñas no coinciden" placeholder="Confirmar Contraseña" required readonly  id="password_confirmation" type="password" value="">
                                                 <a href="#" id="clickable4"><i class="far fa-edit"></i>
 
                                                 </a>

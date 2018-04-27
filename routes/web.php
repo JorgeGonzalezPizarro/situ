@@ -18,7 +18,9 @@
 Route::get('/', function () {
     return view('auth.login');
 })->middleware('auth');
-
+Route::get('/slider',function (){
+    return view('auth.slider');
+});
 
 Route::get('/loginInv/{email?}/{encrypted?}','Auth\LoginController@showLoginFormInv');
 Route::post('loginInv', 'Auth\LoginController@login');

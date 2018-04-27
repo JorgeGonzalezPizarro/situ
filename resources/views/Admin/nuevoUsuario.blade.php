@@ -25,7 +25,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        {!! Form::text('first_name', null, ['class' => 'form-control','placeholder '=>'Ingrese el nombre']) !!}
+                        {!! Form::text('first_name', null, ['class' => 'form-control','placeholder '=>'Ingrese el nombre','required']) !!}
                     </div>
                     {!! $errors->first('first_name', '<p class="help-block">:message</p>') !!}
                 </div>
@@ -36,7 +36,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                        {!! Form::text('last_name', null, ['class' => 'form-control','placeholder '=>'Ingrese el apellido']) !!}
+                        {!! Form::text('last_name', null, ['class' => 'form-control','placeholder '=>'Ingrese el apellido','required']) !!}
                     </div>
                     {!! $errors->first('last_name', '<p class="help-block">:message</p>') !!}
                 </div>
@@ -66,7 +66,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                        {!! Form::email('email', null, ['class' => 'form-control','placeholder '=>'E-mail']) !!}
+                        {!! Form::email('email', null, ['class' => 'form-control','placeholder '=>'E-mail','required']) !!}
                     </div>
                     {!! $errors->first('email', '<p class="help-block">:message</p>') !!}
                 </div>
@@ -78,7 +78,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                        {!! Form::password('password', ['class' => 'form-control','rel'=>'gp' ,'data-size'=>'10' ,'data-character-set'=>'a-z,A-Z,0-9,#' ,'id'=>'password1','placeholder '=>'Ingrese la contraseña']) !!}
+                        {!! Form::password('password', ['class' => 'form-control','rel'=>'gp' ,'data-size'=>'10' ,'data-character-set'=>'a-z,A-Z,0-9,#' ,'id'=>'password1','placeholder '=>'Ingrese la contraseña','required']) !!}
 
                     </div>
                     {!! $errors->first('password', '<p class="help-block">:message</p>') !!}
@@ -90,7 +90,7 @@
                 <div class="cols-sm-10">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                        {!! Form::password('password_confirmation', ['class' => 'form-control','rel'=>'gp' ,'data-size'=>'10' ,'id'=>'password2','data-character-set'=>'a-z,A-Z,0-9,#' ,'placeholder '=>'Confirmar contraseña']) !!}
+                        {!! Form::password('password_confirmation', ['class' => 'form-control','rel'=>'gp' ,'data-size'=>'10' ,'id'=>'password2','data-character-set'=>'a-z,A-Z,0-9,#' ,'placeholder '=>'Confirmar contraseña','required']) !!}
 
                     </div>
                     {!! $errors->first('password_confirmation', '<p class="help-block">:message</p>') !!}

@@ -215,7 +215,6 @@
     </div>
     <!-- /.row -->
 
-    </div>
 
     <!-- /.container -->
 @endsection()

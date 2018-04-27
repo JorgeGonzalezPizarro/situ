@@ -35,16 +35,12 @@
                                         <ul class="timeline">
                                             <li>
                                                 <blockquote class="quote-card">
-                                                    <p style="font-size: 22px;
-    font-family: 'Harlow Solid Italic';
-    font-style: italic;
-    margin-top: 20px;
-    margin-left: 20px;">"{{$hecho->contenido}}"<span> por {{$user-> first_name}}</span></p>
+                                                    <p>{{$hecho->contenido}}</p>
+                                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
 
-                                                    </p>
-                                                    <small><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small>
 
                                                 </blockquote>
+
                                             </li>
 
 
