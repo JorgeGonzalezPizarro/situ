@@ -32,6 +32,10 @@ class hechos extends Model
 
 
     }
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
 
         public function user() {
 

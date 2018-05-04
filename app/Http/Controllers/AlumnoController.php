@@ -232,7 +232,7 @@ class AlumnoController extends Controller
         $hecho->user_id = $user->id;
         $hecho->titulo_hecho = 'Formacion';
         $hecho->categoria_id = 5;
-        $hecho->curso = '';
+        $hecho->curso = null;
         $hecho->categoria_nombre="Portafolios profesional";
 
         $hecho->contenido =  $formacionAlumno->descripcion;
@@ -717,7 +717,7 @@ class AlumnoController extends Controller
         $hecho->titulo_hecho = 'Trabajo';
         $hecho->categoria_id = 5;
         $hecho->categoria_nombre="Portafolios profesional";
-        $hecho->curso = '';
+        $hecho->curso = null;
         $hecho->contenido = $alumnoLaboral->descripcion;
         $hecho->proposito = "";
         $hecho->evidencia = "";

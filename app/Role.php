@@ -25,7 +25,10 @@ class Role extends  Model implements RoleInterface, PermissibleInterface
     'slug',
     'permissions',
 ];
-
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
     /**
      * The Eloquent users model name.
      *

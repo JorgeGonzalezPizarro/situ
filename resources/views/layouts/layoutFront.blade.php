@@ -475,15 +475,15 @@
 
 
             @if(Sentinel::check() && Sentinel::inRole('Alu'))
+                <a href="{{ route('alumnoDashboard') }}" class="navbar-brand">
+                    <i class="fas fa-home"></i> Inicio
+                </a>
                 <a href="{{route('misDatos')}}"  class="navbar-brand"><i class="far fa-smile"></i>
 
 
 
                     Mi perfil </a>
-                    <a href="{{ route('alumnoDashboard') }}"  class="navbar-brand" style="display: inline;"><i class="fas fa-home"></i>
 
-
-                        Panel de Control  </a>
                 <a href="{{route('invitar')}}" class="navbar-brand"><i class="fas fa-user-plus"></i>
 
 
@@ -735,6 +735,11 @@
                             <i class="fas fa-quote-left"></i>
                             Mis Frases</a>
                     </li>
+                    <li class="">
+                        <a href="{{ route('hechos', ['categoria'=>"Reflexiones"])}}"><i class="far fa-comments"></i>
+
+                            Reflexiones</a>
+                    </li>
                 @endif
 
             </ul>
@@ -755,131 +760,131 @@
         <!-- /.content -->
             @yield('content')
 
-                <footer class="page-footer font-small stylish-color-dark pt-4 mt-4">
+                {{--<footer class="page-footer font-small stylish-color-dark pt-4 mt-4">--}}
 
-                    <!--Footer Links-->
-                    <div class="container-fluid">
+                    {{--<!--Footer Links-->--}}
+                    {{--<div class="container-fluid">--}}
 
-                        <div class="col-md-3"></div>
-                        <div class="col-md-8">
+                        {{--<div class="col-md-3"></div>--}}
+                        {{--<div class="col-md-8">--}}
 
-                            <!--First column-->
-                            <div class="col-md-3 ">
-                                <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                    <tr><td align="center" style="line-height: 14px; padding: 0 27px;">
-                                            <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
-                                            <div style="line-height: 14px;">
-                                                <strong style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #4db3a4;">
-                                                    <a href="" target="" style="    color: white;
-    text-decoration: none;
-    font-weight: bold;">SEGUMIENTO </a>
-                                                </strong>
-                                            </div>
-                                            <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
-                                            <div style="line-height: 21px;">
-								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
-Otra manera de ver tu carrera academico-profesional.
-                                </span>
-                                            </div>
-                                        </td></tr>
-                                </table>
-                            </div>
-                            <!--/.First column-->
-
-
-                            <!--Second column-->
-                            <div class="col-md-3 ">
-                                <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                    <tr><td align="center" style="line-height: 14px; padding: 0 27px;">
-                                            <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
-                                            <div style="line-height: 14px;">
-                                                <strong style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #4db3a4;">
-                                                    <a href="" target="" style="    color: white;
-    text-decoration: none;
-    font-weight: bold;">FORMACIÓN</a>
-                                                </strong>
-                                            </div>
-                                            <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
-                                            <div style="line-height: 21px;">
-								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
-Comparte tus experiencias , cursos, asignaturas, grados, masters...
-                                </span>
-                                            </div>
-                                        </td></tr>
-                                </table>
-                            </div>
-                            <!--/.Second column-->
+                            {{--<!--First column-->--}}
+                            {{--<div class="col-md-3 ">--}}
+                                {{--<table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">--}}
+                                    {{--<tr><td align="center" style="line-height: 14px; padding: 0 27px;">--}}
+                                            {{--<!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>--}}
+                                            {{--<div style="line-height: 14px;">--}}
+                                                {{--<strong style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #4db3a4;">--}}
+                                                    {{--<a href="" target="" style="    color: white;--}}
+    {{--text-decoration: none;--}}
+    {{--font-weight: bold;">SEGUMIENTO </a>--}}
+                                                {{--</strong>--}}
+                                            {{--</div>--}}
+                                            {{--<!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>--}}
+                                            {{--<div style="line-height: 21px;">--}}
+								{{--<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">--}}
+{{--Otra manera de ver tu carrera academico-profesional.--}}
+                                {{--</span>--}}
+                                            {{--</div>--}}
+                                        {{--</td></tr>--}}
+                                {{--</table>--}}
+                            {{--</div>--}}
+                            {{--<!--/.First column-->--}}
 
 
-                            <!--Third column-->
-                            <div class="col-md-3 ">
-                                <table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">
-                                    <tr><td align="center" style="line-height: 14px; padding: 0 27px;">
-                                            <!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>
-                                            <div style="line-height: 14px;">
-                                                <strong style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #4db3a4;">
-                                                    <a href="" target="" style="    color: white;
-    text-decoration: none;
-    font-weight: bold;">EXPERIENCIA PROFESIONAL</a>
-                                                </strong>
-                                            </div>
-                                            <!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>
-                                            <div style="line-height: 21px;">
-								<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">
-Date a conocer y haz crecer tu perfil.								</span>
-                                            </div>
-                                        </td></tr>
-                                </table>
-                            </div>
-                            </td></tr>
-                            <tr><td><!-- padding -->
-                                    <div style="height: 80px; line-height: 80px; font-size: 10px;"> </div></td></tr>
-                            </table>
-
-                        </div>
-                        <div class="clearfix"></div>
-
-                        <!--/.Third column-->
-
-                        <hr>
-                        <div class="col-md-3"></div>
-
-                        <!--Fourth column-->
-                        <div class="col-md-8">
-
-                            <div class="col-md-9">
-                                <p style="text-align: center"><img src="/imagenes/logo2.jpg" class="img-circle"/> </p>
-
-                            </div>
-
-                            <!--/.Fourth column-->
-                        </div>
-
-                        <!-- Footer links -->
-                        <hr>
-
-                        <div class="col-md-3"></div>
-
-                        <!--Grid column-->
-                        <div class="col-md-8">
-
-                            <div class="col-md-9">
-                                <p class="text-center text-md-left grey-text">
-                                    2018 © <a href="#"> DESSI.</a> Derechos Reservados.
-                                </p>
-                            </div>
-
-                        </div>
-                        <!--Grid column-->
-
-                        <!--Grid column-->
-
-                        <!--Grid column-->
-
-                    </div>
+                            {{--<!--Second column-->--}}
+                            {{--<div class="col-md-3 ">--}}
+                                {{--<table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">--}}
+                                    {{--<tr><td align="center" style="line-height: 14px; padding: 0 27px;">--}}
+                                            {{--<!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>--}}
+                                            {{--<div style="line-height: 14px;">--}}
+                                                {{--<strong style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #4db3a4;">--}}
+                                                    {{--<a href="" target="" style="    color: white;--}}
+    {{--text-decoration: none;--}}
+    {{--font-weight: bold;">FORMACIÓN</a>--}}
+                                                {{--</strong>--}}
+                                            {{--</div>--}}
+                                            {{--<!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>--}}
+                                            {{--<div style="line-height: 21px;">--}}
+								{{--<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">--}}
+{{--Comparte tus experiencias , cursos, asignaturas, grados, masters...--}}
+                                {{--</span>--}}
+                                            {{--</div>--}}
+                                        {{--</td></tr>--}}
+                                {{--</table>--}}
+                            {{--</div>--}}
+                            {{--<!--/.Second column-->--}}
 
 
-                </footer>
+                            {{--<!--Third column-->--}}
+                            {{--<div class="col-md-3 ">--}}
+                                {{--<table class="mob_100" width="100%" border="0" cellspacing="0" cellpadding="0" align="left" style="border-collapse: collapse;">--}}
+                                    {{--<tr><td align="center" style="line-height: 14px; padding: 0 27px;">--}}
+                                            {{--<!-- padding --><div style="height: 40px; line-height: 40px; font-size: 10px;"> </div>--}}
+                                            {{--<div style="line-height: 14px;">--}}
+                                                {{--<strong style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #4db3a4;">--}}
+                                                    {{--<a href="" target="" style="    color: white;--}}
+    {{--text-decoration: none;--}}
+    {{--font-weight: bold;">EXPERIENCIA PROFESIONAL</a>--}}
+                                                {{--</strong>--}}
+                                            {{--</div>--}}
+                                            {{--<!-- padding --><div style="height: 18px; line-height: 18px; font-size: 10px;"> </div>--}}
+                                            {{--<div style="line-height: 21px;">--}}
+								{{--<span style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; color: #98a7b9;">--}}
+{{--Date a conocer y haz crecer tu perfil.								</span>--}}
+                                            {{--</div>--}}
+                                        {{--</td></tr>--}}
+                                {{--</table>--}}
+                            {{--</div>--}}
+                            {{--</td></tr>--}}
+                            {{--<tr><td><!-- padding -->--}}
+                                    {{--<div style="height: 80px; line-height: 80px; font-size: 10px;"> </div></td></tr>--}}
+                            {{--</table>--}}
+
+                        {{--</div>--}}
+                        {{--<div class="clearfix"></div>--}}
+
+                        {{--<!--/.Third column-->--}}
+
+                        {{--<hr>--}}
+                        {{--<div class="col-md-3"></div>--}}
+
+                        {{--<!--Fourth column-->--}}
+                        {{--<div class="col-md-8">--}}
+
+                            {{--<div class="col-md-9">--}}
+                                {{--<p style="text-align: center"><img src="/imagenes/logo2.jpg" class="img-circle"/> </p>--}}
+
+                            {{--</div>--}}
+
+                            {{--<!--/.Fourth column-->--}}
+                        {{--</div>--}}
+
+                        {{--<!-- Footer links -->--}}
+                        {{--<hr>--}}
+
+                        {{--<div class="col-md-3"></div>--}}
+
+                        {{--<!--Grid column-->--}}
+                        {{--<div class="col-md-8">--}}
+
+                            {{--<div class="col-md-9">--}}
+                                {{--<p class="text-center text-md-left grey-text">--}}
+                                    {{--2018 © <a href="#"> DESSI.</a> Derechos Reservados.--}}
+                                {{--</p>--}}
+                            {{--</div>--}}
+
+                        {{--</div>--}}
+                        {{--<!--Grid column-->--}}
+
+                        {{--<!--Grid column-->--}}
+
+                        {{--<!--Grid column-->--}}
+
+                    {{--</div>--}}
+
+
+                {{--</footer>--}}
         </div><!-- /.container-fluid -->
 
     </div><!-- /#page-wrapper -->

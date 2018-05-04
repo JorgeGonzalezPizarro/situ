@@ -411,6 +411,11 @@
 
 
             @if(Sentinel::check() && Sentinel::inRole('Alu'))
+                    <a href="{{ route('alumnoDashboard') }}" class="navbar-brand">
+                        <i class="fas fa-home"></i> Inicio
+                    </a>
+
+
                 <a href="{{route('misDatos')}}"  class="navbar-brand"><i class="far fa-smile"></i>
 
 
@@ -690,6 +695,11 @@
 
 
                             Mis Frases</a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('hechos', ['categoria'=>"Reflexiones"])}}"><i class="far fa-comments"></i>
+
+                            Reflexiones</a>
                     </li>
                 @endif
             </ul>

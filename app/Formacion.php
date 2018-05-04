@@ -21,4 +21,8 @@ class Formacion extends Model
         'actual',
 
     ];//
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
 }

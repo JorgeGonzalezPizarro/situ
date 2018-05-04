@@ -48,6 +48,7 @@ Route::get('Admin/crearEtiqueta',function(){
 })->name('crearEtiqueta');
 
 Route::post('Admin/crearEtiqueta','AdminController@crearNuevaEtiqueta')->name('guardarEtiqueta');
+Route::get('adminDashboard','AdminController@eliminarUsuario')->name('eliminarUsuario');
 
 
 /*ALUMNO*/

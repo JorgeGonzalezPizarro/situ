@@ -17,6 +17,7 @@
                     <th>Email</th>
                     <th>Rol</th>
                     <th>Fecha Límite</th>
+                    <th>Eliminar</th>
 
                 </tr>
                 </thead>
@@ -44,6 +45,8 @@
                                 @else
                                 <td>  {{"Indefinido"}}</td>
                                 @endif
+                            <td id="" ><a href="#"  id="{{$user->id}}"onclick="eliminar(this.id)">Eliminar usuario</a> </td>
+
                         </tr>
                     @endforeach
 
@@ -254,4 +257,27 @@
 
 
 </script>
-    <!-- Scripts -->
+<script>
+    function eliminar(id) {
+        $.ajax({
+            type:"get",
+            url     : "{{ route('eliminarUsuario') }}",
+            datatype:"json",
+            encode  : true,
+            data: {
+                id: id,
+            },
+            success: function(response){ // What to do if we succeed
+                console.log(response);
+                {{--$(location).attr('href', "{{route('Admin/actualizar')}}"+"/"+ data[2]+"");--}}
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+        });
+
+    }
+
+</script>    <!-- Scripts -->

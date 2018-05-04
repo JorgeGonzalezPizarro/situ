@@ -26,6 +26,7 @@
                 </div>
                 </div>
             </div>
+            @if(!empty($hechos))
             <div class="row" style="padding-top: 60px;">
                 <input type="hidden" name="etiq" id="etiq" value="">
                 <div class="col-lg-2">
@@ -82,7 +83,7 @@
                 </div>
             <div class="col-lg-12">
             </div> <div class="clearfix"></div>
-            @if(!empty($hechos))
+
                     @foreach($hechos as $hecho)
 
                     <div class="col-lg-12">
@@ -116,7 +117,7 @@
 
                                         <div class="timeline-body">
 
-                                            <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion {{$hecho->created_at}}</small></span>
+                                            <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small></span>
 
                                             <span class="pull-left" style=" width: -webkit-fill-available;
     word-wrap: break-word;">   {!!  str_limit($hecho->contenido,100,'...' )!!}</span>
@@ -195,6 +196,20 @@
     padding: 5px;" class="badge badge-default"> <a href="#" style=" font-weight: 200;   color: #f1f1f1;"  onclick="etiquetas('')" id="etiqueta[]">TODAS</a></span>
                                     </li>
                             </ul>
+                            <ul class="list-unstyled mb-0">
+                                @foreach ($etiquetasAlu as $etiq1)
+                                    <li style="padding: 5px">
+                                    <span style="          width: 100%;
+    min-width: 100px;
+    line-height: 18px;
+    font-size: 18px;
+    min-height: 30px;
+    background: #5BC0DE;
+    padding: 5px;" class="badge badge-default">   <a href="#" style=" font-weight: 200;   color: #f1f1f1;" onclick="etiquetas(this.text)" id="etiqueta[]">{{$etiq1->nombre}}</a></span>
+                                    </li>
+                                @endforeach
+
+                            </ul>
                         </div>
 
                     </div>
@@ -241,13 +256,56 @@
                         {{--</div>--}}
                     {{--</div>--}}
                 {{--</div>--}}
-                @endif
+                @else
+                    <div class="clearfix"></div>
+                    <div class="container" style="margin-top: 50px">
+                        <ul class="list-group">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-heading">
+                                <p><small class="text-muted"> </small></p>
+                            </div>
+    @if($user->inRole('Alu'))
+   <div class="timeline-body">
+       <div class="alert alert-warning">Comienza añadiendo tu trayectoria universitaria y profesional a  a la plataforma !
+       <ul style="list-style-type: none;">
+
+               @foreach($categorias as $categoria)
+                   <li class="" style="    padding: 10px;
+color: #003865;">
+                       <a href="{{ route('hechos', ['categoria'=>$categoria->categoria])}}" style="    color: #003865;">
+                           <i class="fas fa-plus-square"></i>
+                           {{$categoria->categoria}}</a>
+                   </li>
+               @endforeach
+       </ul>
+       </div>
 
 
-        </div>
-        </div>
-    </div>
-    </div>
+   </div>
+        @endif
+                            @if($user->inRole('Inv'))
+                                <div class="timeline-body">
+                                    <div class="alert alert-warning">El alumno no ha añadido ningun hecho a la plataforma !
+
+                                    </div>
+
+
+                                </div>
+                            @endif
+</li>
+
+
+</ul>
+</ul>    </div>
+
+@endif
+
+
+</div>
+</div>
+</div>
+</div>
 
 
 
@@ -261,143 +319,143 @@
 
 
 
-    $(document).ready(function() {
-        var string = "#"
-        if((window.location.href).includes(string)) {
-            var pathArray = window.location.href.split('#');
-            var newPathname = "";
+$(document).ready(function() {
+var string = "#"
+if((window.location.href).includes(string)) {
+var pathArray = window.location.href.split('#');
+var newPathname = "";
 
-            for (i = 0; i < pathArray.length; i++) {
-                // newPathname += "#";
-                // newPathname += pathArray[i];
-            }
-            if (pathArray[1].length > 0) {
-                etiquetas(pathArray[1]);
-            }
-        }
+for (i = 0; i < pathArray.length; i++) {
+// newPathname += "#";
+// newPathname += pathArray[i];
+}
+if (pathArray[1].length > 0) {
+etiquetas(pathArray[1]);
+}
+}
 
-    });
+});
 
-        function orden(id) {
+function orden(id) {
 
-        var ordenacion = document.getElementById("orden");
+var ordenacion = document.getElementById("orden");
 
-        var orden = ordenacion.options[ordenacion.selectedIndex].value;
+var orden = ordenacion.options[ordenacion.selectedIndex].value;
 
-        if (0 != ($('#buscar').val().length)) {
-            var input = $('#buscar').val();
-        } else if (0 != ($('#etiq').val().length)) {
-            var input = $('#etiq').val();
+if (0 != ($('#buscar').val().length)) {
+var input = $('#buscar').val();
+} else if (0 != ($('#etiq').val().length)) {
+var input = $('#etiq').val();
 
-        } else {
-            input = "";
-        }
+} else {
+input = "";
+}
 
-        // var x = document.getElementById("cursoSelect").selectedIndex;
+// var x = document.getElementById("cursoSelect").selectedIndex;
 
-        if (0 != (orden.length)) {
-            $.ajax({
-                type: "get",
-                url: "{{url('Situ') }}" + "/" + orden,
-                encode: true,
-                data: {
-                    orden: orden,
-                    input: $('#etiq').val(),
-                },
-                success: function (response) {
-                    console.log(response[0].length);
-                    console.log();
-                    if (response[0].length == 0) {
+if (0 != (orden.length)) {
+$.ajax({
+type: "get",
+url: "{{url('Situ') }}" + "/" + orden,
+encode: true,
+data: {
+orden: orden,
+input: $('#etiq').val(),
+},
+success: function (response) {
+console.log(response[0].length);
+console.log();
+if (response[0].length == 0) {
 
-                        var html2 = '<div class="alert alert-info" role="alert">' +
-                            ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' + id + '</a>.' +
-                            ' </div>';
-                        $("#contenedor").empty();
+var html2 = '<div class="alert alert-info" role="alert">' +
+   ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' + id + '</a>.' +
+   ' </div>';
+$("#contenedor").empty();
 
-                        $("#contenedor").append(html2);
+$("#contenedor").append(html2);
 
-                    }
-
-
-                    else {
-
-                        var html = [];
-                        response[0].forEach(function (element) {
+}
 
 
-                            html.push('<div class="col-lg-12">'
-                                +'<ul class="timeline">' +
-                                '<li>' +
-                                '  <div class="timeline-panel">' +
-                                '    <div class="timeline-heading">' +
-                                '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
-                                '<span style="float: right;">'+
+else {
 
-                                '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
-                                '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
-                                '<h4 class="timeline-title"><a href="#" id=" ' + element['categoria_id']+ '" onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
-                                '</div><input type="hidden" name="etiq" id="etiq" value=' + input + '>' +
-
-                            '</div>' +
-                            '<div class="timeline-body">' +
-                            '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
-                            '<br>' +
-
-                            '  <div class="clearfix"></div>' +
-
-                            '<span class="pull-left"style=" width: -webkit-fill-available;' +
-                            '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
-                            '  <div class="clearfix"></div>' +
-                            ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
-                            ' </p></span>' +
-                            '</div>' +
-                            '</div>'
-                            +'<div class="col-md-4">'
-                           + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
-
-                            +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                 (element['etiqueta'] !==(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+var html = [];
+response[0].forEach(function (element) {
 
 
+   html.push('<div class="col-lg-12">'
+       +'<ul class="timeline">' +
+       '<li>' +
+       '  <div class="timeline-panel">' +
+       '    <div class="timeline-heading">' +
+       '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+       '<span style="float: right;">'+
 
-                            +'</div>'
+       '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
+       '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+       '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+       '<h4 class="timeline-title"><a href="#" id=" ' + element['categoria_id']+ '" onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+       '</div><input type="hidden" name="etiq" id="etiq" value=' + input + '>' +
 
-                            +'</div>'
-                            +'</li>' +
+   '</div>' +
+   '<div class="timeline-body">' +
+   '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+   '<br>' +
 
+   '  <div class="clearfix"></div>' +
 
-                            '</ul>' +
+   '<span class="pull-left"style=" width: -webkit-fill-available;' +
+   '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+   '  <div class="clearfix"></div>' +
+   ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+   ' </p></span>' +
+   '</div>' +
+   '</div>'
+   +'<div class="col-md-4">'
+  + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+       + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
-                            '</div>');
-                            $("#contenedor").empty();
-
-
-                        });
-                        html.forEach(function (element) {
-
-                            $("#contenedor").append(element);
-
-
-                        });
-
-
-                    }
-
-
-                },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
-        } else {
-            location.reload();
-        }
+   +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+        (element['etiqueta'] !==(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
-    }
+
+   +'</div>'
+
+   +'</div>'
+   +'</li>' +
+
+
+   '</ul>' +
+
+   '</div>');
+   $("#contenedor").empty();
+
+
+});
+html.forEach(function (element) {
+
+   $("#contenedor").append(element);
+
+
+});
+
+
+}
+
+
+},
+error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+console.log(JSON.stringify(jqXHR));
+console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+}
+});
+} else {
+location.reload();
+}
+
+
+}
 
 
 
@@ -405,616 +463,616 @@
 function etiquetas(id){
 
 
-    var ordenacion = document.getElementById("orden");
+var ordenacion = document.getElementById("orden");
 
-    var orden=ordenacion.options[ordenacion.selectedIndex].value;
-
-
-    // var x = document.getElementById("cursoSelect").selectedIndex;
-    console.log(id);
-
-    if(0 !=(id.length)) {
-        $.ajax({
-            type: "get",
-            url: "{{url('Situ/') }}" + "/" +id,
-            encode: true,
-            data: {
-                input: id,
-                orden: orden,
-            },
-            success: function (response) {
-                console.log(response[0].length);
-
-                if (response[0].length == 0) {
-
-                    var html2= '<div class="alert alert-info" role="alert">'+
-                        ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +id+'</a>.'+
-                        ' </div>';
-                    $("#contenedor").empty();
-
-                    $("#contenedor").append(html2);
-
-                }
+var orden=ordenacion.options[ordenacion.selectedIndex].value;
 
 
-                else {
+// var x = document.getElementById("cursoSelect").selectedIndex;
+console.log(id);
 
+if(0 !=(id.length)) {
+$.ajax({
+type: "get",
+url: "{{url('Situ/') }}" + "/" +id,
+encode: true,
+data: {
+input: id,
+orden: orden,
+},
+success: function (response) {
+console.log(response[0].length);
 
-                    var html = [];
-                    response[0].forEach(function (element) {
+if (response[0].length == 0) {
 
+var html2= '<div class="alert alert-info" role="alert">'+
+' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +id+'</a>.'+
+' </div>';
+$("#contenedor").empty();
 
-                        html.push('<div class="col-lg-12">'
-                            +'<ul class="timeline">' +
-                            '<li>' +
-                            '  <div class="timeline-panel">' +
-                            '    <div class="timeline-heading">' +
-                            '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
-                            '<span style="float: right;">'+
-
-                            '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                            '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
-                            '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
-                            '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id']+ '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
-                            '</div><input type="hidden" name="etiq" id="etiq" value=' + id + '>' +
-
-                            '</div>' +
-                            '<div class="timeline-body">' +
-                            '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
-                            '<br>' +
-
-                            '  <div class="clearfix"></div>' +
-
-                            '<span class="pull-left"style=" width: -webkit-fill-available;' +
-                            '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
-                            '  <div class="clearfix"></div>' +
-                            ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
-                            ' </p></span>' +
-                            '</div>' +
-                            '</div>'
-                            +'<div class="col-md-4">'
-                            + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                            + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
-
-                            +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                            (element['etiqueta'] !=(null || "") ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
-
-
-
-                            +'</div>'
-
-                            +'</div>'
-                            +'</li>' +
-
-
-                            '</ul>' +
-
-                            '</div>');
-                        $("#contenedor").empty();
-
-
-                    });
-
-                    html.forEach(function (element) {
-                        console.log(element['id']);
-
-                        $("#contenedor").append(element);
-
-
-                    });
-                    var input = document.getElementById("buscar");
-                    input_value =  input.getAttribute("value");
-                    input_value = "";
-                    $('#buscar').val("");
-                    $('#etiq').val(id);
-
-                }
-
-
-            },
-            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                console.log(JSON.stringify(jqXHR));
-                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-            }
-        });
-    }else{
-        location.reload();
-    }
+$("#contenedor").append(html2);
 
 }
 
 
-    function categorias(id){
+else {
 
-        var ordenacion = document.getElementById("orden");
 
-        var orden=ordenacion.options[ordenacion.selectedIndex].value;
+var html = [];
+response[0].forEach(function (element) {
 
 
-        // var x = document.getElementById("cursoSelect").selectedIndex;
-        console.log(id);
+html.push('<div class="col-lg-12">'
+   +'<ul class="timeline">' +
+   '<li>' +
+   '  <div class="timeline-panel">' +
+   '    <div class="timeline-heading">' +
+   '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+   '<span style="float: right;">'+
 
-        if(0 !=(id.length)) {
-            $.ajax({
-                type: "get",
-                url: "{{url('Situ/categorias') }}" + "/" +id,
-                encode: true,
-                data: {
-                    input: id,
-                    orden: orden,
-                },
-                success: function (response) {
-                    console.log(response[0].length);
+   '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
+   '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+   '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+   '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id']+ '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+   '</div><input type="hidden" name="etiq" id="etiq" value=' + id + '>' +
 
-                    if (response[0].length == 0) {
+   '</div>' +
+   '<div class="timeline-body">' +
+   '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+   '<br>' +
 
-                        var html2= '<div class="alert alert-info" role="alert">'+
-                            ' No hay hechos relacionados la busqueda '+
-                            ' </div>';
-                        $("#contenedor").empty();
+   '  <div class="clearfix"></div>' +
 
-                        $("#contenedor").append(html2);
+   '<span class="pull-left"style=" width: -webkit-fill-available;' +
+   '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+   '  <div class="clearfix"></div>' +
+   ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+   ' </p></span>' +
+   '</div>' +
+   '</div>'
+   +'<div class="col-md-4">'
+   + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+   + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
-                    }
+   +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+   (element['etiqueta'] !=(null || "") ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
-                    else {
 
+   +'</div>'
 
-                        var html = [];
-                        response[0].forEach(function (element) {
+   +'</div>'
+   +'</li>' +
 
 
-                            html.push('<div class="col-lg-12">'
-                                +'<ul class="timeline">' +
-                                '<li>' +
-                                '  <div class="timeline-panel">' +
-                                '    <div class="timeline-heading">' +
-                                '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+   '</ul>' +
 
-                                '<span style="float: right;">'+
+   '</div>');
+$("#contenedor").empty();
 
-                                '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
-                                '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
-                                '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '" onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
-                                '</div><input type="hidden" name="etiq" id="etiq" value=' + input + '>' +
 
-                                '</div>' +
-                                '<div class="timeline-body">' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
-                                '<br>' +
+});
 
-                                '  <div class="clearfix"></div>' +
+html.forEach(function (element) {
+console.log(element['id']);
 
-                                '<span class="pull-left"style=" width: -webkit-fill-available;' +
-                                '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
-                                '  <div class="clearfix"></div>' +
-                                ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
-                                ' </p></span>' +
-                                '</div>' +
-                                '</div>'
-                                +'<div class="col-md-4">'
-                                + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+$("#contenedor").append(element);
 
-                                +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                (element['etiqueta'] !=(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
+});
+var input = document.getElementById("buscar");
+input_value =  input.getAttribute("value");
+input_value = "";
+$('#buscar').val("");
+$('#etiq').val(id);
 
+}
 
-                                +'</div>'
 
-                                +'</div>'
-                                +'</li>' +
+},
+error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+console.log(JSON.stringify(jqXHR));
+console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+}
+});
+}else{
+location.reload();
+}
 
+}
 
-                                '</ul>' +
 
-                                '</div>');
+function categorias(id){
 
-                            $("#contenedor").empty();
+var ordenacion = document.getElementById("orden");
 
+var orden=ordenacion.options[ordenacion.selectedIndex].value;
 
-                        });
 
-                        var input = document.getElementById("buscar");
+// var x = document.getElementById("cursoSelect").selectedIndex;
+console.log(id);
 
-                        $('#etiq').val(id);
+if(0 !=(id.length)) {
+$.ajax({
+type: "get",
+url: "{{url('Situ/categorias') }}" + "/" +id,
+encode: true,
+data: {
+input: id,
+orden: orden,
+},
+success: function (response) {
+console.log(response[0].length);
 
-                        console.log(response[0].length);
-                        html.forEach(function (element) {
-                            console.log(element['id']);
+if (response[0].length == 0) {
 
-                            $("#contenedor").append(element);
+var html2= '<div class="alert alert-info" role="alert">'+
+   ' No hay hechos relacionados la busqueda '+
+   ' </div>';
+$("#contenedor").empty();
 
+$("#contenedor").append(html2);
 
-                        });
+}
 
 
-                    }
+else {
 
 
-                },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
-        }else{
-            location.reload();
-        }
+var html = [];
+response[0].forEach(function (element) {
 
-    }
 
+   html.push('<div class="col-lg-12">'
+       +'<ul class="timeline">' +
+       '<li>' +
+       '  <div class="timeline-panel">' +
+       '    <div class="timeline-heading">' +
+       '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
 
-       function buscar() {
+       '<span style="float: right;">'+
 
-           var ordenacion = document.getElementById("orden");
+       '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
+       '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+       '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+       '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '" onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+       '</div><input type="hidden" name="etiq" id="etiq" value=' + input + '>' +
 
-           var orden=ordenacion.options[ordenacion.selectedIndex].value;
+       '</div>' +
+       '<div class="timeline-body">' +
+       '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+       '<br>' +
 
-           var buscar = document.getElementById("buscar");
+       '  <div class="clearfix"></div>' +
 
-           // var x = document.getElementById("cursoSelect").selectedIndex;
-           console.log($('#buscar').val());
+       '<span class="pull-left"style=" width: -webkit-fill-available;' +
+       '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+       '  <div class="clearfix"></div>' +
+       ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+       ' </p></span>' +
+       '</div>' +
+       '</div>'
+       +'<div class="col-md-4">'
+       + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+       + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
-            if(0 !=($('#buscar').val().length)) {
-                $.ajax({
-                    type: "get",
-                    url: "{{url('Situ/') }}" + "/" + $('#buscar').val(),
-                    encode: true,
-                    data: {
-                        input: $('#buscar').val(),
-                        orden:orden,
-                    },
-                    success: function (response) {
-                        console.log(response[0].length);
+       +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+       (element['etiqueta'] !=(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
-                        if (response[0].length == 0) {
 
-                            var html2= '<div class="alert alert-info" role="alert">'+
-                                ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +$("#buscar").val()+'</a>.'+
-                                ' </div>';
-                            $("#contenedor").empty();
 
-                            $("#contenedor").append(html2);
+       +'</div>'
 
-                        }
+       +'</div>'
+       +'</li>' +
 
 
-                        else {
+       '</ul>' +
 
+       '</div>');
 
-                            var html = [];
-                            response[0].forEach(function (element) {
+   $("#contenedor").empty();
 
 
+});
 
+var input = document.getElementById("buscar");
 
+$('#etiq').val(id);
 
+console.log(response[0].length);
+html.forEach(function (element) {
+   console.log(element['id']);
 
+   $("#contenedor").append(element);
 
 
+});
 
 
+}
 
-                                html.push('<div class="col-lg-12">'
-                                    +'<ul class="timeline">' +
-                                    '<li>' +
-                                    '  <div class="timeline-panel">' +
-                                    '    <div class="timeline-heading">' +
-                                    '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
 
-                                    '<span style="float: right;">'+
+},
+error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+console.log(JSON.stringify(jqXHR));
+console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+}
+});
+}else{
+location.reload();
+}
 
-                                    '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                    '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
-                                    '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
-                                    '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
-                                    '</div>'+
+}
 
-                                    '</div>' +
-                                    '<div class="timeline-body">' +
-                                    '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
-                                    '<br>' +
 
-                                    '  <div class="clearfix"></div>' +
+function buscar() {
 
-                                    '<span class="pull-left"style=" width: -webkit-fill-available;' +
-                                    '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
-                                    '  <div class="clearfix"></div>' +
-                                    ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
-                                    ' </p></span>' +
-                                    '</div>' +
-                                    '</div>'
-                                    +'<div class="col-md-4">'
-                                    + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                    + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+var ordenacion = document.getElementById("orden");
 
-                                    +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                    (element['etiqueta']!==(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+var orden=ordenacion.options[ordenacion.selectedIndex].value;
 
+var buscar = document.getElementById("buscar");
 
+// var x = document.getElementById("cursoSelect").selectedIndex;
+console.log($('#buscar').val());
 
-                                    +'</div>'
+if(0 !=($('#buscar').val().length)) {
+$.ajax({
+type: "get",
+url: "{{url('Situ/') }}" + "/" + $('#buscar').val(),
+encode: true,
+data: {
+input: $('#buscar').val(),
+orden:orden,
+},
+success: function (response) {
+console.log(response[0].length);
 
-                                    +'</div>'
-                                    +'</li>' +
+if (response[0].length == 0) {
 
+   var html2= '<div class="alert alert-info" role="alert">'+
+       ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +$("#buscar").val()+'</a>.'+
+       ' </div>';
+   $("#contenedor").empty();
 
-                                    '</ul>' +
+   $("#contenedor").append(html2);
 
-                                    '</div>');
+}
 
-                                $("#contenedor").empty();
 
+else {
 
-                            });
-                            html.forEach(function (element) {
-                                console.log(element['id']);
 
-                                $("#contenedor").append(element);
+   var html = [];
+   response[0].forEach(function (element) {
 
 
-                            });
-                            // $('#etiq').val(id);
 
-                            console.log(response[0].length);
 
-                        }
 
 
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                        console.log(JSON.stringify(jqXHR));
-                        console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                    }
-                });
-            }else{
-                location.reload();
-            }
-       }
 
-    function getCursos(id){
 
 
-        var ordenacion = document.getElementById("orden");
 
-        var orden=ordenacion.options[ordenacion.selectedIndex].value;
 
+       html.push('<div class="col-lg-12">'
+           +'<ul class="timeline">' +
+           '<li>' +
+           '  <div class="timeline-panel">' +
+           '    <div class="timeline-heading">' +
+           '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
 
-        // var x = document.getElementById("cursoSelect").selectedIndex;
-        console.log(id);
+           '<span style="float: right;">'+
 
-        if(0 !=(id.length)) {
-            $.ajax({
-                type: "get",
-                url: "{{url('/cursos') }}" + "/" +id,
-                encode: true,
-                data: {
-                    input: id,
-                    orden: orden,
-                },
-                success: function (response) {
-                    console.log(response[0].length);
+           '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
+           '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+           '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+           '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+           '</div>'+
 
-                    if (response[0].length == 0) {
+           '</div>' +
+           '<div class="timeline-body">' +
+           '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+           '<br>' +
 
-                        var html2= '<div class="alert alert-info" role="alert">'+
-                            ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +id+'</a>.'+
-                            ' </div>';
-                        $("#contenedor").empty();
+           '  <div class="clearfix"></div>' +
 
-                        $("#contenedor").append(html2);
+           '<span class="pull-left"style=" width: -webkit-fill-available;' +
+           '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+           '  <div class="clearfix"></div>' +
+           ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+           ' </p></span>' +
+           '</div>' +
+           '</div>'
+           +'<div class="col-md-4">'
+           + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+           + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
-                    }
+           +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+           (element['etiqueta']!==(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
 
-                    else {
 
+           +'</div>'
 
-                        var html = [];
-                        response[0].forEach(function (element) {
+           +'</div>'
+           +'</li>' +
 
 
-                            html.push('<div class="col-lg-12">'
-                                +'<ul class="timeline">' +
-                                '<li>' +
-                                '  <div class="timeline-panel">' +
-                                '    <div class="timeline-heading">' +
-                                '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+           '</ul>' +
 
-                                '<span style="float: right;">'+
+           '</div>');
 
-                                '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
-                                '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
-                                '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
-                                '</div>'+
+       $("#contenedor").empty();
 
-                                '</div>' +
-                                '<div class="timeline-body">' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
-                                '<br>' +
 
-                                '  <div class="clearfix"></div>' +
+   });
+   html.forEach(function (element) {
+       console.log(element['id']);
 
-                                '<span class="pull-left"style=" width: -webkit-fill-available;' +
-                                '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
-                                '  <div class="clearfix"></div>' +
-                                ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
-                                ' </p></span>' +
-                                '</div>' +
-                                '</div>'
-                                +'<div class="col-md-4">'
-                                + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+       $("#contenedor").append(element);
 
-                                +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                (element['etiqueta'] !==(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
+   });
+   // $('#etiq').val(id);
 
+   console.log(response[0].length);
 
-                                +'</div>'
+}
 
-                                +'</div>'
-                                +'</li>' +
 
+},
+error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+console.log(JSON.stringify(jqXHR));
+console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+}
+});
+}else{
+location.reload();
+}
+}
 
-                                '</ul>' +
+function getCursos(id){
 
-                                '</div>');
-                            $("#contenedor").empty();
 
+var ordenacion = document.getElementById("orden");
 
-                        });
+var orden=ordenacion.options[ordenacion.selectedIndex].value;
 
-                        html.forEach(function (element) {
-                            console.log(element['id']);
 
-                            $("#contenedor").append(element);
+// var x = document.getElementById("cursoSelect").selectedIndex;
+console.log(id);
 
+if(0 !=(id.length)) {
+$.ajax({
+type: "get",
+url: "{{url('/cursos') }}" + "/" +id,
+encode: true,
+data: {
+input: id,
+orden: orden,
+},
+success: function (response) {
+console.log(response[0].length);
 
-                        });
-                        var input = document.getElementById("buscar");
-                        input_value =  input.getAttribute("value");
-                        input_value = "";
-                        $('#etiq').val(id);
+if (response[0].length == 0) {
 
-                    }
+var html2= '<div class="alert alert-info" role="alert">'+
+   ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +id+'</a>.'+
+   ' </div>';
+$("#contenedor").empty();
 
+$("#contenedor").append(html2);
 
-                },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
-        }else{
-            location.reload();
-        }
+}
 
-    }
-    function getAsignaturas(id){
 
+else {
 
-        var ordenacion = document.getElementById("orden");
 
-        var orden=ordenacion.options[ordenacion.selectedIndex].value;
+var html = [];
+response[0].forEach(function (element) {
 
 
-        // var x = document.getElementById("cursoSelect").selectedIndex;
-        console.log(id);
+   html.push('<div class="col-lg-12">'
+       +'<ul class="timeline">' +
+       '<li>' +
+       '  <div class="timeline-panel">' +
+       '    <div class="timeline-heading">' +
+       '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
 
-        if(0 !=(id.length)) {
-            $.ajax({
-                type: "get",
-                url: "{{url('/cursos') }}" + "/" +id,
-                encode: true,
-                data: {
-                    input: id,
-                    orden: orden,
-                },
-                success: function (response) {
-                    console.log(response[0].length);
+       '<span style="float: right;">'+
 
-                    if (response[0].length == 0) {
+       '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
+       '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+       '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+       '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+       '</div>'+
 
-                        var html2= '<div class="alert alert-info" role="alert">'+
-                            ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +id+'</a>.'+
-                            ' </div>';
-                        $("#contenedor").empty();
+       '</div>' +
+       '<div class="timeline-body">' +
+       '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+       '<br>' +
 
-                        $("#contenedor").append(html2);
+       '  <div class="clearfix"></div>' +
 
-                    }
+       '<span class="pull-left"style=" width: -webkit-fill-available;' +
+       '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+       '  <div class="clearfix"></div>' +
+       ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+       ' </p></span>' +
+       '</div>' +
+       '</div>'
+       +'<div class="col-md-4">'
+       + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+       + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
+       +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+       (element['etiqueta'] !==(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
 
-                    else {
 
 
-                        var html = [];
-                        response[0].forEach(function (element) {
+       +'</div>'
 
+       +'</div>'
+       +'</li>' +
 
-                            html.push('<div class="col-lg-12">'
-                                +'<ul class="timeline">' +
-                                '<li>' +
-                                '  <div class="timeline-panel">' +
-                                '    <div class="timeline-heading">' +
-                                '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
 
-                                '<span style="float: right;">'+
+       '</ul>' +
 
-                                '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
-                                '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
-                                '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
-                                '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
-                                '</div>' +
+       '</div>');
+   $("#contenedor").empty();
 
-                                '</div>' +
-                                '<div class="timeline-body">' +
-                                '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
-                                '<br>' +
 
-                                '  <div class="clearfix"></div>' +
+});
 
-                                '<span class="pull-left"style=" width: -webkit-fill-available;' +
-                                '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
-                                '  <div class="clearfix"></div>' +
-                                ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
-                                ' </p></span>' +
-                                '</div>' +
-                                '</div>'
-                                +'<div class="col-md-4">'
-                                + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
-                                + (element['curso']!==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+html.forEach(function (element) {
+   console.log(element['id']);
 
-                                +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
-                                (element['etiqueta'] !==(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+   $("#contenedor").append(element);
 
 
+});
+var input = document.getElementById("buscar");
+input_value =  input.getAttribute("value");
+input_value = "";
+$('#etiq').val(id);
 
-                                +'</div>'
+}
 
-                                +'</div>'
-                                +'</li>' +
 
+},
+error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+console.log(JSON.stringify(jqXHR));
+console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+}
+});
+}else{
+location.reload();
+}
 
-                                '</ul>' +
+}
+function getAsignaturas(id){
 
-                                '</div>');
 
-                            $("#contenedor").empty();
+var ordenacion = document.getElementById("orden");
 
+var orden=ordenacion.options[ordenacion.selectedIndex].value;
 
-                        });
 
-                        html.forEach(function (element) {
-                            console.log(element['id']);
+// var x = document.getElementById("cursoSelect").selectedIndex;
+console.log(id);
 
-                            $("#contenedor").append(element);
+if(0 !=(id.length)) {
+$.ajax({
+type: "get",
+url: "{{url('/cursos') }}" + "/" +id,
+encode: true,
+data: {
+input: id,
+orden: orden,
+},
+success: function (response) {
+console.log(response[0].length);
 
+if (response[0].length == 0) {
 
-                        });
-                        var input = document.getElementById("buscar");
-                        input_value =  input.getAttribute("value");
-                        input_value = "";
-                        $('#etiq').val(id);
+var html2= '<div class="alert alert-info" role="alert">'+
+   ' No hay hechos relacionados con  <a href="#" class="alert-link" style="font-size: 18px;">' +id+'</a>.'+
+   ' </div>';
+$("#contenedor").empty();
 
-                    }
+$("#contenedor").append(html2);
 
+}
 
-                },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
-        }else{
-            location.reload();
-        }
 
-    }
-    </script>
+else {
+
+
+var html = [];
+response[0].forEach(function (element) {
+
+
+   html.push('<div class="col-lg-12">'
+       +'<ul class="timeline">' +
+       '<li>' +
+       '  <div class="timeline-panel">' +
+       '    <div class="timeline-heading">' +
+       '  <span style="float: left;"><h3 class="timeline-title">' + element['titulo_hecho'] + '</h3></span>' +
+
+       '<span style="float: right;">'+
+
+       '<img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="' + response[1]['img'] + '" class="img-circle img-responsive"  name="imagen">' +
+       '<h4 style="text-align: center" class="timeline-title">'+response[2]['first_name']+'</h4></span><div class="clearfix"></div></div>' +
+       '<div class="col-md-8"><div class="timeline-panel"><div class="timeline-heading">' +
+       '<h4 class="timeline-title"><a href="#" id="' + element['categoria_id'] + '"onclick="categorias(this.id)">'+ element['categoria_nombre']+'</a></h5>' +
+       '</div>' +
+
+       '</div>' +
+       '<div class="timeline-body">' +
+       '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+       '<br>' +
+
+       '  <div class="clearfix"></div>' +
+
+       '<span class="pull-left"style=" width: -webkit-fill-available;' +
+       '    word-wrap: break-word;"> ' + element['contenido'].substring(0, 100) + '...' + '</span>' +
+       '  <div class="clearfix"></div>' +
+       ' <span><p><a href=" {{ url('Situ/public') }}/' + element['id'] + '/' + element['categoria_id'] + '" class="btn btn-info" role="button">Ver</a>' +
+       ' </p></span>' +
+       '</div>' +
+       '</div>'
+       +'<div class="col-md-4">'
+       + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+       + (element['curso']!==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
+
+       +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
+       (element['etiqueta'] !==(null ) ?  '<span style="  width: 100%;min-width: 100px; line-height: 18px;font-size: 18px;min-height: 30px;background: transparent;  border: 1px solid #5bc0de;  padding: 5px;" class="badge badge-default">    <a  onclick="etiquetas(this.text)" href="#">'+ (element['etiqueta']).replace(',','')+'</a></span></span></span>' : ' ' )
+
+
+
+       +'</div>'
+
+       +'</div>'
+       +'</li>' +
+
+
+       '</ul>' +
+
+       '</div>');
+
+   $("#contenedor").empty();
+
+
+});
+
+html.forEach(function (element) {
+   console.log(element['id']);
+
+   $("#contenedor").append(element);
+
+
+});
+var input = document.getElementById("buscar");
+input_value =  input.getAttribute("value");
+input_value = "";
+$('#etiq').val(id);
+
+}
+
+
+},
+error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+console.log(JSON.stringify(jqXHR));
+console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+}
+});
+}else{
+location.reload();
+}
+
+}
+</script>

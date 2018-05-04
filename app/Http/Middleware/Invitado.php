@@ -20,6 +20,7 @@ class Invitado
     {
         /*Chequeo si es Admin*/
         $user = Sentinel::getUser();
+        if (Sentinel::check()) {
         if ($user->roles()->first()->slug == 'Inv') {
             $inviado = $user->invitado()->get()->first();
 
@@ -33,11 +34,13 @@ class Invitado
             }
         }
 
+
         else{
 
                 return $next($request);
 
 
             }
+        }
         }
     }

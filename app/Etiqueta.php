@@ -12,7 +12,10 @@ class Etiqueta extends Model
        'user_id','nombre' , 'slug','color'
 
     ];
-
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
 
 
 }

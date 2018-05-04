@@ -12,6 +12,9 @@ class hecho_etiqueta extends Model
     protected $fillable = [ 'hechos_id' ,
         'etiqueta_id',
     ];
-
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
 
 }

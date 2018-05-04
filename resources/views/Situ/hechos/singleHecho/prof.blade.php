@@ -45,13 +45,13 @@
                                                 <?php $otros_datos=json_decode($user->otros_datos,true);?>
 
                                                     <span style="float: right;">   <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $user['img'] !!}" class="img-circle img-responsive"  name="imagen">
-                                                @endif
+                                                @endif<h4 style="text-align: center" class="timeline-title">{{$alumno->first_name}}</h4>
                                                 </span>
                                                     <div class="clearfix"></div>
 
                                             </span></div>
                                         <div class="timeline-body">
-                                            <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$alumno->created_at}}</small></span>
+                                            <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$alumno->created_at->formatLocalized('%d-%m-%Y')}}</small></span>
                                             <br>
                                             <span class="pull-left">   {!!  $alumno->email!!}</span>
                                             <div class="clearfix"></div>

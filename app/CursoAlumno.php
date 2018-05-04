@@ -23,6 +23,9 @@ class CursoAlumno extends Model
     ];//
 
 
-
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
 
 }

@@ -27,5 +27,8 @@ class Categorias extends Model
         return  categorias();
 
     }
-
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
 }

@@ -58,6 +58,12 @@ class SituController extends Controller
     {
         /*ACCESO A LA PARTE PUBLICA*/
         $etiquetasAll=Etiqueta::whereNull('user_id')->get()->all();
+        if($alu!=null) {
+            $etiquetasAlu = Etiqueta::where('user_id', $alu)->get()->all();
+        }else{
+            $etiquetasAlu = Etiqueta::where('user_id', Sentinel::getUser()->id)->get()->all();
+
+        }
         if(Sentinel::check()) {
             if (is_null($id) && is_null($categoria)) {
                 $usuario = Sentinel::getUser();
@@ -224,14 +230,14 @@ class SituController extends Controller
                         'alumno_id' => $alumno->id, 'rol' => $invitado->rol, 'hechos_id' => $id, 'numero_accesos' => '1']);
                     $logAccesos->numero_accesos = ($logAccesos->numero_accesos) + 1;
                     $logAccesos->save();
-
+                    $etiquetasAlu = Etiqueta::where('user_id', $invitado->getAlumno()->get()->first()->id)->get()->all();
                     return view('Situ.hechos.singleHecho')->with('user', $usuario)->with('alumno', $alumno)
-                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll)->with('categorias',$categorias);
+                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll)->with('etiquetasAlu', $etiquetasAlu)->with('categorias',$categorias);
                 } elseif (Sentinel::inRole('Alu')) {
                     $alumno = $usuario;
 
                     return view('Situ.hechos.singleHecho')->with('user', $usuario)->with('alumno', $alumno)
-                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll)->with('categorias',$categorias);;
+                        ->with('hechos', $hechosPublicos)->with('etiquetas', $etiquetasAll)->with('etiquetasAlu', $etiquetasAlu)->with('categorias',$categorias);;
                 }
 
             }
@@ -278,7 +284,10 @@ class SituController extends Controller
 
             $rol=Sentinel::findRoleById(2);
             $alumnos=$rol->users()->with('roles')->where('first_name','like', '%' . $request->input . '%')->get()->all();
+    if(empty($alumnos)){
+        $alumnos=$rol->users()->with('roles')->where('last_name','like', '%' . $request->input . '%')->get();
 
+        }
 
             return response($alumnos);
 

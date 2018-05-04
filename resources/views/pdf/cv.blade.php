@@ -34,7 +34,7 @@
     <div id="details" class="dataTables_wrapper">
         <div id="invoice">
             <h1 style="text-align: center;font-size: 42px">Curriculum Vitae </h1>
-            <div class="date" style="font-style: italic;">A fecha de    {{ "    " .Carbon\Carbon::today()->toDateString()}}</div>
+            <div class="date" style="font-style: italic;">A fecha de    {{ "    " .Carbon\Carbon::today()->formatLocalized('%d-%m-%Y')}}</div>
 
         </div>
     </div>
@@ -44,34 +44,46 @@
 
     <tr >
         <td><span ><strong>Nombre</strong></span>
-           <td> <span style="margin-left:30px; font-style: italic; text-align: center;">{{$alumnoCv->first_name}}</span></td>
+        <td><span ><strong></strong></span>
+
+        <td> <span style="margin-left:30px; font-style: italic; text-align: center;">{{$alumnoCv->first_name}}</span></td>
     </tr> <tr >
         <td><span ><strong>Apellido</strong></span></td>
-           <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->last_name}}</span></td>
+        <td><span ><strong></strong></span>
+
+        <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->last_name}}</span></td>
     </tr>
     @if(!empty($alumnoCv->dni))
     <tr >
         <td><span ><strong>DNI</strong></span></td>
-         <td>   <span style="margin-left:30px; font-style: italic">{{$alumnoCv->dni}}</span></td>
+        <td><span ><strong></strong></span>
+
+        <td>   <span style="margin-left:30px; font-style: italic">{{$alumnoCv->dni}}</span></td>
     </tr>
     @endif
     @if(!empty($alumnoCv->direccion))
 
         <tr >
         <td><span ><strong>Direccion</strong></span></td>
-        <td>   <span style="margin-left:30px; font-style: italic">{{$alumnoCv->direccion}}</span></td>
+            <td><span ><strong></strong></span>
+
+            <td>   <span style="margin-left:30px; font-style: italic">{{$alumnoCv->direccion}}</span></td>
     </tr>
     @endif
 
     <tr >
         <td><span ><strong>Email</strong></span></td>
-            <td><span style="margin-left:30px; font-style: italic">{{$alumnoCv->email}}</span></td>
+        <td><span ><strong></strong></span>
+
+        <td><span style="margin-left:30px; font-style: italic">{{$alumnoCv->email}}</span></td>
     </tr>
     @if(!empty($alumnoCv->telefono))
 
         <tr >
         <td><span ><strong>Telefono</strong></span></td>
-           <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->telefono}}</span></td>
+            <td><span ><strong></strong></span>
+
+            <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->telefono}}</span></td>
     </tr>
 @endif
         {{--<td class="p"><span >Apellido </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></td>--}}
@@ -89,9 +101,15 @@
             <tbody>
             @foreach($formacion as $for)
             <tr >
-                <td><h3 >{{$for->fecha_inicio}}</h3></td>
+                <td><h3 >{{ Carbon::parse($for->fecha_inicio)->formatLocalized('%d-%m-%Y')}}</h3></td>
+                @if(!empty($for->fecha_fin))
+                <td><h3 >{{ Carbon::parse($for->fecha_fin)->formatLocalized('%d-%m-%Y')}}</h3></td>
+                @else
+                    <td><h3 >Actual</h3></td>
+
+                @endif
                 <td> <span style="font-style: italic; text-align: center;">{!! $for->titulacion." en ". $for->disciplina_academica . " cursado en ". $for->centro . "<br>
-                                                                                                Ubicacion: ". $for->ubicacion !!}</span></td>
+                                                                                                Ubicación: ". $for->ubicacion !!}</span></td>
             </tr>
             @endforeach
 
@@ -111,10 +129,15 @@
             <tbody>
             @foreach($laboral as $labor)
                 <tr >
-                    <td><h3 >{{$labor->fecha_inicio}}</h3></td>
-                    <td> <span style="font-style: italic; text-align: center;">{!! $labor->cargo." en ". $labor->empresa ."<br>" !!}
+                    <td><h3 >{{ Carbon::parse($labor->fecha_inicio)->formatLocalized('%d-%m-%Y')}}</h3></td>
+                    @if(!empty($labor->fecha_fin))
+                        <td><h3 >{{ Carbon::parse($labor->fecha_fin)->formatLocalized('%d-%m-%Y')}}</h3></td>
+                    @else
+                        <td><h3 >Actual</h3></td>
 
-                                    @if(!empty($labor->ubicacion)){!! "Ubicado en ". $labor->ubicacion ."<br>" !!}@endif
+                    @endif                    <td> <span style="font-style: italic; text-align: center;">{!! $labor->cargo." en ". $labor->empresa ."<br>" !!}
+
+                                    @if(!empty($labor->ubicacion)){!! "Ubicación : ". $labor->ubicacion ."<br>" !!}@endif
                                     @if(!empty($labor->sector)){!! "Sector ". $labor->sector ."<br>" !!}@endif
 
 

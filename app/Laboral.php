@@ -20,6 +20,9 @@ class Laboral extends Model
         'actual'
     ];//
 
-
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
 
 }

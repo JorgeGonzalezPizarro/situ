@@ -14,7 +14,10 @@ class Calificaciones extends Model
     ];
     public $timestamps = false;
 
-
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
     public function getHecho(){
 
         return $this->hasOne('App\hechos','id','hechos_id');

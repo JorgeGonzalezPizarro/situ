@@ -196,7 +196,7 @@
                         <img width="900" src="/imagenes/capturaAcademicos.png"/>
                                 <br>
                                 <hr>
-                                                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosAcademicos')}}#forma">Por favor , agregue al menos una Titulacion Académica a su trayectoria .</a></p>
+                                                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosAcademicos')}}#forma">Por favor , agregue al menos una Asignatura a su trayectoria .</a></p>
 
                     </span>
                         </div>

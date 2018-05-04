@@ -26,4 +26,8 @@ class logAccesos extends Model
     {
         return $this->belongsTo(hechos::class, 'hechos_id', 'id');
     }
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
 }

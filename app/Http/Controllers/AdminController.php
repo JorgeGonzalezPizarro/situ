@@ -192,7 +192,68 @@ class AdminController extends Controller
         $password = substr( str_shuffle( $chars ), 0, $length );
         return $password;
     }
+    function eliminarUsuario(Request $request ) {
 
+        $user=User::where('id',$request->id)->get()->first();
+//        return $user->roles()->get();
+        if($user->roles()->get()->first()->name == "Alumno"){
+            $hechos=$user->getHechos()->get()->all();
+            $invitados=$user->getInvitados($request->id);
+            $usuariosInvitados=array();
+            foreach($invitados as $invitado){
+                $usuariosInvitado=$invitado->getUsuario()->get()->first();
+//                array_push($usuariosInvitados,$usuariosInvitado);
+
+                $usuariosInvitado->delete();
+
+            }
+            foreach($invitados as $invitado){
+                $invitado=Invitados::where('id',$invitado->id)->get()->first();
+                $invitado->delete();
+
+            }
+            foreach($hechos as $hecho){
+
+                $hecho->delete();
+
+            }
+            $formacion=$user->getFormacion()->get()->all();
+            foreach($formacion as $f){
+
+                $f->delete();
+
+            }
+            $laboral=$user->getLaboral()->get()->all();
+            foreach($laboral as $l){
+
+                $l->delete();
+
+            }
+            $etiquetas=$user->getEtiquetas()->get()->all();
+
+            foreach($etiquetas as $e){
+
+                $e->delete();
+
+            }
+            $datosAcademicos=$user->getDatosAcademicos()->get()->all();
+            foreach($datosAcademicos as $dAcademicos){
+
+                $dAcademicos->delete();
+
+            }
+            User::destroy($user->id);
+            $user->destroy($user->id);
+            //            $user->delete();
+
+            return "destruido";
+
+        }else{
+            return "bb";
+        }
+
+
+    }
 
     public function actualizarFecha(Request $request)
     {

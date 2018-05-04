@@ -36,7 +36,7 @@ use hechos;
 class User extends Model implements RoleableInterface, PermissibleInterface, PersistableInterface, UserInterface ,CanResetPassword,Authenticatable
 {
     use PermissibleTrait,Notifiable,AuthenticableTrait;
-    use SoftDeletes;
+//    use SoftDeletes;
     /**
      * {@inheritDoc}
      */
@@ -70,7 +70,10 @@ class User extends Model implements RoleableInterface, PermissibleInterface, Per
         return $this->hasMany('App\hechos');
 
     }
-
+    public function getQueueableRelations()
+    {
+        // TODO: Implement getQueueableRelations() method.
+    }
     public function getDatosAcademicos(){
         return $this->hasMany('App\CursoAlumno','user_id', 'id');
 

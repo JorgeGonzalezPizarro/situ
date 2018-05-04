@@ -149,7 +149,7 @@ Schema::create('alumno_laboral', function (Blueprint $table) {
     $table->string('empresa')->nullable();
     $table->timestamp('fecha_inicio')->nullable();
     $table->timestamp('fecha_fin')->nullable();
-    $table->string('descripcion')->nullable();
+    $table->longText('descripcion')->nullable();
     $table->string('actual')->nullable();
 
 
@@ -170,7 +170,7 @@ Schema::create('alumno_laboral', function (Blueprint $table) {
             $table->string('disciplina_academica')->nullable();
             $table->timestamp('fecha_inicio')->nullable();
             $table->timestamp('fecha_fin')->nullable();
-            $table->string('descripcion')->nullable();
+            $table->longText('descripcion')->nullable();
             $table->string('actual')->nullable();
 
 
