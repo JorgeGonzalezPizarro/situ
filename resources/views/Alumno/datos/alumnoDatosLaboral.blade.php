@@ -372,7 +372,7 @@
                                       ">
 
                                         {!! csrf_field() !!}
-                                        {!! Form::submit('Actualizar', array('class'=>'btn btn-info btn-lg btn-block' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
+                                        {!! Form::submit('Añadir', array('class'=>'btn btn-info btn-lg btn-block' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
 
                                     </div>
 
@@ -631,7 +631,7 @@
                                       ">
 
                                     {!! csrf_field() !!}
-                                    <button type="submit" name="formulario2" class="btn btn-info btn-lg btn-block" id="boton2" style="">Actualizar</button>
+                                    <button type="submit" name="formulario2" class="btn btn-info btn-lg btn-block" id="boton2" style="">Añadir</button>
 
                                 </div>
 

@@ -52,8 +52,10 @@ class ResetPasswordController extends Controller
                 return Redirect::back()->withErrors($validation)->withInput();
          }
          $CheckUserRequest=DB::table('password_resets')->where('email',$request->email)->first();
-         if ($CheckUserRequest &&  Hash::check($request->token, $CheckUserRequest->token)) {
-    
+          $user=DB::table('users')->where('email',$request->email)->where('permissions','like','%Invitado%')->get()->first();
+         if ($CheckUserRequest &&  Hash::check($request->token, $CheckUserRequest->token) && (empty($user))) {
+
+
               DB::table('users')->where('email',$request->email)->update(['password' =>  Hash::make($request->password)] );
               DB::table('password_resets')->where('email',$request->email)->delete();
               Session::flash('message', 'Your password is changed sucesfully ,Please login with yor new password.');

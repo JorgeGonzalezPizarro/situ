@@ -26,7 +26,7 @@
 
 
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Fecha  de registro </strong></span>{{ $user->created_at  ->formatLocalized('%d-%m-%Y')}} </li>
-                    <li class="list-group-item text-right" style="min-height: 60px;"><span class="pull-left"><strong class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span></li>
+                    <li class="list-group-item text-right" style="min-height: 60px;"><span class="pull-left"><strong class="">Fecha  último acceso</strong></span><span><p>{{ Carbon::parse($user->last_login) ->formatLocalized('%d-%m-%Y')  }} </p></span></li>
                 </ul>
 
 
@@ -64,6 +64,7 @@
 </div>
             </div>
 
+        @if($user->permissions[0]=='Alumno')
 
         <div class="col-md-5">
             <!--left col-->
@@ -91,7 +92,7 @@
             <div class="col-md-5">
                 <div style="    color: #ffffff;
     background-color: #003865;
-    border-color: #bce8f1;" class="panel-heading">ETIQUETAS <i class="fas fa-tag"></i></div>
+    border-color: #bce8f1;" class="panel-heading">ETIQUETAS PERSONALIZADAS<i class="fas fa-tag"></i></div>
             <ul class="list-group">
 
                 </li>
@@ -105,21 +106,29 @@
                 @endforeach
                 @endif
 
-                @foreach($etiquetasPublic as $etiquetaPubli)
-                    @if(isset($etiquetaPubli))
 
-                    <li class="list-group-item text-left"><span class=""><strong
-                                    class="">{!!$etiquetaPubli->slug!!}</strong></span>
-                        <a href="#" id="{{$etiquetaPubli->id}}" onclick="eliminarEtiqueta(this.id);"><i class="far fa-trash-alt" style="color: red;"></i></a></span>
-
-                    </li>                @endif
-
-                @endforeach
 
 
             </ul>
+                {{--<ul class="list-group">--}}
 
+
+
+                    {{--@foreach($etiquetasPublic as $etiquetaPubli)--}}
+                        {{--@if(isset($etiquetaPubli))--}}
+
+                            {{--<li class="list-group-item text-left"><span class=""><strong--}}
+                                            {{--class="">{!!$etiquetaPubli->slug!!}</strong></span>--}}
+                                {{--<a href="#" id="{{$etiquetaPubli->id}}" onclick="eliminarEtiqueta(this.id);"><i class="far fa-trash-alt" style="color: red;"></i></a></span>--}}
+
+                            {{--</li>                @endif--}}
+
+                    {{--@endforeach--}}
+
+
+                {{--</ul>--}}
         </div>
+        @endif
 
 
             </div>

@@ -31,7 +31,8 @@ class AdminController extends Controller
     public function getDashboard(){
 
         $users=User::all();
-        return view('Admin.adminDashboard')->with('users',$users);
+        $etiquetas=Etiqueta::all();
+        return view('Admin.adminDashboard')->with('users',$users)->with('etiquetas',$etiquetas);
 
     }
 

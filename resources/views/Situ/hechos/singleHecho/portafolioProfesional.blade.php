@@ -67,7 +67,7 @@
                                 @elseif(!is_null($hecho->formacion_id))
                                     <li class="list-group-item text-muted"style="color: #31708f;
     background-color: #d9edf7;
-    border-color: #bce8f1;"><h2 class="">Formacion Academica </h2>
+    border-color: #bce8f1;"><h2 class="">Formación Academica </h2>
                                     </li>
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                                     class="">Centro </strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->centro  }}</p></span>

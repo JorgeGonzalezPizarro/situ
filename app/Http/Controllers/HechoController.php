@@ -70,7 +70,7 @@ class HechoController extends Controller
 //                $hecho -> etiqueta= Input::get('etiqueta');
                 $hecho->hechos_relacionados = Input::get('hechos_relacionados');
                 $format = 'd/m/Y';
-                $fecha_inicio = Carbon\Carbon::createFromFormat($format, Input::get('startDate'));
+                $fecha_inicio = Carbon\Carbon::parse( Input::get('startDate'));
                 $hecho->fecha_inicio = $fecha_inicio;
 //                $hecho->publico = Input::get('acceso');
                 $dt =  Carbon\Carbon::now();
@@ -87,7 +87,7 @@ class HechoController extends Controller
                 }
                 if (isset($request->endDate)) {
 
-                $fecha_fin = Carbon\Carbon::createFromFormat($format, Input::get('endDate'));
+                $fecha_fin = Carbon\Carbon::parse(Input::get('endDate'));
                     $hecho -> fecha_fin= $fecha_fin;
 
                 }

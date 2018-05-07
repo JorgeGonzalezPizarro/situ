@@ -559,7 +559,7 @@
                                     <ul  style="    background: #003865c7;
     color: white;" class="dropdown-menu" id="menuNuevo">
                                         @foreach($categorias as $categoria)
-                                            <li class="" style="
+                                            <li class="" style="padding:10px;
     color: white;">
                                                 <a href="{!! route('hechos', ['categoria'=>$categoria->categoria]) !!}" style="    color: white;">
                                                     <i class="fas fa-plus-square"></i>

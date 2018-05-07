@@ -503,7 +503,7 @@
                         <li class="nav-item"  style="    right: 20px;">
                             <a style="  font-family: 'Playfair Display', serif;
     font-style: italic;" class="nav-link" href="{{url('Situ/public')}}">
-                                <img style="     margin-top: -10px; width: 200px; float: left;"  id="myimagen" title="profile image" src="/imagenes/logo1.jpg" class="img-responsive" name="imagen">
+                                <img style="     margin-top: -10px; width: 200px; float: left;"  id="myimagen" title="Icono SITU" src="/imagenes/logo1.jpg" class="img-responsive" name="imagen">
                             </a>
 
                         </li>
@@ -592,7 +592,7 @@
 
                                 <?php $otros_datos=json_decode(Sentinel::getUser()->otros_datos,true);?>
                                 <div class="avatar" style="    width: 250px; float: left; margin-right: 5px;">
-                                    <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="profile image" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
+                                    <img style=" width: 50px;height: 50px; float: left;"  id="myimagen" title="Imagen Usuario" src="{!! $otros_datos['img'] !!}" class="img-circle img-responsive" name="imagen">
                                     <a href="#" class="dropdown-toggle" style="color:white;    padding: 20px; padding-top: 100px; position: relative;top: 10px;" data-toggle="dropdown"> <span>{{ Sentinel::getUser()->first_name }} </span><b class="caret"></b></a>
 
                                 </div>

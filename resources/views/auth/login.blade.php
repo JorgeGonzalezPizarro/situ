@@ -35,6 +35,8 @@
 
             <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="Submit">Login</button>
 
+                    <a href="{{url('password/reset')}}">Recuperar Contraseña</a>
+
 
             </form>
             </div>

@@ -87,7 +87,7 @@
                                                 {{ Form::select('grado', $grado, ['class' => 'grado','id' => 'gradoSelector' ,'value'=>$grado,'required']) }}
 
                                                 <a id="añadir_asignaturas" href="<?php echo e(route('misDatosLaborales')); ?>"><i  style="    font-size: 26px; cursor: pointer" class="fa fa-plus-circle"></i>
-                                                    Añadir Formacion</a>
+                                                    Añadir Formación</a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -131,7 +131,7 @@
                                     </table>
                                     <tr>
 
-                                        <td>     {!! Form::submit('Actualizar', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
+                                        <td>     {!! Form::submit('Añadir', array('class'=>'btn btn-primary' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
                                         </td>
                                     </tr>
                                     {{ Form::close() }}

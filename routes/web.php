@@ -44,7 +44,10 @@ Route::get('Admin/usuario/{usuario}', 'AdminController@verUsuario');
 Route::get('/Admin/nuevoUsuario', 'AdminController@getNuevoUsuario')->name('nuevoUsuario');
 Route::post('register', 'AdminController@register');
 Route::get('Admin/crearEtiqueta',function(){
-    return view('Admin.crearEtiqueta');
+
+    $etiquetas=\App\Etiqueta::all();
+
+    return view('Admin.crearEtiqueta')->with('etiquetas',$etiquetas);
 })->name('crearEtiqueta');
 
 Route::post('Admin/crearEtiqueta','AdminController@crearNuevaEtiqueta')->name('guardarEtiqueta');

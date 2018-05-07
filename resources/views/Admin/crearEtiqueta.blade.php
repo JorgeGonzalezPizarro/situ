@@ -58,11 +58,85 @@
 
 
             {{ Form::close() }}
+
+
+        <hr>
+        <br>
+        <br>
+        <div style="    color: #ffffff;
+    background-color: #003865;
+    border-color: #bce8f1;" class="panel-heading">ETIQUETAS <i class="fas fa-tag"></i></div>
+        <ul class="list-group">
+
+            </li>
+            @if(isset($etiquetas))
+                @foreach($etiquetas as $etiqueta)
+                    <li class="list-group-item text-left"><span class=""><strong
+                                    class="">{!!$etiqueta->nombre!!}</strong></span>
+                        <a href="#" id="{{$etiqueta->id}}" onclick="eliminarEtiqueta(this.id);"><i class="far fa-trash-alt" style="color: red;"></i></a></span>
+                        @if($etiqueta->user_id != null)
+                            <span style="font-style: italic;">Personalizada</span>
+                            @endif
+
+                    </li>
+                @endforeach
+            @endif
+
+
+
+
+        </ul>
+        {{--<ul class="list-group">--}}
+
+
+
+        {{--@foreach($etiquetasPublic as $etiquetaPubli)--}}
+        {{--@if(isset($etiquetaPubli))--}}
+
+        {{--<li class="list-group-item text-left"><span class=""><strong--}}
+        {{--class="">{!!$etiquetaPubli->slug!!}</strong></span>--}}
+        {{--<a href="#" id="{{$etiquetaPubli->id}}" onclick="eliminarEtiqueta(this.id);"><i class="far fa-trash-alt" style="color: red;"></i></a></span>--}}
+
+        {{--</li>                @endif--}}
+
+        {{--@endforeach--}}
+
+
+        {{--</ul>--}}
+    </div>
     </div>
 
 
-    </div>
 
 
 @endsection
 
+
+<script>
+
+    function eliminarEtiqueta(id) {
+        $.ajax({
+            type: "get",
+            url: "{{ route('eliminarEtiquetaAdmin') }}",
+            datatype: "json",
+            encode: true,
+            data: {
+                id: id,
+            },
+            success: function (response) { // What to do if we succeed
+                console.log(response);
+                location.reload();
+            },
+            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+        });
+
+
+
+
+
+    }
+
+</script>

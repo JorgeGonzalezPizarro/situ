@@ -143,7 +143,7 @@ El correo electronico ya existe</p></div>') !!}
                                       ">
 
                                         {!! csrf_field() !!}
-                                        {!! Form::submit('Actualizar', array('class'=>'btn btn-info btn-lg btn-block' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
+                                        {!! Form::submit('Invitar', array('class'=>'btn btn-info btn-lg btn-block' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
 
                                     </div>
 

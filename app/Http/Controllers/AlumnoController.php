@@ -219,7 +219,7 @@ class AlumnoController extends Controller
         }
         if(empty(Input::get('descripcion'))){
             $formacionAlumno->descripcion="Centro: ".$formacionAlumno->centro."
-            <br> Ubicacion: ".$formacionAlumno->ubicacion." <br> Titulacion: ". $formacionAlumno->titulacion." Disciplina académica<br>". $formacionAlumno->disciplina_academica."";
+            <br> Ubicación: ".$formacionAlumno->ubicacion." <br> Titulación: ". $formacionAlumno->titulacion." Disciplina académica<br>". $formacionAlumno->disciplina_academica."";
         }else {
             $formacionAlumno->descripcion = Input::get('descripcion');
 
@@ -662,7 +662,7 @@ class AlumnoController extends Controller
 
         }
 
-        return Response::download($file, 'filename.txt', $headers);
+        return Response::download($file, 'Acceso_SITU.txt', $headers);
 //        return Redirect::back();
     }
 

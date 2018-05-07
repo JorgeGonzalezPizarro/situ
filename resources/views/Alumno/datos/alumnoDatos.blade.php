@@ -87,7 +87,7 @@
                     <div class="panel-heading">Redes Sociales <i class="fa fa-link fa-1x"></i>
 
                     </div>
-                    <div class="panel-body">
+                    <div style="display: none;" class="panel-body">
                         <i class="fab fa-facebook-f" style="font-size: 22px;"></i>
 
                         {!! Form::text('facebook', null, ['id'=>'fieldIDfacebook',
