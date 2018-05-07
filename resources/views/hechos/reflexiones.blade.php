@@ -77,13 +77,17 @@
 
                                 {!! Form::textarea('contenido', Input::old('contenido') , ['id'=>'contenido','placeholder'=>'Reflexion...','style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: 70px;']) !!}
 
+                                <br>
+                                <br>
 
+                                <span>{!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                                </span>
                             </div>
                         <div class="col-md-1" style="">
 
 
 
-                            {!! Form::button('Guardar', array('class'=>'btn btn-info ' ,'id'=>'fraseButton' , 'style=""')) !!}</td>
+                            {!! Form::button('Guardar', array('class'=>'btn btn-info ' ,'id'=>'fraseButton' , 'style="margin-top:95px;"')) !!}</td>
 
                         </div>
                     </nav>
@@ -106,8 +110,12 @@
 
                                                     <p>{{$reflexion->contenido}}</p>
                                                 @endif
-                                                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$reflexion->created_at}}</small></p>
+                                                <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$reflexion->created_at->formatLocalized('%d-%m-%Y')}}</small></p>
 
+                                                    @foreach(($reflexion->getEtiqueta()->get()->all()) as $etiquetas)
+
+                                                        <p><i class="fas fa-tag"></i>     <a href=" {{ url('Situ/public#'.$etiquetas->etiqueta_id)}}">{{$etiquetas->etiqueta_id}}</a>
+                                                        </p> @endforeach
 
                                             </blockquote>
 
@@ -173,6 +181,13 @@
 
     <script>
         $(document).ready(function () {
+            var sel = document.getElementById('etiquetas');
+            var opts = sel.options;
+
+
+            for (var i=0;i<opts.length;i++) {
+                opts[i].value = opts[i].text;
+            }
             var selectedValue = $("input[name='hecho_relacionado']:checked").val();
             console.log(selectedValue);
             if(selectedValue=='vincular') {
@@ -218,6 +233,7 @@
             }
             var data =  $('#contenido').val();
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var etiqueta =  $('#etiquetas').val();
 
             var categoria=$('#selectorHecho').find(":selected").attr("id");
             $.ajax({
@@ -226,6 +242,9 @@
                 data: {
                     contenido: data,
                     hecho: id,
+                    etiqueta: etiqueta,
+
+                    etiqueta:etiqueta,
                     categoria_id:categoria,
                     _token: CSRF_TOKEN
 

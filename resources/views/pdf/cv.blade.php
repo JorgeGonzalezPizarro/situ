@@ -86,11 +86,33 @@
             <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->telefono}}</span></td>
     </tr>
 @endif
-        {{--<td class="p"><span >Apellido </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></td>--}}
-        {{--<li class="p"><span >Fecha Nacimiento </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
-        {{--<li class="p"><span >Email </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
-        {{--<li class="p"><span >Telefono </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
-        {{--<li class="p"><span >Ciudad</span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
+    @if(!empty($alumnoCv->otros_datos1))
+
+        <tr >
+            <td><span ><strong>Otros Datos</strong></span></td>
+            <td><span ><strong></strong></span>
+
+            <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->otros_datos1}}</span></td>
+        </tr>
+    @endif
+    @if(!empty($alumnoCv->otros_datos2))
+
+        <tr >
+            <td><span ><strong>Otros Datos</strong></span></td>
+            <td><span ><strong></strong></span>
+
+            <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->otros_datos2}}</span></td>
+        </tr>
+    @endif
+    @if(!empty($alumnoCv->otros_datos3))
+
+        <tr >
+            <td><span ><strong>Otros Datos</strong></span></td>
+            <td><span ><strong></strong></span>
+
+            <td> <span style="margin-left:30px; font-style: italic">{{$alumnoCv->otros_datos3}}</span></td>
+        </tr>
+    @endif
 
 
         </tbody>
@@ -114,11 +136,6 @@
             @endforeach
 
 
-            {{--<td class="p"><span >Apellido </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></td>--}}
-            {{--<li class="p"><span >Fecha Nacimiento </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
-            {{--<li class="p"><span >Email </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
-            {{--<li class="p"><span >Telefono </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
-            {{--<li class="p"><span >Ciudad</span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
 
 
             </tbody>
@@ -151,6 +168,29 @@
                 {{--<li class="p"><span >Email </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
                 {{--<li class="p"><span >Telefono </span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
                 {{--<li class="p"><span >Ciudad</span><span style=" margin-left:70px;font-style: italic">Otros datos</span></li>--}}
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-lg-12"><h2 style="font-size: 32px">4.Hechos CV </h2>
+        <table border="0" cellspacing="1" cellpadding="2"style=" margin-left:20px; width: 600px">
+            <tbody>
+            @foreach($hechosCv as $cv)
+                <tr >
+                    <td><h3 >{{ Carbon::parse($cv->fecha_inicio)->formatLocalized('%d-%m-%Y')}}</h3></td>
+                    @if(!empty($cv->fecha_fin))
+                        <td><h3 >{{ Carbon::parse($cv->fecha_fin)->formatLocalized('%d-%m-%Y')}}</h3></td>
+                    @else
+                        <td><h3 >-</h3></td>
+
+                    @endif   <td> <span style="font-style: italic; text-align: center;">{!! $cv->categoria_nombre ." <br>  ". $cv->titulo_hecho ."<br>" !!}
+                            <a  style=" font-style: italic"  href="{{ url('Situ/public') }}/{{$cv->id}}/{{$cv->categoria_id}}" target="_blank" >Ver</a>
+                        </span></td>
+                </tr>
+            @endforeach
+
 
 
             </tbody>

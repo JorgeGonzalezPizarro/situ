@@ -31,9 +31,9 @@
                             <td id="user">{{$user->first_name}}</td>
                             <td id="user">{{$user->last_name}}</td>
                             <td id="user" >{{$user->email}}</td>
-                            <td id="user" >{{$user->roles()->first()->slug }}</td>
+                            <td id="user" >{{$user->permissions[0] }}</td>
 
-                            @if(($user->roles()->first()->slug=='Prof')|| ($user->roles()->first()->slug=='Inv'))
+                            @if(($user->permissions[0]=='Profesor')|| ($user->permissions[0]=='Invitado'))
                                 <td id="prof">
                            <span id="{{ $user->invitado()->get()->first()->fecha_limite}}" class="prof">{{
 
@@ -233,6 +233,7 @@
                   // url: url + '/' + 'actualizarUsuario'+ '/',
                    data: {
                        email: data[2],
+                       rol : data[3],
                        _token: CSRF_TOKEN
                    },
                 success: function(response){ // What to do if we succeed
@@ -259,25 +260,32 @@
 </script>
 <script>
     function eliminar(id) {
-        $.ajax({
-            type:"get",
-            url     : "{{ route('eliminarUsuario') }}",
-            datatype:"json",
-            encode  : true,
-            data: {
-                id: id,
-            },
-            success: function(response){ // What to do if we succeed
-                console.log(response);
-                {{--$(location).attr('href', "{{route('Admin/actualizar')}}"+"/"+ data[2]+"");--}}
 
-            },
-            error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-                console.log(JSON.stringify(jqXHR));
-                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-            }
-        });
 
+        var mensaje = confirm("Al eliminar el usuario se borrará del sistema todo lo relacionado" +
+            "con el usuario ( hechos , invitados , informacion académica...");
+
+        if (mensaje) {
+
+            $.ajax({
+                type: "get",
+                url: "{{ route('eliminarUsuario') }}",
+                datatype: "json",
+                encode: true,
+                data: {
+                    id: id,
+                },
+                success: function (response) { // What to do if we succeed
+                    console.log(response);
+                   location.reload();
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+        }
     }
 
 </script>    <!-- Scripts -->

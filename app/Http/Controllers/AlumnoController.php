@@ -319,6 +319,9 @@ class AlumnoController extends Controller
         $user->telefono=Input::get('telefono');
         $user->otros_datos = json_encode($otros_datos);
 
+        $user->otros_datos1 = Input::get('otros_datos1');
+        $user->otros_datos2 = Input::get('otros_datos2');
+        $user->otros_datos3 = Input::get('otros_datos3');
 
         $credentials = [
             'email' =>$user->email,
@@ -515,7 +518,7 @@ class AlumnoController extends Controller
 
 
         $pdf->loadHTML($view);
-        return $pdf->stream('invoice');
+        return $pdf->stream('logAccesos');
 
 
     }
@@ -833,4 +836,16 @@ class AlumnoController extends Controller
         });
         return Response::download($file, 'filename.txt', $headers);
     }
+
+    public function eliminarEtiqueta(Request $request){
+
+        $etiqueta=Etiqueta::where('id',$request->id);
+
+        $etiqueta->delete();
+
+
+        return "eliminado";
+    }
+
+
 }

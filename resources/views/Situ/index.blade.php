@@ -12,7 +12,7 @@
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4 class="timeline-title">{{$hecho->titulo_hecho}}</h4>
-                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
+                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small></p>
                                 </div>
                                 <div class="timeline-body">
                                     <p>{{$hecho->contenido}}</p>

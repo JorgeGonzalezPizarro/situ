@@ -186,7 +186,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4  class="alert alert-danger" >No tiene calificaciones en su perfil.</h4>
+                    <h4  class="alert alert-danger" >No tiene asignaturas agregadas en su perfil.</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">

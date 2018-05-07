@@ -123,21 +123,42 @@ class AdminController extends Controller
     {
 
         $user=Sentinel::findById($usuario);
+
+        if($user->permissions[0]=='Alumno'){
+            $etiquetas = $user->getEtiquetas()->get()->all();
+
+        }
+        else{
+            $etiquetas = array();
+
+        }
         $json= Sentinel::findById($usuario);
         $otros_datos=json_decode($json->otros_datos,true);
         $hechos=$user->getHechos()->get()->all();
         $invitados=$user->getInvitados($user->id)->all();
         $profesores=$user->getProfesores($user->id)->all();
         $etiquetasPublic = Etiqueta::where('user_id', null)->get()->all();
-        $etiquetas = $user->getEtiquetas()->get()->all();
 
         return view('Admin.setUsuario')->with('user', Sentinel::findById($usuario))->with('hechos',$hechos)
          ->with('etiquetas',$etiquetas)  ->with('etiquetasPublic',$etiquetasPublic) ->with('otros_datos', $otros_datos)->with('profesores',$profesores)->with('invitados',$invitados);
     }
-    public function actualizarUsuario($email)
+
+    public function eliminarEtiquetaAdmin(Request $request){
+
+
+        $etiqueta=Etiqueta::where('id',$request->id);
+
+        $etiqueta->delete();
+
+
+        return "eliminado";
+
+    }
+
+    public function actualizarUsuario($email,$rol)
     {
 
-        $user = User::find($email);
+        $user = User::where('email',$email)->where('permissions[0]',$rol)->get();
 
         $validation = Validator::make(Input::all());
 
@@ -160,7 +181,7 @@ class AdminController extends Controller
     public function getActualizarUsuario(Request $request){
     $credentials =array('login' =>$request->email);
    $usuario = Sentinel::findByCredentials($credentials);
-
+    $usuario=User::where('email',$request->email)->where('permissions','like',"%".$request->rol."%")->get()->first();
       return response($usuario->id);
     }
 
@@ -249,7 +270,8 @@ class AdminController extends Controller
             return "destruido";
 
         }else{
-            return "bb";
+            User::destroy($user->id);
+            $user->destroy($user->id);
         }
 
 

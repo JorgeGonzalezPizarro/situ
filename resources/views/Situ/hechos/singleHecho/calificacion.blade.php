@@ -44,7 +44,7 @@
                                 <div class="panel-heading">Otros detalles
 
                                 </div>
-                                <div class="panel-body"><span><p>{!! $hecho->contenido !!}</p></span>
+                                <div class="panel-body" style="    min-height: 330px !important;"><span><p>{!! $hecho->contenido !!}</p></span>
                                 </div>
 
                             </div>
@@ -157,10 +157,10 @@
                                                     class="">{{$hecho->getCategoria()->get()->first()->categoria}} </strong></span><span><p>{{ $hecho->titulo_hecho  }}</p></span>
                                     </li>
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                    class="">Fecha publicación </strong></span><span><p>{{$hecho->created_at}}</p></span>
+                                                    class="">Fecha publicación </strong></span><span><p>{{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</p></span>
                                     </li>
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                    class="">Fecha del {{$hecho->getCategoria()->get()->first()->categoria}}  </strong></span><span><p>{{$hecho->fecha_inicio}}</p></span>
+                                                    class="">Fecha del {{$hecho->getCategoria()->get()->first()->categoria}}  </strong></span><span><p>{{Carbon\Carbon::parse($hecho->fecha_inicio)->formatLocalized('%d-%m-%Y')}}</p></span>
                                     </li>
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                                     class="">Contenido </strong></span><span><p>{!!  str_limit($hecho->contenido,50,'...' )!!}</p></span>

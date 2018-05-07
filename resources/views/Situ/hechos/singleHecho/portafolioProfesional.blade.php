@@ -82,7 +82,7 @@
                                                     class="">Disciplina Academica </strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->disciplina_academica  }}</p></span>
                                     </li>
                                     <li class="list-group-item text-right"><span class="pull-left"><strong
-                                                    class="">Fecha Inicio</strong></span><span><p>{{ $hecho->getFormacion()->get()->first()->fecha_inicio  }}</p></span>
+                                                    class="">Fecha Inicio</strong></span><span><p>{{ Carbon::parse($hecho->getFormacion()->get()->first()->fecha_inicio)  }}</p></span>
                                     </li>
                                 @if( $hecho->getFormacion()->get()->first()->actual=='0')
                                     <li class="list-group-item text-right"><span class="pull-left"><strong

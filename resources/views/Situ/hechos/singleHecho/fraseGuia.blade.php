@@ -36,7 +36,7 @@
                                             <li>
                                                 <blockquote class="quote-card">
                                                     <p>{{$hecho->contenido}}</p>
-                                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
+                                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small></p>
 
 
                                                 </blockquote>
@@ -95,7 +95,7 @@
                                 <li>
                                     <div class="timeline-panel">
                                         <div class="timeline-heading">
-                                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
+                                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small></p>
                                         </div>
                                         <div class="timeline-body">
                                             <p style="font-size: 18px;font-family: 'Harlow Solid Italic';font-style: italic">"{{$hecho->contenido}}"<span> por {{$user-> first_name}}</span></p>

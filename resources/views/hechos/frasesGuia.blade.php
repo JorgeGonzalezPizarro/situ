@@ -43,10 +43,21 @@
 
                             <div class="col-md-11">
                                 {!! Form::textarea('contenido', Input::old('contenido') , ['id'=>'contenido','placeholder'=>'Frase guía','style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: 70px;']) !!}
+                               <br>
+                                <br>
+
+                                <span>{!! Form::select('etiqueta', $etiqueta, null, ['id'=>'etiquetas','class' => 'form-control chosen-select', 'name' => 'etiqueta[]', 'multiple tabindex' => 6]) !!}
+                              </span>
 
 
                             </div>
-                            <div class="col-md-1" style="margin-top: 30px">
+
+
+
+
+
+
+                            <div class="col-md-1" style="margin-top: 95px">
                                 {!! Form::button('Guardar', array('class'=>'btn btn-info ' ,'id'=>'fraseButton' , 'style=""')) !!}</td>
 
                             </div>
@@ -62,12 +73,18 @@
                                     <li>
                                         <blockquote class="quote-card">
                                             <p>{{$hecho->contenido}}</p>
-                                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small></p>
+                                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small></p>
+                                    @foreach(($hecho->getEtiqueta()->get()->all()) as $etiquetas)
 
+                                                <p><i class="fas fa-tag"></i>     <a href=" {{ url('Situ/public#'.$etiquetas->etiqueta_id)}}">{{$etiquetas->etiqueta_id}}</a>
+                                                </p> @endforeach
 
                                         </blockquote>
 
                                     </li>
+
+
+                                        <!-- Categories Widget -->
 
 
                                 </ul>
@@ -141,148 +158,6 @@
 
 
 
-            {{--var categoria=document.getElementById("categoria").innerHTML;--}}
-            {{--if( $('#inputCurso').has('option').length > 0 ) {--}}
-                {{--var x = document.getElementById("inputCurso").selectedIndex;--}}
-                {{--var curso = (document.getElementsByTagName("option")[x].text);--}}
-                {{--$('#inputCurso').attr('value', curso);--}}
-                {{--$('#asignaturas').empty();--}}
-                {{--$.ajax({--}}
-                    {{--type: "get",--}}
-                    {{--url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,--}}
-                    {{--encode: true,--}}
-                    {{--data: {--}}
-                        {{--curso: curso,--}}
-                    {{--},--}}
-                    {{--success: function (response) {--}}
-                        {{--console.log(response);--}}
-                        {{--if (response.length  == 0) {--}}
-                            {{--document.getElementById('boton').disabled = true;--}}
-                            {{--// $( '#añadir_asignaturas').show();--}}
-
-                            {{--$('#asignaturas ').hide();--}}
-                        {{--}--}}
-
-                        {{--else{--}}
-                            {{--$( '#añadir_asignaturas').hide();--}}
-
-                            {{--$('#boton').removeClass('btn btn-info disabled');--}}
-                            {{--$('#boton').addClass('btn btn-success');--}}
-                            {{--document.getElementById('boton').disabled = false;--}}
-                            {{--document.getElementById('boton').disabled = false;--}}
-                            {{--response.forEach(function (element) {--}}
-
-
-                                {{--$('#asignaturas')--}}
-                                    {{--.append($("<option></option>")--}}
-                                        {{--.attr("value", element)--}}
-                                        {{--.text(element));--}}
-                            {{--});--}}
-                        {{--}--}}
-
-
-
-                        {{--window.location.href = "{{url('hechos') }}" +"/" +categoria+"/" +curso--}}
-                    {{--},--}}
-                    {{--error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
-                        {{--console.log(JSON.stringify(jqXHR));--}}
-                        {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
-                    {{--}--}}
-                {{--});--}}
-            {{--}--}}
-
-
-
-
-            {{--$('#inputCurso').on('change', function() {--}}
-                {{--var x = document.getElementById("inputCurso").selectedIndex;--}}
-                {{--var x = document.getElementById("inputCurso").selectedIndex;--}}
-                {{--var pathArray = window.location.pathname.split( '/,' );--}}
-                {{--var secondLevelLocation = pathArray[0];--}}
-
-                {{--var curso=(document.getElementsByTagName("option")[x].text);--}}
-                {{--$('#inputCurso').attr('value',curso);--}}
-                {{--$('#asignaturas').empty();--}}
-                {{--$.ajax({--}}
-                    {{--type:"get",--}}
-                    {{--url: "{{url('hechos') }}" +"/" +categoria+"/" +curso,--}}
-                    {{--encode  : true,--}}
-                    {{--data: {--}}
-                        {{--curso: curso,--}}
-                    {{--},--}}
-                    {{--success: function(response){ // What to do if we succeed--}}
-                        {{--if (response.length  == 0) {--}}
-                            {{--document.getElementById('boton').disabled = true;--}}
-                            {{--$( '#añadir_asignaturas').show();--}}
-
-                            {{--$('#asignaturas ').hide();--}}
-                        {{--}--}}
-
-                        {{--else{--}}
-                            {{--$( '#añadir_asignaturas').hide();--}}
-                            {{--$('#asignaturas ').show();--}}
-
-                            {{--$('#boton').removeClass('btn btn-info disabled');--}}
-                            {{--$('#boton').addClass('btn btn-success');--}}
-                            {{--document.getElementById('boton').disabled = false;--}}
-                            {{--document.getElementById('boton').disabled = false;--}}
-                            {{--response.forEach(function(element) {--}}
-                                {{--$('#asignaturas')--}}
-                                    {{--.append($("<option></option>")--}}
-                                        {{--.attr("value",element)--}}
-                                        {{--.text(element));--}}
-                            {{--});--}}
-
-                        {{--}--}}
-
-
-
-
-                        {{--console.log(response);--}}
-
-                    {{--},--}}
-                    {{--error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
-                        {{--console.log(JSON.stringify(jqXHR));--}}
-                        {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
-                    {{--}--}}
-                {{--});--}}
-
-            {{--});--}}
-
-
-
-
-            {{--$.datepicker.setDefaults($.datepicker.regional['es']);--}}
-            {{--$(function () {--}}
-                {{--document.getElementById("endDate").disabled = true;--}}
-
-                {{--$("#startDate").datepicker({--}}
-
-                        {{--onSelect: function(date) {--}}
-                            {{--document.getElementById("endDate").disabled = false;--}}
-
-                            {{--$("#endDate" ).datepicker("destroy");--}}
-
-                            {{--$("#endDate").datepicker({--}}
-                                {{--minDate: date,--}}
-                                {{--inline : false--}}
-
-                            {{--})--}}
-                            {{--$( "#endDate" ).datepicker("refresh");--}}
-                            {{--$("#endDate").datepicker('setDate', null);--}}
-
-                        {{--},--}}
-
-                    {{--}--}}
-
-
-
-
-                {{--);--}}
-
-            {{--});--}}
-
-
 
 
 
@@ -304,29 +179,13 @@
 
 
     </script>
-    {{--<script>--}}
-        {{--$('.en_curso').change(function(ev) {--}}
-            {{--if ( $(this).is(':checked') ) {--}}
-                {{--document.getElementById("endDate").disabled = true;--}}
-            {{--}--}}
-            {{--else {--}}
 
-                {{--$("#endDate").datepicker({--}}
-                    {{--inline : false--}}
-
-                {{--})--}}
-                {{--$( "#endDate" ).datepicker("refresh");--}}
-
-                {{--document.getElementById("endDate").disabled = false;--}}
-            {{--}--}}
-
-        {{--});--}}
-    {{--</script>--}}
     <script>
 
         $('#fraseButton').on('click', function () {
             var data =  $('#contenido').val();
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var etiqueta =  $('#etiquetas').val();
 
             $.ajax({
                 type:"post",
@@ -334,13 +193,14 @@
                 encode  : true,
                 data: {
                     contenido: data,
+                    etiqueta: etiqueta,
                     categoria_id:3,
                     _token: CSRF_TOKEN
 
                 },
                 success: function(response){ // What to do if we succeed
                     {{--window.location.href= "{{ url('Alumno/alumnoDashboard') }} ";--}}
-                    location.reload();
+                     location.reload();
                     // console.log(JSON.stringify(response));
 
                     // table.ajax.reload();

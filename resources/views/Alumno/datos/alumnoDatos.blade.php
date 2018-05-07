@@ -59,7 +59,7 @@
     background-color: #d9edf7;
     border-color: #bce8f1;"contenteditable="false">Log</li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
-                                    class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>
+                                    class="">Fecha  de registro </strong></span>{{ $user->created_at->formatLocalized('%d-%m-%Y')  }} </li>
                     <li class="list-group-item text-right"><span class="pull-left"><strong
                                     class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span>
                     </li>
@@ -161,7 +161,7 @@
                                         <tr>
                                         <tr>
                                             <td><strong class="">DNI:</strong></td>
-                                            <td>{!! Form::text('dni', null, ['id'=>'dni','class' => 'misDatos','readonly' => 'true','value '=> $user->dni,'required']) !!}
+                                            <td>{!! Form::text('dni', null, ['id'=>'dni','placeholder'=>'DNI','class' => 'misDatos','readonly' => 'true','value '=> $user->dni,'required']) !!}
                                                 <a href="#" id="clickable5"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -169,7 +169,7 @@
                                             </td>
                                         </tr>
                                             <td><strong class="">Direccion:</strong></td>
-                                            <td>{!! Form::text('direccion', null, ['id'=>'direccion','class' => 'misDatos','readonly' => 'true','value '=> $user->direccion,'required']) !!}
+                                            <td>{!! Form::text('direccion', null, ['id'=>'direccion','placeholder'=>'Dirección','class' => 'misDatos','readonly' => 'true','value '=> $user->direccion,'required']) !!}
                                                 <a href="#" id="clickable6"> <i class="far fa-edit"></i>
 
                                                 </a>
@@ -179,8 +179,33 @@
 
                                         <tr>
                                             <td><strong class="">Telefono:</strong></td>
-                                            <td>{!! Form::text('telefono', null, ['id'=>'telefono','class' => 'misDatos','readonly' => 'true','value '=> $user->telefono,'required']) !!}
+                                            <td>{!! Form::text('telefono', null, ['id'=>'telefono','placeholder'=>'Teléfono','class' => 'misDatos','readonly' => 'true','value '=> $user->telefono,'required']) !!}
                                                 <a href="#" id="clickable7"> <i class="far fa-edit"></i>
+
+                                                </a>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong class="">Otros Datos:</strong></td>
+                                            <td>{!! Form::text('otros_datos1', null, ['id'=>'otros_datos1','placeholder'=>'Otros datos...','class' => 'misDatos','readonly' => 'true','value '=> $user->otros_datos1,'required']) !!}
+                                                <a href="#" id="clickable8"> <i class="far fa-edit"></i>
+
+                                                </a>
+
+                                            </td>
+                                        </tr>     <tr>
+                                            <td><strong class=""></strong></td>
+                                            <td>{!! Form::text('otros_datos2', null, ['id'=>'otros_datos2','placeholder'=>'Otros datos...','class' => 'misDatos','readonly' => 'true','value '=> $user->otros_datos2,'required']) !!}
+                                                <a href="#" id="clickable9"> <i class="far fa-edit"></i>
+
+                                                </a>
+
+                                            </td>
+                                        </tr>     <tr>
+                                            <td><strong class=""></strong></td>
+                                            <td>{!! Form::text('otros_datos3', null, ['id'=>'otros_datos3','placeholder'=>'Otros datos...','class' => 'misDatos','readonly' => 'true','value '=> $user->otros_datos3,'required']) !!}
+                                                <a href="#" id="clickable10"> <i class="far fa-edit"></i>
 
                                                 </a>
 
@@ -278,13 +303,14 @@
                     </li>
                     @foreach($etiquetas as $etiqueta)
                         <li class="list-group-item text-left"><span class=""><strong
-                                        class="">{!!$etiqueta->nombre!!}</strong></span>
+                                        class="">{!!$etiqueta->nombre!!}</strong>
+                                <a href="#" id="{{$etiqueta->id}}" onclick="eliminarEtiqueta(this.id);"><i class="far fa-trash-alt" style="color: red;"></i></a></span>
                         </li>
                     @endforeach
 
                     @foreach($etiquetasPublic as $etiquetaPubli)
                         <li class="list-group-item text-left"><span class=""><strong
-                                        class="">{!!$etiquetaPubli->slug!!}</strong></span>
+                                        class="">{!!$etiquetaPubli->slug!!}</strong> </span>
                         </li>
                     @endforeach
                     <li class="list-group-item text-left"><span class=""><a  id="mas"  value="" href="{!! route('crearEtiquetaAlumno') !!}" >
@@ -385,6 +411,22 @@
 
 
         });
+        $('#clickable8').on('click', function () {
+            $('#otros_datos1').attr('readonly', false).focus().css("background-color", "#bfe1e847");
+            ;
+
+
+        });$('#clickable9').on('click', function () {
+            $('#otros_datos2').attr('readonly', false).focus().css("background-color", "#bfe1e847");
+            ;
+
+
+        });$('#clickable10').on('click', function () {
+            $('#otros_datos3').attr('readonly', false).focus().css("background-color", "#bfe1e847");
+            ;
+
+
+        });
         $('#clickable2').on('click', function () {
 
             $('#email').attr('readonly', false).focus().css("background-color", "#bfe1e847");
@@ -435,4 +477,33 @@
 
 
 </script>
+    <script>
+        
+        function eliminarEtiqueta(id) {
+            $.ajax({
+                type: "get",
+                url: "{{ route('eliminarEtiqueta') }}",
+                datatype: "json",
+                encode: true,
+                data: {
+                    id: id,
+                },
+                success: function (response) { // What to do if we succeed
+                    console.log(response);
+                    location.reload();
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                    console.log(JSON.stringify(jqXHR));
+                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+                }
+            });
+
+
+
+
+
+        }
+        
+    </script>
 @endsection

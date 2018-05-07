@@ -6,18 +6,18 @@
     <div class="col-lg-12 col-lg-offset-0">
 
         <div class='col-md-12' style="    margin-top: 30px; float: left;">
-            <div class="col-md-9">
-                {!! Form::textarea('contenido', Input::old('contenido') , ['id'=>'contenido','placeholder'=>'Frase guía','style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: 70px;']) !!}
+            {{--<div class="col-md-9">--}}
+                {{--{!! Form::textarea('contenido', Input::old('contenido') , ['id'=>'contenido','placeholder'=>'Frase guía','style'=>'    margin-top: 0px; margin-bottom: 0px;width: 100%;height: 70px;']) !!}--}}
 
 
-            </div>
-            <div class="col-md-3" style="margin-top: 30px">
-                {!! Form::button('Guardar', array('class'=>'btn btn-info ' ,'id'=>'fraseButton' , 'style=""')) !!}</td>
+            {{--</div>--}}
+            {{--<div class="col-md-3" style="margin-top: 30px">--}}
+                {{--{!! Form::button('Guardar', array('class'=>'btn btn-info ' ,'id'=>'fraseButton' , 'style=""')) !!}</td>--}}
 
-            </div>
-            <div class="clearfix"></div>
-            <br>
-            <br>
+            {{--</div>--}}
+            {{--<div class="clearfix"></div>--}}
+            {{--<br>--}}
+            {{--<br>--}}
             <br>
 
             <div class="table-responsive" style="overflow-x: hidden">
@@ -42,9 +42,9 @@
                     @foreach ($hechos as $hecho)
                         <tr id="" style="cursor: pointer">
                             <td id="id">{{$hecho->id}}</td>
-                            <td id="click">{{$hecho->created_at}}</td>
-                            <td id="descripcion">{!!  str_limit($hecho->contenido,50,'...' )!!}</td>
-                            <td id="click">{{$hecho->fecha_inicio}}</td>
+                            <td id="click">{{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</td>
+                            <td id="descripcion">{{  str_limit($hecho->contenido,50,'...' )}}</td>
+                            <td id="click">{{Carbon\Carbon::parse($hecho->fecha_inicio)->formatLocalized('%d-%m-%Y')}}</td>
                             <td id="click">{{$hecho->getCategoria()->get()->first()->categoria }}</td>
 
                             <td> @foreach ( $hecho->getEtiqueta()->get() as $etiq)
@@ -84,9 +84,7 @@
 
         <div class="col-lg-8">
 
-            <!-- Title -->
 
-            <!-- Author -->
 
 
 
@@ -118,7 +116,7 @@
     margin-left: 20px;">"{{$hecho->contenido}}"<span> por {{$user-> first_name}}</span></p>
 
                                     </p>
-                                    <small><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small>
+                                    <small><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small>
 
                                     </blockquote>
                         </li>
@@ -153,9 +151,7 @@
 
         <div class="col-lg-4">
 
-            <!-- Title -->
 
-            <!-- Author -->
 
 
 
@@ -290,32 +286,32 @@
 
 
         });
-        $('#fraseButton').on('click', function () {
-            var data = $('#contenido').val();
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        {{--$('#fraseButton').on('click', function () {--}}
+            {{--var data = $('#contenido').val();--}}
+            {{--var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');--}}
 
-            $.ajax({
-                type: "post",
-                url: "{{ route('fraseguia') }}",
-                encode: true,
-                data: {
-                    contenido: data,
-                    categoria_id: 3,
-                    _token: CSRF_TOKEN
+            {{--$.ajax({--}}
+                {{--type: "post",--}}
+                {{--url: "{{ route('fraseguia') }}",--}}
+                {{--encode: true,--}}
+                {{--data: {--}}
+                    {{--contenido: data,--}}
+                    {{--categoria_id: 3,--}}
+                    {{--_token: CSRF_TOKEN--}}
 
-                },
-                success: function (response) { // What to do if we succeed
-                        window.location.href = "{{ route('alumnoDashboard') }}";
+                {{--},--}}
+                {{--success: function (response) { // What to do if we succeed--}}
+                        {{--window.location.href = "{{ route('alumnoDashboard') }}";--}}
 
-                },
-                error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
-                    console.log(JSON.stringify(jqXHR));
-                    console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-                }
-            });
+                {{--},--}}
+                {{--error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail--}}
+                    {{--console.log(JSON.stringify(jqXHR));--}}
+                    {{--console.log("AJAX error: " + textStatus + ' : ' + errorThrown);--}}
+                {{--}--}}
+            {{--});--}}
 
 
-        });
+        {{--});--}}
     });
 
 </script>

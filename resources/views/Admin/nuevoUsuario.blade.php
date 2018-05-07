@@ -229,11 +229,6 @@
 
         $("#rolesDiv1").append(html);
 
-
-
-
-
-
     }
 </script>
     @endsection

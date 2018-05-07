@@ -155,7 +155,7 @@ class HechoController extends Controller
 
                     if(empty( Input::get('contenido'))){
                         $hecho->contenido=" Calificación: ".$calificacion->calificacion."
-            <br> Asignatura: ".$calificacion->asignatura." <br> Grado: ". $calificacion->grado." Curso<br>". $calificacion->curso."";
+                         <br> Grado: ". $calificacion->grado." <br>Curso-Asignatura ". $calificacion->curso."";
                         $hecho->update();
                     }else {
                         $hecho->descripcion = Input::get('descripcion');
@@ -209,6 +209,14 @@ class HechoController extends Controller
         $fecha_inicio =$dt->format('Y-m-d H:i:s');
         $hecho->fecha_inicio = $fecha_inicio;
             /*CALIFICACIONES*/
+            if(!empty(        $etiqueta=Input::get('etiqueta'))) {
+                foreach (Input::get('etiqueta') as $etiquet) {
+                    $hecho->etiqueta = $hecho->etiqueta . "," . $etiquet;
+
+                }
+            }else{
+                $etiqueta=null;
+            }
         if($request->acceso){
             $hecho->nivel_acceso = "2";
             $hecho->publico = "publico";
@@ -219,7 +227,18 @@ class HechoController extends Controller
             $hecho->publico = "privado";
 
         }
-            $hecho->save();
+        $hecho->save();
+
+        $etiqueta=Input::get('etiqueta');
+        if(!empty($etiqueta)) {
+            foreach ($etiqueta as $etiquet) {
+                $etiqueta1=new hecho_etiqueta();
+                $etiqueta1->hechos_id=$hecho->id;
+                $etiqueta1->etiqueta_id=$etiquet;
+                $etiqueta1->save();
+
+            }
+        }
 
 
 
@@ -262,9 +281,29 @@ class HechoController extends Controller
             $hecho->publico = "privado";
 
         }
+        /*CALIFICACIONES*/
+        if(!empty(        $etiqueta=Input::get('etiqueta'))) {
+
+            foreach (Input::get('etiqueta') as $etiquet) {
+                $hecho->etiqueta = $hecho->etiqueta . "," . $etiquet;
+
+            }
+        }
+        else{
+            $etiqueta=null;
+        }
         $hecho->save();
 
+        $etiqueta=Input::get('etiqueta');
+        if(!empty($etiqueta)) {
+            foreach ($etiqueta as $etiquet) {
+                $etiqueta1=new hecho_etiqueta();
+                $etiqueta1->hechos_id=$hecho->id;
+                $etiqueta1->etiqueta_id=$etiquet;
+                $etiqueta1->save();
 
+            }
+        }
 
 
 

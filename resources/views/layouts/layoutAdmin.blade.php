@@ -724,47 +724,47 @@
         </div><!-- /.container-fluid -->
         @if(Sentinel::inRole('Alu'))
 
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Launch demo modal
-            </button>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
+            {{--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">--}}
+                {{--Launch demo modal--}}
+            {{--</button>--}}
+            {{--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+                {{--<div class="modal-dialog" role="document">--}}
+                    {{--<div class="modal-content">--}}
 
-                        <div class="modal-body">
+                        {{--<div class="modal-body">--}}
 
-                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                <!-- Carousel indicators -->
-                <ol class="carousel-indicators">
-                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                    <li data-target="#myCarousel" data-slide-to="2"></li>
-                </ol>
-                <!-- Wrapper for carousel items -->
-                <div class="carousel-inner">
-                    <div class="item active">
-                        <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="First Slide">
-                    </div>
-                    <div class="item">
-                        <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Second Slide">
-                    </div>
-                    <div class="item">
-                        <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="Third Slide">
-                    </div>
-                </div>
-                <!-- Carousel controls -->
-                <a class="carousel-control left" href="#myCarousel" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="carousel-control right" href="#myCarousel" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-            </div>
-                        </div>
+                            {{--<div id="myCarousel" class="carousel slide" data-ride="carousel">--}}
+                {{--<!-- Carousel indicators -->--}}
+                {{--<ol class="carousel-indicators">--}}
+                    {{--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>--}}
+                    {{--<li data-target="#myCarousel" data-slide-to="1"></li>--}}
+                    {{--<li data-target="#myCarousel" data-slide-to="2"></li>--}}
+                {{--</ol>--}}
+                {{--<!-- Wrapper for carousel items -->--}}
+                {{--<div class="carousel-inner">--}}
+                    {{--<div class="item active">--}}
+                        {{--<img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="First Slide">--}}
+                    {{--</div>--}}
+                    {{--<div class="item">--}}
+                        {{--<img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Second Slide">--}}
+                    {{--</div>--}}
+                    {{--<div class="item">--}}
+                        {{--<img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="Third Slide">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+                {{--<!-- Carousel controls -->--}}
+                {{--<a class="carousel-control left" href="#myCarousel" data-slide="prev">--}}
+                    {{--<span class="glyphicon glyphicon-chevron-left"></span>--}}
+                {{--</a>--}}
+                {{--<a class="carousel-control right" href="#myCarousel" data-slide="next">--}}
+                    {{--<span class="glyphicon glyphicon-chevron-right"></span>--}}
+                {{--</a>--}}
+            {{--</div>--}}
+                        {{--</div>--}}
 
-                    </div>
-                </div>
-            </div>
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
             {{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">--}}
             {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>--}}
             {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>--}}

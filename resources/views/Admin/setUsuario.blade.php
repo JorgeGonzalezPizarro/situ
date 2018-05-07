@@ -25,7 +25,7 @@
                 <ul class="list-group">
 
 
-                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Fecha  de registro </strong></span>{{ $user->created_at  }} </li>
+                    <li class="list-group-item text-right"><span class="pull-left"><strong class="">Fecha  de registro </strong></span>{{ $user->created_at  ->formatLocalized('%d-%m-%Y')}} </li>
                     <li class="list-group-item text-right" style="min-height: 60px;"><span class="pull-left"><strong class="">Fecha  último acceso</strong></span><span><p>{{ $user->last_login  }} </p></span></li>
                 </ul>
 
@@ -57,7 +57,7 @@
 
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Rol:</strong></span>
 
-                        {{ $user->roles()->first()->slug }}
+                        {{ $user->permissions[0] }}
                     </li>
                 </ul>
 
@@ -95,16 +95,25 @@
             <ul class="list-group">
 
                 </li>
+                @if(isset($etiquetas))
                 @foreach($etiquetas as $etiqueta)
                     <li class="list-group-item text-left"><span class=""><strong
                                     class="">{!!$etiqueta->nombre!!}</strong></span>
+                        <a href="#" id="{{$etiqueta->id}}" onclick="eliminarEtiqueta(this.id);"><i class="far fa-trash-alt" style="color: red;"></i></a></span>
+
                     </li>
                 @endforeach
+                @endif
 
                 @foreach($etiquetasPublic as $etiquetaPubli)
+                    @if(isset($etiquetaPubli))
+
                     <li class="list-group-item text-left"><span class=""><strong
                                     class="">{!!$etiquetaPubli->slug!!}</strong></span>
-                    </li>
+                        <a href="#" id="{{$etiquetaPubli->id}}" onclick="eliminarEtiqueta(this.id);"><i class="far fa-trash-alt" style="color: red;"></i></a></span>
+
+                    </li>                @endif
+
                 @endforeach
 
 
@@ -123,3 +132,31 @@
 
 @endsection
 
+<script>
+
+    function eliminarEtiqueta(id) {
+        $.ajax({
+            type: "get",
+            url: "{{ route('eliminarEtiquetaAdmin') }}",
+            datatype: "json",
+            encode: true,
+            data: {
+                id: id,
+            },
+            success: function (response) { // What to do if we succeed
+                console.log(response);
+                location.reload();
+            },
+            error: function (jqXHR, textStatus, errorThrown) { // What to do if we fail
+                console.log(JSON.stringify(jqXHR));
+                console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
+            }
+        });
+
+
+
+
+
+    }
+
+</script>

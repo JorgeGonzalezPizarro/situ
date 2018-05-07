@@ -412,7 +412,7 @@
                             <tr>
                                 <td>{{$labor->empresa}}</td>
                                 <td id="asignatura">{!!  $labor->cargo !!}</td>
-                                <td id="fechainicio">{!!  $labor->fecha_inicio !!}</td>
+                                <td id="fechainicio">{!! Carbon::parse( $labor->fecha_inicio) !!}</td>
                                 @if($labor->actual=="1")
                                     <td id="fechafin">  Actualidad </td>
                                 @else
@@ -674,7 +674,7 @@
                                     <td id="asignatura">{!!  $form->ubicacion !!}</td>
                                     <td id="fechainicio">{!!  $form->titulacion."<br> ".$form->disciplina_academica !!}</td>
                                     <td id="descripcion">{!! str_limit( $form->descripcion , 100 )!!}</td>
-                                    <td id="fecha_inicio">{!!  $form->fecha_inicio !!}</td>
+                                    <td id="fecha_inicio">{!!  Carbon::parse($form->fecha_inicio) !!}</td>
 
                                     @if($form->actual=="1")
                                         <td id="fechafin">  Actualidad </td>

@@ -139,10 +139,11 @@ El correo electronico ya existe</p></div>') !!}
                                         </tbody>
 
                                     </table>
-                                    <div class='col-md-5' style="    margin-top: 10px;
-                                      margin-left: 240px;">
+                                    <div class='col-md-12 center-block' style="    margin-top: 10px;
+                                      ">
 
-                                        {!! Form::submit('Invitar', array('class'=>'btn btn-info ' ,'id'=>'boton' , 'style="margin-right:30px"')) !!}</td>
+                                        {!! csrf_field() !!}
+                                        {!! Form::submit('Actualizar', array('class'=>'btn btn-info btn-lg btn-block' , 'id'=>'boton','style="margin-right:30px"')) !!}</td>
 
                                     </div>
 
@@ -184,7 +185,7 @@ El correo electronico ya existe</p></div>') !!}
                             <tr>
                                 <td>{{$invitado->getUsuario()->get()->first()->first_name }}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->email }}</td>
-                                <td>{{$invitado->getUsuario()->get()->first()->created_at }}</td>
+                                <td>{{$invitado->getUsuario()->get()->first()->created_at ->formatLocalized('%d-%m-%Y')}}</td>
                                 <td>{{$invitado->getUsuario()->get()->first()->last_login }}</td>
                                 <td>{{$invitado->numero_accesos }}</td>
                                 <td id="prof">
@@ -268,7 +269,21 @@ El correo electronico ya existe</p></div>') !!}
 <script>
     $(document).ready(function () {
 
+        document.getElementById('boton').disabled = true;
+        $('i').on('click',function () {
+            $('#boton').removeClass('btn btn-info disabled');
+            $('#boton').addClass('btn btn-success');
+            document.getElementById('boton').disabled = false;
 
+
+        })
+        $('input').on('change',function () {
+            $('#boton').removeClass('btn btn-info disabled');
+            $('#boton').addClass('btn btn-success');
+            document.getElementById('boton').disabled = false;
+
+
+        })
 
 
     $('#myModal12').on('shown.bs.modal', function (e) {

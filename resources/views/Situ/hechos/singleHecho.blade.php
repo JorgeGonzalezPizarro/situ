@@ -117,7 +117,7 @@
 
                                         <div class="timeline-body">
 
-                                            <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small></span>
+                                            <span class="pull-left"><small id="fecha_creacion"  class="text-muted fecha_creacion"><i class="glyphicon glyphicon-time"></i> Fecha creacion {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small></span>
 
                                             <span class="pull-left" style=" width: -webkit-fill-available;
     word-wrap: break-word;">   {!!  str_limit($hecho->contenido,100,'...' )!!}</span>
@@ -128,7 +128,7 @@
                                         </div>
                                         </div>
                                         <div class="col-md-4">
-                                            <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i> Fecha de inicio {{$hecho->fecha_inicio}}</span></span><br>
+                                            <span class="pull-right"><span class="text-muted fecha_inicio" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i> Fecha de inicio {{Carbon\Carbon::parse($hecho->fecha_inicio)}}</span></span><br>
                                             @if(!empty($hecho->curso))
                                                 <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-graduation-cap"></i> Curso <a  onclick="getCursos(this.text)" href="#"> {{substr($hecho->curso,0,3)}}</a></span></span><br>
                                                 <span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">{{substr($hecho->curso,5,10)}}</a></span></span><br>
@@ -320,6 +320,22 @@ color: #003865;">
 
 
 $(document).ready(function() {
+    var elements = document.getElementsByClassName("fecha_creacion");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_creacion")[i].textContent=" Fecha creacion "+ (new Date(document.getElementsByClassName("fecha_creacion")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
+    var elements = document.getElementsByClassName("fecha_inicio");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_inicio")[i].textContent=" Fecha de Inicio "+ (new Date(document.getElementsByClassName("fecha_creacion")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
+    // elements.forEach(function (e) {
+    //     alert(new Date(e.text()));
+    //
+    // });
 var string = "#"
 if((window.location.href).includes(string)) {
 var pathArray = window.location.href.split('#');
@@ -399,7 +415,7 @@ response[0].forEach(function (element) {
 
    '</div>' +
    '<div class="timeline-body">' +
-   '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+   '  <span class="pull-left"><small class="text-muted fecha_creacion"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
    '<br>' +
 
    '  <div class="clearfix"></div>' +
@@ -412,7 +428,7 @@ response[0].forEach(function (element) {
    '</div>' +
    '</div>'
    +'<div class="col-md-4">'
-  + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+  + '<span class="pull-right"><span class="text-muted fecha_inicio" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
        + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
    +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
@@ -439,8 +455,18 @@ html.forEach(function (element) {
 
 
 });
+    var elements = document.getElementsByClassName("fecha_creacion");
+    for(var i=0; i<elements.length; i++) {
 
+        document.getElementsByClassName("fecha_creacion")[i].textContent=" Fecha creacion "+ (new Date(document.getElementsByClassName("fecha_creacion")[i].textContent)).toLocaleDateString("es-ES");
 
+    }
+    var elements = document.getElementsByClassName("fecha_inicio");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_inicio")[i].textContent=" Fecha de Inicio "+ (new Date(document.getElementsByClassName("fecha_inicio")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
 }
 
 
@@ -518,7 +544,7 @@ html.push('<div class="col-lg-12">'
 
    '</div>' +
    '<div class="timeline-body">' +
-   '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+   '  <span class="pull-left"><small class="text-muted fecha_creacion"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
    '<br>' +
 
    '  <div class="clearfix"></div>' +
@@ -531,7 +557,7 @@ html.push('<div class="col-lg-12">'
    '</div>' +
    '</div>'
    +'<div class="col-md-4">'
-   + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+    + '<span class="pull-right"><span class="text-muted fecha_inicio" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  new Date(element['fecha_inicio']) + '</span></span><br>'
    + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
    +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
@@ -560,6 +586,18 @@ $("#contenedor").append(element);
 
 
 });
+    var elements = document.getElementsByClassName("fecha_creacion");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_creacion")[i].textContent=" Fecha creacion "+ (new Date(document.getElementsByClassName("fecha_creacion")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
+    var elements = document.getElementsByClassName("fecha_inicio");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_inicio")[i].textContent=" Fecha de Inicio "+ (new Date(document.getElementsByClassName("fecha_inicio")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
 var input = document.getElementById("buscar");
 input_value =  input.getAttribute("value");
 input_value = "";
@@ -640,7 +678,7 @@ response[0].forEach(function (element) {
 
        '</div>' +
        '<div class="timeline-body">' +
-       '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+       '  <span class="pull-left"><small class="text-muted fecha_creacion"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
        '<br>' +
 
        '  <div class="clearfix"></div>' +
@@ -653,7 +691,7 @@ response[0].forEach(function (element) {
        '</div>' +
        '</div>'
        +'<div class="col-md-4">'
-       + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+       + '<span class="pull-right"><span class="text-muted fecha_inicio" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  new Date(element['fecha_inicio']) + '</span></span><br>'
        + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
        +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
@@ -688,7 +726,17 @@ html.forEach(function (element) {
 
 
 });
+    var elements = document.getElementsByClassName("fecha_creacion");
+    for(var i=0; i<elements.length; i++) {
 
+        document.getElementsByClassName("fecha_creacion")[i].textContent=" Fecha creacion "+ (new Date(document.getElementsByClassName("fecha_creacion")[i].textContent)).toLocaleDateString("es-ES");
+
+    }  var elements = document.getElementsByClassName("fecha_inicio");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_inicio")[i].textContent=" Fecha de Inicio "+ (new Date(document.getElementsByClassName("fecha_inicio")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
 
 }
 
@@ -749,14 +797,6 @@ else {
 
 
 
-
-
-
-
-
-
-
-
        html.push('<div class="col-lg-12">'
            +'<ul class="timeline">' +
            '<li>' +
@@ -774,7 +814,7 @@ else {
 
            '</div>' +
            '<div class="timeline-body">' +
-           '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+           '  <span class="pull-left"><small class="text-muted fecha_creacion"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
            '<br>' +
 
            '  <div class="clearfix"></div>' +
@@ -787,7 +827,7 @@ else {
            '</div>' +
            '</div>'
            +'<div class="col-md-4">'
-           + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+           + '<span class="pull-right"><span class="text-muted fecha_inicio" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  new Date(element['fecha_inicio']) + '</span></span><br>'
            + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
            +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
@@ -809,6 +849,7 @@ else {
 
 
    });
+
    html.forEach(function (element) {
        console.log(element['id']);
 
@@ -817,7 +858,17 @@ else {
 
    });
    // $('#etiq').val(id);
+    var elements = document.getElementsByClassName("fecha_creacion");
+    for(var i=0; i<elements.length; i++) {
 
+        document.getElementsByClassName("fecha_creacion")[i].textContent=" Fecha creacion "+ (new Date(document.getElementsByClassName("fecha_creacion")[i].textContent)).toLocaleDateString("es-ES");
+
+    }  var elements = document.getElementsByClassName("fecha_inicio");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_inicio")[i].textContent=" Fecha de Inicio "+ (new Date(document.getElementsByClassName("fecha_inicio")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
    console.log(response[0].length);
 
 }
@@ -893,7 +944,7 @@ response[0].forEach(function (element) {
 
        '</div>' +
        '<div class="timeline-body">' +
-       '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+       '  <span class="pull-left"><small class="text-muted fecha_creacion"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
        '<br>' +
 
        '  <div class="clearfix"></div>' +
@@ -906,7 +957,7 @@ response[0].forEach(function (element) {
        '</div>' +
        '</div>'
        +'<div class="col-md-4">'
-       + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+       + '<span class="pull-right"><span class="text-muted fecha_inicio" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  new Date(element['fecha_inicio']) + '</span></span><br>'
        + (element['curso'] !==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
        +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
@@ -935,6 +986,18 @@ html.forEach(function (element) {
 
 
 });
+    var elements = document.getElementsByClassName("fecha_creacion");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_creacion")[i].textContent=" Fecha creacion "+ (new Date(document.getElementsByClassName("fecha_creacion")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
+    var elements = document.getElementsByClassName("fecha_inicio");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_inicio")[i].textContent=" Fecha de Inicio "+ (new Date(document.getElementsByClassName("fecha_inicio")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
 var input = document.getElementById("buscar");
 input_value =  input.getAttribute("value");
 input_value = "";
@@ -1013,7 +1076,7 @@ response[0].forEach(function (element) {
 
        '</div>' +
        '<div class="timeline-body">' +
-       '  <span class="pull-left"><small class="text-muted"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
+       '  <span class="pull-left"><small class="text-muted fecha_creacion"><i class="glyphicon glyphicon-time"></i> Fecha creacion ' + element['created_at'] + '</small></span>' +
        '<br>' +
 
        '  <div class="clearfix"></div>' +
@@ -1026,7 +1089,7 @@ response[0].forEach(function (element) {
        '</div>' +
        '</div>'
        +'<div class="col-md-4">'
-       + '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  element['fecha_inicio'] + '</span></span><br>'
+       + '<span class="pull-right"><span class="text-muted fecha_inicio" style="font-style: italic;"><i class="glyphicon glyphicon-time"></i>Fecha de inicio'+  new Date(element['fecha_inicio']) + '</span></span><br>'
        + (element['curso']!==(null ) ? '<span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Curso <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(0, 3) + '</a></span></span> <br><span class="pull-right"><span class="text-muted" style="font-style: italic;"><i class="fas fa-book"></i> Asignatura <a href="#"  onclick="getAsignaturas(this.text)">' + element['curso'].substring(5, 100) + '</a></span></span><br> ' : ' ' )
 
        +'<span class="pull-right"><span class="text-muted" style="font-style: italic;"></i>'+
@@ -1056,6 +1119,18 @@ html.forEach(function (element) {
 
 
 });
+    var elements = document.getElementsByClassName("fecha_creacion");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_creacion")[i].textContent=" Fecha creacion "+ (new Date(document.getElementsByClassName("fecha_creacion")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
+    var elements = document.getElementsByClassName("fecha_inicio");
+    for(var i=0; i<elements.length; i++) {
+
+        document.getElementsByClassName("fecha_inicio")[i].textContent=" Fecha de Inicio "+ (new Date(document.getElementsByClassName("fecha_inicio")[i].textContent)).toLocaleDateString("es-ES");
+
+    }
 var input = document.getElementById("buscar");
 input_value =  input.getAttribute("value");
 input_value = "";

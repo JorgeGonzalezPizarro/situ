@@ -112,6 +112,9 @@ class MigrationCartalystSentinel extends Migration
             $table->string('dni')->nullable();
             $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();
+            $table->string('otros_datos1')->nullable();
+            $table->string('otros_datos2')->nullable();
+            $table->string('otros_datos3')->nullable();
 
         });
 

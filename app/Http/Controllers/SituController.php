@@ -657,7 +657,7 @@ class SituController extends Controller
             $hecho = hechos::all();
             $formacion=Formacion::where([['user_id',$alumnoCv->id]])->get()->all();
             $laboral=Laboral::where([['user_id',$alumnoCv->id]])->get()->all();
-
+            $hechosCv=hechos::where([['user_id',$alumnoCv->id],['nivel_acceso','>=',$usuario->nivel_acceso],['etiqueta', 'like', '%CV%'],['laboral_id',null],['formacion_id',null]])->orderByRaw('fecha_inicio DESC')->get()->all();
             $categorias = Categorias::all();
 
 //            $categoria = $hecho->getCategoria()->get()->first();
@@ -669,21 +669,22 @@ class SituController extends Controller
 //            $hecho = hechos::all();
             $formacion = Formacion::where('user_id', $alumnoCv->id)->get()->all();
             $laboral = Laboral::where('user_id', $alumnoCv->id)->get()->all();
-
+            $hechosCv=hechos::where([['user_id',$alumnoCv->id],['etiqueta', 'like', '%CV%'],['laboral_id',null],['formacion_id',null]])->orderByRaw('fecha_inicio DESC')->get();
             $categorias = Categorias::all();
 
 //            $categoria = $hecho->getCategoria()->get()->first();
 
             view()->share('categorias', $categorias);
+
         }
 
         $data = $this->getData();
         $date = date('Y-m-d');
         $invoice = "Portolio profesional de ";
-        $view = \View::make('pdf.cv', compact('alumnoCv',  'formacion', 'laboral'))->render();
+        $view = \View::make('pdf.cv', compact('alumnoCv',  'formacion', 'laboral','hechosCv'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
-        return $pdf->stream('invoice');
+        return $pdf->stream('CV.pdf');
     }
 
     public function getData()

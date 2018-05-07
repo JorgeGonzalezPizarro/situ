@@ -56,7 +56,7 @@
     margin-left: 20px;">"{{$hecho->contenido}}"<span> por {{$user-> first_name}}</span></p>
 
                                         </p>
-                                        <small><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small>
+                                        <small><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small>
 
                                     </blockquote>
                                 </li>
@@ -127,7 +127,7 @@
     margin-left: 20px;">"{{$hecho->contenido}}"<span> por {{$user-> first_name}}</span></p>
 
                                         </p>
-                                        <small><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at}}</small>
+                                        <small><i class="glyphicon glyphicon-time"></i> {{$hecho->created_at->formatLocalized('%d-%m-%Y')}}</small>
 
                                     </blockquote>
                                 </li>

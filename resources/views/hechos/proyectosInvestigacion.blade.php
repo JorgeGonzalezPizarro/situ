@@ -207,6 +207,36 @@
         </div>
     </div>
     </div><!-- /#wrapper -->
+    <div  data-backdrop="static" data-keyboard="false" class="modal fade" id="myModal12" role="dialog">
+        <div class="modal-dialog" style="width: 1000px ;  ">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4  class="alert alert-danger" >No tiene asignaturas agregadas en su perfil.</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker2'>
+                            <span class="input-group-addon">
+
+                        <img width="900" src="/imagenes/capturaAcademicos.png"/>
+                                <br>
+                                <hr>
+                                                                <p class="text-info" style="font-size: 16px"><a href="{{route('misDatosAcademicos')}}#forma">Por favor , agregue al menos una Asignatura a su trayectoria .</a></p>
+
+                    </span>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 
 
@@ -235,6 +265,12 @@
         function vincularAsign() {
             if (document.getElementById('vincular').checked) {
                 $('#asigAlumno').show();
+                var e3 = document.getElementById("inputCurso").options.length;
+                if(e3==0){
+                    $('#myModal12').modal('show', { backdrop: 'static',
+                        keyboard: false});
+
+                }
 
             } else {
                 document.getElementById("inputGrado").value = "";
@@ -296,6 +332,13 @@
                 if (document.getElementById('vincular').checked)
                 {
                     $('#asigAlumno').show();
+                    var e3 = document.getElementById("inputCurso").options.length;
+                    if(e3==0){
+                        $('#myModal12').modal('show', { backdrop: 'static',
+                            keyboard: false});
+
+                    }
+
                 } else {
                     $('#inputGrado').attr('value', null);
                     $('#inputCurso').attr('value', null);
@@ -421,13 +464,13 @@
 
 
         $('#inputGrado').attr('value', grado);
-        if (e3 == 0) {
-            $('#myModal12').modal('show', {
-                backdrop: 'static',
-                keyboard: false
-            });
-
-        }
+        // if (e3 == 0) {
+        //     $('#myModal12').modal('show', {
+        //         backdrop: 'static',
+        //         keyboard: false
+        //     });
+        //
+        // }
         $('#inputCurso').empty();
 
 
